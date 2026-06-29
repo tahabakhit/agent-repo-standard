@@ -1,5 +1,5 @@
 # agent-repo-standard — copier template
-# Usage: copier copy --trust gh:<you>/agent-repo-standard <dest>   (or a local path)
+# Usage: copier copy --trust gh:tahabakhit/agent-repo-standard <dest>   (or a local path)
 # --trust is required because this template runs post-generation tasks
 # (git init, type-specific scaffolding, optional spec-kit bootstrap).
 

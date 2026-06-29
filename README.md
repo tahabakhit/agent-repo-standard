@@ -18,9 +18,9 @@ it is stamped into every generated repo so collaborators have it in-repo.
 uv tool install copier
 
 # scaffold a new repo (--trust enables post-gen tasks: git init, src/ scaffold, spec-kit)
-copier copy --trust /Users/taha.bakhit@m10s.io/projects/personal/repos/agent-repo-standard ./my-new-repo
-#   …or, once pushed to GitHub:
-# copier copy --trust gh:<you>/agent-repo-standard ./my-new-repo
+copier copy --trust gh:tahabakhit/agent-repo-standard ./my-new-repo
+#   …or from a local clone:
+# copier copy --trust ~/projects/personal/repos/agent-repo-standard ./my-new-repo
 
 # later, pull standard updates into an existing repo
 cd my-new-repo && copier update --trust
