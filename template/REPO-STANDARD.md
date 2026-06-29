@@ -67,18 +67,23 @@ present.
 
 ## Agent setup
 
-Spec-kit supports Claude Code, GitHub Copilot, and Codex. Generated per-agent
-command surfaces are **gitignored** (local, not committed); materialize yours with:
+Spec-kit's core workflow runs on Claude Code, GitHub Copilot, and Codex.
+Generated per-agent command/config surfaces are **gitignored** (local,
+machine-specific); materialize yours with:
 
 ```bash
 specify init --here --integration claude    # or: copilot, codex
 specify extension add git                    # auto-commit / branch workflow (optional)
 ```
 
-Claude Code users additionally get the **spex extensions** (gates, deep-review,
-teams, collab, brainstorm) via the spex plugin / `/spex:init`. Those extensions
-ship Claude-only command formats; Copilot and Codex get the core spec-kit
-workflow (`/speckit-specify|plan|tasks|implement|…`).
+**spex enforcement** (spec-first gating, prompt interception, review gates) is
+delivered as per-agent hook **adapters** and supports **Claude Code, Codex, and
+OpenCode** — *not* Copilot (no adapter). Run `/spex:init` (or `spex-init.sh`)
+**from within the agent you want to enforce**: it detects the agent and installs
+that adapter (`.claude/` hooks for Claude, `.codex/hooks.json` for Codex,
+`.opencode/` plugin for OpenCode). On Claude you also get the spex slash-command
+skills (gates, deep-review, teams, collab, brainstorm); on Codex/OpenCode the
+same enforcement is delivered via hooks + inline prompts + subagents.
 
 ## Provenance
 
