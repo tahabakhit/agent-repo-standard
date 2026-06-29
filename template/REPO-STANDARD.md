@@ -28,6 +28,7 @@ README.md                     # human entry point
 CONTRIBUTING.md               # thin human contribution guide → points at AGENTS.md
 .github/
   CODEOWNERS                  # review ownership (kept here, not at root)
+  copilot-instructions.md     # Copilot entry → points at AGENTS.md
   ISSUE_TEMPLATE/             # bug_report, feature_request, config.yml
   pull_request_template.md    # PR checklist (verification, sensitive-data boundary, ADR)
 .specify/
@@ -80,8 +81,13 @@ present.
 ## Agent setup
 
 Spec-kit's core workflow runs on Claude Code, GitHub Copilot, and Codex.
-Generated per-agent command/config surfaces are **gitignored** (local,
-machine-specific); materialize yours with:
+
+Three per-agent **entry files are committed and shared** — all point at `AGENTS.md`:
+`AGENTS.md` itself (Codex + universal), `CLAUDE.md` (Claude), and
+`.github/copilot-instructions.md` (Copilot). Everything a `specify init`
+*generates* (command surfaces, `.specify/` machinery, enforcement adapters) is
+**gitignored** — local and machine-specific. Each contributor materializes their
+own agent with:
 
 ```bash
 specify init --here --integration claude    # or: copilot, codex
