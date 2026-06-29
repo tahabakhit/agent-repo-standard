@@ -27,6 +27,7 @@ REPO-STANDARD.md              # this file
 README.md                     # human entry point
 CONTRIBUTING.md               # thin human contribution guide → points at AGENTS.md
 .github/
+  CODEOWNERS                  # review ownership (kept here, not at root)
   ISSUE_TEMPLATE/             # bug_report, feature_request, config.yml
   pull_request_template.md    # PR checklist (verification, sensitive-data boundary, ADR)
 .specify/
