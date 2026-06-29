@@ -48,6 +48,7 @@ Data repos carry their data surface at the root and no `src/`.
 |---|---|
 | Instructions an agent must follow | `AGENTS.md` |
 | A non-negotiable principle or quality gate | `.specify/memory/constitution.md` |
+| A rough idea you want to shape into work | `/speckit-spex-brainstorm` → `specs/NNN-feature/` (no `brainstorms/` folder) |
 | A per-feature spec / plan / tasks | `specs/NNN-feature/` (via `/speckit-specify`) |
 | A learning walkthrough | `docs/tutorials/` |
 | A "how do I X" recipe or runbook | `docs/how-to/` |
