@@ -45,8 +45,8 @@ Data repos carry their data surface at the root and no `src/`.
 
 ## File naming
 
-- **Landmark / meta files → UPPERCASE:** `README`, `AGENTS`, `CLAUDE`,
-  `CONTRIBUTING`, `REPO-STANDARD`, `LANGUAGE`.
+- **Root landmark / meta files → UPPERCASE:** `README`, `AGENTS`, `CLAUDE`,
+  `CONTRIBUTING`, `REPO-STANDARD` (the well-known all-caps repo files only).
 - **All other docs content → kebab-case:** e.g. `ai-readiness-playbook.md`,
   `snowflake-setup.md`.
 - **ADRs:** `NNNN-slug.md` (never renumbered). **History:** `YYYY-MM-DD-slug.md`.
