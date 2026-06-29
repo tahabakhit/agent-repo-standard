@@ -43,6 +43,14 @@ docs/
 Code repos additionally carry `src/` + `tests/`; library repos add packaging.
 Data repos carry their data surface at the root and no `src/`.
 
+## File naming
+
+- **Landmark / meta files → UPPERCASE:** `README`, `AGENTS`, `CLAUDE`,
+  `CONTRIBUTING`, `REPO-STANDARD`, `LANGUAGE`.
+- **All other docs content → kebab-case:** e.g. `ai-readiness-playbook.md`,
+  `snowflake-setup.md`.
+- **ADRs:** `NNNN-slug.md` (never renumbered). **History:** `YYYY-MM-DD-slug.md`.
+
 ## What goes where
 
 | You are writing… | Put it in… |
