@@ -28,6 +28,7 @@ README.md                     # human entry point
 CONTRIBUTING.md               # thin human contribution guide → points at AGENTS.md
 .specify/
   memory/constitution.md      # non-negotiable principles + quality gates (committed)
+brainstorm/                   # spex brainstorm docs (NN-*.md + 00-overview.md); spex-managed
 specs/                        # per-feature spec/plan/tasks via /speckit-specify
 docs/
   tutorials/                  # learning-oriented, step-by-step
@@ -48,7 +49,7 @@ Data repos carry their data surface at the root and no `src/`.
 |---|---|
 | Instructions an agent must follow | `AGENTS.md` |
 | A non-negotiable principle or quality gate | `.specify/memory/constitution.md` |
-| A rough idea you want to shape into work | `/speckit-spex-brainstorm` → `specs/NNN-feature/` (no `brainstorms/` folder) |
+| A rough idea you want to shape into work | `/speckit-spex-brainstorm` → `brainstorm/NN-*.md` (spex-managed), then `/speckit-specify` → `specs/` |
 | A per-feature spec / plan / tasks | `specs/NNN-feature/` (via `/speckit-specify`) |
 | A learning walkthrough | `docs/tutorials/` |
 | A "how do I X" recipe or runbook | `docs/how-to/` |
