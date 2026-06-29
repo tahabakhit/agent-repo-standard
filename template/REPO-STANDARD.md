@@ -26,6 +26,9 @@ AGENTS.md                     # agent entry point (read first); CLAUDE.md @-incl
 REPO-STANDARD.md              # this file
 README.md                     # human entry point
 CONTRIBUTING.md               # thin human contribution guide → points at AGENTS.md
+.github/
+  ISSUE_TEMPLATE/             # bug_report, feature_request, config.yml
+  pull_request_template.md    # PR checklist (verification, sensitive-data boundary, ADR)
 .specify/
   memory/constitution.md      # non-negotiable principles + quality gates (committed)
 brainstorm/                   # spex brainstorm docs (NN-*.md + 00-overview.md); spex-managed
