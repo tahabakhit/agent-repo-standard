@@ -64,6 +64,21 @@ No change is "done" until the repo's verification passes with fresh output
 the canonical tree must be intact — see `tests/` (or the scaffold audit) where
 present.
 
+## Agent setup
+
+Spec-kit supports Claude Code, GitHub Copilot, and Codex. Generated per-agent
+command surfaces are **gitignored** (local, not committed); materialize yours with:
+
+```bash
+specify init --here --integration claude    # or: copilot, codex
+specify extension add git                    # auto-commit / branch workflow (optional)
+```
+
+Claude Code users additionally get the **spex extensions** (gates, deep-review,
+teams, collab, brainstorm) via the spex plugin / `/spex:init`. Those extensions
+ship Claude-only command formats; Copilot and Codex get the core spec-kit
+workflow (`/speckit-specify|plan|tasks|implement|…`).
+
 ## Provenance
 
 Generated from the `agent-repo-standard` copier template. To adopt standard

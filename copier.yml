@@ -66,15 +66,21 @@ _tasks:
     {% if repo_type == 'library' %}
     printf '[project]\nname = "{{ project_slug }}"\nversion = "0.0.0"\ndescription = "{{ description }}"\nrequires-python = ">=3.11"\n' > pyproject.toml
     {% else %}true{% endif %}
-  # Optional spec-kit bootstrap (preserves our populated constitution)
+  # Optional spec-kit bootstrap for all three agents + git/auto-commit extension.
+  # NOTE: spex *extensions* (gates, deep-review, teams, collab, brainstorm) ship Claude-only
+  # command formats; copilot/codex get core spec-kit commands. Generated surfaces are gitignored.
+  # Preserves our populated constitution across the multiple inits.
   - >
     {% if bootstrap_speckit %}
     if command -v specify >/dev/null 2>&1; then
       cp .specify/memory/constitution.md /tmp/const.$$ 2>/dev/null || true;
       specify init --here --integration claude --force || true;
+      specify init --here --integration copilot --force || true;
+      specify init --here --integration codex --integration-options="--skills" --force || true;
+      specify extension add git || true;
       cp /tmp/const.$$ .specify/memory/constitution.md 2>/dev/null || true;
       rm -f /tmp/const.$$;
     else
-      echo 'NOTE: `specify` not on PATH — run /spex:init in Claude Code to add spec-kit + spex.';
+      echo 'NOTE: `specify` not on PATH — run /spex:init (Claude) or `specify init --integration <agent>` per agent.';
     fi
     {% else %}true{% endif %}
