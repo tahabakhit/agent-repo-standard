@@ -1,0 +1,20 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# spex / spec-kit: generated/local files (only the constitution is committed)
+**/.claude/
+**/.specify/**
+!**/.specify/memory/
+!**/.specify/memory/constitution.md
+
+# Local-only session handoff
+HANDOFF.md
+{% if repo_type != "data" %}
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+*.egg-info/
+{% endif %}

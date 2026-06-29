@@ -1,0 +1,20 @@
+# docs/
+
+Durable, human-facing documentation, organized by [Diátaxis](https://diataxis.fr).
+Per-feature specs/plans/tasks are spec-kit artifacts and live in `specs/`, not here.
+Project principles live in `.specify/memory/constitution.md`.
+
+| Folder | Diátaxis mode | Purpose |
+|---|---|---|
+| [`tutorials/`](tutorials/README.md) | Learning | Step-by-step lessons for newcomers. |
+| [`how-to/`](how-to/README.md) | Task | Goal-oriented recipes and runbooks. |
+| [`reference/`](reference/README.md) | Information | Vocabulary, schemas, APIs, config — looked up, not read through. |
+| [`explanation/`](explanation/README.md) | Understanding | Rationale, background, trade-offs. |
+| [`decisions/adrs/`](decisions/adrs/README.md) | — | MADR architecture decisions (`NNNN-slug.md`, never renumbered). |
+| `history/` | — | Dated point-in-time notes kept for context only. |
+
+## When to write where
+
+Pick the Diátaxis mode by **the reader's need**: learning → `tutorials/`; doing a
+task → `how-to/`; looking something up → `reference/`; understanding why →
+`explanation/`. A decision worth preserving → `decisions/adrs/`.
