@@ -2,19 +2,19 @@
 
 {{ description }}
 
-This repo follows the shared [Repo Standard](REPO-STANDARD.md): AGENTS.md +
-spec-kit/spex + Diátaxis docs + MADR decisions. Read that file once to learn the
-layout; read this file every session.
+This repo follows the shared [Repo Standard](REPO-STANDARD.md): agent entrypoint +
+spec-driven workflow + Diátaxis docs + MADR decisions. Read that file once to learn
+the layout; read this file every session.
 
 ## Read First
 
-- `.specify/memory/constitution.md` — non-negotiable principles and quality gates.
+- `CONSTITUTION.md` — non-negotiable principles and quality gates.
 - `docs/reference/` — vocabulary, schemas, and durable reference material.
 - `docs/decisions/adrs/` — durable decisions (MADR; never renumbered).
 - `docs/README.md` — documentation map (Diátaxis).
 
-For non-trivial work, create a spec with `/speckit-specify` (lands in
-`specs/NNN-*/`) before implementing. `/speckit-spex-help` lists the workflow.
+For non-trivial work, create a reviewed spec under `specs/NNN-feature/` before
+implementing.
 
 ## Work Map
 {% if repo_type == "data" %}
@@ -25,7 +25,7 @@ For non-trivial work, create a spec with `/speckit-specify` (lands in
 - `src/{{ package_name }}/` — implementation.
 - `tests/` — automated tests (TDD: write the failing test first).
 {% if repo_type == "library" %}- `pyproject.toml` — packaging and public API surface.
-{% endif %}{% endif %}- `specs/` — per-feature specs, plans, and tasks (`/speckit-specify`).
+{% endif %}{% endif %}- `specs/` — per-feature specs, plans, and tasks.
 - `docs/` — durable human docs (Diátaxis); see `docs/README.md`.
 
 ## Operating Rules
@@ -35,7 +35,8 @@ For non-trivial work, create a spec with `/speckit-specify` (lands in
 {% else %}- Test-driven: no production code without a failing test first (see the `test-driven-development` skill).
 - Debug by root cause, not symptom (see the `systematic-debugging` skill).
 {% endif %}- Keep tracked content host-agnostic and free of local agent/tool state.
-- Do not reintroduce a `.ai/` workspace or per-tool skill copies; skills come from the plugin layer.
+- Do not reintroduce a `.ai/` workspace or per-tool skill copies; agent command
+  surfaces and tool machinery are materialized locally per developer (git-ignored).
 
 ## Verification
 
@@ -56,4 +57,4 @@ paths out of tracked files.
 ## Child Index
 
 - `docs/` — durable repo documentation. See `docs/README.md`.
-- `.specify/memory/constitution.md` — principles and gates.
+- `CONSTITUTION.md` — principles and gates.

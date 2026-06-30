@@ -6,9 +6,9 @@ enforced at review and by the verification gate.
 ## Core Principles
 
 ### I. Spec-First for Non-Trivial Work
-Non-trivial or structural work starts from a reviewed spec (`/speckit-specify` →
-`specs/NNN-feature/`) before implementation. Code and data are validated against
-the spec; drift triggers the evolution workflow. Small, obvious, low-risk
+Non-trivial or structural work starts from a reviewed spec under
+`specs/NNN-feature/` before implementation. Code and data are validated against
+the spec; spec/code drift triggers a spec revision. Small, obvious, low-risk
 changes may proceed directly with the relevant verification.
 {% if repo_type == "data" %}
 ### II. Data Is the Source of Truth

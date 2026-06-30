@@ -8,8 +8,12 @@ _subdirectory: template
 _message_after_copy: |
   Repo scaffolded to the shared Repo Standard.
   Next:
-    - Review .specify/memory/constitution.md and set the ratified date.
-    - Run /spex:init in Claude Code to add the spex extensions.
+    - Review CONSTITUTION.md and set the ratified date.
+    - Materialize your local agent tooling (git-ignored, never committed). For the
+      reference spec-kit toolchain:
+        specify init --here --integration <claude|copilot|codex>
+        mkdir -p .specify/memory && ln -sf ../../CONSTITUTION.md .specify/memory/constitution.md
+      Keep tool-specific notes in a git-ignored CLAUDE.local.md / AGENTS.local.md.
     - Fill docs/ (Diátaxis) and write your first ADR from docs/decisions/adrs/adr-template.md.
 
 project_name:
@@ -69,18 +73,18 @@ _tasks:
   # Optional spec-kit bootstrap for all three agents + git/auto-commit extension.
   # NOTE: spex *extensions* (gates, deep-review, teams, collab, brainstorm) ship Claude-only
   # command formats; copilot/codex get core spec-kit commands. Generated surfaces are gitignored.
-  # Preserves our populated constitution across the multiple inits.
+  # Symlinks the committed tool-agnostic CONSTITUTION.md into spec-kit's expected
+  # path (the symlink itself is gitignored), so principles have one source of truth.
   - >
     {% if bootstrap_speckit %}
     if command -v specify >/dev/null 2>&1; then
-      cp .specify/memory/constitution.md /tmp/const.$$ 2>/dev/null || true;
       specify init --here --integration claude --force || true;
       specify init --here --integration copilot --force || true;
       specify init --here --integration codex --integration-options="--skills" --force || true;
       specify extension add git || true;
-      cp /tmp/const.$$ .specify/memory/constitution.md 2>/dev/null || true;
-      rm -f /tmp/const.$$;
+      mkdir -p .specify/memory;
+      ln -sf ../../CONSTITUTION.md .specify/memory/constitution.md;
     else
-      echo 'NOTE: `specify` not on PATH — run /spex:init (Claude) or `specify init --integration <agent>` per agent.';
+      echo 'NOTE: `specify` not on PATH — materialize tooling later, e.g. `specify init --integration <agent>`, then `ln -sf ../../CONSTITUTION.md .specify/memory/constitution.md`.';
     fi
     {% else %}true{% endif %}

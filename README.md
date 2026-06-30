@@ -4,7 +4,9 @@ A [copier](https://copier.readthedocs.io) template that scaffolds repositories t
 a single, defined **Repo Standard** — the composition of four mature standards:
 
 - **[AGENTS.md](https://agents.md)** — agent instruction entry point.
-- **[spec-kit](https://github.com/github/spec-kit) + spex** — spec-driven workflow (`.specify/`, `specs/`).
+- **Spec-driven development** — principles in `CONSTITUTION.md` + per-feature work
+  in `specs/` (reference tooling [spec-kit](https://github.com/github/spec-kit) +
+  spex, materialized locally per developer — see "Agent setup" in the standard).
 - **[Diátaxis](https://diataxis.fr)** — human docs (`docs/{tutorials,how-to,reference,explanation}/`).
 - **[MADR](https://adr.github.io)** — decisions (`docs/decisions/adrs/`).
 
@@ -32,7 +34,7 @@ Or use the wrapper: `bin/new-repo.sh <dest>`.
 
 `repo_type` tailors the output: `data` (source-of-truth, no `src/`), `code`
 (`src/` + `tests/` + TDD), `library` (adds packaging). All types share the
-AGENTS.md + spec-kit + Diátaxis + MADR spine.
+AGENTS.md + spec-driven workflow + Diátaxis + MADR spine.
 
 ## Adopting in an existing repo
 
