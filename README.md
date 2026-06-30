@@ -1,14 +1,17 @@
 # agent-repo-standard
 
 A [copier](https://copier.readthedocs.io) template that scaffolds repositories to
-a single, defined **Repo Standard** — the composition of four mature standards:
+a single, defined **Repo Standard** — the composition of three mature standards.
+The committed tree is tool- and host-agnostic; any toolchain (spec-driven CLI,
+enforcement plugin) is a per-developer local choice, never committed.
 
-- **[AGENTS.md](https://agents.md)** — agent instruction entry point.
-- **Spec-driven development** — principles in `CONSTITUTION.md` + per-feature work
-  in `specs/` (reference tooling [spec-kit](https://github.com/github/spec-kit) +
-  spex, materialized locally per developer — see "Agent setup" in the standard).
+- **[AGENTS.md](https://agents.md)** — agent instruction entry point; also holds
+  principles + quality gates (the one file auto-loaded across harnesses).
 - **[Diátaxis](https://diataxis.fr)** — human docs (`docs/{tutorials,how-to,reference,explanation}/`).
 - **[MADR](https://adr.github.io)** — decisions (`docs/decisions/adrs/`).
+
+Optional local tooling (reference: [spec-kit](https://github.com/github/spec-kit) +
+spex) is materialized per developer and git-ignored — see "Agent setup" in the standard.
 
 The full standard text is [`template/REPO-STANDARD.md`](template/REPO-STANDARD.md);
 it is stamped into every generated repo so collaborators have it in-repo.
@@ -34,7 +37,7 @@ Or use the wrapper: `bin/new-repo.sh <dest>`.
 
 `repo_type` tailors the output: `data` (source-of-truth, no `src/`), `code`
 (`src/` + `tests/` + TDD), `library` (adds packaging). All types share the
-AGENTS.md + spec-driven workflow + Diátaxis + MADR spine.
+AGENTS.md + Diátaxis + MADR spine.
 
 ## Adopting in an existing repo
 

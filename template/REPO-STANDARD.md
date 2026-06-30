@@ -1,20 +1,24 @@
 # Repo Standard
 
 This repository follows a defined, AI-native layout. It is a **composition of
-four mature, individually-defined standards** — not a bespoke framework. Each
+three mature, individually-defined standards** — not a bespoke framework. Each
 owns one plane and they do not overlap. Follow it whether you are a human or an
 agent; this file is committed so every collaborator has it in-repo.
 
 | Plane | Standard | Owns |
 |---|---|---|
-| Agent instructions | [AGENTS.md](https://agents.md) | The entry file every agent reads first. |
-| Spec-driven workflow | spec-driven development | `CONSTITUTION.md` principles + `specs/NNN-feature/` work. |
+| Agent instructions | [AGENTS.md](https://agents.md) | The entry file every agent reads first; principles + quality gates. |
 | Human documentation | [Diátaxis](https://diataxis.fr) | `docs/{tutorials,how-to,reference,explanation}/`. |
 | Decisions | [MADR / ADR](https://adr.github.io) | `docs/decisions/adrs/`. |
 
+The committed tree is **tool- and host-agnostic**: it names no specific agent,
+plugin, CLI, or workflow methodology. Any of those — a spec-driven toolchain, an
+enforcement plugin, etc. — is a **per-developer, local choice** (see *Agent
+setup* below), never part of the committed standard.
+
 ## The non-overlap principle
 
-AGENTS.md + the spec-driven workflow own the **agent/workflow** plane. Diátaxis owns the
+AGENTS.md owns **agent instructions + principles**. Diátaxis owns the
 **human-docs** plane. MADR owns **decisions**. Nothing belongs in two places.
 Do not reintroduce a parallel `.ai/` or per-tool documentation tree — that is
 the failure mode this standard exists to prevent.
@@ -22,18 +26,16 @@ the failure mode this standard exists to prevent.
 ## Canonical tree
 
 ```
-AGENTS.md                     # agent entry point (read first); CLAUDE.md @-includes it
+AGENTS.md                     # agent entry point (read first): principles, rules, quality gates
+                              #   CLAUDE.md @-includes it for Claude Code
 REPO-STANDARD.md              # this file
 README.md                     # human entry point
 CONTRIBUTING.md               # thin human contribution guide → points at AGENTS.md
-CONSTITUTION.md               # non-negotiable principles + quality gates
 .github/
   CODEOWNERS                  # review ownership (kept here, not at root)
   copilot-instructions.md     # Copilot entry → points at AGENTS.md
   ISSUE_TEMPLATE/             # bug_report, feature_request, config.yml
   pull_request_template.md    # PR checklist (verification, sensitive-data boundary, ADR)
-brainstorm/                   # brainstorm docs (NN-*.md + 00-overview.md)
-specs/                        # per-feature spec/plan/tasks
 docs/
   tutorials/                  # learning-oriented, step-by-step
   how-to/                     # task-oriented recipes / runbooks
@@ -45,7 +47,9 @@ docs/
 ```
 
 Code repos additionally carry `src/` + `tests/`; library repos add packaging.
-Data repos carry their data surface at the root and no `src/`.
+Data repos carry their data surface at the root and no `src/`. Anything a local
+toolchain generates (`specs/`, `brainstorm/`, `.specify/`, `.claude/`, …) is
+git-ignored — see *Agent setup*.
 
 ## File naming
 
@@ -60,63 +64,61 @@ Data repos carry their data surface at the root and no `src/`.
 | You are writing… | Put it in… |
 |---|---|
 | Instructions an agent must follow | `AGENTS.md` |
-| A non-negotiable principle or quality gate | `CONSTITUTION.md` |
-| A rough idea you want to shape into work | `brainstorm/NN-*.md`, then a spec in `specs/` |
-| A per-feature spec / plan / tasks | `specs/NNN-feature/` |
+| A non-negotiable principle or quality gate | `AGENTS.md` (Principles / Quality Gates) |
 | A learning walkthrough | `docs/tutorials/` |
 | A "how do I X" recipe or runbook | `docs/how-to/` |
 | Vocabulary, schema, API, config reference | `docs/reference/` |
 | Why something is the way it is (rationale) | `docs/explanation/` |
 | A decision worth preserving past the work | `docs/decisions/adrs/` |
 | A dated note kept only for context | `docs/history/` |
+| Local specs / brainstorms / tool notes | local-only (git-ignored) — see *Agent setup* |
+
+## Keep AGENTS.md lean
+
+Instructions compete for attention — every line you add makes the others less
+likely to be followed, and some harnesses silently truncate large files. So:
+
+- Prefer the fewest, most load-bearing rules; push detail into `docs/` and
+  reference it (`see docs/x.md`) rather than inlining.
+- Make each rule **verifiable**, and give the alternative ("don't X → do Y").
+- Reserve emphatic markers (NON-NEGOTIABLE / MUST / NEVER) for the few that matter.
+- Reference `file:line` instead of pasting code (snippets go stale).
 
 ## Quality gate
 
 No change is "done" until the repo's verification passes with fresh output
-(defined in `CONSTITUTION.md`). Markdown links must resolve and
-the canonical tree must be intact — see `tests/` (or the scaffold audit) where
-present.
+(defined in `AGENTS.md`). Markdown links must resolve and the canonical tree must
+be intact — see `tests/` (or the scaffold audit) where present.
 
 ## Agent setup
 
-The committed tree is **tool- and host-agnostic**: it carries the structure
-(`AGENTS.md`, `CONSTITUTION.md`, `specs/`, `docs/`) but names no specific agent,
-plugin, or CLI. The actual agent tooling is a **per-developer, local choice** —
-materialized on each clone and git-ignored, never pushed. This keeps the repo
-from prescribing one workflow to every collaborator.
+The committed tree names no agent. Each contributor brings their own.
 
 **Committed, shared entry files** — all tool-agnostic, all pointing at `AGENTS.md`:
-`AGENTS.md` itself (universal), `CLAUDE.md` (`@AGENTS.md`), and
-`.github/copilot-instructions.md`.
+`AGENTS.md` itself (read natively by most harnesses — Codex, Cursor, Copilot,
+Windsurf, Cline, Roo, Amp, Zed, …), `CLAUDE.md` (`@AGENTS.md`, the bridge for
+Claude Code, which does not read AGENTS.md directly), and
+`.github/copilot-instructions.md`. Put principles/rules in `AGENTS.md` — it is the
+one file auto-loaded across harnesses; there is no separate cross-harness "rules"
+file.
 
 **Local, never-committed agent context.** Tool-specific instructions (slash
-commands, plugin/extension notes, current-plan pointers) belong in a local file
-your agent auto-loads but git ignores — never in a committed entry file:
+commands, plugin/extension notes, current-plan pointers) belong in a git-ignored
+local overlay, never in a committed entry file:
 
-- **Claude Code** auto-loads `CLAUDE.local.md` at the repo root (git-ignored via
-  the `*.local.md` rule) with no committed reference needed — put your
-  spec-tooling command notes there.
-- For other agents that read `AGENTS.md`, use an equivalently git-ignored
-  `AGENTS.local.md` referenced only from local config.
+- `AGENTS.local.md` — the canonical local overlay (neutral; holds the actual notes).
+- `CLAUDE.local.md` — `@AGENTS.local.md` (+ any Claude-only local). Claude Code
+  auto-loads `CLAUDE.local.md`, which pulls in `AGENTS.local.md`; no committed
+  reference is needed. Both are git-ignored by `*.local.md`.
 
-**Local materialization.** Everything an agent/spec toolchain *generates*
-(command surfaces, `.specify/` / `.claude/` machinery, enforcement adapters) is
-git-ignored. The canonical principles live in committed `CONSTITUTION.md`; a
-toolchain that expects them at its own path gets a **git-ignored symlink** back
-to the root file, so the single source of truth stays tool-agnostic:
-
-```bash
-mkdir -p .specify/memory
-ln -sf ../../CONSTITUTION.md .specify/memory/constitution.md
-```
-
-**Reference tooling (optional).** The reference implementation of the
-spec-driven plane is [spec-kit](https://github.com/github/spec-kit) plus the
-spex plugin layer, installed and run **locally per developer**, not committed.
-Materialize it with the toolchain's own setup — for spec-kit,
-`specify init --here --integration <claude|copilot|codex>` (then create the
-constitution symlink above) — or use any equivalent spec-driven toolchain. The
-committed tree does not depend on the choice.
+**Local tooling (optional).** Any spec-driven or enforcement toolchain is a local
+choice, installed and run per developer, never committed. Everything it generates
+— `specs/`, `brainstorm/`, `.specify/`, `.claude/`, enforcement adapters — is
+git-ignored. Durable outcomes are promoted to ADRs, `docs/`, or issues; remote
+carries no local specing or brainstorming. The reference implementation is
+[spec-kit](https://github.com/github/spec-kit) + the spex plugin layer
+(`specify init --here --integration <claude|copilot|codex>`), but any equivalent
+toolchain works — the committed tree does not depend on the choice.
 
 ## Provenance
 

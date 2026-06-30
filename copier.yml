@@ -8,12 +8,11 @@ _subdirectory: template
 _message_after_copy: |
   Repo scaffolded to the shared Repo Standard.
   Next:
-    - Review CONSTITUTION.md and set the ratified date.
-    - Materialize your local agent tooling (git-ignored, never committed). For the
-      reference spec-kit toolchain:
-        specify init --here --integration <claude|copilot|codex>
-        mkdir -p .specify/memory && ln -sf ../../CONSTITUTION.md .specify/memory/constitution.md
-      Keep tool-specific notes in a git-ignored CLAUDE.local.md / AGENTS.local.md.
+    - Review the Principles / Quality Gates in AGENTS.md and tailor them to the repo.
+    - Materialize your local agent tooling (git-ignored, never committed). Reference
+      spec-kit toolchain: specify init --here --integration <claude|copilot|codex>.
+      Keep tool-specific notes in a git-ignored AGENTS.local.md (Claude Code: a
+      CLAUDE.local.md containing `@AGENTS.local.md`).
     - Fill docs/ (Diátaxis) and write your first ADR from docs/decisions/adrs/adr-template.md.
 
 project_name:
@@ -71,10 +70,9 @@ _tasks:
     printf '[project]\nname = "{{ project_slug }}"\nversion = "0.0.0"\ndescription = "{{ description }}"\nrequires-python = ">=3.11"\n' > pyproject.toml
     {% else %}true{% endif %}
   # Optional spec-kit bootstrap for all three agents + git/auto-commit extension.
-  # NOTE: spex *extensions* (gates, deep-review, teams, collab, brainstorm) ship Claude-only
-  # command formats; copilot/codex get core spec-kit commands. Generated surfaces are gitignored.
-  # Symlinks the committed tool-agnostic CONSTITUTION.md into spec-kit's expected
-  # path (the symlink itself is gitignored), so principles have one source of truth.
+  # NOTE: spex *extensions* ship Claude-only command formats; copilot/codex get core
+  # spec-kit commands. ALL generated surfaces (specs/, brainstorm/, .specify/, .claude/,
+  # adapters) are gitignored — principles/quality-gates live in committed AGENTS.md.
   - >
     {% if bootstrap_speckit %}
     if command -v specify >/dev/null 2>&1; then
@@ -82,9 +80,7 @@ _tasks:
       specify init --here --integration copilot --force || true;
       specify init --here --integration codex --integration-options="--skills" --force || true;
       specify extension add git || true;
-      mkdir -p .specify/memory;
-      ln -sf ../../CONSTITUTION.md .specify/memory/constitution.md;
     else
-      echo 'NOTE: `specify` not on PATH — materialize tooling later, e.g. `specify init --integration <agent>`, then `ln -sf ../../CONSTITUTION.md .specify/memory/constitution.md`.';
+      echo 'NOTE: `specify` not on PATH — materialize tooling later, e.g. `specify init --integration <agent>`.';
     fi
     {% else %}true{% endif %}
