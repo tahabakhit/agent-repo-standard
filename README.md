@@ -10,8 +10,8 @@ enforcement plugin) is a per-developer local choice, never committed.
 - **[Diátaxis](https://diataxis.fr)** — human docs (`docs/{tutorials,how-to,reference,explanation}/`).
 - **[MADR](https://adr.github.io)** — decisions (`docs/decisions/adrs/`).
 
-Optional local tooling (reference: [spec-kit](https://github.com/github/spec-kit) +
-spex) is materialized per developer and git-ignored — see "Agent setup" in the standard.
+Optional local agent tooling is materialized per developer and git-ignored, never
+committed — see "Agent setup" in the standard.
 
 The full standard text is [`template/REPO-STANDARD.md`](template/REPO-STANDARD.md);
 it is stamped into every generated repo so collaborators have it in-repo.
@@ -22,7 +22,7 @@ it is stamped into every generated repo so collaborators have it in-repo.
 # install copier once
 uv tool install copier
 
-# scaffold a new repo (--trust enables post-gen tasks: git init, src/ scaffold, spec-kit)
+# scaffold a new repo (--trust enables post-gen tasks: git init, src/ scaffold)
 copier copy --trust gh:tahabakhit/agent-repo-standard ./my-new-repo
 #   …or from a local clone:
 # copier copy --trust ~/projects/personal/repos/agent-repo-standard ./my-new-repo

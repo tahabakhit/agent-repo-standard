@@ -48,8 +48,8 @@ docs/
 
 Code repos additionally carry `src/` + `tests/`; library repos add packaging.
 Data repos carry their data surface at the root and no `src/`. Anything a local
-toolchain generates (`specs/`, `brainstorm/`, `.specify/`, `.claude/`, …) is
-git-ignored — see *Agent setup*.
+toolchain generates (local spec/brainstorm working dirs, per-agent command
+surfaces, …) is git-ignored — see *Agent setup*.
 
 ## File naming
 
@@ -113,12 +113,10 @@ local overlay, never in a committed entry file:
 
 **Local tooling (optional).** Any spec-driven or enforcement toolchain is a local
 choice, installed and run per developer, never committed. Everything it generates
-— `specs/`, `brainstorm/`, `.specify/`, `.claude/`, enforcement adapters — is
-git-ignored. Durable outcomes are promoted to ADRs, `docs/`, or issues; remote
-carries no local specing or brainstorming. The reference implementation is
-[spec-kit](https://github.com/github/spec-kit) + the spex plugin layer
-(`specify init --here --integration <claude|copilot|codex>`), but any equivalent
-toolchain works — the committed tree does not depend on the choice.
+— local spec/brainstorm working dirs, per-agent command surfaces, enforcement
+adapters — is git-ignored. Durable outcomes are promoted to ADRs, `docs/`, or
+issues; remote carries no local specing or brainstorming. The committed tree does
+not depend on the choice of toolchain.
 
 ## Provenance
 

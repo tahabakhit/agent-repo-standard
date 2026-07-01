@@ -1,7 +1,7 @@
 # agent-repo-standard — copier template
 # Usage: copier copy --trust gh:tahabakhit/agent-repo-standard <dest>   (or a local path)
 # --trust is required because this template runs post-generation tasks
-# (git init, type-specific scaffolding, optional spec-kit bootstrap).
+# (git init, type-specific scaffolding).
 
 _subdirectory: template
 
@@ -9,9 +9,8 @@ _message_after_copy: |
   Repo scaffolded to the shared Repo Standard.
   Next:
     - Review the Principles / Quality Gates in AGENTS.md and tailor them to the repo.
-    - Materialize your local agent tooling (git-ignored, never committed). Reference
-      spec-kit toolchain: specify init --here --integration <claude|copilot|codex>.
-      Keep tool-specific notes in a git-ignored AGENTS.local.md (Claude Code: a
+    - Materialize your local agent tooling (git-ignored, never committed). Keep
+      tool-specific notes in a git-ignored AGENTS.local.md (Claude Code: a
       CLAUDE.local.md containing `@AGENTS.local.md`).
     - Fill docs/ (Diátaxis) and write your first ADR from docs/decisions/adrs/adr-template.md.
 
@@ -49,11 +48,6 @@ code_owner:
   help: 'Default CODEOWNERS owner (e.g. "@org/team"); blank to skip'
   default: ""
 
-bootstrap_speckit:
-  type: bool
-  help: Run `specify init` (spec-kit) after scaffolding, if the CLI is present?
-  default: true
-
 _tasks:
   # Initialize git if needed
   - "git rev-parse --is-inside-work-tree >/dev/null 2>&1 || git init -q"
@@ -68,19 +62,4 @@ _tasks:
   - >
     {% if repo_type == 'library' %}
     printf '[project]\nname = "{{ project_slug }}"\nversion = "0.0.0"\ndescription = "{{ description }}"\nrequires-python = ">=3.11"\n' > pyproject.toml
-    {% else %}true{% endif %}
-  # Optional spec-kit bootstrap for all three agents + git/auto-commit extension.
-  # NOTE: spex *extensions* ship Claude-only command formats; copilot/codex get core
-  # spec-kit commands. ALL generated surfaces (specs/, brainstorm/, .specify/, .claude/,
-  # adapters) are gitignored — principles/quality-gates live in committed AGENTS.md.
-  - >
-    {% if bootstrap_speckit %}
-    if command -v specify >/dev/null 2>&1; then
-      specify init --here --integration claude --force || true;
-      specify init --here --integration copilot --force || true;
-      specify init --here --integration codex --integration-options="--skills" --force || true;
-      specify extension add git || true;
-    else
-      echo 'NOTE: `specify` not on PATH — materialize tooling later, e.g. `specify init --integration <agent>`.';
-    fi
     {% else %}true{% endif %}
