@@ -27,7 +27,8 @@ HANDOFF.md
 
 # Project boundary directories.
 /data/local/
-/artifacts/
+/artifacts/*
+!/artifacts/.gitkeep
 {% if repo_type in ["code", "library"] %}
 # Python
 __pycache__/

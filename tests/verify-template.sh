@@ -46,6 +46,7 @@ render() {
   require_path "$destination/data/README.md"
   require_path "$destination/deliverables/README.md"
   require_path "$destination/artifacts"
+  require_path "$destination/artifacts/.gitkeep"
   grep -Fq 'Versioned source material' "$destination/docs/reference/project-charter.md"
   grep -Fq 'Tracked deliverables' "$destination/docs/reference/project-charter.md"
   grep -Fq 'Disposable generated output' "$destination/docs/reference/project-charter.md"
@@ -54,11 +55,18 @@ render() {
   grep -Fq '`data/` — versioned source material' "$destination/AGENTS.md"
   grep -Fq 'reference/project-charter.md' "$destination/docs/README.md"
   grep -Fqx '/data/local/' "$destination/.gitignore"
-  grep -Fqx '/artifacts/' "$destination/.gitignore"
-  git -C "$destination" check-ignore -q artifacts
+  grep -Fqx '/artifacts/*' "$destination/.gitignore"
+  grep -Fqx '!/artifacts/.gitkeep' "$destination/.gitignore"
+  git -C "$destination" check-ignore -q artifacts/generated.txt
+  ! git -C "$destination" check-ignore -q artifacts/.gitkeep
   git -C "$destination" check-ignore -q data/local
   ! git -C "$destination" check-ignore -q data/README.md
   ! git -C "$destination" check-ignore -q deliverables/README.md
+
+  git -C "$destination" add .
+  git -C "$destination" -c user.name=template-check -c user.email=template-check@example.invalid commit -qm scaffold
+  git clone -q "$destination" "$destination-clone"
+  require_path "$destination-clone/artifacts/.gitkeep"
 
   if [[ "$repo_type" == data ]]; then
     grep -Fq 'Consumers fetch from this repo; data is never copied into consumers.' "$destination/AGENTS.md"
