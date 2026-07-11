@@ -5,9 +5,9 @@
 Evolve the Copier template from a documentation spine into a broader, more
 opinionated project scaffold. Every generated repository will declare its scope
 and receive clear locations for source material, deliverables, and generated
-output. The existing `data` Copier value remains unchanged for update
-compatibility, but its human-facing label becomes the general non-code workspace
-profile.
+output. The existing `data` Copier value retains its source-of-truth semantics
+for update compatibility; a separate `workspace` profile covers broad non-code
+projects.
 
 ## Decisions
 
@@ -16,8 +16,8 @@ profile.
   generated/transient output.
 - Generate `docs/reference/project-charter.md` from required short Copier
   answers: inputs, outputs, and non-goals.
-- Keep the existing `data`, `code`, and `library` values. Only the `data` label
-  changes to describe a non-code workspace.
+- Keep the existing `data`, `code`, and `library` values. Add `workspace` for
+  docs, research, and design without weakening the `data` source-of-truth rule.
 - Do not add a generic `work/` or `scratch/` directory.
 
 ## Dependency Graph
@@ -75,8 +75,8 @@ and encode the tracked-versus-local boundary in the generated `.gitignore`.
 - [x] Every render creates `data/`, `deliverables/`, and `artifacts/`.
 - [x] `data/local/` and `artifacts/` are ignored; `data/` and `deliverables/`
   remain trackable.
-- [x] The non-code option is labelled “Workspace: docs, research, design, config,
-  or data” while its value remains `data`.
+- [x] The `data` profile retains its source-of-truth contract, and the non-code
+  workspace option is a separate `workspace` value.
 
 **Verification:** `tests/verify-template.sh` and `git diff --check`
 
@@ -163,14 +163,13 @@ full render check.
 
 - [x] `tests/verify-template.sh` passes.
 - [x] `git diff --check` passes.
-- [x] Generated docs contain no stale “data-only” wording for the workspace
-  profile.
+- [x] Generated docs distinguish data-source and workspace profile rules.
 
 ## Risks and Mitigations
 
 | Risk | Impact | Mitigation |
 |---|---|---|
-| Changing the `data` value breaks Copier updates | High | Change only its displayed label; retain `data` throughout templates and tasks. |
+| Weakening existing data-repo semantics breaks updates | High | Retain the `data` value and its source-of-truth rule; add `workspace` separately. |
 | Ignored empty folders disappear from Git | Medium | Create them at render time and verify their presence in the render check. |
 | Charter duplicates agent policy | Medium | Limit it to inputs, outputs, and non-goals; link from entrypoints instead of repeating policy. |
 | Copier is unavailable in a contributor environment | Low | The check fails clearly with the existing documented install command. |

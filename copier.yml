@@ -44,7 +44,8 @@ repo_type:
   type: str
   help: What kind of repo is this?
   choices:
-    "Workspace: docs, research, design, config, or data (no src/)": data
+    Data / config source-of-truth (no src/): data
+    "Workspace: docs, research, or design (no src/)": workspace
     Application / service code (src/ + tests): code
     Installable library / package: library
   default: code
@@ -53,7 +54,7 @@ package_name:
   type: str
   help: Python package name (code/library only)
   default: "{{ project_slug | replace('-', '_') }}"
-  when: "{{ repo_type != 'data' }}"
+  when: "{{ repo_type in ['code', 'library'] }}"
 
 code_owner:
   type: str
@@ -65,7 +66,7 @@ _tasks:
   - "git rev-parse --is-inside-work-tree >/dev/null 2>&1 || git init -q"
   # Type-specific scaffolding for code / library repos
   - >
-    {% if repo_type != 'data' %}
+    {% if repo_type in ['code', 'library'] %}
     mkdir -p src/{{ package_name }} tests &&
     printf '' > src/{{ package_name }}/__init__.py &&
     printf '' > tests/.gitkeep &&

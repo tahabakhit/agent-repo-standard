@@ -61,6 +61,13 @@ render() {
   ! git -C "$destination" check-ignore -q deliverables/README.md
 
   if [[ "$repo_type" == data ]]; then
+    grep -Fq 'Consumers fetch from this repo; data is never copied into consumers.' "$destination/AGENTS.md"
+    grep -Fq 'When data and docs disagree, the data wins' "$destination/AGENTS.md"
+    [[ ! -e "$destination/src" ]]
+    [[ ! -e "$destination/tests" ]]
+    [[ ! -e "$destination/pyproject.toml" ]]
+  elif [[ "$repo_type" == workspace ]]; then
+    grep -Fq 'Keep project boundaries explicit.' "$destination/AGENTS.md"
     [[ ! -e "$destination/src" ]]
     [[ ! -e "$destination/tests" ]]
     [[ ! -e "$destination/pyproject.toml" ]]
@@ -76,5 +83,6 @@ render() {
 }
 
 render data
+render workspace
 render code
 render library

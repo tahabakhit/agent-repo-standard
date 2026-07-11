@@ -50,9 +50,9 @@ artifacts/                    # ignored generated or transient output
 ```
 
 Code repos additionally carry `src/` + `tests/`; library repos add packaging.
-Workspace repos carry no `src/`. Anything a local toolchain generates (local
-spec/brainstorm working dirs, per-agent command surfaces, …) is git-ignored —
-see *Agent setup*.
+Data and workspace repos carry no `src/`. Anything a local toolchain generates
+(local spec/brainstorm working dirs, per-agent command surfaces, …) is
+git-ignored — see *Agent setup*.
 
 ## File naming
 
