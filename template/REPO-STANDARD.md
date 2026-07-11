@@ -44,12 +44,15 @@ docs/
   decisions/adrs/             # MADR decisions (NNNN-slug.md, never renumbered)
     archive/                  # retired ADRs, kept for history
   history/                    # dated point-in-time notes (context only)
+data/                         # versioned source material; data/local/ is ignored
+deliverables/                 # versioned final outputs
+artifacts/                    # ignored generated or transient output
 ```
 
 Code repos additionally carry `src/` + `tests/`; library repos add packaging.
-Data repos carry their data surface at the root and no `src/`. Anything a local
-toolchain generates (local spec/brainstorm working dirs, per-agent command
-surfaces, …) is git-ignored — see *Agent setup*.
+Data and workspace repos carry no `src/`. Anything a local toolchain generates
+(local spec/brainstorm working dirs, per-agent command surfaces, …) is
+git-ignored — see *Agent setup*.
 
 ## File naming
 
@@ -68,6 +71,10 @@ surfaces, …) is git-ignored — see *Agent setup*.
 | A learning walkthrough | `docs/tutorials/` |
 | A "how do I X" recipe or runbook | `docs/how-to/` |
 | Vocabulary, schema, API, config reference | `docs/reference/` |
+| Versioned source material | `data/` |
+| Restricted or bulky local input | `data/local/` (git-ignored) |
+| Versioned final output | `deliverables/` |
+| Generated or transient output | `artifacts/` (git-ignored) |
 | Why something is the way it is (rationale) | `docs/explanation/` |
 | A decision worth preserving past the work | `docs/decisions/adrs/` |
 | A dated note kept only for context | `docs/history/` |

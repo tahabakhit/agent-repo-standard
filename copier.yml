@@ -28,11 +28,24 @@ description:
   help: One-line description of what this repo is
   default: ""
 
+project_inputs:
+  type: str
+  help: What versioned source material does this project take in?
+
+project_outputs:
+  type: str
+  help: What tracked deliverables does this project produce?
+
+non_goals:
+  type: str
+  help: What is explicitly out of scope for this project?
+
 repo_type:
   type: str
   help: What kind of repo is this?
   choices:
     Data / config source-of-truth (no src/): data
+    "Workspace: docs, research, or design (no src/)": workspace
     Application / service code (src/ + tests): code
     Installable library / package: library
   default: code
@@ -41,7 +54,7 @@ package_name:
   type: str
   help: Python package name (code/library only)
   default: "{{ project_slug | replace('-', '_') }}"
-  when: "{{ repo_type != 'data' }}"
+  when: "{{ repo_type in ['code', 'library'] }}"
 
 code_owner:
   type: str
@@ -53,7 +66,7 @@ _tasks:
   - "git rev-parse --is-inside-work-tree >/dev/null 2>&1 || git init -q"
   # Type-specific scaffolding for code / library repos
   - >
-    {% if repo_type != 'data' %}
+    {% if repo_type in ['code', 'library'] %}
     mkdir -p src/{{ package_name }} tests &&
     printf '' > src/{{ package_name }}/__init__.py &&
     printf '' > tests/.gitkeep &&
@@ -63,3 +76,4 @@ _tasks:
     {% if repo_type == 'library' %}
     printf '[project]\nname = "{{ project_slug }}"\nversion = "0.0.0"\ndescription = "{{ description }}"\nrequires-python = ">=3.11"\n' > pyproject.toml
     {% else %}true{% endif %}
+  - "mkdir -p data/local deliverables artifacts"

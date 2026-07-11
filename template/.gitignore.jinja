@@ -24,7 +24,12 @@ Thumbs.db
 
 # Local-only session handoff
 HANDOFF.md
-{% if repo_type != "data" %}
+
+# Project boundary directories.
+/data/local/
+/artifacts/*
+!/artifacts/.gitkeep
+{% if repo_type in ["code", "library"] %}
 # Python
 __pycache__/
 *.py[cod]

@@ -35,9 +35,11 @@ Or use the wrapper: `bin/new-repo.sh <dest>`.
 
 ## Repo types
 
-`repo_type` tailors the output: `data` (source-of-truth, no `src/`), `code`
-(`src/` + `tests/` + TDD), `library` (adds packaging). All types share the
-AGENTS.md + Diátaxis + MADR spine.
+`repo_type` tailors the output: `data` (source-of-truth data/config, no `src/`),
+`workspace` (docs, research, or design, no `src/`), `code` (`src/` + `tests/` +
+TDD), and `library` (adds packaging). All types share the AGENTS.md + Diátaxis +
+MADR spine, plus `data/` for versioned source material, `deliverables/` for
+versioned final outputs, and git-ignored `artifacts/` for generated output.
 
 ## Adopting in an existing repo
 
