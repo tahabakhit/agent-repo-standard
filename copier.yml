@@ -28,11 +28,23 @@ description:
   help: One-line description of what this repo is
   default: ""
 
+project_inputs:
+  type: str
+  help: What versioned source material does this project take in?
+
+project_outputs:
+  type: str
+  help: What tracked deliverables does this project produce?
+
+non_goals:
+  type: str
+  help: What is explicitly out of scope for this project?
+
 repo_type:
   type: str
   help: What kind of repo is this?
   choices:
-    Data / config source-of-truth (no src/): data
+    "Workspace: docs, research, design, config, or data (no src/)": data
     Application / service code (src/ + tests): code
     Installable library / package: library
   default: code
@@ -63,3 +75,4 @@ _tasks:
     {% if repo_type == 'library' %}
     printf '[project]\nname = "{{ project_slug }}"\nversion = "0.0.0"\ndescription = "{{ description }}"\nrequires-python = ">=3.11"\n' > pyproject.toml
     {% else %}true{% endif %}
+  - "mkdir -p data/local deliverables artifacts"

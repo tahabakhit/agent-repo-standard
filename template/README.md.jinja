@@ -9,8 +9,18 @@ This repository follows the shared **[Repo Standard](REPO-STANDARD.md)**
 contributors and agents should read [`AGENTS.md`](AGENTS.md) first, then
 [`REPO-STANDARD.md`](REPO-STANDARD.md) for the layout.
 
+This project's scope, inputs, outputs, and non-goals are defined in the
+[project charter](docs/reference/project-charter.md).
+
 ## Documentation
 
 Durable documentation lives in [`docs/`](docs/README.md), organized by Diátaxis:
 tutorials, how-to guides, reference, and explanation. Decisions are recorded as
 ADRs in [`docs/decisions/adrs/`](docs/decisions/adrs/README.md).
+
+## Project boundaries
+
+- [`data/`](data/README.md) — versioned source material; use `data/local/` for
+  restricted or bulky local input.
+- [`deliverables/`](deliverables/README.md) — versioned final outputs.
+- `artifacts/` — git-ignored generated or transient output.
