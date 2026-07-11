@@ -69,7 +69,8 @@ render() {
   require_path "$destination-clone/artifacts/.gitkeep"
 
   if [[ "$repo_type" == data ]]; then
-    grep -Fq 'Consumers fetch from this repo; data is never copied into consumers.' "$destination/AGENTS.md"
+    grep -Fq 'Consumers fetch from this repo; data is never' "$destination/AGENTS.md"
+    grep -Fq 'copied into consumers.' "$destination/AGENTS.md"
     grep -Fq 'When data and docs disagree, the data wins' "$destination/AGENTS.md"
     [[ ! -e "$destination/src" ]]
     [[ ! -e "$destination/tests" ]]
