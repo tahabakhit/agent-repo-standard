@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "startedAt": "2026-07-17T01:45:00.000Z",
+  "finishedAt": "2026-07-17T01:45:00.000Z",
+  "mode": "full",
+  "status": "completed",
+  "evidenceState": "estimated",
+  "id": "2026-07-17-agent-tool-source-batch-fresh",
+  "target": {
+    "kind": "evaluation-batch",
+    "name": "Wiki-promoted agent tools and workflows",
+    "source": "/Users/tahabakhit/wiki/topics/agent-workflows/wiki/references/cross-harness-agent-tool-scorecard.md",
+    "version": "fresh source inventory 2026-07-17"
+  },
+  "axes": {
+    "V": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+      ]
+    },
+    "U": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+      ]
+    },
+    "E": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+      ]
+    },
+    "X": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+      ]
+    },
+    "R": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+      ]
+    },
+    "S": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+      ]
+    },
+    "M": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+      ]
+    },
+    "F": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+      ]
+    },
+    "C": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+      ]
+    }
+  },
+  "methods": [
+    {
+      "name": "source-review",
+      "status": "completed",
+      "version": "fresh pinned source review 2026-07-17",
+      "exactCommand": "git diff --check",
+      "exactCommands": [
+        {
+          "command": "git diff --check",
+          "exitCode": 0
+        },
+        {
+          "command": "jq empty reviews/*/matrix.json",
+          "exitCode": 0
+        }
+      ],
+      "exitCode": 0,
+      "durationMs": 30000,
+      "metrics": {
+        "sourceLanes": 3,
+        "promotedCandidatesReviewed": 80
+      },
+      "artifactLinks": [
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+      ],
+      "artifactDigests": {
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c"
+      }
+    },
+    {
+      "name": "plugin-eval",
+      "status": "not-applicable",
+      "skipReason": "This batch contains multiple plugin and workflow types; Plugin Eval was run only on native local Codex plugin roots in the candidate-specific runs.",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "promptfoo",
+      "status": "not-applicable",
+      "skipReason": "No single adapter and verifier can represent all promoted candidates; candidate-specific measured runs use a shared task pack.",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "harbor",
+      "status": "unavailable",
+      "skipReason": "harbor is not on PATH",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "inspect",
+      "status": "unavailable",
+      "skipReason": "inspect is not on PATH",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    }
+  ],
+  "platforms": {
+    "codex": {
+      "status": "not-run",
+      "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+    },
+    "claude-code": {
+      "status": "not-run",
+      "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+    },
+    "pi": {
+      "status": "not-run",
+      "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+    },
+    "hermes": {
+      "status": "not-run",
+      "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+    },
+    "opencode": {
+      "status": "not-run",
+      "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+    }
+  },
+  "combinations": [],
+  "findings": [
+    "The wiki promoted approximately 80 actionable candidates across control planes, utilities, memory, MCP, and discovery layers.",
+    "Source evidence is not a substitute for host-specific behavioral measurement; most candidates need an adapter and deterministic task verifier."
+  ],
+  "decision": "Use this source batch as the fresh inventory and coverage map; use the four candidate-specific Codex runs for actual behavioral evidence.",
+  "provenance": {
+    "harness": "agent-eval 0.1.0 + Promptfoo 0.121.19",
+    "model": "Codex CLI 0.144.3",
+    "repositoryRevision": "fresh source inventory 2026-07-17",
+    "sandbox": "disposable /tmp workspaces; source clones read-only",
+    "approvalPolicy": "never",
+    "network": "enabled for source clone; task workspaces network-independent",
+    "enabledExtensions": [
+      "agent-eval:evaluate-all",
+      "promptfoo 0.121.19",
+      "plugin-eval 0.1.0"
+    ]
+  },
+  "artifactDigests": {
+    "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+    "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c",
+    "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c"
+  },
+  "score": 68,
+  "bloat": 2,
+  "confidence": "C"
+}

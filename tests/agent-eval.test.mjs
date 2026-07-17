@@ -170,6 +170,12 @@ test("derives paired deterministic evidence from Promptfoo rows", () => {
     candidatePasses: 3,
     platforms: ["codex"],
   });
+  const customProviderResult = structuredClone(result);
+  customProviderResult.results.results.forEach((item) => {
+    item.provider.id = "file://custom-coding-provider.mjs";
+    item.metadata.platform = "codex";
+  });
+  assert.equal(verifyPromptfooResult(customProviderResult).platforms[0], "codex");
   const modelGraded = structuredClone(result);
   modelGraded.results.results[0].gradingResult.componentResults[0].assertion.type = "llm-rubric";
   assert.throws(() => verifyPromptfooResult(modelGraded), /deterministic assertions/);

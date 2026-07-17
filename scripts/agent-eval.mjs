@@ -171,7 +171,7 @@ const DETERMINISTIC_ASSERTIONS = new Set([
   "trajectory:tool-sequence",
   "trajectory:tool-used",
 ]);
-const OUTCOME_ASSERTIONS = new Set(["contains", "contains-all", "contains-any", "contains-json", "equals", "is-json", "not-contains", "regex", "starts-with"]);
+const OUTCOME_ASSERTIONS = new Set(["contains", "contains-all", "contains-any", "contains-json", "equals", "is-json", "javascript", "not-contains", "regex", "starts-with"]);
 
 function platformForProvider(providerId) {
   const id = String(providerId ?? "").toLowerCase();
@@ -181,8 +181,15 @@ function platformForProvider(providerId) {
   return null;
 }
 
+function platformForRow(row) {
+  const native = platformForProvider(row?.provider?.id);
+  if (native) return native;
+  const declared = String(row?.metadata?.platform ?? row?.response?.metadata?.platform ?? "").toLowerCase();
+  return PLATFORMS.has(declared) ? declared : null;
+}
+
 function platformsForRows(rows) {
-  return [...new Set(rows.map((row) => platformForProvider(row?.provider?.id)).filter(Boolean))].sort();
+  return [...new Set(rows.map((row) => platformForRow(row)).filter(Boolean))].sort();
 }
 
 export function verifyPromptfooResult(result) {
@@ -193,16 +200,20 @@ export function verifyPromptfooResult(result) {
     const label = String(row?.provider?.label ?? "").toLowerCase();
     if (label in byLabel) byLabel[label].push(row);
   }
-  const baselinePlatforms = new Set(byLabel.baseline.map((row) => platformForProvider(row?.provider?.id)));
-  const candidatePlatforms = new Set(byLabel.candidate.map((row) => platformForProvider(row?.provider?.id)));
+  const baselinePlatforms = new Set(byLabel.baseline.map((row) => platformForRow(row)));
+  const candidatePlatforms = new Set(byLabel.candidate.map((row) => platformForRow(row)));
   if (baselinePlatforms.size !== 1 || candidatePlatforms.size !== 1 || baselinePlatforms.has(null) || candidatePlatforms.has(null) || [...baselinePlatforms][0] !== [...candidatePlatforms][0]) {
     throw new Error("Promptfoo baseline and candidate trials must use the same known platform");
   }
   const platform = [...baselinePlatforms][0];
   if (byLabel.baseline.length < 3 || byLabel.candidate.length < 3) throw new Error("Promptfoo measured evidence requires at least 3 baseline and 3 candidate trials");
 
+  const taskKey = (row) => {
+    const task = row?.vars?.task ?? row?.testCase?.vars?.task ?? row?.testCase?.description;
+    return `${String(task ?? row?.testIdx ?? "unknown")}:${row?.promptId ?? ""}`;
+  };
   const taskCounts = (group) => group.reduce((counts, row) => {
-    const key = `${row.testIdx}:${row.promptId}`;
+    const key = taskKey(row);
     counts[key] = (counts[key] ?? 0) + 1;
     return counts;
   }, {});
@@ -215,7 +226,7 @@ export function verifyPromptfooResult(result) {
   const repeatSignature = (group) => {
     const grouped = new Map();
     for (const row of group) {
-      const task = `${row.testIdx}:${row.promptId}`;
+      const task = taskKey(row);
       grouped.set(task, [...(grouped.get(task) ?? []), row]);
     }
     return Object.fromEntries([...grouped.entries()].sort(([left], [right]) => left.localeCompare(right)).map(([task, taskRows]) => {
@@ -560,8 +571,12 @@ export async function loadAndVerifyRun(source, options = {}) {
   }
   if (promptfoo && artifacts.has(promptfooLink) && artifacts.has(promptfooConfig)) {
     const raw = JSON.parse(artifacts.get(promptfooLink).content.toString("utf8"));
-    const needsPaired = candidate.evidenceState === "measured" || Object.values(candidate.platforms ?? {}).some((platform) => platform?.evidenceState === "measured");
-    const derived = needsPaired ? verifyPromptfooResult(raw) : verifyPromptfooSmokeResult(raw);
+    const rawLabels = new Set((raw?.results?.results ?? []).map((row) => String(row?.provider?.label ?? "").toLowerCase()));
+    const hasPairedLabels = rawLabels.has("baseline") && rawLabels.has("candidate");
+    const needsPaired = candidate.evidenceState === "measured"
+      || Object.values(candidate.axes ?? {}).some((axis) => ["measured", "mixed"].includes(axis?.evidenceState))
+      || Object.values(candidate.platforms ?? {}).some((platform) => ["measured", "mixed"].includes(platform?.evidenceState));
+    const derived = needsPaired && hasPairedLabels ? verifyPromptfooResult(raw) : verifyPromptfooSmokeResult(raw);
     promptfoo.metrics = { ...promptfoo.metrics, ...derived };
     pairedVerified = derived.pairedBaseline === true && derived.deterministicVerifier === true;
     runtimeObserved = true;

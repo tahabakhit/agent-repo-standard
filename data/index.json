@@ -1,7 +1,1599 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-17T00:47:41.117Z",
+  "generatedAt": "2026-07-17T01:45:00.000Z",
   "runs": [
+    {
+      "schemaVersion": 1,
+      "startedAt": "2026-07-17T01:45:00.000Z",
+      "finishedAt": "2026-07-17T01:45:00.000Z",
+      "mode": "full",
+      "status": "completed",
+      "evidenceState": "mixed",
+      "id": "2026-07-17-agent-repo-standard-fresh-codex",
+      "target": {
+        "kind": "workflow",
+        "name": "Agent Repo Standard",
+        "source": "https://github.com/tahabakhit/agent-repo-standard",
+        "version": "f0a4e5f9b836ff87e43d47577c57281d7d0f4b21"
+      },
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "U": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "E": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "S": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "C": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "fresh pinned source review 2026-07-17",
+          "exactCommand": "git diff --check",
+          "exactCommands": [
+            {
+              "command": "git diff --check",
+              "exitCode": 0
+            },
+            {
+              "command": "jq empty reviews/*/matrix.json",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 15000,
+          "metrics": {
+            "sourceLanes": 3,
+            "promotedCandidatesReviewed": 80
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "not-applicable",
+          "skipReason": "The target has no native Codex plugin root for Plugin Eval; source review and the Codex skill-overlay task adapter are the applicable evidence.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "promptfoo",
+          "status": "completed",
+          "version": "0.121.19",
+          "exactCommand": "promptfoo eval -c promptfooconfig-codex-repo-standard.yaml --repeat 3 --no-cache --no-share --max-concurrency 1 --no-progress-bar -o codex-repo-standard-measured.json",
+          "exitCode": 0,
+          "durationMs": 547000,
+          "metrics": {
+            "trialsPerCondition": 6,
+            "tasks": 2,
+            "baselineTrials": 6,
+            "candidateTrials": 6,
+            "baselinePasses": 6,
+            "candidatePasses": 6,
+            "platforms": [
+              "codex"
+            ],
+            "pairedBaseline": true,
+            "deterministicVerifier": true
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/promptfooconfig.yaml",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/promptfooconfig.yaml": "253f4dd28c91f20d764dce8dcb175c5383a1959edc341ecf7520de4a0e86bf69",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json": "c7a8ed07a423910788942a5348c13fe2189ca574d5354f6084ef7aa964484cc6"
+          }
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "codex": {
+          "status": "completed",
+          "adapter": "Codex exec with disposable workspace and deterministic npm-test verifier",
+          "evidenceState": "mixed",
+          "axes": {
+            "V": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "U": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "E": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "X": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "R": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "S": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "M": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "C": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            }
+          },
+          "score": 89,
+          "bloat": 1,
+          "confidence": "B"
+        },
+        "claude-code": {
+          "status": "blocked",
+          "reason": "Claude Code is authenticated through Vertex, but the organization disabled Claude subscription access for noninteractive runs; no API key was available."
+        },
+        "pi": {
+          "status": "unavailable",
+          "reason": "Pi CLI is not installed in this environment."
+        },
+        "hermes": {
+          "status": "unavailable",
+          "reason": "Hermes CLI is not installed in this environment."
+        },
+        "opencode": {
+          "status": "unavailable",
+          "reason": "OpenCode CLI is not installed in this environment."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "The generated AGENTS.md policy completed 12/12 paired Codex trials, matching a 12/12 baseline; the pack measures compatibility, not documentation quality uplift.",
+        "The fresh Copier template verification passed, with interpolation/trust caveats documented in the source lane.",
+        "This is the leanest cross-agent foundation of the four because it governs repository boundaries without adding a large runtime control plane."
+      ],
+      "decision": "Use as the baseline repository contract. Add a task-specific workflow only when a measured task gap justifies the extra control plane.",
+      "provenance": {
+        "harness": "agent-eval 0.1.0 + Promptfoo 0.121.19",
+        "model": "Codex CLI 0.144.3",
+        "repositoryRevision": "f0a4e5f9b836ff87e43d47577c57281d7d0f4b21",
+        "sandbox": "disposable /tmp workspaces; source clones read-only",
+        "approvalPolicy": "never",
+        "network": "enabled for source clone; task workspaces network-independent",
+        "enabledExtensions": [
+          "agent-eval:evaluate-all",
+          "promptfoo 0.121.19",
+          "plugin-eval 0.1.0"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/promptfooconfig.yaml": "253f4dd28c91f20d764dce8dcb175c5383a1959edc341ecf7520de4a0e86bf69",
+        "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json": "c7a8ed07a423910788942a5348c13fe2189ca574d5354f6084ef7aa964484cc6",
+        "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+        "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c",
+        "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c"
+      },
+      "score": 89,
+      "bloat": 1,
+      "confidence": "B"
+    },
+    {
+      "schemaVersion": 1,
+      "startedAt": "2026-07-17T01:45:00.000Z",
+      "finishedAt": "2026-07-17T01:45:00.000Z",
+      "mode": "full",
+      "status": "completed",
+      "evidenceState": "estimated",
+      "id": "2026-07-17-agent-tool-source-batch-fresh",
+      "target": {
+        "kind": "evaluation-batch",
+        "name": "Wiki-promoted agent tools and workflows",
+        "source": "/Users/tahabakhit/wiki/topics/agent-workflows/wiki/references/cross-harness-agent-tool-scorecard.md",
+        "version": "fresh source inventory 2026-07-17"
+      },
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "U": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "X": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "R": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "F": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "C": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "fresh pinned source review 2026-07-17",
+          "exactCommand": "git diff --check",
+          "exactCommands": [
+            {
+              "command": "git diff --check",
+              "exitCode": 0
+            },
+            {
+              "command": "jq empty reviews/*/matrix.json",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 30000,
+          "metrics": {
+            "sourceLanes": 3,
+            "promotedCandidatesReviewed": 80
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "not-applicable",
+          "skipReason": "This batch contains multiple plugin and workflow types; Plugin Eval was run only on native local Codex plugin roots in the candidate-specific runs.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "promptfoo",
+          "status": "not-applicable",
+          "skipReason": "No single adapter and verifier can represent all promoted candidates; candidate-specific measured runs use a shared task pack.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "codex": {
+          "status": "not-run",
+          "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+        },
+        "claude-code": {
+          "status": "not-run",
+          "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+        },
+        "pi": {
+          "status": "not-run",
+          "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+        },
+        "hermes": {
+          "status": "not-run",
+          "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+        },
+        "opencode": {
+          "status": "not-run",
+          "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "The wiki promoted approximately 80 actionable candidates across control planes, utilities, memory, MCP, and discovery layers.",
+        "Source evidence is not a substitute for host-specific behavioral measurement; most candidates need an adapter and deterministic task verifier."
+      ],
+      "decision": "Use this source batch as the fresh inventory and coverage map; use the four candidate-specific Codex runs for actual behavioral evidence.",
+      "provenance": {
+        "harness": "agent-eval 0.1.0 + Promptfoo 0.121.19",
+        "model": "Codex CLI 0.144.3",
+        "repositoryRevision": "fresh source inventory 2026-07-17",
+        "sandbox": "disposable /tmp workspaces; source clones read-only",
+        "approvalPolicy": "never",
+        "network": "enabled for source clone; task workspaces network-independent",
+        "enabledExtensions": [
+          "agent-eval:evaluate-all",
+          "promptfoo 0.121.19",
+          "plugin-eval 0.1.0"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c"
+      },
+      "score": 68,
+      "bloat": 2,
+      "confidence": "C"
+    },
+    {
+      "schemaVersion": 1,
+      "startedAt": "2026-07-17T01:45:00.000Z",
+      "finishedAt": "2026-07-17T01:45:00.000Z",
+      "mode": "full",
+      "status": "completed",
+      "evidenceState": "mixed",
+      "id": "2026-07-17-klaussy-fresh-codex",
+      "target": {
+        "kind": "workflow",
+        "name": "Klaussy Agents",
+        "source": "https://github.com/steph-dove/klaussy-agents",
+        "version": "ce03f937338f270e16b6dd778f584ec2d5a50049 (0.11.0)"
+      },
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "U": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "E": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "X": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "R": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "F": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "C": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "fresh pinned source review 2026-07-17",
+          "exactCommand": "git diff --check",
+          "exactCommands": [
+            {
+              "command": "git diff --check",
+              "exitCode": 0
+            },
+            {
+              "command": "jq empty reviews/*/matrix.json",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 15000,
+          "metrics": {
+            "sourceLanes": 3,
+            "promotedCandidatesReviewed": 80
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "not-applicable",
+          "skipReason": "The target has no native Codex plugin root for Plugin Eval; source review and the Codex skill-overlay task adapter are the applicable evidence.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "promptfoo",
+          "status": "completed",
+          "version": "0.121.19",
+          "exactCommand": "promptfoo eval -c promptfooconfig-codex-klaussy.yaml --repeat 3 --no-cache --no-share --max-concurrency 1 --no-progress-bar -o codex-klaussy-measured.json",
+          "exitCode": 0,
+          "durationMs": 456000,
+          "metrics": {
+            "trialsPerCondition": 6,
+            "tasks": 2,
+            "baselineTrials": 6,
+            "candidateTrials": 6,
+            "baselinePasses": 6,
+            "candidatePasses": 6,
+            "platforms": [
+              "codex"
+            ],
+            "pairedBaseline": true,
+            "deterministicVerifier": true
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/promptfooconfig.yaml",
+            "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/promptfooconfig.yaml": "6484caf12250685d579b3f145fc03eabf355b39c5d4a450395239f4901f27907",
+            "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json": "e270c81b230c5f02162c73c7b2f27362ed80de78e1fc6e410004f01041c18416"
+          }
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "codex": {
+          "status": "completed",
+          "adapter": "Codex exec with disposable workspace and deterministic npm-test verifier",
+          "evidenceState": "mixed",
+          "axes": {
+            "V": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "U": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "E": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "X": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "R": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "S": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "M": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "F": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "C": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            }
+          },
+          "score": 71,
+          "bloat": 2,
+          "confidence": "B"
+        },
+        "claude-code": {
+          "status": "blocked",
+          "reason": "Claude Code is authenticated through Vertex, but the organization disabled Claude subscription access for noninteractive runs; no API key was available."
+        },
+        "pi": {
+          "status": "unavailable",
+          "reason": "Pi CLI is not installed in this environment."
+        },
+        "hermes": {
+          "status": "unavailable",
+          "reason": "Hermes CLI is not installed in this environment."
+        },
+        "opencode": {
+          "status": "unavailable",
+          "reason": "OpenCode CLI is not installed in this environment."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "Klaussy completed 12/12 paired Codex trials, matching a 12/12 baseline; this is a skill-overlay smoke of its cross-agent instructions, not a native Codex plugin integration.",
+        "The fresh repository exposes a Claude plugin but no native Codex plugin root; Plugin Eval is therefore not applicable to this Codex run.",
+        "Its broad multi-host policy surface is useful for repository consistency but has limited measured Codex-specific fit."
+      ],
+      "decision": "Treat Klaussy as a repository policy/workflow layer, not the only Codex plugin; adopt it only where the cross-agent conventions are the goal and keep native Codex skills explicit.",
+      "provenance": {
+        "harness": "agent-eval 0.1.0 + Promptfoo 0.121.19",
+        "model": "Codex CLI 0.144.3",
+        "repositoryRevision": "ce03f937338f270e16b6dd778f584ec2d5a50049 (0.11.0)",
+        "sandbox": "disposable /tmp workspaces; source clones read-only",
+        "approvalPolicy": "never",
+        "network": "enabled for source clone; task workspaces network-independent",
+        "enabledExtensions": [
+          "agent-eval:evaluate-all",
+          "promptfoo 0.121.19",
+          "plugin-eval 0.1.0"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/promptfooconfig.yaml": "6484caf12250685d579b3f145fc03eabf355b39c5d4a450395239f4901f27907",
+        "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json": "e270c81b230c5f02162c73c7b2f27362ed80de78e1fc6e410004f01041c18416",
+        "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+        "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c",
+        "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c"
+      },
+      "score": 71,
+      "bloat": 2,
+      "confidence": "B"
+    },
+    {
+      "schemaVersion": 1,
+      "startedAt": "2026-07-17T01:45:00.000Z",
+      "finishedAt": "2026-07-17T01:45:00.000Z",
+      "mode": "full",
+      "status": "completed",
+      "evidenceState": "mixed",
+      "id": "2026-07-17-superpowers-fresh-codex",
+      "target": {
+        "kind": "plugin",
+        "name": "Superpowers",
+        "source": "https://github.com/obra/superpowers",
+        "version": "v6.1.1-d884ae04edebef577e82ff7c4e143debd0bbec99"
+      },
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "U": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "E": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "C": {
+          "value": 1,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "fresh pinned source review 2026-07-17",
+          "exactCommand": "git diff --check",
+          "exactCommands": [
+            {
+              "command": "git diff --check",
+              "exitCode": 0
+            },
+            {
+              "command": "jq empty reviews/*/matrix.json",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 15000,
+          "metrics": {
+            "sourceLanes": 3,
+            "promotedCandidatesReviewed": 80
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "completed",
+          "version": "0.1.0 (plugin 0.1.2)",
+          "exactCommand": "plugin-eval analyze /tmp/agent-eval-fresh-2026-07-17/superpowers --format json --output /tmp/agent-eval-fresh-2026-07-17/reviews/superpowers-plugin-result.json",
+          "exitCode": 0,
+          "durationMs": 790,
+          "metrics": {
+            "localScore": 8,
+            "grade": "F",
+            "triggerTokens": 550,
+            "invokeTokens": 31671,
+            "deferredTokens": 299162
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/plugin-eval/start.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/plugin-eval/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-superpowers-fresh-codex/plugin-eval/start.md": "64ee3edd4a0828cf8470c1eee28fc58bdb67964ee0e1afb1c9ba7e3fddd45f43",
+            "artifacts/2026-07-17-superpowers-fresh-codex/plugin-eval/result.json": "68705ea3d3938dfa5d29f86b9797e7e6c1b1d06dcd7d111f679661904d9c3e57"
+          }
+        },
+        {
+          "name": "promptfoo",
+          "status": "completed",
+          "version": "0.121.19",
+          "exactCommand": "promptfoo eval -c promptfooconfig-codex-superpowers.yaml --repeat 3 --no-cache --no-share --max-concurrency 1 --no-progress-bar -o codex-sp-measured.json",
+          "exitCode": 0,
+          "durationMs": 602000,
+          "metrics": {
+            "trialsPerCondition": 6,
+            "tasks": 2,
+            "baselineTrials": 6,
+            "candidateTrials": 6,
+            "baselinePasses": 6,
+            "candidatePasses": 6,
+            "platforms": [
+              "codex"
+            ],
+            "pairedBaseline": true,
+            "deterministicVerifier": true
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/promptfooconfig.yaml",
+            "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/promptfooconfig.yaml": "a870ff57d8e6fd2460809e640c226061a87892541a4316837dd0d5f206cfc13d",
+            "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json": "e4dc251d11352fcbe7806abc492544261a9b2c037ce79b0aaf20aacdd3907bc0"
+          }
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "codex": {
+          "status": "completed",
+          "adapter": "Codex exec with disposable workspace and deterministic npm-test verifier",
+          "evidenceState": "mixed",
+          "axes": {
+            "V": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "U": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "E": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "X": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "R": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "S": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "M": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "C": {
+              "value": 1,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            }
+          },
+          "score": 77,
+          "bloat": 4,
+          "confidence": "B"
+        },
+        "claude-code": {
+          "status": "blocked",
+          "reason": "Claude Code is authenticated through Vertex, but the organization disabled Claude subscription access for noninteractive runs; no API key was available."
+        },
+        "pi": {
+          "status": "unavailable",
+          "reason": "Pi CLI is not installed in this environment."
+        },
+        "hermes": {
+          "status": "unavailable",
+          "reason": "Hermes CLI is not installed in this environment."
+        },
+        "opencode": {
+          "status": "unavailable",
+          "reason": "OpenCode CLI is not installed in this environment."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "Measured Codex task success was 12/12, but baseline also scored 6/6; this establishes reliability on the two-task pack, not incremental value.",
+        "Plugin Eval's raw F is a static token/manifest signal and should not override the paired task outcome.",
+        "Broad workflow and subagent fan-out make this a high-bloat control plane."
+      ],
+      "decision": "Useful when you want a prescriptive end-to-end workflow, but do not treat the measured parity as proof of uplift; keep it isolated from other control planes until a task-gap benchmark shows value.",
+      "provenance": {
+        "harness": "agent-eval 0.1.0 + Promptfoo 0.121.19",
+        "model": "Codex CLI 0.144.3",
+        "repositoryRevision": "v6.1.1-d884ae04edebef577e82ff7c4e143debd0bbec99",
+        "sandbox": "disposable /tmp workspaces; source clones read-only",
+        "approvalPolicy": "never",
+        "network": "enabled for source clone; task workspaces network-independent",
+        "enabledExtensions": [
+          "agent-eval:evaluate-all",
+          "promptfoo 0.121.19",
+          "plugin-eval 0.1.0"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-superpowers-fresh-codex/plugin-eval/result.json": "68705ea3d3938dfa5d29f86b9797e7e6c1b1d06dcd7d111f679661904d9c3e57",
+        "artifacts/2026-07-17-superpowers-fresh-codex/plugin-eval/start.md": "64ee3edd4a0828cf8470c1eee28fc58bdb67964ee0e1afb1c9ba7e3fddd45f43",
+        "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/promptfooconfig.yaml": "a870ff57d8e6fd2460809e640c226061a87892541a4316837dd0d5f206cfc13d",
+        "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json": "e4dc251d11352fcbe7806abc492544261a9b2c037ce79b0aaf20aacdd3907bc0",
+        "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+        "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c",
+        "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c"
+      },
+      "score": 77,
+      "bloat": 4,
+      "confidence": "B"
+    },
+    {
+      "schemaVersion": 1,
+      "startedAt": "2026-07-17T01:45:00.000Z",
+      "finishedAt": "2026-07-17T01:45:00.000Z",
+      "mode": "full",
+      "status": "completed",
+      "evidenceState": "mixed",
+      "id": "2026-07-17-taskflow-fresh-codex",
+      "target": {
+        "kind": "plugin",
+        "name": "Taskflow",
+        "source": "https://github.com/heggria/taskflow",
+        "version": "300da53ea85ef820a49e72827f9f3261f377a9c9 (0.2.2)"
+      },
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "U": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "E": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "X": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "R": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "C": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "fresh pinned source review 2026-07-17",
+          "exactCommand": "git diff --check",
+          "exactCommands": [
+            {
+              "command": "git diff --check",
+              "exitCode": 0
+            },
+            {
+              "command": "jq empty reviews/*/matrix.json",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 15000,
+          "metrics": {
+            "sourceLanes": 3,
+            "promotedCandidatesReviewed": 80
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "completed",
+          "version": "0.1.0 (plugin 0.1.2)",
+          "exactCommand": "plugin-eval analyze /tmp/agent-eval-fresh-2026-07-17/taskflow/packages/codex-taskflow/plugin --format json --output /tmp/agent-eval-fresh-2026-07-17/reviews/taskflow-plugin-result.json",
+          "exitCode": 0,
+          "durationMs": 900,
+          "metrics": {
+            "localScore": 49,
+            "grade": "F",
+            "triggerTokens": 218,
+            "invokeTokens": 10323,
+            "deferredTokens": 15682
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/plugin-eval/start.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/plugin-eval/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-taskflow-fresh-codex/plugin-eval/start.md": "c38351699ff19ecd9ec272b52a9601d9b60b3db8f66188ad6e9290a59cce6786",
+            "artifacts/2026-07-17-taskflow-fresh-codex/plugin-eval/result.json": "f4e32655c73d6c3b03f0c2aa915c20b5b2fb83f187d6a32fcc4710b03cb547d9"
+          }
+        },
+        {
+          "name": "promptfoo",
+          "status": "completed",
+          "version": "0.121.19",
+          "exactCommand": "promptfoo eval -c promptfooconfig-codex-taskflow.yaml --repeat 3 --no-cache --no-share --max-concurrency 1 --no-progress-bar -o codex-taskflow-measured.json",
+          "exitCode": 0,
+          "durationMs": 500000,
+          "metrics": {
+            "trialsPerCondition": 6,
+            "tasks": 2,
+            "baselineTrials": 6,
+            "candidateTrials": 6,
+            "baselinePasses": 6,
+            "candidatePasses": 6,
+            "platforms": [
+              "codex"
+            ],
+            "pairedBaseline": true,
+            "deterministicVerifier": true
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/promptfooconfig.yaml",
+            "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/promptfooconfig.yaml": "254c643331ec6f9f3600c8c837b9e4af72d8fb97f21d56ebf6d02b13e70bcd41",
+            "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json": "55e327769688d1ae7de215fb66978b5fd00bf763303cb98f1da352b42a41322a"
+          }
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "codex": {
+          "status": "completed",
+          "adapter": "Codex exec with disposable workspace and deterministic npm-test verifier",
+          "evidenceState": "mixed",
+          "axes": {
+            "V": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "U": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "E": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "X": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "R": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "S": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "M": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "C": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            }
+          },
+          "score": 79,
+          "bloat": 2,
+          "confidence": "B"
+        },
+        "claude-code": {
+          "status": "blocked",
+          "reason": "Claude Code is authenticated through Vertex, but the organization disabled Claude subscription access for noninteractive runs; no API key was available."
+        },
+        "pi": {
+          "status": "unavailable",
+          "reason": "Pi CLI is not installed in this environment."
+        },
+        "hermes": {
+          "status": "unavailable",
+          "reason": "Hermes CLI is not installed in this environment."
+        },
+        "opencode": {
+          "status": "unavailable",
+          "reason": "OpenCode CLI is not installed in this environment."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "Taskflow completed 12/12 paired Codex trials on the deterministic pack; baseline also completed 6/6.",
+        "The source lane found a runner-process check failure and Plugin Eval flagged manifest/privacy and progressive-disclosure issues.",
+        "The result measures the copied Codex skill overlay; native activation and workflow uplift need a task pack designed around Taskflow's planning/parallelism behavior."
+      ],
+      "decision": "A plausible narrow workflow layer, but current evidence supports reliability rather than uplift; use it alone for task orchestration experiments before stacking it with another control plane.",
+      "provenance": {
+        "harness": "agent-eval 0.1.0 + Promptfoo 0.121.19",
+        "model": "Codex CLI 0.144.3",
+        "repositoryRevision": "300da53ea85ef820a49e72827f9f3261f377a9c9 (0.2.2)",
+        "sandbox": "disposable /tmp workspaces; source clones read-only",
+        "approvalPolicy": "never",
+        "network": "enabled for source clone; task workspaces network-independent",
+        "enabledExtensions": [
+          "agent-eval:evaluate-all",
+          "promptfoo 0.121.19",
+          "plugin-eval 0.1.0"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-taskflow-fresh-codex/plugin-eval/result.json": "f4e32655c73d6c3b03f0c2aa915c20b5b2fb83f187d6a32fcc4710b03cb547d9",
+        "artifacts/2026-07-17-taskflow-fresh-codex/plugin-eval/start.md": "c38351699ff19ecd9ec272b52a9601d9b60b3db8f66188ad6e9290a59cce6786",
+        "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/promptfooconfig.yaml": "254c643331ec6f9f3600c8c837b9e4af72d8fb97f21d56ebf6d02b13e70bcd41",
+        "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json": "55e327769688d1ae7de215fb66978b5fd00bf763303cb98f1da352b42a41322a",
+        "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+        "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c",
+        "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c"
+      },
+      "score": 79,
+      "bloat": 2,
+      "confidence": "B"
+    },
     {
       "schemaVersion": 1,
       "id": "2026-07-17-agent-repo-standard-f0a4e5f-quick",
