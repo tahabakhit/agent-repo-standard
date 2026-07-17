@@ -1,5 +1,328 @@
 {
   "schemaVersion": 1,
-  "generatedAt": null,
-  "runs": []
+  "generatedAt": "2026-07-17T00:08:49Z",
+  "runs": [
+    {
+      "schemaVersion": 1,
+      "id": "2026-07-17-agent-eval-self-v1",
+      "startedAt": "2026-07-17T00:05:00Z",
+      "finishedAt": "2026-07-17T00:08:49Z",
+      "mode": "quick",
+      "status": "completed",
+      "evidenceState": "mixed",
+      "target": {
+        "kind": "plugin",
+        "name": "Agent Eval",
+        "source": "/Users/tahabakhit/dev/projects/agents/tools/agent-eval",
+        "version": "1a36c03b85406a07fe74802884a2087c05fd3655"
+      },
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "mixed",
+          "reason": "The workflow completed a real Codex contract smoke and produced a validated offline evidence ledger, but it has not yet demonstrated paired outcome lift.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json",
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "It uniquely reconciles method evidence into per-axis, per-platform, and explicit combination records while keeping evaluator-local scores separate.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 4,
+          "evidenceState": "measured",
+          "reason": "Eighteen deterministic tests and a real Promptfoo contract run exercised evidence gates, artifact verification, and orchestration semantics.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json",
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "X": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "The score model represents five harnesses, but the installed workflow and this run are Codex-native; no Claude Code, Pi, Hermes, or OpenCode adapter ran.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "mixed",
+          "reason": "The implementation passed deterministic tests, fail-closed proof checks, two independent final reviews, and one real contract smoke.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json",
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 4,
+          "evidenceState": "mixed",
+          "reason": "Validated paths, symlink defenses, bounded files, digest pinning, secret-minimized subprocess environments, CSP, and read-only Promptfoo execution are implemented and tested.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json",
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The project has no runtime dependencies and one deterministic core, but the validator-renderer script and comprehensive specification remain sizable.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/plugin-eval/result.json",
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 5,
+          "evidenceState": "mixed",
+          "reason": "The personal Codex plugin installed and enabled successfully, its cache matched source, and the Codex app-server smoke passed.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json",
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Plugin Eval measured a 134-token trigger and 2,014-token invocation, both moderate; its heavy deferred estimate includes repository files that are not always loaded.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/plugin-eval/result.json"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "1a36c03b85406a07fe74802884a2087c05fd3655",
+          "exactCommand": "/usr/bin/time -p sh -c 'npm test && npm run check && npm audit --omit=dev'",
+          "exitCode": 0,
+          "durationMs": 1870,
+          "metrics": {
+            "testsPassed": 18,
+            "testsFailed": 0,
+            "auditVulnerabilities": 0,
+            "finalRequiredReviewFindings": 0,
+            "browserConsoleErrors": 0,
+            "automaticRemoteRequests": 0
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md": "f7dfe70e27e9fd9bb101afcba74ceb4bc6d70466dc45e59e194e490d5229a554"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "completed",
+          "version": "0.1.0 (plugin 0.1.2)",
+          "exactCommand": "/usr/bin/time -p /opt/homebrew/bin/plugin-eval analyze /Users/tahabakhit/dev/projects/agents/tools/agent-eval --format json --output /tmp/agent-eval-self-run/plugin-eval/result.json",
+          "exitCode": 0,
+          "durationMs": 760,
+          "metrics": {
+            "localScore": 67,
+            "grade": "D",
+            "triggerTokens": 134,
+            "invokeTokens": 2014,
+            "deferredTokens": 28277,
+            "manifestFailures": 2
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-eval-self-v1/plugin-eval/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-eval-self-v1/plugin-eval/result.json": "b782e953c72ddbb725f03629ec7ca6855b16738e21d21399d5f10a6d775ab87a"
+          }
+        },
+        {
+          "name": "promptfoo",
+          "status": "completed",
+          "version": "0.121.19",
+          "exactCommand": "/opt/homebrew/bin/promptfoo validate -c /tmp/agent-eval-self-run/promptfoo/promptfooconfig.yaml && /usr/bin/time -p /opt/homebrew/bin/promptfoo eval -c /tmp/agent-eval-self-run/promptfoo/promptfooconfig.yaml --repeat 1 --no-cache --no-share --max-concurrency 1 --output /tmp/agent-eval-self-run/promptfoo/result.json",
+          "exitCode": 0,
+          "durationMs": 15000,
+          "metrics": {
+            "trials": 1,
+            "passes": 1,
+            "failures": 0,
+            "errors": 0,
+            "tokenTotal": 25354,
+            "cachedTokens": 22912,
+            "evaluationDurationMs": 12450,
+            "purpose": "read-only contract smoke, not paired outcome measurement",
+            "runtimeObserved": true,
+            "platforms": [
+              "codex"
+            ]
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/promptfooconfig.yaml",
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/promptfooconfig.yaml": "395f457a69e73a12774237f9c99cdc81ea0f7c0292159881740f54a3f9f7623d",
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json": "de0718f1b7b884225ed2ae3eab8508c269fd12fc2325526c7feb757020898321"
+          }
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "codex": {
+          "status": "completed",
+          "adapter": "Promptfoo openai:codex-app-server:gpt-5.4 plus installed Codex plugin",
+          "evidenceState": "mixed",
+          "axes": {
+            "V": {
+              "value": 4,
+              "evidenceState": "mixed",
+              "reason": "The Codex contract smoke passed, but outcome lift is not paired.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json"
+              ]
+            },
+            "U": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The orchestration and ledger combination is differentiated on Codex.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 4,
+              "evidenceState": "measured",
+              "reason": "The contract and evidence gates were directly exercised.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json"
+              ]
+            },
+            "X": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "The data model is portable, but this adapter is Codex-specific.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 4,
+              "evidenceState": "mixed",
+              "reason": "Installation, tests, and the Codex smoke passed.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json"
+              ]
+            },
+            "S": {
+              "value": 4,
+              "evidenceState": "mixed",
+              "reason": "The Codex run was read-only and proof/path defenses passed tests.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json"
+              ]
+            },
+            "M": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Dependency-free, with one sizable core script.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 5,
+              "evidenceState": "mixed",
+              "reason": "The plugin is installed, enabled, hash-matched, and smoke-tested in Codex.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json"
+              ]
+            },
+            "C": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Trigger and invocation budgets were moderate.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/plugin-eval/result.json"
+              ]
+            }
+          },
+          "score": 79,
+          "bloat": 1,
+          "confidence": "B"
+        },
+        "claude-code": {
+          "status": "unsupported",
+          "reason": "Version 0.1 is packaged as a Codex plugin and no Claude Code adapter ran."
+        },
+        "pi": {
+          "status": "unsupported",
+          "reason": "No Pi installation or behavioral adapter exists in version 0.1."
+        },
+        "hermes": {
+          "status": "unsupported",
+          "reason": "No Hermes installation or behavioral adapter exists in version 0.1."
+        },
+        "opencode": {
+          "status": "unsupported",
+          "reason": "No OpenCode installation or behavioral adapter exists in version 0.1."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "The final Promptfoo contract smoke passed 1 of 1 trials with deterministic structural and JavaScript assertions.",
+        "Plugin Eval scored 67/D, primarily because a private local plugin intentionally lacks public privacy and terms URLs; this method score is not the aggregate score.",
+        "All 18 deterministic tests, audit, core review, and browser review passed with no remaining required findings.",
+        "Cross-platform and paired outcome value remain unmeasured."
+      ],
+      "unresolvedFacts": [
+        "Outcome lift versus native Codex behavior has not been measured with paired repeated tasks.",
+        "Claude Code, Pi, Hermes, and OpenCode adapters have not been implemented or run.",
+        "Measured A+B combinations remain blocked until a four-way adapter exists."
+      ],
+      "decision": "Use Agent Eval now for Codex-local, evidence-labeled evaluations; do not treat this self-run as cross-harness outcome proof.",
+      "removalPlan": "Remove agent-eval@personal and the ~/plugins/agent-eval symlink; canonical JSON remains in this repository.",
+      "provenance": {
+        "harness": "Codex desktop orchestrator with method subagents",
+        "model": "gpt-5.4 for Promptfoo Codex app-server smoke",
+        "repositoryRevision": "1a36c03b85406a07fe74802884a2087c05fd3655",
+        "sandbox": "orchestrator full workspace access; Promptfoo agent read-only",
+        "approvalPolicy": "never",
+        "network": "provider API enabled; Promptfoo agent network access disabled",
+        "enabledExtensions": [
+          "agent-eval@personal",
+          "plugin-eval@openai-curated"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-agent-eval-self-v1/plugin-eval/result.json": "b782e953c72ddbb725f03629ec7ca6855b16738e21d21399d5f10a6d775ab87a",
+        "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/promptfooconfig.yaml": "395f457a69e73a12774237f9c99cdc81ea0f7c0292159881740f54a3f9f7623d",
+        "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json": "de0718f1b7b884225ed2ae3eab8508c269fd12fc2325526c7feb757020898321",
+        "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md": "f7dfe70e27e9fd9bb101afcba74ceb4bc6d70466dc45e59e194e490d5229a554"
+      },
+      "score": 77,
+      "bloat": 1,
+      "confidence": "B"
+    }
+  ]
 }
