@@ -5,6 +5,8 @@ description: Evaluate a local skill, plugin, agent tool, repository workflow, or
 
 # Evaluate All
 
+Explicit invocation: `$agent-eval:evaluate-all <target> [options]`.
+
 The current Codex task is the orchestrator and only canonical writer. Invocation authorizes evaluator subagents for this workflow. Never delegate final scoring, reconciliation, ledger writes, dashboard generation, or wiki updates.
 
 ## Inputs
