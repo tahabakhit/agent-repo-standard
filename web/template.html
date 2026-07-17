@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src __AGENT_EVAL_SCRIPT_HASH__; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Agent Eval scorecard</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #13251f;
+      --muted: #5c6e67;
+      --paper: #f5f7f3;
+      --surface: #fff;
+      --line: #d9e2dc;
+      --brand: #075f50;
+      --brand-soft: #dff4ed;
+      --gold: #925d00;
+      --gold-soft: #fff2cc;
+      --red: #a12d31;
+      --red-soft: #fde9e7;
+      --blue: #315ca8;
+      --blue-soft: #e8effc;
+      --shadow: 0 12px 36px rgb(26 59 48 / 9%);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top right, #dff4ed 0, transparent 28rem),
+        var(--paper);
+      color: var(--ink);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: var(--brand); }
+    button, input, select, textarea { font: inherit; }
+    button, select, input, textarea { border: 1px solid var(--line); border-radius: .65rem; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+    .shell { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; padding: 2rem 0 4rem; }
+    .eyebrow { margin: 0 0 .3rem; color: var(--brand); font-size: .76rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1, h2, h3 { line-height: 1.15; }
+    h1 { margin: 0; font-size: clamp(2rem, 7vw, 4.8rem); letter-spacing: -.06em; }
+    h2 { margin: 0; font-size: clamp(1.35rem, 3vw, 2rem); letter-spacing: -.025em; }
+    h3 { margin: 0; font-size: 1rem; }
+    .lede { max-width: 54rem; margin: .7rem 0 0; color: var(--muted); font-size: 1.06rem; }
+    .topbar { display: flex; gap: 1.5rem; align-items: end; justify-content: space-between; margin-bottom: 1.5rem; }
+    .topbar > div:first-child { min-width: 0; }
+    .launcher, .panel, .card { background: color-mix(in srgb, var(--surface) 95%, transparent); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .launcher { margin-bottom: 1rem; border-radius: 1rem; }
+    .launcher > summary { padding: 1rem 1.2rem; color: var(--brand); cursor: pointer; font-weight: 800; }
+    .launcher form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; padding: 0 1.2rem 1.2rem; }
+    label, legend { font-weight: 750; }
+    label { display: grid; gap: .35rem; }
+    input, select, textarea { width: 100%; padding: .7rem .75rem; background: var(--surface); color: var(--ink); }
+    fieldset { grid-column: 1 / -1; margin: 0; padding: .7rem .8rem; border: 1px solid var(--line); border-radius: .65rem; }
+    .checks { display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin-top: .45rem; }
+    .checks label { display: flex; gap: .35rem; align-items: center; font-weight: 500; }
+    .checks input { width: auto; }
+    .command { grid-column: 1 / -1; }
+    .command textarea { min-height: 5.2rem; resize: vertical; font: .88rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .primary { align-self: end; min-height: 2.8rem; padding: .65rem 1rem; border-color: var(--brand); background: var(--brand); color: #fff; font-weight: 800; }
+    .copy-status { min-height: 1.5rem; margin: 0; color: var(--brand); font-weight: 700; }
+    .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; margin: 1rem 0; }
+    .summary-card { padding: 1rem; border-radius: .85rem; background: var(--surface); border: 1px solid var(--line); }
+    .summary-card strong { display: block; font-size: 1.8rem; letter-spacing: -.04em; }
+    .summary-card span { color: var(--muted); }
+    .panel { margin-top: 1rem; border-radius: 1rem; overflow: hidden; }
+    .panel-head { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; justify-content: space-between; padding: 1.1rem 1.2rem; border-bottom: 1px solid var(--line); }
+    .panel-head p { margin: .25rem 0 0; color: var(--muted); }
+    .filters { display: flex; flex-wrap: wrap; gap: .65rem; align-items: end; }
+    .filters label { min-width: 9rem; font-size: .82rem; }
+    .filters .search { min-width: min(19rem, 75vw); }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: .8rem 1rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+    th { color: var(--muted); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; }
+    th button { padding: 0; border: 0; background: none; color: inherit; font-size: inherit; font-weight: 800; letter-spacing: inherit; text-transform: inherit; }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr[data-selected="true"] { background: #edf8f4; }
+    .candidate-button { display: block; padding: 0; border: 0; background: none; color: var(--ink); font-weight: 800; text-align: left; }
+    .candidate-button small { display: block; margin-top: .1rem; color: var(--muted); font-weight: 500; }
+    .badge { display: inline-flex; align-items: center; min-height: 1.55rem; padding: .14rem .5rem; border-radius: 99rem; background: #e9eeeb; color: #34463f; font-size: .74rem; font-weight: 850; letter-spacing: .03em; text-transform: capitalize; }
+    .badge.measured, .badge.completed { background: var(--brand-soft); color: var(--brand); }
+    .badge.mixed { background: var(--blue-soft); color: var(--blue); }
+    .badge.estimated, .badge.blocked { background: var(--gold-soft); color: var(--gold); }
+    .badge.failed, .badge.unsafe { background: var(--red-soft); color: var(--red); }
+    .score { font-size: 1.25rem; font-weight: 900; letter-spacing: -.04em; }
+    .empty { padding: 3rem 1rem; color: var(--muted); text-align: center; }
+    .detail { padding: 1.2rem; }
+    .evidence-banner { display: grid; grid-template-columns: auto 1fr auto; gap: 1rem; align-items: center; margin: -.1rem 0 1.2rem; padding: 1rem; border: 1px solid var(--line); border-left: .4rem solid var(--brand); border-radius: .8rem; background: #f7fbf9; }
+    .evidence-banner .big-score { font-size: 2.4rem; font-weight: 950; letter-spacing: -.08em; }
+    .evidence-banner p { margin: .2rem 0 0; color: var(--muted); }
+    .meta { display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: .65rem 0 0; color: var(--muted); }
+    .section { margin-top: 1.5rem; }
+    .section-heading { display: flex; gap: 1rem; align-items: end; justify-content: space-between; margin-bottom: .75rem; }
+    .section-heading p { margin: 0; color: var(--muted); }
+    .axis-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+    .axis { padding: .9rem; border: 1px solid var(--line); border-radius: .8rem; background: #fcfdfc; }
+    .axis-head { display: flex; gap: .7rem; align-items: center; justify-content: space-between; }
+    .axis p { min-height: 3rem; margin: .65rem 0; color: var(--muted); }
+    progress { width: 100%; height: .55rem; overflow: hidden; border: 0; border-radius: 99rem; background: #e3eae6; accent-color: var(--brand); }
+    progress::-webkit-progress-bar { background: #e3eae6; }
+    progress::-webkit-progress-value { background: var(--brand); border-radius: 99rem; }
+    .evidence-links { display: flex; flex-wrap: wrap; gap: .3rem .65rem; margin: .55rem 0 0; padding: 0; list-style: none; font-size: .82rem; }
+    .stack { display: grid; gap: .65rem; }
+    .method { border: 1px solid var(--line); border-radius: .8rem; background: #fcfdfc; }
+    .method > summary { display: flex; gap: .65rem; align-items: center; padding: .85rem .95rem; cursor: pointer; font-weight: 800; }
+    .method-body { padding: 0 .95rem .95rem; }
+    dl { display: grid; grid-template-columns: max-content 1fr; gap: .3rem .8rem; margin: .5rem 0; }
+    dt { color: var(--muted); font-weight: 700; }
+    dd { margin: 0; overflow-wrap: anywhere; }
+    pre { overflow-x: auto; margin: .65rem 0; padding: .75rem; border-radius: .65rem; background: #12251f; color: #ecfff8; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .combo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+    .card { padding: 1rem; border-radius: .8rem; box-shadow: none; }
+    .card p:last-child { margin-bottom: 0; }
+    .term-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: .4rem; margin-top: .7rem; }
+    .term { padding: .45rem .55rem; border-radius: .5rem; background: var(--paper); }
+    .decision { border-left: .4rem solid var(--brand); }
+    .plain-list { margin: .5rem 0 0; padding-left: 1.2rem; }
+    .muted { color: var(--muted); }
+    footer { margin-top: 1.5rem; color: var(--muted); text-align: center; }
+    @media (max-width: 820px) {
+      .summary-grid, .axis-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .evidence-banner { grid-template-columns: 1fr auto; }
+      .evidence-banner > .badge { grid-column: 1 / -1; width: max-content; }
+    }
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 1rem, 1180px); padding-top: 1rem; }
+      .topbar { align-items: start; }
+      .launcher form, .summary-grid, .axis-grid, .combo-grid { grid-template-columns: 1fr; }
+      .filters, .filters label { width: 100%; }
+      .filters .search { min-width: 0; }
+      .evidence-banner { grid-template-columns: 1fr; }
+      .evidence-banner > .badge { grid-column: auto; }
+      th, td { padding: .7rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Evidence before scores</p>
+        <h1>Agent Eval</h1>
+        <p class="lede">Compare agent tools by what was actually verified. Estimated, mixed, and measured evidence never look the same.</p>
+      </div>
+    </header>
+
+    <details class="launcher">
+      <summary>New evaluation</summary>
+      <form id="new-evaluation">
+        <label>Target path or URL
+          <input id="target" name="target" required placeholder="/path/to/skill or repository URL">
+        </label>
+        <label>Target kind
+          <select id="kind" name="kind">
+            <option value="auto">Auto-detect</option>
+            <option value="skill">Skill</option>
+            <option value="plugin">Plugin</option>
+            <option value="tool">Tool</option>
+            <option value="repository">Repository convention</option>
+          </select>
+        </label>
+        <label>Mode
+          <select id="mode" name="mode">
+            <option value="quick">Quick</option>
+            <option value="full">Full</option>
+          </select>
+        </label>
+        <label>Combine with (optional)
+          <input id="with-target" name="with" placeholder="/path/to/second-tool">
+        </label>
+        <fieldset>
+          <legend>Platforms</legend>
+          <div class="checks" id="new-platforms">
+            <label><input type="checkbox" value="codex" checked> Codex</label>
+            <label><input type="checkbox" value="claude-code"> Claude Code</label>
+            <label><input type="checkbox" value="pi"> Pi</label>
+            <label><input type="checkbox" value="hermes"> Hermes</label>
+            <label><input type="checkbox" value="opencode"> OpenCode</label>
+          </div>
+        </fieldset>
+        <label class="command">Codex command
+          <textarea id="command-output" readonly aria-describedby="copy-status"></textarea>
+        </label>
+        <button class="primary" type="submit">Copy Codex command</button>
+        <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+      </form>
+    </details>
+
+    <section class="summary-grid" id="summary" aria-label="Evidence summary"></section>
+
+    <section class="panel" aria-labelledby="candidates-title">
+      <div class="panel-head">
+        <div>
+          <h2 id="candidates-title">Candidates</h2>
+          <p>Filter by platform or evidence. Select a candidate for the full audit trail.</p>
+        </div>
+        <div class="filters">
+          <label class="search">Search
+            <input id="search" type="search" placeholder="Name, kind, or source">
+          </label>
+          <label>Platform
+            <select id="platform-filter">
+              <option value="all">All platforms</option>
+              <option value="codex">Codex</option>
+              <option value="claude-code">Claude Code</option>
+              <option value="pi">Pi</option>
+              <option value="hermes">Hermes</option>
+              <option value="opencode">OpenCode</option>
+            </select>
+          </label>
+          <label>Evidence
+            <select id="evidence-filter">
+              <option value="all">All evidence</option>
+              <option value="measured">Measured</option>
+              <option value="mixed">Mixed</option>
+              <option value="estimated">Estimated</option>
+            </select>
+          </label>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th scope="col" data-key="name"><button type="button" data-sort="name">Candidate</button></th>
+            <th scope="col" data-key="evidence"><button type="button" data-sort="evidence">Evidence</button></th>
+            <th scope="col" data-key="score"><button type="button" data-sort="score">Score</button></th>
+            <th scope="col" data-key="confidence"><button type="button" data-sort="confidence">Confidence</button></th>
+            <th scope="col" data-key="status"><button type="button" data-sort="status">Status</button></th>
+            <th scope="col" data-key="date"><button type="button" data-sort="date">Last run</button></th>
+          </tr></thead>
+          <tbody id="candidate-rows"></tbody>
+        </table>
+      </div>
+      <p class="empty" id="empty" hidden>No evaluations match these filters.</p>
+    </section>
+
+    <article class="panel detail" id="detail"></article>
+    <footer>Offline by design. This page cannot run evaluations and makes no automatic network requests.</footer>
+  </main>
+
+  <script>
+    "use strict";
+    const DATA=__AGENT_EVAL_DATA__;
+    const runs = Array.isArray(DATA && DATA.runs) ? DATA.runs : [];
+    const axisNames = { V: "Outcome value", U: "Unique lift", E: "Evidence strength", X: "Cross-agent portability", R: "Reliability", S: "Safety", M: "Maintenance", F: "Platform fit", C: "Context efficiency" };
+    const platformNames = { codex: "Codex", "claude-code": "Claude Code", pi: "Pi", hermes: "Hermes", opencode: "OpenCode" };
+    const state = { selected: runs[0] && runs[0].id, search: "", platform: "all", evidence: "all", sort: "score", direction: -1 };
+
+    const byId = (id) => document.getElementById(id);
+    const shown = (value, fallback = "Not recorded") => value === 0 || value ? String(value) : fallback;
+    const list = (value) => Array.isArray(value) ? value : value ? [value] : [];
+    const slug = (value) => String(value || "unknown").toLowerCase().replace(/[^a-z0-9-]/g, "-");
+    function element(tag, attributes = {}, children = []) {
+      const item = document.createElement(tag);
+      for (const [name, value] of Object.entries(attributes)) {
+        if (value == null) continue;
+        if (name === "class") item.className = value;
+        else if (name === "text") item.textContent = String(value);
+        else item.setAttribute(name, String(value));
+      }
+      for (const child of list(children).flat(Infinity)) {
+        if (child == null) continue;
+        item.append(child instanceof Node ? child : document.createTextNode(String(child)));
+      }
+      return item;
+    }
+    const badge = (value) => element("span", { class: `badge ${slug(value)}`, text: shown(value, "unknown") });
+    function localLink(path, label) {
+      const value = String(path || "");
+      const isArtifact = value.startsWith("artifacts/");
+      const isSource = value.startsWith("https://");
+      if (!isArtifact && !isSource) return element("span", { class: "muted", text: label || value || "Missing artifact" });
+      const href = isArtifact ? `../${value}` : value;
+      return element("a", { href }, label || value);
+    }
+    function dateLabel(value) {
+      if (!value) return "Not recorded";
+      const date = new Date(value);
+      return Number.isNaN(date.valueOf()) ? String(value) : date.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+    }
+    function effective(run) {
+      if (state.platform === "all") return run;
+      return run.platforms && run.platforms[state.platform] ? run.platforms[state.platform] : { status: "not-run", reason: "No platform result" };
+    }
+    function evidenceFor(run) {
+      return state.platform === "all" ? shown(run.evidenceState, "unknown") : shown(effective(run).evidenceState, "unavailable");
+    }
+    function scoreFor(run) { return Number.isFinite(effective(run).score) ? effective(run).score : null; }
+
+    function renderSummary() {
+      const counts = { measured: 0, mixed: 0, estimated: 0 };
+      for (const run of runs) if (Object.hasOwn(counts, run.evidenceState)) counts[run.evidenceState] += 1;
+      const cards = [[runs.length, "evaluations"], [counts.measured, "measured"], [counts.mixed, "mixed"], [counts.estimated, "estimated"]];
+      byId("summary").replaceChildren(...cards.map(([value, label]) => element("div", { class: "summary-card" }, [element("strong", { text: value }), element("span", { text: label })])));
+    }
+
+    function filteredRuns() {
+      const query = state.search.trim().toLowerCase();
+      const result = runs.filter((run) => {
+        const target = run.target || {};
+        const haystack = [target.name, target.kind, target.source, target.version].join(" ").toLowerCase();
+        const platformMatch = state.platform === "all" || Boolean(run.platforms && run.platforms[state.platform]);
+        const evidenceMatch = state.evidence === "all" || evidenceFor(run) === state.evidence;
+        return (!query || haystack.includes(query)) && platformMatch && evidenceMatch;
+      });
+      const values = (run) => ({
+        name: shown(run.target && run.target.name, run.id).toLowerCase(),
+        evidence: evidenceFor(run),
+        score: scoreFor(run) ?? -1,
+        confidence: state.platform === "all" ? shown(run.confidence, "") : shown(effective(run).confidence, ""),
+        status: state.platform === "all" ? shown(run.status, "") : shown(effective(run).status, "not-run"),
+        date: Date.parse(run.finishedAt || run.startedAt || 0) || 0,
+      });
+      return result.sort((a, b) => {
+        const left = values(a)[state.sort];
+        const right = values(b)[state.sort];
+        return (typeof left === "number" ? left - right : String(left).localeCompare(String(right))) * state.direction;
+      });
+    }
+
+    function renderTable() {
+      const filtered = filteredRuns();
+      if (filtered.length && !filtered.some((run) => run.id === state.selected)) state.selected = filtered[0].id;
+      const rows = filtered.map((run) => {
+        const target = run.target || {};
+        const view = effective(run);
+        const score = scoreFor(run);
+        const select = element("button", { type: "button", class: "candidate-button", "data-run": run.id, "aria-pressed": run.id === state.selected ? "true" : "false", "aria-controls": "detail" }, [
+          shown(target.name, run.id), element("small", { text: `${shown(target.kind, "target")} · ${shown(target.version, "version unknown")}` }),
+        ]);
+        const row = element("tr", { "data-selected": run.id === state.selected ? "true" : "false" }, [
+          element("td", {}, select),
+          element("td", {}, badge(evidenceFor(run))),
+          element("td", { class: "score", text: score == null ? "—" : `${score}/100` }),
+          element("td", { text: state.platform === "all" ? shown(run.confidence, "—") : shown(view.confidence, "—") }),
+          element("td", {}, badge(state.platform === "all" ? run.status : view.status)),
+          element("td", { text: dateLabel(run.finishedAt || run.startedAt) }),
+        ]);
+        select.addEventListener("click", () => { state.selected = run.id; renderTable(); renderDetail(run); });
+        return row;
+      });
+      byId("candidate-rows").replaceChildren(...rows);
+      byId("empty").hidden = Boolean(filtered.length);
+      document.querySelectorAll("th[data-key]").forEach((header) => header.setAttribute("aria-sort", header.dataset.key === state.sort ? (state.direction === 1 ? "ascending" : "descending") : "none"));
+      renderDetail(filtered.find((run) => run.id === state.selected));
+    }
+
+    function artifactList(paths) {
+      const items = list(paths);
+      if (!items.length) return element("p", { class: "muted", text: "No artifact linked." });
+      return element("ul", { class: "evidence-links" }, items.map((path) => element("li", {}, localLink(path))));
+    }
+
+    function axisCard(key, axis = {}) {
+      const value = Number.isFinite(axis.value) ? axis.value : null;
+      const progress = element("progress", { max: 5, value: value == null ? 0 : value, "aria-label": `${axisNames[key]} score` });
+      return element("section", { class: "axis" }, [
+        element("div", { class: "axis-head" }, [element("h3", { text: `${key} · ${axisNames[key]}` }), element("strong", { text: value == null ? "—" : `${value}/5` })]),
+        progress,
+        element("p", { text: shown(axis.reason, "Reason not recorded.") }),
+        axis.evidenceState ? badge(axis.evidenceState) : null,
+        artifactList(axis.evidence),
+      ]);
+    }
+
+    function methodCard(method = {}) {
+      const summary = element("summary", {}, [shown(method.name, "Evaluator"), badge(method.status)]);
+      const details = element("details", { class: "method" }, summary);
+      const facts = element("dl", {}, [
+        element("dt", { text: "Version" }), element("dd", { text: shown(method.version) }),
+        element("dt", { text: "Exit code" }), element("dd", { text: shown(method.exitCode) }),
+        element("dt", { text: "Duration" }), element("dd", { text: Number.isFinite(method.durationMs) ? `${method.durationMs} ms` : "Not recorded" }),
+        method.reason || method.skipReason ? [element("dt", { text: "Reason" }), element("dd", { text: method.reason || method.skipReason })] : null,
+      ]);
+      const body = element("div", { class: "method-body" }, [facts]);
+      if (method.exactCommand) body.append(element("h3", { text: "Exact command" }), element("pre", {}, element("code", { text: method.exactCommand })));
+      body.append(element("h3", { text: "Artifacts" }), artifactList(method.artifactLinks || method.artifacts));
+      details.append(body);
+      return details;
+    }
+
+    function platformTable(platforms = {}) {
+      const body = element("tbody");
+      for (const [key, label] of Object.entries(platformNames)) {
+        const platform = platforms[key] || { status: "not-run" };
+        body.append(element("tr", {}, [
+          element("th", { scope: "row", text: label }),
+          element("td", {}, badge(platform.status)),
+          element("td", {}, badge(platform.evidenceState || "unavailable")),
+          element("td", { text: Number.isFinite(platform.score) ? `${platform.score}/100` : "—" }),
+          element("td", { text: shown(platform.confidence, "—") }),
+          element("td", { text: shown(platform.adapter, platform.reason || "—") }),
+        ]));
+      }
+      return element("div", { class: "table-wrap" }, element("table", {}, [
+        element("thead", {}, element("tr", {}, ["Platform", "Status", "Evidence", "Score", "Confidence", "Adapter or reason"].map((label) => element("th", { scope: "col", text: label })))), body,
+      ]));
+    }
+
+    function comboCard(combo = {}) {
+      const terms = combo.terms || combo;
+      const termNames = [["scoreA", "Candidate A"], ["scoreB", "Candidate B"], ["synergy", "Synergy"], ["controlConflict", "Control conflict"], ["contextPenalty", "Context penalty"], ["operationsPenalty", "Operations penalty"]];
+      return element("section", { class: "card" }, [
+        element("div", { class: "axis-head" }, [element("h3", { text: shown(combo.name, list(combo.members).join(" + ") || "Combination") }), badge(combo.evidenceState || "estimated")]),
+        element("p", { class: "score", text: Number.isFinite(combo.score) ? `${combo.score}/100` : "Not scored" }),
+        element("p", { text: shown(combo.reason, combo.decision || "No combination explanation recorded.") }),
+        element("div", { class: "term-list" }, termNames.filter(([key]) => Number.isFinite(terms[key])).map(([key, label]) => element("div", { class: "term" }, [element("strong", { text: terms[key] }), ` ${label}`]))),
+        artifactList(combo.artifactLinks || combo.artifacts),
+      ]);
+    }
+
+    function plainItems(values, emptyText) {
+      const items = list(values);
+      if (!items.length) return element("p", { class: "muted", text: emptyText });
+      return element("ul", { class: "plain-list" }, items.map((item) => element("li", { text: typeof item === "object" ? shown(item.summary, item.message || JSON.stringify(item)) : item })));
+    }
+
+    function renderDetail(run) {
+      const root = byId("detail");
+      if (!run) {
+        root.replaceChildren(element("p", { class: "empty", text: runs.length ? "Select a candidate to see its evidence." : "No evaluations yet. Use New evaluation to copy the Codex command." }));
+        return;
+      }
+      const target = run.target || {};
+      const view = effective(run);
+      const axes = state.platform === "all" ? (run.axes || {}) : (view.axes || {});
+      const score = Number.isFinite(view.score) ? `${view.score}/100` : "—";
+      const evidenceState = state.platform === "all" ? run.evidenceState : (view.evidenceState || "unavailable");
+      const confidence = state.platform === "all" ? run.confidence : (view.confidence || "unavailable");
+      const title = element("div", {}, [
+        element("p", { class: "eyebrow", text: shown(target.kind, "Evaluation") }),
+        element("h2", { text: shown(target.name, run.id) }),
+        element("p", { class: "meta" }, [
+          element("span", { text: `Version ${shown(target.version, "unknown")}` }),
+          element("span", { text: dateLabel(run.finishedAt || run.startedAt) }),
+          element("span", { text: `Mode ${shown(run.mode)}` }),
+          state.platform !== "all" ? element("span", { text: `Platform ${platformNames[state.platform]}` }) : null,
+          element("span", { text: `Source ${shown(target.source)}` }),
+        ]),
+      ]);
+      const banner = element("section", { class: "evidence-banner", "aria-label": "Evaluation evidence and score" }, [
+        badge(evidenceState),
+        element("div", {}, [element("strong", { text: `${shown(evidenceState, "Unknown")} evidence` }), element("p", { text: `Confidence ${shown(confidence, "unknown")}. Evidence state comes before the score.` })]),
+        element("div", { class: "big-score", text: score }),
+      ]);
+      const axisSection = state.platform === "all" || view.status === "completed"
+        ? element("section", { class: "section", "aria-labelledby": "axes-title" }, [
+          element("div", { class: "section-heading" }, [element("h2", { id: "axes-title", text: "Why this score" }), element("p", { text: `Bloat ${state.platform === "all" ? shown(run.bloat, "—") : shown(view.bloat, "—")}/5` })]),
+          element("div", { class: "axis-grid" }, Object.keys(axisNames).map((key) => axisCard(key, axes[key]))),
+        ])
+        : element("section", { class: "section card", "aria-labelledby": "axes-title" }, [
+          element("h2", { id: "axes-title", text: "No platform score" }),
+          element("p", { text: shown(view.reason, "This platform was not completed, so no axes were scored.") }),
+        ]);
+      const platformSection = element("section", { class: "section", "aria-labelledby": "platforms-title" }, [element("h2", { id: "platforms-title", text: "Platform results" }), platformTable(run.platforms)]);
+      const methodSection = element("section", { class: "section", "aria-labelledby": "methods-title" }, [
+        element("div", { class: "section-heading" }, [element("h2", { id: "methods-title", text: "Evaluation methods" }), element("p", { text: "Commands and raw evidence" })]),
+        element("div", { class: "stack" }, list(run.methods).length ? list(run.methods).map(methodCard) : element("p", { class: "muted", text: "No method details recorded." })),
+      ]);
+      const combos = list(run.combinations);
+      const comboSection = combos.length ? element("section", { class: "section", "aria-labelledby": "combos-title" }, [element("h2", { id: "combos-title", text: "Combinations" }), element("div", { class: "combo-grid" }, combos.map(comboCard))]) : null;
+      const decision = element("section", { class: "section card decision", "aria-labelledby": "decision-title" }, [
+        element("h2", { id: "decision-title", text: "Decision and open evidence" }),
+        element("p", { text: shown(run.decision, "No decision recorded.") }),
+        element("h3", { text: "Findings" }), plainItems(run.findings, "No findings recorded."),
+        element("h3", { text: "Unresolved facts" }), plainItems(run.unresolvedFacts, "None recorded."),
+        element("h3", { text: "Removal plan" }), element("p", { text: shown(run.removalPlan, "Not recorded.") }),
+      ]);
+      root.replaceChildren(...[title, banner, axisSection, platformSection, methodSection, comboSection, decision].filter(Boolean));
+    }
+
+    function buildCommand() {
+      const target = byId("target").value.trim() || "<target>";
+      const kind = byId("kind").value;
+      const mode = byId("mode").value;
+      const platforms = [...document.querySelectorAll("#new-platforms input:checked")].map((input) => input.value);
+      const withTarget = byId("with-target").value.trim();
+      const quote = (value) => JSON.stringify(value);
+      let command = `$agent-eval:evaluate-all ${quote(target)} --mode ${mode} --platforms ${platforms.join(",")}`;
+      if (kind !== "auto") command += ` --kind ${kind}`;
+      if (withTarget) command += ` --with ${quote(withTarget)}`;
+      byId("command-output").value = command;
+      return command;
+    }
+
+    async function copyCommand(event) {
+      event.preventDefault();
+      const command = buildCommand();
+      let copied = false;
+      try { await navigator.clipboard.writeText(command); copied = true; } catch (_) {
+        byId("command-output").select();
+        copied = document.execCommand("copy");
+      }
+      byId("copy-status").textContent = copied ? "Command copied. Paste it into Codex." : "Copy was blocked. Select the command above and copy it manually.";
+    }
+
+    renderSummary();
+    renderTable();
+    byId("search").addEventListener("input", (event) => { state.search = event.target.value; renderTable(); });
+    byId("platform-filter").addEventListener("change", (event) => { state.platform = event.target.value; renderTable(); });
+    byId("evidence-filter").addEventListener("change", (event) => { state.evidence = event.target.value; renderTable(); });
+    document.querySelectorAll("button[data-sort]").forEach((button) => button.addEventListener("click", () => {
+      if (state.sort === button.dataset.sort) state.direction *= -1;
+      else { state.sort = button.dataset.sort; state.direction = button.dataset.sort === "score" || button.dataset.sort === "date" ? -1 : 1; }
+      renderTable();
+    }));
+    byId("new-evaluation").addEventListener("input", buildCommand);
+    byId("new-evaluation").addEventListener("change", (event) => {
+      if (event.target.matches("#new-platforms input") && !document.querySelector("#new-platforms input:checked")) {
+        document.querySelector('#new-platforms input[value="codex"]').checked = true;
+        byId("copy-status").textContent = "At least one platform is required. Codex was restored.";
+      }
+      buildCommand();
+    });
+    byId("new-evaluation").addEventListener("submit", copyCommand);
+    buildCommand();
+  </script>
+</body>
+</html>

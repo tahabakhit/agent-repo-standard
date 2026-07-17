@@ -1,0 +1,25 @@
+{
+  "name": "agent-eval",
+  "version": "0.1.0",
+  "description": "Run evidence-backed evaluations of agent skills, plugins, tools, and explicit combinations.",
+  "author": {
+    "name": "Taha Bakhit",
+    "url": "https://github.com/tahabakhit"
+  },
+  "keywords": ["codex", "evaluation", "agents", "promptfoo", "plugin-eval"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agent Eval",
+    "shortDescription": "Evaluate agent tools with evidence",
+    "longDescription": "Orchestrate independent evaluator lanes, reconcile their evidence, and render a local cross-platform scorecard without inventing measurements.",
+    "developerName": "Taha Bakhit",
+    "category": "Developer Tools",
+    "capabilities": ["Interactive", "Write"],
+    "websiteURL": "https://github.com/tahabakhit",
+    "defaultPrompt": [
+      "Evaluate this skill across Codex and Claude Code.",
+      "Compare this plugin with another tool.",
+      "Run a full evidence-backed evaluation."
+    ]
+  }
+}
