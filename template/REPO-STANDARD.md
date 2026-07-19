@@ -49,10 +49,10 @@ deliverables/                 # versioned final outputs
 artifacts/                    # ignored generated or transient output
 ```
 
-Code repos additionally carry `src/` + `tests/`; library repos add packaging.
-Data and workspace repos carry no `src/`. Anything a local toolchain generates
-(local spec/brainstorm working dirs, per-agent command surfaces, …) is
-git-ignored — see *Agent setup*.
+The Python code and library profiles additionally carry `src/`, `tests/`, and
+`pyproject.toml`. Data and workspace repos carry none of those Python-specific
+paths. Anything a local toolchain generates (local spec/brainstorm working dirs,
+per-agent command surfaces, …) is git-ignored — see *Agent setup*.
 
 ## File naming
 
@@ -127,5 +127,8 @@ not depend on the choice of toolchain.
 
 ## Provenance
 
-Generated from the `agent-repo-standard` copier template. To adopt standard
-changes later, re-run `copier update` from the repo root.
+Generated once from the optional `agent-repo-standard` legacy fixed-layout Copier
+template. The generator does not support existing-repository adoption, and
+Copier's project-update workflow is unsupported. Use `$scaffold audit` or
+`$scaffold adopt` to assess later harness changes while preserving this
+repository's working conventions.

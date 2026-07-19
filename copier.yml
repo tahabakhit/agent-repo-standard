@@ -1,18 +1,16 @@
-# agent-repo-standard — copier template
-# Usage: copier copy --trust gh:tahabakhit/agent-repo-standard <dest>   (or a local path)
-# --trust is required because this template runs post-generation tasks
-# (git init, type-specific scaffolding).
+# Optional legacy fixed-layout generator for new, empty destinations only.
+# The supported entrypoint is bin/new-repo.sh. Existing-repository adoption and
+# Copier's project-update workflow are unsupported.
 
 _subdirectory: template
+_min_copier_version: "9.17.0"
 
 _message_after_copy: |
-  Repo scaffolded to the shared Repo Standard.
+  New repository generated with the optional legacy fixed layout.
   Next:
-    - Review the Principles / Quality Gates in AGENTS.md and tailor them to the repo.
-    - Materialize your local agent tooling (git-ignored, never committed). Keep
-      tool-specific notes in a git-ignored AGENTS.local.md (Claude Code: a
-      CLAUDE.local.md containing `@AGENTS.local.md`).
-    - Fill docs/ (Diátaxis) and write your first ADR from docs/decisions/adrs/adr-template.md.
+    - Review README.md and AGENTS.md.
+    - Run bin/validate-repository.sh.
+    - Keep local agent tooling and secrets out of tracked files.
 
 project_name:
   type: str
@@ -22,6 +20,10 @@ project_slug:
   type: str
   help: Repo / directory slug
   default: "{{ project_name | lower | replace(' ', '-') | replace('_', '-') }}"
+  validator: >-
+    {% if not (project_slug | regex_search('^[a-z][a-z0-9-]*$')) %}
+    Use lowercase letters, digits, and dashes; start with a letter.
+    {% endif %}
 
 description:
   type: str
@@ -42,19 +44,23 @@ non_goals:
 
 repo_type:
   type: str
-  help: What kind of repo is this?
+  help: Which fixed legacy profile should be generated?
   choices:
     Data / config source-of-truth (no src/): data
     "Workspace: docs, research, or design (no src/)": workspace
-    Application / service code (src/ + tests): code
-    Installable library / package: library
+    Python application / service (src/ + tests): code
+    Installable Python library / package: library
   default: code
 
 package_name:
   type: str
-  help: Python package name (code/library only)
+  help: Python import package name (code/library only)
   default: "{{ project_slug | replace('-', '_') }}"
   when: "{{ repo_type in ['code', 'library'] }}"
+  validator: >-
+    {% if repo_type in ['code', 'library'] and not (package_name | regex_search('^[A-Za-z_][A-Za-z0-9_]*$')) %}
+    Use a valid Python identifier.
+    {% endif %}
 
 code_owner:
   type: str
@@ -62,18 +68,8 @@ code_owner:
   default: ""
 
 _tasks:
-  # Initialize git if needed
-  - "git rev-parse --is-inside-work-tree >/dev/null 2>&1 || git init -q"
-  # Type-specific scaffolding for code / library repos
-  - >
-    {% if repo_type in ['code', 'library'] %}
-    mkdir -p src/{{ package_name }} tests &&
-    printf '' > src/{{ package_name }}/__init__.py &&
-    printf '' > tests/.gitkeep &&
-    printf '[pytest]\ntestpaths = tests\n' > pytest.ini
-    {% else %}true{% endif %}
-  - >
-    {% if repo_type == 'library' %}
-    printf '[project]\nname = "{{ project_slug }}"\nversion = "0.0.0"\ndescription = "{{ description }}"\nrequires-python = ">=3.11"\n' > pyproject.toml
-    {% else %}true{% endif %}
+  # Initialize this destination, not a parent worktree.
+  - "test -d .git || git init -q"
+  # These directory operations do not replace files. The supported wrapper
+  # rejects non-empty destinations before Copier starts.
   - "mkdir -p data/local deliverables artifacts"

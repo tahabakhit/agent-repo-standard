@@ -44,8 +44,8 @@ These override convenience and are enforced at review and by the verification ga
 {% if repo_type in ["code", "library"] %}
 - `src/{{ package_name }}/` — implementation.
 - `tests/` — automated tests (TDD: write the failing test first).
-{% if repo_type == "library" %}- `pyproject.toml` — packaging and public API surface.
-{% endif %}{% endif %}- `data/` — versioned source material; `data/local/` is local-only.
+- `pyproject.toml` — Python project and dependency metadata.
+{% endif %}- `data/` — versioned source material; `data/local/` is local-only.
 - `docs/` — durable human docs (Diátaxis); see `docs/README.md`.
 - `deliverables/` — versioned final outputs.
 - `artifacts/` — local generated or transient output; never commit it.
@@ -56,12 +56,8 @@ No change is "done" until the narrowest relevant verification passes with fresh
 output. Markdown links resolve; the canonical tree stays intact.
 
 ```bash
-{% if repo_type in ["data", "workspace"] %}# define the project's validation gate here
-git diff --check
-{% else %}# run the project's test + lint gate here, e.g.:
-pytest
-git diff --check
-{% endif %}```
+bin/validate-repository.sh
+```
 
 ## Sensitive Data Boundary
 

@@ -1,13 +1,18 @@
 # Implementation Plan: Structured Project Boundaries
 
+> **Status:** Completed historical plan. Superseded by the adaptive-toolkit
+> contract in `README.md` and `docs/migrating-from-legacy-fixed.md`. Statements
+> below describe the fixed-layout work completed at the time; they are not the
+> current support policy.
+
 ## Overview
 
 Evolve the Copier template from a documentation spine into a broader, more
 opinionated project scaffold. Every generated repository will declare its scope
 and receive clear locations for source material, deliverables, and generated
 output. The existing `data` Copier value retains its source-of-truth semantics
-for update compatibility; a separate `workspace` profile covers broad non-code
-projects.
+for historical render compatibility; a separate `workspace` profile covers broad
+non-code projects. Copier's project-update workflow is not supported.
 
 ## Decisions
 
@@ -36,11 +41,11 @@ Render-check script
 
 ### Phase 1: Verification Foundation
 
-#### Task 1: Add a three-profile render check
+#### Task 1: Add a four-profile render check
 
-**Description:** Add one shell-based check that renders `data`, `code`, and
-`library` repositories with explicit Copier answers, then verifies their common
-and profile-specific files.
+**Description:** Add one shell-based check that renders `data`, `workspace`,
+`code`, and `library` repositories with explicit Copier answers, then verifies
+their common and profile-specific files.
 
 **Acceptance criteria:**
 
@@ -48,8 +53,8 @@ and profile-specific files.
   missing.
 - [x] It verifies the generated project charter, `data/`, `deliverables/`, and
   `artifacts/` in every profile.
-- [x] It verifies `src/` and `tests/` only for code and library profiles, and
-  `pyproject.toml` only for library.
+- [x] It verifies `src/`, `tests/`, and Python project metadata only for the code
+  and library profiles.
 
 **Verification:** `tests/verify-template.sh`
 
@@ -156,7 +161,7 @@ full render check.
 
 ### After Tasks 2–3
 
-- [x] All three profiles render with the new boundary structure and charter.
+- [x] All four profiles render with the new boundary structure and charter.
 - [x] The tracked versus ignored boundary is correct in a generated repository.
 
 ### Complete
@@ -169,7 +174,7 @@ full render check.
 
 | Risk | Impact | Mitigation |
 |---|---|---|
-| Weakening existing data-repo semantics breaks updates | High | Retain the `data` value and its source-of-truth rule; add `workspace` separately. |
+| Weakening existing data-repo semantics breaks legacy renders | High | Retain the `data` value and its source-of-truth rule; add `workspace` separately. |
 | Ignored empty folders disappear from Git | Medium | Create them at render time and verify their presence in the render check. |
 | Charter duplicates agent policy | Medium | Limit it to inputs, outputs, and non-goals; link from entrypoints instead of repeating policy. |
-| Copier is unavailable in a contributor environment | Low | The check fails clearly with the existing documented install command. |
+| Copier is unavailable in a contributor environment | Low | CI installs the exact pinned release; local validation can use isolated `uvx`. |
