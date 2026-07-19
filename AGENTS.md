@@ -10,8 +10,12 @@ This repository owns the adaptive repository-harness toolkit and the preserved
 - `README.md` is the human entry point.
 - `docs/migrating-from-legacy-fixed.md` owns compatibility and migration guidance.
 - `copier.yml`, `template/`, `bin/new-repo.sh`, and `tests/verify-template.sh` are
-  the legacy fixed profile and must remain update-compatible.
-- `tests/validate-toolkit.py` checks the adaptive skill and fixture decisions.
+  the new-repository-only, fixed-layout legacy generator.
+- `tests/validate-toolkit.py` checks deterministic structure, references,
+  documentation assertions, shell syntax, and evaluation fixture schema. It does
+  not evaluate model recommendations.
+- `tests/fixtures/scaffold-evaluations.json` contains behavioural review cases for
+  `$scaffold` agent runs.
 
 ## Boundaries
 
@@ -27,8 +31,9 @@ This repository owns the adaptive repository-harness toolkit and the preserved
 
 ```sh
 python3 tests/validate-toolkit.py
+tests/verify-template.sh
 git diff --check
 ```
 
-Run `tests/verify-template.sh` only when Copier is already available. Do not
-install packages solely for validation.
+`tests/verify-template.sh` may use the pinned Copier release through isolated
+`uvx`; it must not install Copier globally or modify user tool configuration.

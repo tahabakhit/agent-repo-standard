@@ -12,6 +12,20 @@ contributors and agents should read [`AGENTS.md`](AGENTS.md) first, then
 This project's scope, inputs, outputs, and non-goals are defined in the
 [project charter](docs/reference/project-charter.md).
 
+## Setup and validation
+
+{% if repo_type in ["code", "library"] %}This is a Python {{ "application/service" if repo_type == "code" else "library/package" }}
+profile. It requires Python 3.11 or newer. The generated smoke test uses only the
+Python standard library, so no dependency installation is required to validate a
+fresh render.
+{% else %}This non-code profile has no language-specific setup step.
+{% endif %}
+Run the repository's declared gate from its root:
+
+```bash
+bin/validate-repository.sh
+```
+
 ## Documentation
 
 Durable documentation lives in [`docs/`](docs/README.md), organized by Diátaxis:

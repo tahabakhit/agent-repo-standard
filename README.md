@@ -1,7 +1,7 @@
 # agent-repo-standard
 
-An adaptive repository-harness toolkit for creating or improving repositories
-without imposing one universal directory tree.
+An adaptive repository-harness toolkit for creating, auditing, or improving
+repositories without imposing one universal directory tree.
 
 The primary interface is the repository-owned [`$scaffold`](skills/scaffold/SKILL.md)
 skill. It inspects a project, preserves coherent existing conventions, and proposes
@@ -13,9 +13,10 @@ the smallest authority and validation structure that pays for itself.
   structure, existing-repository adoption, and validation.
 - Composable profile guidance for applications, libraries, CLIs, infrastructure,
   data, knowledge, and monorepos.
-- A tested `$scaffold new|adopt|audit` workflow.
-- A preserved Copier template for repositories already using the former fixed
-  standard.
+- A documented corpus for reviewing `$scaffold new|adopt|audit`
+  recommendations against representative behavioural cases.
+- An optional, opinionated Copier generator for new repositories that explicitly
+  choose the former fixed standard.
 
 The toolkit does not make Diátaxis, MADR, TDD, Python packaging, Makefiles,
 `src/`, `data/`, `deliverables/`, or `artifacts/` universal requirements.
@@ -40,37 +41,46 @@ The skill's supporting references are:
 
 ## Legacy fixed Copier profile
 
-The existing root `copier.yml`, `template/`, `bin/new-repo.sh`, and
-`tests/verify-template.sh` remain the supported `legacy-fixed` profile. They are
-retained for update compatibility and are not the default experience for new
-repositories.
+The root `copier.yml`, `template/`, `bin/new-repo.sh`, and
+`tests/verify-template.sh` form the optional `legacy-fixed` generator. It creates
+new repositories with one complete, opinionated layout. It is not the default
+interface and it does not adapt the layout to an existing repository.
 
-Existing generated repositories may continue to update through Copier:
+The supported legacy entrypoint accepts only a missing or empty destination:
 
 ```bash
-copier update --trust
+bin/new-repo.sh <new-empty-destination>
 ```
 
-New repositories should use `$scaffold` unless the fixed profile is explicitly
-required. See [migrating from the legacy fixed profile](docs/migrating-from-legacy-fixed.md).
+Its `code` and `library` profiles are specifically Python profiles. The `data`
+and `workspace` profiles are non-code profiles. Existing-repository adoption and
+Copier's project-update workflow are unsupported. Use `$scaffold audit` or
+`$scaffold adopt` for an existing repository, including one previously generated
+from the fixed template.
+
+See [migrating from the legacy fixed profile](docs/migrating-from-legacy-fixed.md)
+for the full support boundary.
 
 ## Validation
 
-The adaptive toolkit contract has no third-party Python dependencies:
+The deterministic release gate checks skill structure and references, evaluation
+fixture schema, documentation assertions, shell syntax, actual legacy renders,
+generated validation commands, destination safety, and patch whitespace:
 
 ```bash
 python3 tests/validate-toolkit.py
+tests/verify-template.sh
 git diff --check
 ```
 
-When `copier` is already installed, the unchanged legacy profile can also be
-rendered end to end:
+The render check uses the exact Copier version in
+[`tests/requirements-ci.txt`](tests/requirements-ci.txt). It renders every legacy
+profile, runs each generated repository's declared validation command, and checks
+destination safety.
 
-```bash
-tests/verify-template.sh
-```
-
-Do not install Copier merely to run an unrelated adaptive-toolkit change.
+`tests/validate-toolkit.py` does not compute `$scaffold` recommendations. The
+cases in [`tests/fixtures/scaffold-evaluations.json`](tests/fixtures/scaffold-evaluations.json)
+are behavioural review inputs for an agent run, not deterministic unit tests.
 
 ## Preservation benchmark
 
