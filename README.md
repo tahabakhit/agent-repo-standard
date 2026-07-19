@@ -1,49 +1,79 @@
 # agent-repo-standard
 
-A [copier](https://copier.readthedocs.io) template that scaffolds repositories to
-a single, defined **Repo Standard** — the composition of three mature standards.
-The committed tree is tool- and host-agnostic; any toolchain (spec-driven CLI,
-enforcement plugin) is a per-developer local choice, never committed.
+An adaptive repository-harness toolkit for creating or improving repositories
+without imposing one universal directory tree.
 
-- **[AGENTS.md](https://agents.md)** — agent instruction entry point; also holds
-  principles + quality gates (the one file auto-loaded across harnesses).
-- **[Diátaxis](https://diataxis.fr)** — human docs (`docs/{tutorials,how-to,reference,explanation}/`).
-- **[MADR](https://adr.github.io)** — decisions (`docs/decisions/adrs/`).
+The primary interface is the repository-owned [`$scaffold`](skills/scaffold/SKILL.md)
+skill. It inspects a project, preserves coherent existing conventions, and proposes
+the smallest authority and validation structure that pays for itself.
 
-Optional local agent tooling is materialized per developer and git-ignored, never
-committed — see "Agent setup" in the standard.
+## What the toolkit provides
 
-The full standard text is [`template/REPO-STANDARD.md`](template/REPO-STANDARD.md);
-it is stamped into every generated repo so collaborators have it in-repo.
+- Adaptive principles for authority, progressive disclosure, proportional
+  structure, existing-repository adoption, and validation.
+- Composable profile guidance for applications, libraries, CLIs, infrastructure,
+  data, knowledge, and monorepos.
+- A tested `$scaffold new|adopt|audit` workflow.
+- A preserved Copier template for repositories already using the former fixed
+  standard.
 
-## Use it
+The toolkit does not make Diátaxis, MADR, TDD, Python packaging, Makefiles,
+`src/`, `data/`, `deliverables/`, or `artifacts/` universal requirements.
 
-```bash
-# install copier once
-uv tool install copier
+## Use `$scaffold`
 
-# scaffold a new repo (--trust enables post-gen tasks: git init, src/ scaffold)
-copier copy --trust gh:tahabakhit/agent-repo-standard ./my-new-repo
-#   …or from a local clone:
-# copier copy --trust ~/projects/personal/repos/agent-repo-standard ./my-new-repo
-
-# later, pull standard updates into an existing repo
-cd my-new-repo && copier update --trust
+```text
+$scaffold new <destination and requirements>
+$scaffold adopt <existing repository>
+$scaffold audit <existing repository>
 ```
 
-Or use the wrapper: `bin/new-repo.sh <dest>`.
+- `new` creates the minimum useful harness for a new repository.
+- `adopt` adds or repairs navigation, authority, and verification while preserving
+  working conventions.
+- `audit` reports gaps and a proposed harness without modifying files.
 
-## Repo types
+The skill's supporting references are:
 
-`repo_type` tailors the output: `data` (source-of-truth data/config, no `src/`),
-`workspace` (docs, research, or design, no `src/`), `code` (`src/` + `tests/` +
-TDD), and `library` (adds packaging). All types share the AGENTS.md + Diátaxis +
-MADR spine, plus `data/` for versioned source material, `deliverables/` for
-versioned final outputs, and git-ignored `artifacts/` for generated output.
+- [`harness-principles.md`](skills/scaffold/references/harness-principles.md)
+- [`repository-profiles.md`](skills/scaffold/references/repository-profiles.md)
 
-## Adopting in an existing repo
+## Legacy fixed Copier profile
 
-Run `copier copy --trust <this> .` in the repo and resolve diffs, or copy
-`template/REPO-STANDARD.md` plus the `docs/` skeleton by hand. The standard is
-also referenced from global agent instructions (`~/.claude/CLAUDE.md`,
-`~/.codex/AGENTS.md`).
+The existing root `copier.yml`, `template/`, `bin/new-repo.sh`, and
+`tests/verify-template.sh` remain the supported `legacy-fixed` profile. They are
+retained for update compatibility and are not the default experience for new
+repositories.
+
+Existing generated repositories may continue to update through Copier:
+
+```bash
+copier update --trust
+```
+
+New repositories should use `$scaffold` unless the fixed profile is explicitly
+required. See [migrating from the legacy fixed profile](docs/migrating-from-legacy-fixed.md).
+
+## Validation
+
+The adaptive toolkit contract has no third-party Python dependencies:
+
+```bash
+python3 tests/validate-toolkit.py
+git diff --check
+```
+
+When `copier` is already installed, the unchanged legacy profile can also be
+rendered end to end:
+
+```bash
+tests/verify-template.sh
+```
+
+Do not install Copier merely to run an unrelated adaptive-toolkit change.
+
+## Preservation benchmark
+
+Atlas is a read-only benchmark for a valid non-generic architecture. Its `ops/`
+and `knowledge/` authority planes must be recognized and preserved, not normalized
+into the `legacy-fixed` tree.

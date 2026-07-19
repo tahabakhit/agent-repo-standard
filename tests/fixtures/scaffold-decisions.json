@@ -1,0 +1,22 @@
+{
+  "cases": [
+    {
+      "id": "atlas-two-plane-preservation",
+      "mode": "adopt",
+      "signals": ["infrastructure", "knowledge", "monorepo", "existing-authority"],
+      "preserve": ["AGENTS.md", "ops/", "knowledge/"],
+      "add": [],
+      "omit": ["legacy-fixed tree conversion", "mandatory src/", "mandatory full Diataxis"],
+      "rationale": "The existing ops and knowledge authority planes are coherent and must not be normalized."
+    },
+    {
+      "id": "new-cli-minimum",
+      "mode": "new",
+      "signals": ["cli", "developer-tool"],
+      "preserve": [],
+      "add": ["README.md", "AGENTS.md", "command entrypoint", "validation entrypoint"],
+      "omit": ["full Diataxis", "MADR directory", "data/", "deliverables/", "artifacts/"],
+      "rationale": "A new CLI needs a command contract and executable validation, not speculative repository taxonomy."
+    }
+  ]
+}
