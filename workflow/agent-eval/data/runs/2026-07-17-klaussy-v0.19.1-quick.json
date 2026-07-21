@@ -1,0 +1,461 @@
+{
+  "schemaVersion": 1,
+  "id": "2026-07-17-klaussy-v0.19.1-quick",
+  "startedAt": "2026-07-17T00:17:41.117Z",
+  "finishedAt": "2026-07-17T00:47:41.117Z",
+  "mode": "quick",
+  "status": "completed",
+  "evidenceState": "estimated",
+  "target": {
+    "kind": "tool",
+    "name": "Klaussy Agents",
+    "source": "https://github.com/steph-dove/klaussy-agents",
+    "version": "v0.19.1-ce03f937338f270e16b6dd778f584ec2d5a50049"
+  },
+  "axes": {
+    "V": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Cross-host scaffolding can save setup work, but default ownership collisions, stale plugin metadata, and destructive updates substantially reduce realized value.",
+      "evidence": [
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+      ]
+    },
+    "U": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "The repo-convention cross-compiler and host-specific settings/hooks are meaningfully different from native harness features.",
+      "evidence": [
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+      ]
+    },
+    "E": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Current source and 74 Python files were statically parsed, but unit dependencies, live evals, host schemas, and installs were not run.",
+      "evidence": [
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+      ]
+    },
+    "X": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "Nine host backends exist in source, but default outputs collide, portability is prompt-translated, and Pi and Hermes are unsupported.",
+      "evidence": [
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+      ]
+    },
+    "R": {
+      "value": 2,
+      "evidenceState": "estimated",
+      "reason": "Normal init performs an unpinned dependency upgrade; force-update has no backup or three-way merge; Claude plugin metadata and install commands are stale.",
+      "evidence": [
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+      ]
+    },
+    "S": {
+      "value": 2,
+      "evidenceState": "estimated",
+      "reason": "Guards deliberately fail open and are bypassable, generated permissions are broad, and the optional MCP exposes unconstrained path writes with force.",
+      "evidence": [
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+      ]
+    },
+    "M": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "The project is active and MIT licensed, but alpha status, one broad generator, stale metadata, and no ownership manifest or rollback path raise maintenance cost.",
+      "evidence": [
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+      ]
+    },
+    "F": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Claude, Codex, and OpenCode outputs exist, but live compatibility was not verified and the Claude plugin bootstrap appears stale.",
+      "evidence": [
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+      ]
+    },
+    "C": {
+      "value": 1,
+      "evidenceState": "estimated",
+      "reason": "The default creates 25 skills, multiple always-on documents, hooks, permissions, and host configurations; this is a broad repository control plane.",
+      "evidence": [
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+      ]
+    }
+  },
+  "methods": [
+    {
+      "name": "source-review",
+      "status": "completed",
+      "version": "ce03f937338f270e16b6dd778f584ec2d5a50049",
+      "exactCommand": "PYTHONDONTWRITEBYTECODE=1 python3 -c 'import ast,pathlib; files=list(pathlib.Path(\"src\").rglob(\"*.py\"))+list(pathlib.Path(\"tests\").rglob(\"*.py\")); [ast.parse(p.read_text()) for p in files]; print(f\"parsed {len(files)} Python files\")'",
+      "exactCommands": [
+        {"command": "python3 -m pytest -q tests --ignore=tests/evals --ignore=tests/e2e", "exitCode": 1},
+        {"command": "UV_PROJECT_ENVIRONMENT=/tmp/klaussy-test-venv uv run --offline --frozen --extra dev --no-editable python -m pytest -q -p no:cacheprovider tests --ignore=tests/evals --ignore=tests/e2e", "exitCode": 2},
+        {"command": "PYTHONDONTWRITEBYTECODE=1 uv run --offline --no-project --with-editable . --with pytest --with ruff python -m pytest -q -p no:cacheprovider tests --ignore=tests/evals --ignore=tests/e2e", "exitCode": 1},
+        {"command": "PYTHONDONTWRITEBYTECODE=1 python3 -c 'import ast,pathlib; files=list(pathlib.Path(\"src\").rglob(\"*.py\"))+list(pathlib.Path(\"tests\").rglob(\"*.py\")); [ast.parse(p.read_text()) for p in files]; print(f\"parsed {len(files)} Python files\")'", "exitCode": 0}
+      ],
+      "exitCode": 0,
+      "durationMs": 259,
+      "metrics": {
+        "pythonFilesAstParsed": 74,
+        "unitSuiteRun": false,
+        "dependencyBlockedAttempts": 3,
+        "highImpactSourceFindings": 7,
+        "targetDirtyAfter": false
+      },
+      "artifactLinks": [
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md",
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/replay-check.md"
+      ],
+      "artifactDigests": {
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/replay-check.md": "4e55da1319ee8af3fd2a7c108b0cca313c1e8cd1ac0b3b3a10205f35712ab3d6",
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md": "537f68d8693326703909ab22b34f067de7daae79e882ad67263ae9dab531ff5f"
+      }
+    },
+    {
+      "name": "plugin-eval",
+      "status": "not-applicable",
+      "skipReason": "The target has a Claude plugin but no .codex-plugin/plugin.json root; Plugin Eval's evaluate-plugin workflow is Codex-plugin-specific.",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "promptfoo",
+      "status": "not-applicable",
+      "skipReason": "No bounded shared task pack, candidate adapter, and deterministic outcome verifier existed for this quick run; no Promptfoo result was fabricated.",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "harbor",
+      "status": "unavailable",
+      "skipReason": "harbor is not on PATH",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "inspect",
+      "status": "unavailable",
+      "skipReason": "inspect is not on PATH",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    }
+  ],
+  "platforms": {
+    "claude-code": {
+      "status": "completed",
+      "adapter": "Claude Code plugin and generated skills/settings/hooks",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Cross-host scaffolding can save setup work, but default ownership collisions, stale plugin metadata, and destructive updates substantially reduce realized value.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The repo-convention cross-compiler and host-specific settings/hooks are meaningfully different from native harness features.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current source and 74 Python files were statically parsed, but unit dependencies, live evals, host schemas, and installs were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "X": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Nine host backends exist in source, but default outputs collide, portability is prompt-translated, and Pi and Hermes are unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Normal init performs an unpinned dependency upgrade; force-update has no backup or three-way merge; Claude plugin metadata and install commands are stale.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Guards deliberately fail open and are bypassable, generated permissions are broad, and the optional MCP exposes unconstrained path writes with force.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The project is active and MIT licensed, but alpha status, one broad generator, stale metadata, and no ownership manifest or rollback path raise maintenance cost.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Claude has the deepest generated surface, but plugin version, package names, and skill counts are stale at the pinned release.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 1,
+          "evidenceState": "estimated",
+          "reason": "The default creates 25 skills, multiple always-on documents, hooks, permissions, and host configurations; this is a broad repository control plane.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        }
+      },
+      "score": 54,
+      "bloat": 4,
+      "confidence": "C"
+    },
+    "codex": {
+      "status": "completed",
+      "adapter": "Generated AGENTS.md, .agents/skills, config, and hooks",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Cross-host scaffolding can save setup work, but default ownership collisions, stale plugin metadata, and destructive updates substantially reduce realized value.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The repo-convention cross-compiler and host-specific settings/hooks are meaningfully different from native harness features.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current source and 74 Python files were statically parsed, but unit dependencies, live evals, host schemas, and installs were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "X": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Nine host backends exist in source, but default outputs collide, portability is prompt-translated, and Pi and Hermes are unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Normal init performs an unpinned dependency upgrade; force-update has no backup or three-way merge; Claude plugin metadata and install commands are stale.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Guards deliberately fail open and are bypassable, generated permissions are broad, and the optional MCP exposes unconstrained path writes with force.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The project is active and MIT licensed, but alpha status, one broad generator, stale metadata, and no ownership manifest or rollback path raise maintenance cost.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Codex output exists, but it collides with other default backends and lacks a complete secret-read boundary.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 1,
+          "evidenceState": "estimated",
+          "reason": "The default creates 25 skills, multiple always-on documents, hooks, permissions, and host configurations; this is a broad repository control plane.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        }
+      },
+      "score": 56,
+      "bloat": 4,
+      "confidence": "C"
+    },
+    "pi": {
+      "status": "unsupported",
+      "reason": "No Pi backend or package exists at this revision."
+    },
+    "hermes": {
+      "status": "unsupported",
+      "reason": "No Hermes backend or package exists at this revision."
+    },
+    "opencode": {
+      "status": "completed",
+      "adapter": "Generated AGENTS.md, OpenCode rules/skills/config, and Bun hook bridge",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Cross-host scaffolding can save setup work, but default ownership collisions, stale plugin metadata, and destructive updates substantially reduce realized value.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The repo-convention cross-compiler and host-specific settings/hooks are meaningfully different from native harness features.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current source and 74 Python files were statically parsed, but unit dependencies, live evals, host schemas, and installs were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "X": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Nine host backends exist in source, but default outputs collide, portability is prompt-translated, and Pi and Hermes are unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Normal init performs an unpinned dependency upgrade; force-update has no backup or three-way merge; Claude plugin metadata and install commands are stale.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Guards deliberately fail open and are bypassable, generated permissions are broad, and the optional MCP exposes unconstrained path writes with force.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The project is active and MIT licensed, but alpha status, one broad generator, stale metadata, and no ownership manifest or rollback path raise maintenance cost.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "OpenCode has a substantial adapter, but it collides on root AGENTS.md and uses best-effort hook translation.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 1,
+          "evidenceState": "estimated",
+          "reason": "The default creates 25 skills, multiple always-on documents, hooks, permissions, and host configurations; this is a broad repository control plane.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        }
+      },
+      "score": 56,
+      "bloat": 4,
+      "confidence": "C"
+    }
+  },
+  "combinations": [
+    {
+      "name": "Klaussy plus Agent Repo Standard",
+      "members": [
+        "Klaussy Agents",
+        "Agent Repo Standard"
+      ],
+      "evidenceState": "estimated",
+      "terms": {
+        "scoreA": 56,
+        "scoreB": 68,
+        "synergy": 2,
+        "controlConflict": 20,
+        "contextPenalty": 8,
+        "operationsPenalty": 8
+      },
+      "artifactLinks": [
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/combinations/report.md"
+      ],
+      "rationale": "Both want to own root instructions, repository conventions, generated skills, and update policy; Klaussy's default collision behavior makes coexistence especially risky.",
+      "score": 34,
+      "confidence": "C"
+    }
+  ],
+  "findings": [
+    "Default all-host generation has real AGENTS.md and .agents/skills ownership collisions.",
+    "Init always performs an unpinned dependency upgrade; force-update can overwrite broad surfaces without backup or rollback.",
+    "The guards are workflow nudges, not security boundaries, and the MCP can write caller-selected paths."
+  ],
+  "unresolvedFacts": [
+    "Installability, live host compatibility, full unit tests, prompt evals, and E2E behavior were not executed."
+  ],
+  "decision": "Do not adopt Klaussy as the replacement repo standard or sole main plugin at v0.19.1. Re-evaluate only after ownership, reproducibility, rollback, and plugin-metadata fixes.",
+  "removalPlan": "No upstream uninstall or ownership manifest exists; removal requires reviewing and deleting generated files host by host, then restoring customized files from version control.",
+  "provenance": {
+    "harness": "Codex desktop orchestrator with independent method subagents",
+    "model": "Codex desktop default model; exact model version not independently reported",
+    "repositoryRevision": "ce03f937338f270e16b6dd778f584ec2d5a50049",
+    "sandbox": "orchestrator full workspace access; source-review workers read-only against targets",
+    "approvalPolicy": "never",
+    "network": "GitHub clone and metadata only; no live model or provider benchmark",
+    "enabledExtensions": [
+      "agent-eval@personal"
+    ]
+  },
+  "artifactDigests": {
+    "artifacts/2026-07-17-klaussy-v0.19.1-quick/combinations/report.md": "6f3dcc59231646981c20f2d84a1f0e9bac3f9dad9912918a81f0d3b896ca12a8",
+    "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/replay-check.md": "4e55da1319ee8af3fd2a7c108b0cca313c1e8cd1ac0b3b3a10205f35712ab3d6",
+    "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md": "537f68d8693326703909ab22b34f067de7daae79e882ad67263ae9dab531ff5f"
+  },
+  "score": 56,
+  "bloat": 4,
+  "confidence": "C"
+}

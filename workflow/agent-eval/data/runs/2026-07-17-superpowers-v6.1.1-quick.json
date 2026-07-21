@@ -1,0 +1,601 @@
+{
+  "schemaVersion": 1,
+  "id": "2026-07-17-superpowers-v6.1.1-quick",
+  "startedAt": "2026-07-17T00:17:41.117Z",
+  "finishedAt": "2026-07-17T00:47:41.117Z",
+  "mode": "quick",
+  "status": "completed",
+  "evidenceState": "estimated",
+  "target": {
+    "kind": "plugin",
+    "name": "Superpowers",
+    "source": "https://github.com/obra/superpowers",
+    "version": "v6.1.1-d884ae04edebef577e82ff7c4e143debd0bbec99"
+  },
+  "axes": {
+    "V": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "The methodology covers planning, TDD, debugging, review, and delivery coherently, but no paired task outcomes were measured.",
+      "evidence": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+      ]
+    },
+    "U": {
+      "value": 2,
+      "evidenceState": "estimated",
+      "reason": "Most capabilities overlap with native Codex and Claude workflows; the differentiated part is the mandatory end-to-end control policy.",
+      "evidence": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+      ]
+    },
+    "E": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Current source, manifests, and bounded tests were inspected, but the external behavior-eval repository and live harness claims were not run.",
+      "evidence": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+      ]
+    },
+    "X": {
+      "value": 5,
+      "evidenceState": "estimated",
+      "reason": "First-party packaging exists for Claude Code, Codex, Pi, OpenCode, and several other hosts; Hermes has no supported adapter.",
+      "evidence": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+      ]
+    },
+    "R": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Many bounded checks passed, but Pi and Antigravity mapping tests failed and Codex packaging assertions were timezone-sensitive.",
+      "evidence": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+      ]
+    },
+    "S": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Core hooks are local and dependency-light, but the optional visual companion executes agent-authored HTML and emits default branding telemetry; workflow skills also exercise broad git and dependency authority.",
+      "evidence": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+      ]
+    },
+    "M": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "The project is active, MIT licensed, dependency-light, and broadly tested, but cross-host removal and rollback guidance is incomplete.",
+      "evidence": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+      ]
+    },
+    "F": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "Four requested hosts have real adapters, but behavior and startup semantics differ and Hermes is unsupported.",
+      "evidence": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+      ]
+    },
+    "C": {
+      "value": 1,
+      "evidenceState": "estimated",
+      "reason": "Plugin Eval estimated a 550-token trigger and a 31,671-token all-skills invocation ceiling; normal selective loading is lower, but the automatic methodology and subagent fan-out remain operationally heavy.",
+      "evidence": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+      ]
+    }
+  },
+  "methods": [
+    {
+      "name": "source-review",
+      "status": "completed",
+      "version": "d884ae04edebef577e82ff7c4e143debd0bbec99",
+      "exactCommand": "bash tests/hooks/test-session-start.sh",
+      "exactCommands": [
+        {"command": "bash tests/hooks/test-session-start.sh", "exitCode": 0},
+        {"command": "bash tests/codex/test-marketplace-manifest.sh", "exitCode": 0},
+        {"command": "bash tests/codex/test-package-codex-plugin.sh", "exitCode": 1},
+        {"command": "TZ=UTC bash tests/codex/test-package-codex-plugin.sh", "exitCode": 1},
+        {"command": "bash tests/opencode/run-tests.sh", "exitCode": 0},
+        {"command": "node tests/pi/test-pi-extension.mjs", "exitCode": 1},
+        {"command": "bash tests/kimi/run-tests.sh", "exitCode": 0},
+        {"command": "bash tests/antigravity/run-tests.sh", "exitCode": 1},
+        {"command": "bash tests/shell-lint/test-lint-shell.sh", "exitCode": 0},
+        {"command": "node tests/brainstorm-server/ws-protocol.test.js", "exitCode": 0},
+        {"command": "node tests/brainstorm-server/helper.test.js", "exitCode": 0},
+        {"command": "node tests/brainstorm-server/browser-launcher.test.js", "exitCode": 0},
+        {"command": "node tests/brainstorm-server/branding.test.js", "exitCode": 0},
+        {"command": "bash tests/brainstorm-server/start-server.test.sh", "exitCode": 0},
+        {"command": "bash tests/brainstorm-server/stop-server.test.sh", "exitCode": 0}
+      ],
+      "exitCode": 0,
+      "durationMs": 10015,
+      "metrics": {
+        "boundedCommands": 15,
+        "passedCommands": 11,
+        "failedCommands": 4,
+        "liveHarnesses": 0,
+        "targetDirtyAfter": false
+      },
+      "artifactLinks": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+      ],
+      "artifactDigests": {
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md": "0b87eff14aa8dfefc5fe71f11970849decb0987e4d59c98fa77489c77759cc37"
+      }
+    },
+    {
+      "name": "plugin-eval",
+      "status": "completed",
+      "version": "0.1.0 (plugin 0.1.2)",
+      "exactCommand": "/usr/bin/time -p plugin-eval analyze /tmp/agent-eval-batch-2026-07-17.TkjC06/superpowers --format json --output /tmp/agent-eval-batch-2026-07-17.TkjC06/results/superpowers-plugin-eval.json",
+      "exitCode": 0,
+      "durationMs": 790,
+      "metrics": {
+        "localScore": 8,
+        "grade": "F",
+        "triggerTokens": 550,
+        "invokeTokens": 31671,
+        "deferredTokens": 299162,
+        "interpretationCaveats": 2
+      },
+      "artifactLinks": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json",
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/report.md",
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/start.md"
+      ],
+      "artifactDigests": {
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json": "f88b2822b2966cc2d9737c3c8a9ae8f7517ec74dd0e4c59c9bf976a421c0eeed",
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/report.md": "54f3be3a3652d74d90f32b2a9786a137446eddc3fa3180e3eb04e7355d1f813a",
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/start.md": "57613baad634a62963991187a0714d1b9371919ff2d46533003e929a54349b14"
+      }
+    },
+    {
+      "name": "promptfoo",
+      "status": "not-applicable",
+      "skipReason": "No bounded shared task pack, candidate adapter, and deterministic outcome verifier existed for this quick run; no Promptfoo result was fabricated.",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "harbor",
+      "status": "unavailable",
+      "skipReason": "harbor is not on PATH",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "inspect",
+      "status": "unavailable",
+      "skipReason": "inspect is not on PATH",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    }
+  ],
+  "platforms": {
+    "claude-code": {
+      "status": "completed",
+      "adapter": "Native Claude Code plugin and SessionStart hook",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The methodology covers planning, TDD, debugging, review, and delivery coherently, but no paired task outcomes were measured.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Most capabilities overlap with native Codex and Claude workflows; the differentiated part is the mandatory end-to-end control policy.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current source, manifests, and bounded tests were inspected, but the external behavior-eval repository and live harness claims were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "First-party packaging exists for Claude Code, Codex, Pi, OpenCode, and several other hosts; Hermes has no supported adapter.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The Claude hook shape passed bounded tests, although no live Claude behavior run was executed.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Core hooks are local and dependency-light, but the optional visual companion executes agent-authored HTML and emits default branding telemetry; workflow skills also exercise broad git and dependency authority.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The project is active, MIT licensed, dependency-light, and broadly tested, but cross-host removal and rollback guidance is incomplete.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "Claude Code is the most mature and native Superpowers delivery path.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 1,
+          "evidenceState": "estimated",
+          "reason": "Plugin Eval estimated a 550-token trigger and a 31,671-token all-skills invocation ceiling; normal selective loading is lower, but the automatic methodology and subagent fan-out remain operationally heavy.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+          ]
+        }
+      },
+      "score": 70,
+      "bloat": 4,
+      "confidence": "C"
+    },
+    "codex": {
+      "status": "completed",
+      "adapter": "Official Codex plugin package with skills and deliberate hook suppression",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The methodology covers planning, TDD, debugging, review, and delivery coherently, but no paired task outcomes were measured.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Most capabilities overlap with native Codex and Claude workflows; the differentiated part is the mandatory end-to-end control policy.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current source, manifests, and bounded tests were inspected, but the external behavior-eval repository and live harness claims were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "First-party packaging exists for Claude Code, Codex, Pi, OpenCode, and several other hosts; Hermes has no supported adapter.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Many bounded checks passed, but Pi and Antigravity mapping tests failed and Codex packaging assertions were timezone-sensitive.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Core hooks are local and dependency-light, but the optional visual companion executes agent-authored HTML and emits default branding telemetry; workflow skills also exercise broad git and dependency authority.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The project is active, MIT licensed, dependency-light, and broadly tested, but cross-host removal and rollback guidance is incomplete.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Codex has an official plugin package, but its startup behavior intentionally differs from Claude and was not run live.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 1,
+          "evidenceState": "estimated",
+          "reason": "Plugin Eval estimated a 550-token trigger and a 31,671-token all-skills invocation ceiling; normal selective loading is lower, but the automatic methodology and subagent fan-out remain operationally heavy.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+          ]
+        }
+      },
+      "score": 66,
+      "bloat": 4,
+      "confidence": "C"
+    },
+    "pi": {
+      "status": "completed",
+      "adapter": "Pi package with native skills and startup/compaction extension",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The methodology covers planning, TDD, debugging, review, and delivery coherently, but no paired task outcomes were measured.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Most capabilities overlap with native Codex and Claude workflows; the differentiated part is the mandatory end-to-end control policy.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current source, manifests, and bounded tests were inspected, but the external behavior-eval repository and live harness claims were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "First-party packaging exists for Claude Code, Codex, Pi, OpenCode, and several other hosts; Hermes has no supported adapter.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "The Pi lifecycle checks mostly passed, but the release's mapping-reference test failed from source drift.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Core hooks are local and dependency-light, but the optional visual companion executes agent-authored HTML and emits default branding telemetry; workflow skills also exercise broad git and dependency authority.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The project is active, MIT licensed, dependency-light, and broadly tested, but cross-host removal and rollback guidance is incomplete.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Four requested hosts have real adapters, but behavior and startup semantics differ and Hermes is unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Pi loads native skills selectively and uses a small extension, though the methodology still adds workflow overhead.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+          ]
+        }
+      },
+      "score": 66,
+      "bloat": 3,
+      "confidence": "C"
+    },
+    "hermes": {
+      "status": "unsupported",
+      "reason": "No Hermes package, adapter, or support claim exists at this revision."
+    },
+    "opencode": {
+      "status": "completed",
+      "adapter": "OpenCode plugin with cached bootstrap injection",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The methodology covers planning, TDD, debugging, review, and delivery coherently, but no paired task outcomes were measured.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Most capabilities overlap with native Codex and Claude workflows; the differentiated part is the mandatory end-to-end control policy.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current source, manifests, and bounded tests were inspected, but the external behavior-eval repository and live harness claims were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "First-party packaging exists for Claude Code, Codex, Pi, OpenCode, and several other hosts; Hermes has no supported adapter.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The dependency-free OpenCode loading and bootstrap-caching tests passed; live integration was not run.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Core hooks are local and dependency-light, but the optional visual companion executes agent-authored HTML and emits default branding telemetry; workflow skills also exercise broad git and dependency authority.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The project is active, MIT licensed, dependency-light, and broadly tested, but cross-host removal and rollback guidance is incomplete.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Four requested hosts have real adapters, but behavior and startup semantics differ and Hermes is unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Bootstrap caching reduces repeated context injection, while methodology overhead remains.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+          ]
+        }
+      },
+      "score": 70,
+      "bloat": 3,
+      "confidence": "C"
+    }
+  },
+  "combinations": [
+    {
+      "name": "Superpowers plus Taskflow",
+      "members": [
+        "Superpowers",
+        "Taskflow"
+      ],
+      "evidenceState": "estimated",
+      "terms": {
+        "scoreA": 66,
+        "scoreB": 78,
+        "synergy": 3,
+        "controlConflict": 18,
+        "contextPenalty": 8,
+        "operationsPenalty": 8
+      },
+      "artifactLinks": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/combinations/report.md"
+      ],
+      "rationale": "Both control decomposition, subagents, reviews, and execution; Taskflow adds a runtime while Superpowers adds mandatory methodology.",
+      "score": 47,
+      "confidence": "C"
+    },
+    {
+      "name": "Superpowers plus Klaussy",
+      "members": [
+        "Superpowers",
+        "Klaussy Agents"
+      ],
+      "evidenceState": "estimated",
+      "terms": {
+        "scoreA": 66,
+        "scoreB": 56,
+        "synergy": 2,
+        "controlConflict": 18,
+        "contextPenalty": 9,
+        "operationsPenalty": 8
+      },
+      "artifactLinks": [
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/combinations/report.md"
+      ],
+      "rationale": "Two broad automatic control planes compete over planning, skills, hooks, review, and repository workflow.",
+      "score": 33,
+      "confidence": "C"
+    }
+  ],
+  "findings": [
+    "Superpowers is compact in installation size but behaviorally expansive: it is a full control plane, not a small helper.",
+    "Plugin Eval's raw 8/F is not the aggregate score; its hooks finding is likely a false positive and its deferred-token estimate includes source-only files.",
+    "Pi and Antigravity adapter tests failed at the pinned release; no live host or paired outcome run was performed."
+  ],
+  "unresolvedFacts": [
+    "Actual outcome lift, token use per ordinary task, and behavior consistency across supported hosts remain unmeasured."
+  ],
+  "decision": "Do not use Superpowers as the sole always-on main plugin. Import selected skills or run a bounded full-methodology trial in one host.",
+  "removalPlan": "Use the host's plugin/package removal flow and remove any project-local .superpowers artifacts after review; upstream does not provide one complete cross-host rollback guide.",
+  "provenance": {
+    "harness": "Codex desktop orchestrator with independent method subagents",
+    "model": "Codex desktop default model; exact model version not independently reported",
+    "repositoryRevision": "d884ae04edebef577e82ff7c4e143debd0bbec99",
+    "sandbox": "orchestrator full workspace access; source-review workers read-only against targets",
+    "approvalPolicy": "never",
+    "network": "GitHub clone and metadata only; no live model or provider benchmark",
+    "enabledExtensions": [
+      "agent-eval@personal",
+      "plugin-eval@openai-curated"
+    ]
+  },
+  "artifactDigests": {
+    "artifacts/2026-07-17-superpowers-v6.1.1-quick/combinations/report.md": "e32759c1d40668230a38cbc52e63646ac2e43b7fbac18e9313c7694d565ee8fa",
+    "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/report.md": "54f3be3a3652d74d90f32b2a9786a137446eddc3fa3180e3eb04e7355d1f813a",
+    "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json": "f88b2822b2966cc2d9737c3c8a9ae8f7517ec74dd0e4c59c9bf976a421c0eeed",
+    "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/start.md": "57613baad634a62963991187a0714d1b9371919ff2d46533003e929a54349b14",
+    "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md": "0b87eff14aa8dfefc5fe71f11970849decb0987e4d59c98fa77489c77759cc37"
+  },
+  "score": 66,
+  "bloat": 4,
+  "confidence": "C"
+}

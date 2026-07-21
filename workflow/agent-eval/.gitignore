@@ -1,0 +1,12 @@
+.DS_Store
+artifacts/*
+!artifacts/.gitkeep
+dist/*
+!dist/.gitkeep
+data/local/
+node_modules/
+*.log
+.env
+.env.*
+*.pem
+*.key

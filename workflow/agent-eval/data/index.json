@@ -1,0 +1,4089 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-17T01:45:00.000Z",
+  "runs": [
+    {
+      "schemaVersion": 1,
+      "startedAt": "2026-07-17T01:45:00.000Z",
+      "finishedAt": "2026-07-17T01:45:00.000Z",
+      "mode": "full",
+      "status": "completed",
+      "evidenceState": "mixed",
+      "id": "2026-07-17-agent-repo-standard-fresh-codex",
+      "target": {
+        "kind": "workflow",
+        "name": "Agent Repo Standard",
+        "source": "https://github.com/tahabakhit/agent-repo-standard",
+        "version": "f0a4e5f9b836ff87e43d47577c57281d7d0f4b21"
+      },
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "U": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "E": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "S": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "C": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "fresh pinned source review 2026-07-17",
+          "exactCommand": "git diff --check",
+          "exactCommands": [
+            {
+              "command": "git diff --check",
+              "exitCode": 0
+            },
+            {
+              "command": "jq empty reviews/*/matrix.json",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 15000,
+          "metrics": {
+            "sourceLanes": 3,
+            "promotedCandidatesReviewed": 80
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "not-applicable",
+          "skipReason": "The target has no native Codex plugin root for Plugin Eval; source review and the Codex skill-overlay task adapter are the applicable evidence.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "promptfoo",
+          "status": "completed",
+          "version": "0.121.19",
+          "exactCommand": "promptfoo eval -c promptfooconfig-codex-repo-standard.yaml --repeat 3 --no-cache --no-share --max-concurrency 1 --no-progress-bar -o codex-repo-standard-measured.json",
+          "exitCode": 0,
+          "durationMs": 547000,
+          "metrics": {
+            "trialsPerCondition": 6,
+            "tasks": 2,
+            "baselineTrials": 6,
+            "candidateTrials": 6,
+            "baselinePasses": 6,
+            "candidatePasses": 6,
+            "platforms": [
+              "codex"
+            ],
+            "pairedBaseline": true,
+            "deterministicVerifier": true
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/promptfooconfig.yaml",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/promptfooconfig.yaml": "253f4dd28c91f20d764dce8dcb175c5383a1959edc341ecf7520de4a0e86bf69",
+            "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json": "c7a8ed07a423910788942a5348c13fe2189ca574d5354f6084ef7aa964484cc6"
+          }
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "codex": {
+          "status": "completed",
+          "adapter": "Codex exec with disposable workspace and deterministic npm-test verifier",
+          "evidenceState": "mixed",
+          "axes": {
+            "V": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "U": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "E": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "X": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "R": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "S": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "M": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "C": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md"
+              ]
+            }
+          },
+          "score": 89,
+          "bloat": 1,
+          "confidence": "B"
+        },
+        "claude-code": {
+          "status": "blocked",
+          "reason": "Claude Code is authenticated through Vertex, but the organization disabled Claude subscription access for noninteractive runs; no API key was available."
+        },
+        "pi": {
+          "status": "unavailable",
+          "reason": "Pi CLI is not installed in this environment."
+        },
+        "hermes": {
+          "status": "unavailable",
+          "reason": "Hermes CLI is not installed in this environment."
+        },
+        "opencode": {
+          "status": "unavailable",
+          "reason": "OpenCode CLI is not installed in this environment."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "The generated AGENTS.md policy completed 12/12 paired Codex trials, matching a 12/12 baseline; the pack measures compatibility, not documentation quality uplift.",
+        "The fresh Copier template verification passed, with interpolation/trust caveats documented in the source lane.",
+        "This is the leanest cross-agent foundation of the four because it governs repository boundaries without adding a large runtime control plane."
+      ],
+      "decision": "Use as the baseline repository contract. Add a task-specific workflow only when a measured task gap justifies the extra control plane.",
+      "provenance": {
+        "harness": "agent-eval 0.1.0 + Promptfoo 0.121.19",
+        "model": "Codex CLI 0.144.3",
+        "repositoryRevision": "f0a4e5f9b836ff87e43d47577c57281d7d0f4b21",
+        "sandbox": "disposable /tmp workspaces; source clones read-only",
+        "approvalPolicy": "never",
+        "network": "enabled for source clone; task workspaces network-independent",
+        "enabledExtensions": [
+          "agent-eval:evaluate-all",
+          "promptfoo 0.121.19",
+          "plugin-eval 0.1.0"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/promptfooconfig.yaml": "253f4dd28c91f20d764dce8dcb175c5383a1959edc341ecf7520de4a0e86bf69",
+        "artifacts/2026-07-17-agent-repo-standard-fresh-codex/promptfoo/result.json": "c7a8ed07a423910788942a5348c13fe2189ca574d5354f6084ef7aa964484cc6",
+        "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+        "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c",
+        "artifacts/2026-07-17-agent-repo-standard-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c"
+      },
+      "score": 89,
+      "bloat": 1,
+      "confidence": "B"
+    },
+    {
+      "schemaVersion": 1,
+      "startedAt": "2026-07-17T01:45:00.000Z",
+      "finishedAt": "2026-07-17T01:45:00.000Z",
+      "mode": "full",
+      "status": "completed",
+      "evidenceState": "estimated",
+      "id": "2026-07-17-agent-tool-source-batch-fresh",
+      "target": {
+        "kind": "evaluation-batch",
+        "name": "Wiki-promoted agent tools and workflows",
+        "source": "/Users/tahabakhit/wiki/topics/agent-workflows/wiki/references/cross-harness-agent-tool-scorecard.md",
+        "version": "fresh source inventory 2026-07-17"
+      },
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "U": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "X": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "R": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "F": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        },
+        "C": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "fresh pinned source review 2026-07-17",
+          "exactCommand": "git diff --check",
+          "exactCommands": [
+            {
+              "command": "git diff --check",
+              "exitCode": 0
+            },
+            {
+              "command": "jq empty reviews/*/matrix.json",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 30000,
+          "metrics": {
+            "sourceLanes": 3,
+            "promotedCandidatesReviewed": 80
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c",
+            "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "not-applicable",
+          "skipReason": "This batch contains multiple plugin and workflow types; Plugin Eval was run only on native local Codex plugin roots in the candidate-specific runs.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "promptfoo",
+          "status": "not-applicable",
+          "skipReason": "No single adapter and verifier can represent all promoted candidates; candidate-specific measured runs use a shared task pack.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "codex": {
+          "status": "not-run",
+          "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+        },
+        "claude-code": {
+          "status": "not-run",
+          "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+        },
+        "pi": {
+          "status": "not-run",
+          "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+        },
+        "hermes": {
+          "status": "not-run",
+          "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+        },
+        "opencode": {
+          "status": "not-run",
+          "reason": "The batch is source/inventory evidence; behavioral measurement is recorded in candidate-specific runs."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "The wiki promoted approximately 80 actionable candidates across control planes, utilities, memory, MCP, and discovery layers.",
+        "Source evidence is not a substitute for host-specific behavioral measurement; most candidates need an adapter and deterministic task verifier."
+      ],
+      "decision": "Use this source batch as the fresh inventory and coverage map; use the four candidate-specific Codex runs for actual behavioral evidence.",
+      "provenance": {
+        "harness": "agent-eval 0.1.0 + Promptfoo 0.121.19",
+        "model": "Codex CLI 0.144.3",
+        "repositoryRevision": "fresh source inventory 2026-07-17",
+        "sandbox": "disposable /tmp workspaces; source clones read-only",
+        "approvalPolicy": "never",
+        "network": "enabled for source clone; task workspaces network-independent",
+        "enabledExtensions": [
+          "agent-eval:evaluate-all",
+          "promptfoo 0.121.19",
+          "plugin-eval 0.1.0"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c",
+        "artifacts/2026-07-17-agent-tool-source-batch-fresh/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c"
+      },
+      "score": 68,
+      "bloat": 2,
+      "confidence": "C"
+    },
+    {
+      "schemaVersion": 1,
+      "startedAt": "2026-07-17T01:45:00.000Z",
+      "finishedAt": "2026-07-17T01:45:00.000Z",
+      "mode": "full",
+      "status": "completed",
+      "evidenceState": "mixed",
+      "id": "2026-07-17-klaussy-fresh-codex",
+      "target": {
+        "kind": "workflow",
+        "name": "Klaussy Agents",
+        "source": "https://github.com/steph-dove/klaussy-agents",
+        "version": "ce03f937338f270e16b6dd778f584ec2d5a50049 (0.11.0)"
+      },
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "U": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "E": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "X": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "R": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "F": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "C": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "fresh pinned source review 2026-07-17",
+          "exactCommand": "git diff --check",
+          "exactCommands": [
+            {
+              "command": "git diff --check",
+              "exitCode": 0
+            },
+            {
+              "command": "jq empty reviews/*/matrix.json",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 15000,
+          "metrics": {
+            "sourceLanes": 3,
+            "promotedCandidatesReviewed": 80
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c",
+            "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "not-applicable",
+          "skipReason": "The target has no native Codex plugin root for Plugin Eval; source review and the Codex skill-overlay task adapter are the applicable evidence.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "promptfoo",
+          "status": "completed",
+          "version": "0.121.19",
+          "exactCommand": "promptfoo eval -c promptfooconfig-codex-klaussy.yaml --repeat 3 --no-cache --no-share --max-concurrency 1 --no-progress-bar -o codex-klaussy-measured.json",
+          "exitCode": 0,
+          "durationMs": 456000,
+          "metrics": {
+            "trialsPerCondition": 6,
+            "tasks": 2,
+            "baselineTrials": 6,
+            "candidateTrials": 6,
+            "baselinePasses": 6,
+            "candidatePasses": 6,
+            "platforms": [
+              "codex"
+            ],
+            "pairedBaseline": true,
+            "deterministicVerifier": true
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/promptfooconfig.yaml",
+            "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/promptfooconfig.yaml": "6484caf12250685d579b3f145fc03eabf355b39c5d4a450395239f4901f27907",
+            "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json": "e270c81b230c5f02162c73c7b2f27362ed80de78e1fc6e410004f01041c18416"
+          }
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "codex": {
+          "status": "completed",
+          "adapter": "Codex exec with disposable workspace and deterministic npm-test verifier",
+          "evidenceState": "mixed",
+          "axes": {
+            "V": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "U": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "E": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "X": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "R": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "S": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "M": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "F": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "C": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md"
+              ]
+            }
+          },
+          "score": 71,
+          "bloat": 2,
+          "confidence": "B"
+        },
+        "claude-code": {
+          "status": "blocked",
+          "reason": "Claude Code is authenticated through Vertex, but the organization disabled Claude subscription access for noninteractive runs; no API key was available."
+        },
+        "pi": {
+          "status": "unavailable",
+          "reason": "Pi CLI is not installed in this environment."
+        },
+        "hermes": {
+          "status": "unavailable",
+          "reason": "Hermes CLI is not installed in this environment."
+        },
+        "opencode": {
+          "status": "unavailable",
+          "reason": "OpenCode CLI is not installed in this environment."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "Klaussy completed 12/12 paired Codex trials, matching a 12/12 baseline; this is a skill-overlay smoke of its cross-agent instructions, not a native Codex plugin integration.",
+        "The fresh repository exposes a Claude plugin but no native Codex plugin root; Plugin Eval is therefore not applicable to this Codex run.",
+        "Its broad multi-host policy surface is useful for repository consistency but has limited measured Codex-specific fit."
+      ],
+      "decision": "Treat Klaussy as a repository policy/workflow layer, not the only Codex plugin; adopt it only where the cross-agent conventions are the goal and keep native Codex skills explicit.",
+      "provenance": {
+        "harness": "agent-eval 0.1.0 + Promptfoo 0.121.19",
+        "model": "Codex CLI 0.144.3",
+        "repositoryRevision": "ce03f937338f270e16b6dd778f584ec2d5a50049 (0.11.0)",
+        "sandbox": "disposable /tmp workspaces; source clones read-only",
+        "approvalPolicy": "never",
+        "network": "enabled for source clone; task workspaces network-independent",
+        "enabledExtensions": [
+          "agent-eval:evaluate-all",
+          "promptfoo 0.121.19",
+          "plugin-eval 0.1.0"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/promptfooconfig.yaml": "6484caf12250685d579b3f145fc03eabf355b39c5d4a450395239f4901f27907",
+        "artifacts/2026-07-17-klaussy-fresh-codex/promptfoo/result.json": "e270c81b230c5f02162c73c7b2f27362ed80de78e1fc6e410004f01041c18416",
+        "artifacts/2026-07-17-klaussy-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+        "artifacts/2026-07-17-klaussy-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c",
+        "artifacts/2026-07-17-klaussy-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c"
+      },
+      "score": 71,
+      "bloat": 2,
+      "confidence": "B"
+    },
+    {
+      "schemaVersion": 1,
+      "startedAt": "2026-07-17T01:45:00.000Z",
+      "finishedAt": "2026-07-17T01:45:00.000Z",
+      "mode": "full",
+      "status": "completed",
+      "evidenceState": "mixed",
+      "id": "2026-07-17-superpowers-fresh-codex",
+      "target": {
+        "kind": "plugin",
+        "name": "Superpowers",
+        "source": "https://github.com/obra/superpowers",
+        "version": "v6.1.1-d884ae04edebef577e82ff7c4e143debd0bbec99"
+      },
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "U": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "E": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "C": {
+          "value": 1,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "fresh pinned source review 2026-07-17",
+          "exactCommand": "git diff --check",
+          "exactCommands": [
+            {
+              "command": "git diff --check",
+              "exitCode": 0
+            },
+            {
+              "command": "jq empty reviews/*/matrix.json",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 15000,
+          "metrics": {
+            "sourceLanes": 3,
+            "promotedCandidatesReviewed": 80
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c",
+            "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "completed",
+          "version": "0.1.0 (plugin 0.1.2)",
+          "exactCommand": "plugin-eval analyze /tmp/agent-eval-fresh-2026-07-17/superpowers --format json --output /tmp/agent-eval-fresh-2026-07-17/reviews/superpowers-plugin-result.json",
+          "exitCode": 0,
+          "durationMs": 790,
+          "metrics": {
+            "localScore": 8,
+            "grade": "F",
+            "triggerTokens": 550,
+            "invokeTokens": 31671,
+            "deferredTokens": 299162
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/plugin-eval/start.md",
+            "artifacts/2026-07-17-superpowers-fresh-codex/plugin-eval/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-superpowers-fresh-codex/plugin-eval/start.md": "64ee3edd4a0828cf8470c1eee28fc58bdb67964ee0e1afb1c9ba7e3fddd45f43",
+            "artifacts/2026-07-17-superpowers-fresh-codex/plugin-eval/result.json": "68705ea3d3938dfa5d29f86b9797e7e6c1b1d06dcd7d111f679661904d9c3e57"
+          }
+        },
+        {
+          "name": "promptfoo",
+          "status": "completed",
+          "version": "0.121.19",
+          "exactCommand": "promptfoo eval -c promptfooconfig-codex-superpowers.yaml --repeat 3 --no-cache --no-share --max-concurrency 1 --no-progress-bar -o codex-sp-measured.json",
+          "exitCode": 0,
+          "durationMs": 602000,
+          "metrics": {
+            "trialsPerCondition": 6,
+            "tasks": 2,
+            "baselineTrials": 6,
+            "candidateTrials": 6,
+            "baselinePasses": 6,
+            "candidatePasses": 6,
+            "platforms": [
+              "codex"
+            ],
+            "pairedBaseline": true,
+            "deterministicVerifier": true
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/promptfooconfig.yaml",
+            "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/promptfooconfig.yaml": "a870ff57d8e6fd2460809e640c226061a87892541a4316837dd0d5f206cfc13d",
+            "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json": "e4dc251d11352fcbe7806abc492544261a9b2c037ce79b0aaf20aacdd3907bc0"
+          }
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "codex": {
+          "status": "completed",
+          "adapter": "Codex exec with disposable workspace and deterministic npm-test verifier",
+          "evidenceState": "mixed",
+          "axes": {
+            "V": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "U": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "E": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "X": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "R": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "S": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "M": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "C": {
+              "value": 1,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md"
+              ]
+            }
+          },
+          "score": 77,
+          "bloat": 4,
+          "confidence": "B"
+        },
+        "claude-code": {
+          "status": "blocked",
+          "reason": "Claude Code is authenticated through Vertex, but the organization disabled Claude subscription access for noninteractive runs; no API key was available."
+        },
+        "pi": {
+          "status": "unavailable",
+          "reason": "Pi CLI is not installed in this environment."
+        },
+        "hermes": {
+          "status": "unavailable",
+          "reason": "Hermes CLI is not installed in this environment."
+        },
+        "opencode": {
+          "status": "unavailable",
+          "reason": "OpenCode CLI is not installed in this environment."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "Measured Codex task success was 12/12, but baseline also scored 6/6; this establishes reliability on the two-task pack, not incremental value.",
+        "Plugin Eval's raw F is a static token/manifest signal and should not override the paired task outcome.",
+        "Broad workflow and subagent fan-out make this a high-bloat control plane."
+      ],
+      "decision": "Useful when you want a prescriptive end-to-end workflow, but do not treat the measured parity as proof of uplift; keep it isolated from other control planes until a task-gap benchmark shows value.",
+      "provenance": {
+        "harness": "agent-eval 0.1.0 + Promptfoo 0.121.19",
+        "model": "Codex CLI 0.144.3",
+        "repositoryRevision": "v6.1.1-d884ae04edebef577e82ff7c4e143debd0bbec99",
+        "sandbox": "disposable /tmp workspaces; source clones read-only",
+        "approvalPolicy": "never",
+        "network": "enabled for source clone; task workspaces network-independent",
+        "enabledExtensions": [
+          "agent-eval:evaluate-all",
+          "promptfoo 0.121.19",
+          "plugin-eval 0.1.0"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-superpowers-fresh-codex/plugin-eval/result.json": "68705ea3d3938dfa5d29f86b9797e7e6c1b1d06dcd7d111f679661904d9c3e57",
+        "artifacts/2026-07-17-superpowers-fresh-codex/plugin-eval/start.md": "64ee3edd4a0828cf8470c1eee28fc58bdb67964ee0e1afb1c9ba7e3fddd45f43",
+        "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/promptfooconfig.yaml": "a870ff57d8e6fd2460809e640c226061a87892541a4316837dd0d5f206cfc13d",
+        "artifacts/2026-07-17-superpowers-fresh-codex/promptfoo/result.json": "e4dc251d11352fcbe7806abc492544261a9b2c037ce79b0aaf20aacdd3907bc0",
+        "artifacts/2026-07-17-superpowers-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+        "artifacts/2026-07-17-superpowers-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c",
+        "artifacts/2026-07-17-superpowers-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c"
+      },
+      "score": 77,
+      "bloat": 4,
+      "confidence": "B"
+    },
+    {
+      "schemaVersion": 1,
+      "startedAt": "2026-07-17T01:45:00.000Z",
+      "finishedAt": "2026-07-17T01:45:00.000Z",
+      "mode": "full",
+      "status": "completed",
+      "evidenceState": "mixed",
+      "id": "2026-07-17-taskflow-fresh-codex",
+      "target": {
+        "kind": "plugin",
+        "name": "Taskflow",
+        "source": "https://github.com/heggria/taskflow",
+        "version": "300da53ea85ef820a49e72827f9f3261f377a9c9 (0.2.2)"
+      },
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "U": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "E": {
+          "value": 5,
+          "evidenceState": "measured",
+          "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json"
+          ]
+        },
+        "X": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "R": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        },
+        "C": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "fresh pinned source review 2026-07-17",
+          "exactCommand": "git diff --check",
+          "exactCommands": [
+            {
+              "command": "git diff --check",
+              "exitCode": 0
+            },
+            {
+              "command": "jq empty reviews/*/matrix.json",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 15000,
+          "metrics": {
+            "sourceLanes": 3,
+            "promotedCandidatesReviewed": 80
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c",
+            "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "completed",
+          "version": "0.1.0 (plugin 0.1.2)",
+          "exactCommand": "plugin-eval analyze /tmp/agent-eval-fresh-2026-07-17/taskflow/packages/codex-taskflow/plugin --format json --output /tmp/agent-eval-fresh-2026-07-17/reviews/taskflow-plugin-result.json",
+          "exitCode": 0,
+          "durationMs": 900,
+          "metrics": {
+            "localScore": 49,
+            "grade": "F",
+            "triggerTokens": 218,
+            "invokeTokens": 10323,
+            "deferredTokens": 15682
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/plugin-eval/start.md",
+            "artifacts/2026-07-17-taskflow-fresh-codex/plugin-eval/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-taskflow-fresh-codex/plugin-eval/start.md": "c38351699ff19ecd9ec272b52a9601d9b60b3db8f66188ad6e9290a59cce6786",
+            "artifacts/2026-07-17-taskflow-fresh-codex/plugin-eval/result.json": "f4e32655c73d6c3b03f0c2aa915c20b5b2fb83f187d6a32fcc4710b03cb547d9"
+          }
+        },
+        {
+          "name": "promptfoo",
+          "status": "completed",
+          "version": "0.121.19",
+          "exactCommand": "promptfoo eval -c promptfooconfig-codex-taskflow.yaml --repeat 3 --no-cache --no-share --max-concurrency 1 --no-progress-bar -o codex-taskflow-measured.json",
+          "exitCode": 0,
+          "durationMs": 500000,
+          "metrics": {
+            "trialsPerCondition": 6,
+            "tasks": 2,
+            "baselineTrials": 6,
+            "candidateTrials": 6,
+            "baselinePasses": 6,
+            "candidatePasses": 6,
+            "platforms": [
+              "codex"
+            ],
+            "pairedBaseline": true,
+            "deterministicVerifier": true
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/promptfooconfig.yaml",
+            "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/promptfooconfig.yaml": "254c643331ec6f9f3600c8c837b9e4af72d8fb97f21d56ebf6d02b13e70bcd41",
+            "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json": "55e327769688d1ae7de215fb66978b5fd00bf763303cb98f1da352b42a41322a"
+          }
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "codex": {
+          "status": "completed",
+          "adapter": "Codex exec with disposable workspace and deterministic npm-test verifier",
+          "evidenceState": "mixed",
+          "axes": {
+            "V": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "The paired deterministic task pack passed in all six baseline and all six candidate trials.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "U": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "E": {
+              "value": 5,
+              "evidenceState": "measured",
+              "reason": "Promptfoo used repository-state and test-exit verifiers; all 12 trials passed with matched baseline/candidate tasks.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json"
+              ]
+            },
+            "X": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "R": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "S": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "M": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            },
+            "C": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current pinned source review and bounded checks support this estimate; it is not a behavioral benchmark.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md",
+                "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md"
+              ]
+            }
+          },
+          "score": 79,
+          "bloat": 2,
+          "confidence": "B"
+        },
+        "claude-code": {
+          "status": "blocked",
+          "reason": "Claude Code is authenticated through Vertex, but the organization disabled Claude subscription access for noninteractive runs; no API key was available."
+        },
+        "pi": {
+          "status": "unavailable",
+          "reason": "Pi CLI is not installed in this environment."
+        },
+        "hermes": {
+          "status": "unavailable",
+          "reason": "Hermes CLI is not installed in this environment."
+        },
+        "opencode": {
+          "status": "unavailable",
+          "reason": "OpenCode CLI is not installed in this environment."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "Taskflow completed 12/12 paired Codex trials on the deterministic pack; baseline also completed 6/6.",
+        "The source lane found a runner-process check failure and Plugin Eval flagged manifest/privacy and progressive-disclosure issues.",
+        "The result measures the copied Codex skill overlay; native activation and workflow uplift need a task pack designed around Taskflow's planning/parallelism behavior."
+      ],
+      "decision": "A plausible narrow workflow layer, but current evidence supports reliability rather than uplift; use it alone for task orchestration experiments before stacking it with another control plane.",
+      "provenance": {
+        "harness": "agent-eval 0.1.0 + Promptfoo 0.121.19",
+        "model": "Codex CLI 0.144.3",
+        "repositoryRevision": "300da53ea85ef820a49e72827f9f3261f377a9c9 (0.2.2)",
+        "sandbox": "disposable /tmp workspaces; source clones read-only",
+        "approvalPolicy": "never",
+        "network": "enabled for source clone; task workspaces network-independent",
+        "enabledExtensions": [
+          "agent-eval:evaluate-all",
+          "promptfoo 0.121.19",
+          "plugin-eval 0.1.0"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-taskflow-fresh-codex/plugin-eval/result.json": "f4e32655c73d6c3b03f0c2aa915c20b5b2fb83f187d6a32fcc4710b03cb547d9",
+        "artifacts/2026-07-17-taskflow-fresh-codex/plugin-eval/start.md": "c38351699ff19ecd9ec272b52a9601d9b60b3db8f66188ad6e9290a59cce6786",
+        "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/promptfooconfig.yaml": "254c643331ec6f9f3600c8c837b9e4af72d8fb97f21d56ebf6d02b13e70bcd41",
+        "artifacts/2026-07-17-taskflow-fresh-codex/promptfoo/result.json": "55e327769688d1ae7de215fb66978b5fd00bf763303cb98f1da352b42a41322a",
+        "artifacts/2026-07-17-taskflow-fresh-codex/source-review/control-planes-report.md": "ec4ddc9aecc02ad56864451d99aa9ce6e96805320dc33b21e709ca4660d6c1f7",
+        "artifacts/2026-07-17-taskflow-fresh-codex/source-review/memory-report.md": "b40cf7abde7041c874c8099e39b051011d36a1fd6a152d32380c115f64ca9d4c",
+        "artifacts/2026-07-17-taskflow-fresh-codex/source-review/utilities-report.md": "359be2801974046b4a872bebd6566a673d9311b0c8c32057e943339e4c07791c"
+      },
+      "score": 79,
+      "bloat": 2,
+      "confidence": "B"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "2026-07-17-agent-repo-standard-f0a4e5f-quick",
+      "startedAt": "2026-07-17T00:17:41.117Z",
+      "finishedAt": "2026-07-17T00:47:41.117Z",
+      "mode": "quick",
+      "status": "completed",
+      "evidenceState": "estimated",
+      "target": {
+        "kind": "repository-template",
+        "name": "Agent Repo Standard",
+        "source": "https://github.com/tahabakhit/agent-repo-standard",
+        "version": "f0a4e5f9b836ff87e43d47577c57281d7d0f4b21"
+      },
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The AGENTS.md, Diataxis, and MADR composition remains valuable, but the documented Copier path renders stale content and the advertised update path fails.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "A host-neutral committed documentation and decision spine adds durable value beyond any one coding harness.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The normal verifier passed and direct consumer, update, quoting, ShellCheck, and render probes exposed concrete failures in the shipped workflow.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "X": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The content is host-neutral and Codex, Hermes, and Claude loading paths are evidenced, but the generator is POSIX-specific and Pi/OpenCode fit is not established.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "The documented copy command selects an eight-commit-old tag, Copier update lacks an answers file, and the verifier misses consumer-path and ignore-assertion defects.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Users are told to grant Copier trust while shell tasks interpolate unsanitized answers; a normal apostrophe already breaks rendering and hostile values could reach shell execution.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "The repo is intentionally small, but it has no license, no working update contract, no ownership manifest, and no current release tag containing HEAD fixes.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Codex, Hermes, and Claude have clear instruction-loading paths; OpenCode and Pi are not verified and native Windows generation is unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "A current render adds only a 2.9 KB AGENTS.md and one-line Claude include, with no skills, hooks, MCP server, telemetry, or runtime daemon.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "f0a4e5f9b836ff87e43d47577c57281d7d0f4b21",
+          "exactCommand": "/usr/bin/time -p bash tests/verify-template.sh",
+          "exactCommands": [
+            {
+              "command": "/usr/bin/time -p bash tests/verify-template.sh",
+              "exitCode": 0
+            },
+            {
+              "command": "/usr/bin/time -p bash -n bin/new-repo.sh tests/verify-template.sh",
+              "exitCode": 0
+            },
+            {
+              "command": "/usr/bin/time -p git diff --check",
+              "exitCode": 0
+            },
+            {
+              "command": "/usr/bin/time -p shellcheck bin/new-repo.sh tests/verify-template.sh",
+              "exitCode": 1
+            },
+            {
+              "command": "uvx --from copier copier copy --trust --defaults --quiet gh:tahabakhit/agent-repo-standard /tmp/agent-repo-standard-render",
+              "exitCode": 0
+            },
+            {
+              "command": "uvx --from copier copier copy --vcs-ref=HEAD --trust --defaults --quiet gh:tahabakhit/agent-repo-standard /tmp/agent-repo-standard-render-head",
+              "exitCode": 0
+            },
+            {
+              "command": "uvx --from copier copier copy --trust --defaults --quiet --data description=\"Owner's library\" gh:tahabakhit/agent-repo-standard /tmp/agent-repo-standard-apostrophe",
+              "exitCode": 1
+            },
+            {
+              "command": "uvx --from copier copier update --trust --defaults --quiet /tmp/agent-repo-standard-render",
+              "exitCode": 1
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 7130,
+          "metrics": {
+            "profileVerifierPassed": true,
+            "consumerTagBehindCommits": 8,
+            "copierUpdatePassed": false,
+            "normalApostropheRenderPassed": false,
+            "shellcheckActionableFindings": 3,
+            "targetDirtyAfter": false
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md": "25cbbad6ff70c6ebef414f1e2ad1eb44cfe921acc4e48195bc69f6b4f4960ec1"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "not-applicable",
+          "skipReason": "This is a repository template, not a local Codex skill or .codex-plugin plugin.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "promptfoo",
+          "status": "not-applicable",
+          "skipReason": "No bounded shared task pack, candidate adapter, and deterministic outcome verifier existed for this quick run; no Promptfoo result was fabricated.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "claude-code": {
+          "status": "completed",
+          "adapter": "Generated one-line CLAUDE.md includes the shared AGENTS.md",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The AGENTS.md, Diataxis, and MADR composition remains valuable, but the documented Copier path renders stale content and the advertised update path fails.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "A host-neutral committed documentation and decision spine adds durable value beyond any one coding harness.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The normal verifier passed and direct consumer, update, quoting, ShellCheck, and render probes exposed concrete failures in the shipped workflow.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "X": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "The content is host-neutral and Codex, Hermes, and Claude loading paths are evidenced, but the generator is POSIX-specific and Pi/OpenCode fit is not established.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "The documented copy command selects an eight-commit-old tag, Copier update lacks an answers file, and the verifier misses consumer-path and ignore-assertion defects.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Users are told to grant Copier trust while shell tasks interpolate unsanitized answers; a normal apostrophe already breaks rendering and hostile values could reach shell execution.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "The repo is intentionally small, but it has no license, no working update contract, no ownership manifest, and no current release tag containing HEAD fixes.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Claude loads the shared standard through a one-line include without duplicating context.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "A current render adds only a 2.9 KB AGENTS.md and one-line Claude include, with no skills, hooks, MCP server, telemetry, or runtime daemon.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            }
+          },
+          "score": 70,
+          "bloat": 0,
+          "confidence": "C"
+        },
+        "codex": {
+          "status": "completed",
+          "adapter": "Codex natively auto-loads AGENTS.md",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The AGENTS.md, Diataxis, and MADR composition remains valuable, but the documented Copier path renders stale content and the advertised update path fails.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "A host-neutral committed documentation and decision spine adds durable value beyond any one coding harness.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The normal verifier passed and direct consumer, update, quoting, ShellCheck, and render probes exposed concrete failures in the shipped workflow.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "X": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "The content is host-neutral and Codex, Hermes, and Claude loading paths are evidenced, but the generator is POSIX-specific and Pi/OpenCode fit is not established.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "The documented copy command selects an eight-commit-old tag, Copier update lacks an answers file, and the verifier misses consumer-path and ignore-assertion defects.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Users are told to grant Copier trust while shell tasks interpolate unsanitized answers; a normal apostrophe already breaks rendering and hostile values could reach shell execution.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "The repo is intentionally small, but it has no license, no working update contract, no ownership manifest, and no current release tag containing HEAD fixes.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "AGENTS.md is Codex's native repository instruction surface and the rendered context is lean.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "A current render adds only a 2.9 KB AGENTS.md and one-line Claude include, with no skills, hooks, MCP server, telemetry, or runtime daemon.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            }
+          },
+          "score": 72,
+          "bloat": 0,
+          "confidence": "C"
+        },
+        "pi": {
+          "status": "unsupported",
+          "reason": "The repository does not document Pi and no native AGENTS.md loading evidence was found in Pi's source search."
+        },
+        "hermes": {
+          "status": "completed",
+          "adapter": "Hermes natively auto-loads AGENTS.md",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The AGENTS.md, Diataxis, and MADR composition remains valuable, but the documented Copier path renders stale content and the advertised update path fails.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "A host-neutral committed documentation and decision spine adds durable value beyond any one coding harness.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The normal verifier passed and direct consumer, update, quoting, ShellCheck, and render probes exposed concrete failures in the shipped workflow.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "X": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "The content is host-neutral and Codex, Hermes, and Claude loading paths are evidenced, but the generator is POSIX-specific and Pi/OpenCode fit is not established.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "The documented copy command selects an eight-commit-old tag, Copier update lacks an answers file, and the verifier misses consumer-path and ignore-assertion defects.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Users are told to grant Copier trust while shell tasks interpolate unsanitized answers; a normal apostrophe already breaks rendering and hostile values could reach shell execution.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "The repo is intentionally small, but it has no license, no working update contract, no ownership manifest, and no current release tag containing HEAD fixes.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "Hermes officially loads AGENTS.md, so the standard needs no Hermes-specific adapter.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "A current render adds only a 2.9 KB AGENTS.md and one-line Claude include, with no skills, hooks, MCP server, telemetry, or runtime daemon.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+              ]
+            }
+          },
+          "score": 72,
+          "bloat": 0,
+          "confidence": "C"
+        },
+        "opencode": {
+          "status": "not-run",
+          "reason": "The repository generates no OpenCode adapter and this lane did not verify current OpenCode AGENTS.md loading behavior."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "The conceptual standard is lean and useful, but the current Copier implementation is not a safe default workflow.",
+        "The documented copy command selects stale v1.0.10, while the advertised update command fails because no answers file is generated.",
+        "Trusted shell tasks interpolate unsanitized answers and can clobber brownfield files outside Copier's normal merge handling."
+      ],
+      "unresolvedFacts": [
+        "Native Windows generation, remote gh: rendering, brownfield adoption, OpenCode loading, and adversarial shell payloads were not executed."
+      ],
+      "decision": "Keep the Repo Standard concept, but stop recommending the current Copier command until tag selection, answers/update support, shell quoting, brownfield safety, verifier gaps, and licensing are fixed.",
+      "removalPlan": "For a generated repository, use version control to remove or restore the known scaffold files; there is no generated-file ownership manifest or automated uninstall path.",
+      "provenance": {
+        "harness": "Codex desktop orchestrator with independent method subagents",
+        "model": "Codex desktop default model; exact model version not independently reported",
+        "repositoryRevision": "f0a4e5f9b836ff87e43d47577c57281d7d0f4b21",
+        "sandbox": "orchestrator full workspace access; source-review workers read-only against targets",
+        "approvalPolicy": "never",
+        "network": "GitHub clone and metadata only; no live model or provider benchmark",
+        "enabledExtensions": [
+          "agent-eval@personal"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md": "25cbbad6ff70c6ebef414f1e2ad1eb44cfe921acc4e48195bc69f6b4f4960ec1"
+      },
+      "score": 68,
+      "bloat": 0,
+      "confidence": "C"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "2026-07-17-klaussy-v0.19.1-quick",
+      "startedAt": "2026-07-17T00:17:41.117Z",
+      "finishedAt": "2026-07-17T00:47:41.117Z",
+      "mode": "quick",
+      "status": "completed",
+      "evidenceState": "estimated",
+      "target": {
+        "kind": "tool",
+        "name": "Klaussy Agents",
+        "source": "https://github.com/steph-dove/klaussy-agents",
+        "version": "v0.19.1-ce03f937338f270e16b6dd778f584ec2d5a50049"
+      },
+      "axes": {
+        "V": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Cross-host scaffolding can save setup work, but default ownership collisions, stale plugin metadata, and destructive updates substantially reduce realized value.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The repo-convention cross-compiler and host-specific settings/hooks are meaningfully different from native harness features.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current source and 74 Python files were statically parsed, but unit dependencies, live evals, host schemas, and installs were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "X": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Nine host backends exist in source, but default outputs collide, portability is prompt-translated, and Pi and Hermes are unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Normal init performs an unpinned dependency upgrade; force-update has no backup or three-way merge; Claude plugin metadata and install commands are stale.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Guards deliberately fail open and are bypassable, generated permissions are broad, and the optional MCP exposes unconstrained path writes with force.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The project is active and MIT licensed, but alpha status, one broad generator, stale metadata, and no ownership manifest or rollback path raise maintenance cost.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Claude, Codex, and OpenCode outputs exist, but live compatibility was not verified and the Claude plugin bootstrap appears stale.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 1,
+          "evidenceState": "estimated",
+          "reason": "The default creates 25 skills, multiple always-on documents, hooks, permissions, and host configurations; this is a broad repository control plane.",
+          "evidence": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "ce03f937338f270e16b6dd778f584ec2d5a50049",
+          "exactCommand": "PYTHONDONTWRITEBYTECODE=1 python3 -c 'import ast,pathlib; files=list(pathlib.Path(\"src\").rglob(\"*.py\"))+list(pathlib.Path(\"tests\").rglob(\"*.py\")); [ast.parse(p.read_text()) for p in files]; print(f\"parsed {len(files)} Python files\")'",
+          "exactCommands": [
+            {
+              "command": "python3 -m pytest -q tests --ignore=tests/evals --ignore=tests/e2e",
+              "exitCode": 1
+            },
+            {
+              "command": "UV_PROJECT_ENVIRONMENT=/tmp/klaussy-test-venv uv run --offline --frozen --extra dev --no-editable python -m pytest -q -p no:cacheprovider tests --ignore=tests/evals --ignore=tests/e2e",
+              "exitCode": 2
+            },
+            {
+              "command": "PYTHONDONTWRITEBYTECODE=1 uv run --offline --no-project --with-editable . --with pytest --with ruff python -m pytest -q -p no:cacheprovider tests --ignore=tests/evals --ignore=tests/e2e",
+              "exitCode": 1
+            },
+            {
+              "command": "PYTHONDONTWRITEBYTECODE=1 python3 -c 'import ast,pathlib; files=list(pathlib.Path(\"src\").rglob(\"*.py\"))+list(pathlib.Path(\"tests\").rglob(\"*.py\")); [ast.parse(p.read_text()) for p in files]; print(f\"parsed {len(files)} Python files\")'",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 259,
+          "metrics": {
+            "pythonFilesAstParsed": 74,
+            "unitSuiteRun": false,
+            "dependencyBlockedAttempts": 3,
+            "highImpactSourceFindings": 7,
+            "targetDirtyAfter": false
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md",
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/replay-check.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md": "537f68d8693326703909ab22b34f067de7daae79e882ad67263ae9dab531ff5f",
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/replay-check.md": "4e55da1319ee8af3fd2a7c108b0cca313c1e8cd1ac0b3b3a10205f35712ab3d6"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "not-applicable",
+          "skipReason": "The target has a Claude plugin but no .codex-plugin/plugin.json root; Plugin Eval's evaluate-plugin workflow is Codex-plugin-specific.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "promptfoo",
+          "status": "not-applicable",
+          "skipReason": "No bounded shared task pack, candidate adapter, and deterministic outcome verifier existed for this quick run; no Promptfoo result was fabricated.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "claude-code": {
+          "status": "completed",
+          "adapter": "Claude Code plugin and generated skills/settings/hooks",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Cross-host scaffolding can save setup work, but default ownership collisions, stale plugin metadata, and destructive updates substantially reduce realized value.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The repo-convention cross-compiler and host-specific settings/hooks are meaningfully different from native harness features.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current source and 74 Python files were statically parsed, but unit dependencies, live evals, host schemas, and installs were not run.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "X": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Nine host backends exist in source, but default outputs collide, portability is prompt-translated, and Pi and Hermes are unsupported.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Normal init performs an unpinned dependency upgrade; force-update has no backup or three-way merge; Claude plugin metadata and install commands are stale.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Guards deliberately fail open and are bypassable, generated permissions are broad, and the optional MCP exposes unconstrained path writes with force.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "The project is active and MIT licensed, but alpha status, one broad generator, stale metadata, and no ownership manifest or rollback path raise maintenance cost.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Claude has the deepest generated surface, but plugin version, package names, and skill counts are stale at the pinned release.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 1,
+              "evidenceState": "estimated",
+              "reason": "The default creates 25 skills, multiple always-on documents, hooks, permissions, and host configurations; this is a broad repository control plane.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            }
+          },
+          "score": 54,
+          "bloat": 4,
+          "confidence": "C"
+        },
+        "codex": {
+          "status": "completed",
+          "adapter": "Generated AGENTS.md, .agents/skills, config, and hooks",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Cross-host scaffolding can save setup work, but default ownership collisions, stale plugin metadata, and destructive updates substantially reduce realized value.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The repo-convention cross-compiler and host-specific settings/hooks are meaningfully different from native harness features.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current source and 74 Python files were statically parsed, but unit dependencies, live evals, host schemas, and installs were not run.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "X": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Nine host backends exist in source, but default outputs collide, portability is prompt-translated, and Pi and Hermes are unsupported.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Normal init performs an unpinned dependency upgrade; force-update has no backup or three-way merge; Claude plugin metadata and install commands are stale.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Guards deliberately fail open and are bypassable, generated permissions are broad, and the optional MCP exposes unconstrained path writes with force.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "The project is active and MIT licensed, but alpha status, one broad generator, stale metadata, and no ownership manifest or rollback path raise maintenance cost.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Codex output exists, but it collides with other default backends and lacks a complete secret-read boundary.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 1,
+              "evidenceState": "estimated",
+              "reason": "The default creates 25 skills, multiple always-on documents, hooks, permissions, and host configurations; this is a broad repository control plane.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            }
+          },
+          "score": 56,
+          "bloat": 4,
+          "confidence": "C"
+        },
+        "pi": {
+          "status": "unsupported",
+          "reason": "No Pi backend or package exists at this revision."
+        },
+        "hermes": {
+          "status": "unsupported",
+          "reason": "No Hermes backend or package exists at this revision."
+        },
+        "opencode": {
+          "status": "completed",
+          "adapter": "Generated AGENTS.md, OpenCode rules/skills/config, and Bun hook bridge",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Cross-host scaffolding can save setup work, but default ownership collisions, stale plugin metadata, and destructive updates substantially reduce realized value.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The repo-convention cross-compiler and host-specific settings/hooks are meaningfully different from native harness features.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current source and 74 Python files were statically parsed, but unit dependencies, live evals, host schemas, and installs were not run.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "X": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Nine host backends exist in source, but default outputs collide, portability is prompt-translated, and Pi and Hermes are unsupported.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Normal init performs an unpinned dependency upgrade; force-update has no backup or three-way merge; Claude plugin metadata and install commands are stale.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Guards deliberately fail open and are bypassable, generated permissions are broad, and the optional MCP exposes unconstrained path writes with force.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "The project is active and MIT licensed, but alpha status, one broad generator, stale metadata, and no ownership manifest or rollback path raise maintenance cost.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "OpenCode has a substantial adapter, but it collides on root AGENTS.md and uses best-effort hook translation.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 1,
+              "evidenceState": "estimated",
+              "reason": "The default creates 25 skills, multiple always-on documents, hooks, permissions, and host configurations; this is a broad repository control plane.",
+              "evidence": [
+                "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md"
+              ]
+            }
+          },
+          "score": 56,
+          "bloat": 4,
+          "confidence": "C"
+        }
+      },
+      "combinations": [
+        {
+          "name": "Klaussy plus Agent Repo Standard",
+          "members": [
+            "Klaussy Agents",
+            "Agent Repo Standard"
+          ],
+          "evidenceState": "estimated",
+          "terms": {
+            "scoreA": 56,
+            "scoreB": 68,
+            "synergy": 2,
+            "controlConflict": 20,
+            "contextPenalty": 8,
+            "operationsPenalty": 8
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-klaussy-v0.19.1-quick/combinations/report.md"
+          ],
+          "rationale": "Both want to own root instructions, repository conventions, generated skills, and update policy; Klaussy's default collision behavior makes coexistence especially risky.",
+          "score": 34,
+          "confidence": "C"
+        }
+      ],
+      "findings": [
+        "Default all-host generation has real AGENTS.md and .agents/skills ownership collisions.",
+        "Init always performs an unpinned dependency upgrade; force-update can overwrite broad surfaces without backup or rollback.",
+        "The guards are workflow nudges, not security boundaries, and the MCP can write caller-selected paths."
+      ],
+      "unresolvedFacts": [
+        "Installability, live host compatibility, full unit tests, prompt evals, and E2E behavior were not executed."
+      ],
+      "decision": "Do not adopt Klaussy as the replacement repo standard or sole main plugin at v0.19.1. Re-evaluate only after ownership, reproducibility, rollback, and plugin-metadata fixes.",
+      "removalPlan": "No upstream uninstall or ownership manifest exists; removal requires reviewing and deleting generated files host by host, then restoring customized files from version control.",
+      "provenance": {
+        "harness": "Codex desktop orchestrator with independent method subagents",
+        "model": "Codex desktop default model; exact model version not independently reported",
+        "repositoryRevision": "ce03f937338f270e16b6dd778f584ec2d5a50049",
+        "sandbox": "orchestrator full workspace access; source-review workers read-only against targets",
+        "approvalPolicy": "never",
+        "network": "GitHub clone and metadata only; no live model or provider benchmark",
+        "enabledExtensions": [
+          "agent-eval@personal"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/combinations/report.md": "6f3dcc59231646981c20f2d84a1f0e9bac3f9dad9912918a81f0d3b896ca12a8",
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/replay-check.md": "4e55da1319ee8af3fd2a7c108b0cca313c1e8cd1ac0b3b3a10205f35712ab3d6",
+        "artifacts/2026-07-17-klaussy-v0.19.1-quick/source-review/report.md": "537f68d8693326703909ab22b34f067de7daae79e882ad67263ae9dab531ff5f"
+      },
+      "score": 56,
+      "bloat": 4,
+      "confidence": "C"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "2026-07-17-superpowers-v6.1.1-quick",
+      "startedAt": "2026-07-17T00:17:41.117Z",
+      "finishedAt": "2026-07-17T00:47:41.117Z",
+      "mode": "quick",
+      "status": "completed",
+      "evidenceState": "estimated",
+      "target": {
+        "kind": "plugin",
+        "name": "Superpowers",
+        "source": "https://github.com/obra/superpowers",
+        "version": "v6.1.1-d884ae04edebef577e82ff7c4e143debd0bbec99"
+      },
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The methodology covers planning, TDD, debugging, review, and delivery coherently, but no paired task outcomes were measured.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Most capabilities overlap with native Codex and Claude workflows; the differentiated part is the mandatory end-to-end control policy.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Current source, manifests, and bounded tests were inspected, but the external behavior-eval repository and live harness claims were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "First-party packaging exists for Claude Code, Codex, Pi, OpenCode, and several other hosts; Hermes has no supported adapter.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Many bounded checks passed, but Pi and Antigravity mapping tests failed and Codex packaging assertions were timezone-sensitive.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Core hooks are local and dependency-light, but the optional visual companion executes agent-authored HTML and emits default branding telemetry; workflow skills also exercise broad git and dependency authority.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The project is active, MIT licensed, dependency-light, and broadly tested, but cross-host removal and rollback guidance is incomplete.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Four requested hosts have real adapters, but behavior and startup semantics differ and Hermes is unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 1,
+          "evidenceState": "estimated",
+          "reason": "Plugin Eval estimated a 550-token trigger and a 31,671-token all-skills invocation ceiling; normal selective loading is lower, but the automatic methodology and subagent fan-out remain operationally heavy.",
+          "evidence": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "d884ae04edebef577e82ff7c4e143debd0bbec99",
+          "exactCommand": "bash tests/hooks/test-session-start.sh",
+          "exactCommands": [
+            {
+              "command": "bash tests/hooks/test-session-start.sh",
+              "exitCode": 0
+            },
+            {
+              "command": "bash tests/codex/test-marketplace-manifest.sh",
+              "exitCode": 0
+            },
+            {
+              "command": "bash tests/codex/test-package-codex-plugin.sh",
+              "exitCode": 1
+            },
+            {
+              "command": "TZ=UTC bash tests/codex/test-package-codex-plugin.sh",
+              "exitCode": 1
+            },
+            {
+              "command": "bash tests/opencode/run-tests.sh",
+              "exitCode": 0
+            },
+            {
+              "command": "node tests/pi/test-pi-extension.mjs",
+              "exitCode": 1
+            },
+            {
+              "command": "bash tests/kimi/run-tests.sh",
+              "exitCode": 0
+            },
+            {
+              "command": "bash tests/antigravity/run-tests.sh",
+              "exitCode": 1
+            },
+            {
+              "command": "bash tests/shell-lint/test-lint-shell.sh",
+              "exitCode": 0
+            },
+            {
+              "command": "node tests/brainstorm-server/ws-protocol.test.js",
+              "exitCode": 0
+            },
+            {
+              "command": "node tests/brainstorm-server/helper.test.js",
+              "exitCode": 0
+            },
+            {
+              "command": "node tests/brainstorm-server/browser-launcher.test.js",
+              "exitCode": 0
+            },
+            {
+              "command": "node tests/brainstorm-server/branding.test.js",
+              "exitCode": 0
+            },
+            {
+              "command": "bash tests/brainstorm-server/start-server.test.sh",
+              "exitCode": 0
+            },
+            {
+              "command": "bash tests/brainstorm-server/stop-server.test.sh",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 10015,
+          "metrics": {
+            "boundedCommands": 15,
+            "passedCommands": 11,
+            "failedCommands": 4,
+            "liveHarnesses": 0,
+            "targetDirtyAfter": false
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md": "0b87eff14aa8dfefc5fe71f11970849decb0987e4d59c98fa77489c77759cc37"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "completed",
+          "version": "0.1.0 (plugin 0.1.2)",
+          "exactCommand": "/usr/bin/time -p plugin-eval analyze /tmp/agent-eval-batch-2026-07-17.TkjC06/superpowers --format json --output /tmp/agent-eval-batch-2026-07-17.TkjC06/results/superpowers-plugin-eval.json",
+          "exitCode": 0,
+          "durationMs": 790,
+          "metrics": {
+            "localScore": 8,
+            "grade": "F",
+            "triggerTokens": 550,
+            "invokeTokens": 31671,
+            "deferredTokens": 299162,
+            "interpretationCaveats": 2
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/report.md",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/start.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json": "f88b2822b2966cc2d9737c3c8a9ae8f7517ec74dd0e4c59c9bf976a421c0eeed",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/report.md": "54f3be3a3652d74d90f32b2a9786a137446eddc3fa3180e3eb04e7355d1f813a",
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/start.md": "57613baad634a62963991187a0714d1b9371919ff2d46533003e929a54349b14"
+          }
+        },
+        {
+          "name": "promptfoo",
+          "status": "not-applicable",
+          "skipReason": "No bounded shared task pack, candidate adapter, and deterministic outcome verifier existed for this quick run; no Promptfoo result was fabricated.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "claude-code": {
+          "status": "completed",
+          "adapter": "Native Claude Code plugin and SessionStart hook",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The methodology covers planning, TDD, debugging, review, and delivery coherently, but no paired task outcomes were measured.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Most capabilities overlap with native Codex and Claude workflows; the differentiated part is the mandatory end-to-end control policy.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current source, manifests, and bounded tests were inspected, but the external behavior-eval repository and live harness claims were not run.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+              ]
+            },
+            "X": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "First-party packaging exists for Claude Code, Codex, Pi, OpenCode, and several other hosts; Hermes has no supported adapter.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The Claude hook shape passed bounded tests, although no live Claude behavior run was executed.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Core hooks are local and dependency-light, but the optional visual companion executes agent-authored HTML and emits default branding telemetry; workflow skills also exercise broad git and dependency authority.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The project is active, MIT licensed, dependency-light, and broadly tested, but cross-host removal and rollback guidance is incomplete.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "Claude Code is the most mature and native Superpowers delivery path.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 1,
+              "evidenceState": "estimated",
+              "reason": "Plugin Eval estimated a 550-token trigger and a 31,671-token all-skills invocation ceiling; normal selective loading is lower, but the automatic methodology and subagent fan-out remain operationally heavy.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+              ]
+            }
+          },
+          "score": 70,
+          "bloat": 4,
+          "confidence": "C"
+        },
+        "codex": {
+          "status": "completed",
+          "adapter": "Official Codex plugin package with skills and deliberate hook suppression",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The methodology covers planning, TDD, debugging, review, and delivery coherently, but no paired task outcomes were measured.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Most capabilities overlap with native Codex and Claude workflows; the differentiated part is the mandatory end-to-end control policy.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current source, manifests, and bounded tests were inspected, but the external behavior-eval repository and live harness claims were not run.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+              ]
+            },
+            "X": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "First-party packaging exists for Claude Code, Codex, Pi, OpenCode, and several other hosts; Hermes has no supported adapter.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Many bounded checks passed, but Pi and Antigravity mapping tests failed and Codex packaging assertions were timezone-sensitive.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Core hooks are local and dependency-light, but the optional visual companion executes agent-authored HTML and emits default branding telemetry; workflow skills also exercise broad git and dependency authority.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The project is active, MIT licensed, dependency-light, and broadly tested, but cross-host removal and rollback guidance is incomplete.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Codex has an official plugin package, but its startup behavior intentionally differs from Claude and was not run live.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 1,
+              "evidenceState": "estimated",
+              "reason": "Plugin Eval estimated a 550-token trigger and a 31,671-token all-skills invocation ceiling; normal selective loading is lower, but the automatic methodology and subagent fan-out remain operationally heavy.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+              ]
+            }
+          },
+          "score": 66,
+          "bloat": 4,
+          "confidence": "C"
+        },
+        "pi": {
+          "status": "completed",
+          "adapter": "Pi package with native skills and startup/compaction extension",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The methodology covers planning, TDD, debugging, review, and delivery coherently, but no paired task outcomes were measured.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Most capabilities overlap with native Codex and Claude workflows; the differentiated part is the mandatory end-to-end control policy.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current source, manifests, and bounded tests were inspected, but the external behavior-eval repository and live harness claims were not run.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+              ]
+            },
+            "X": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "First-party packaging exists for Claude Code, Codex, Pi, OpenCode, and several other hosts; Hermes has no supported adapter.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "The Pi lifecycle checks mostly passed, but the release's mapping-reference test failed from source drift.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Core hooks are local and dependency-light, but the optional visual companion executes agent-authored HTML and emits default branding telemetry; workflow skills also exercise broad git and dependency authority.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The project is active, MIT licensed, dependency-light, and broadly tested, but cross-host removal and rollback guidance is incomplete.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Four requested hosts have real adapters, but behavior and startup semantics differ and Hermes is unsupported.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Pi loads native skills selectively and uses a small extension, though the methodology still adds workflow overhead.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+              ]
+            }
+          },
+          "score": 66,
+          "bloat": 3,
+          "confidence": "C"
+        },
+        "hermes": {
+          "status": "unsupported",
+          "reason": "No Hermes package, adapter, or support claim exists at this revision."
+        },
+        "opencode": {
+          "status": "completed",
+          "adapter": "OpenCode plugin with cached bootstrap injection",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The methodology covers planning, TDD, debugging, review, and delivery coherently, but no paired task outcomes were measured.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Most capabilities overlap with native Codex and Claude workflows; the differentiated part is the mandatory end-to-end control policy.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Current source, manifests, and bounded tests were inspected, but the external behavior-eval repository and live harness claims were not run.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+              ]
+            },
+            "X": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "First-party packaging exists for Claude Code, Codex, Pi, OpenCode, and several other hosts; Hermes has no supported adapter.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The dependency-free OpenCode loading and bootstrap-caching tests passed; live integration was not run.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Core hooks are local and dependency-light, but the optional visual companion executes agent-authored HTML and emits default branding telemetry; workflow skills also exercise broad git and dependency authority.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The project is active, MIT licensed, dependency-light, and broadly tested, but cross-host removal and rollback guidance is incomplete.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Four requested hosts have real adapters, but behavior and startup semantics differ and Hermes is unsupported.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Bootstrap caching reduces repeated context injection, while methodology overhead remains.",
+              "evidence": [
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md",
+                "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json"
+              ]
+            }
+          },
+          "score": 70,
+          "bloat": 3,
+          "confidence": "C"
+        }
+      },
+      "combinations": [
+        {
+          "name": "Superpowers plus Taskflow",
+          "members": [
+            "Superpowers",
+            "Taskflow"
+          ],
+          "evidenceState": "estimated",
+          "terms": {
+            "scoreA": 66,
+            "scoreB": 78,
+            "synergy": 3,
+            "controlConflict": 18,
+            "contextPenalty": 8,
+            "operationsPenalty": 8
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/combinations/report.md"
+          ],
+          "rationale": "Both control decomposition, subagents, reviews, and execution; Taskflow adds a runtime while Superpowers adds mandatory methodology.",
+          "score": 47,
+          "confidence": "C"
+        },
+        {
+          "name": "Superpowers plus Klaussy",
+          "members": [
+            "Superpowers",
+            "Klaussy Agents"
+          ],
+          "evidenceState": "estimated",
+          "terms": {
+            "scoreA": 66,
+            "scoreB": 56,
+            "synergy": 2,
+            "controlConflict": 18,
+            "contextPenalty": 9,
+            "operationsPenalty": 8
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-superpowers-v6.1.1-quick/combinations/report.md"
+          ],
+          "rationale": "Two broad automatic control planes compete over planning, skills, hooks, review, and repository workflow.",
+          "score": 33,
+          "confidence": "C"
+        }
+      ],
+      "findings": [
+        "Superpowers is compact in installation size but behaviorally expansive: it is a full control plane, not a small helper.",
+        "Plugin Eval's raw 8/F is not the aggregate score; its hooks finding is likely a false positive and its deferred-token estimate includes source-only files.",
+        "Pi and Antigravity adapter tests failed at the pinned release; no live host or paired outcome run was performed."
+      ],
+      "unresolvedFacts": [
+        "Actual outcome lift, token use per ordinary task, and behavior consistency across supported hosts remain unmeasured."
+      ],
+      "decision": "Do not use Superpowers as the sole always-on main plugin. Import selected skills or run a bounded full-methodology trial in one host.",
+      "removalPlan": "Use the host's plugin/package removal flow and remove any project-local .superpowers artifacts after review; upstream does not provide one complete cross-host rollback guide.",
+      "provenance": {
+        "harness": "Codex desktop orchestrator with independent method subagents",
+        "model": "Codex desktop default model; exact model version not independently reported",
+        "repositoryRevision": "d884ae04edebef577e82ff7c4e143debd0bbec99",
+        "sandbox": "orchestrator full workspace access; source-review workers read-only against targets",
+        "approvalPolicy": "never",
+        "network": "GitHub clone and metadata only; no live model or provider benchmark",
+        "enabledExtensions": [
+          "agent-eval@personal",
+          "plugin-eval@openai-curated"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/combinations/report.md": "e32759c1d40668230a38cbc52e63646ac2e43b7fbac18e9313c7694d565ee8fa",
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/report.md": "54f3be3a3652d74d90f32b2a9786a137446eddc3fa3180e3eb04e7355d1f813a",
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/result.json": "f88b2822b2966cc2d9737c3c8a9ae8f7517ec74dd0e4c59c9bf976a421c0eeed",
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/plugin-eval/start.md": "57613baad634a62963991187a0714d1b9371919ff2d46533003e929a54349b14",
+        "artifacts/2026-07-17-superpowers-v6.1.1-quick/source-review/report.md": "0b87eff14aa8dfefc5fe71f11970849decb0987e4d59c98fa77489c77759cc37"
+      },
+      "score": 66,
+      "bloat": 4,
+      "confidence": "C"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "2026-07-17-taskflow-v0.2.2-quick",
+      "startedAt": "2026-07-17T00:17:41.117Z",
+      "finishedAt": "2026-07-17T00:47:41.117Z",
+      "mode": "quick",
+      "status": "completed",
+      "evidenceState": "estimated",
+      "target": {
+        "kind": "tool",
+        "name": "Taskflow",
+        "source": "https://github.com/heggria/taskflow",
+        "version": "v0.2.2-300da53ea85ef820a49e72827f9f3261f377a9c9"
+      },
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "Taskflow addresses real graph-shaped work with verification, persistence, resume, replay, and recomputation, but no paired outcome benchmark was run.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "A compiled, inspectable multi-agent DAG runtime is materially different from native one-turn subagents.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Source, CI, host adapters, and bounded process-supervisor checks were inspected; full dependencies, live hosts, and model tasks were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "First-party packages exist for Pi, Codex, Claude Code, OpenCode, and Grok; Hermes is unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The runtime has strong supervision and broad CI design, but local full tests were dependency-blocked and docs drift from implemented MCP tools.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Filtered environments and fail-closed host runners are positives, but Pi subagents and every script phase inherit the full parent environment and run state is persisted in cleartext.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The project is active and release automation is careful, but the runtime is large, concentrated in major files, and primarily maintained by one person.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Four requested hosts have explicit delivery packages with meaningful feature differences; Hermes has none.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Intermediate transcripts stay out of host context, but Plugin Eval estimated a 10,323-token Codex invocation and the runtime adds DAG authoring, persistence, MCP, and operational overhead.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "300da53ea85ef820a49e72827f9f3261f377a9c9",
+          "exactCommand": "sh -c 'for f in $(git ls-files \"*.mjs\"); do node --check \"$f\" || exit 1; done'",
+          "exactCommands": [
+            {
+              "command": "git rev-parse HEAD",
+              "exitCode": 0
+            },
+            {
+              "command": "node --conditions=development --experimental-strip-types --test packages/taskflow-core/test/runner-process.test.ts",
+              "exitCode": 1
+            },
+            {
+              "command": "sh -c 'for f in $(git ls-files \"*.mjs\"); do node --check \"$f\" || exit 1; done'",
+              "exitCode": 0
+            },
+            {
+              "command": "sh -c 'git ls-files -z \"*.json\" | xargs -0 -n 1 jq empty'",
+              "exitCode": 0
+            },
+            {
+              "command": "git diff --exit-code -- .",
+              "exitCode": 0
+            },
+            {
+              "command": "pnpm --version",
+              "exitCode": 0
+            }
+          ],
+          "exitCode": 0,
+          "durationMs": 15490,
+          "metrics": {
+            "processTestsPassed": 34,
+            "processTestsFailed": 1,
+            "failureCause": "missing uninstalled typebox peer",
+            "fullSuiteRun": false,
+            "targetDirtyAfter": false
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md": "8bd6fa24796aef3c4f63b9bebdfb2fd2380b753e7106e5d870714cb6eb25ccd2"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "completed",
+          "version": "0.1.0 (plugin 0.1.2)",
+          "exactCommand": "/usr/bin/time -p plugin-eval analyze /tmp/agent-eval-batch-2026-07-17.TkjC06/taskflow/packages/codex-taskflow/plugin --format json --output /tmp/agent-eval-batch-2026-07-17.TkjC06/results/taskflow-plugin-eval.json",
+          "exitCode": 0,
+          "durationMs": 670,
+          "metrics": {
+            "localScore": 49,
+            "grade": "F",
+            "triggerTokens": 218,
+            "invokeTokens": 10323,
+            "deferredTokens": 15682
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/report.md",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/start.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json": "5e3092c72b9b1fdc303c0f851f6a4b528660b2984b43df01fbe8d90ec4bae832",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/report.md": "1d2c6a261ba05a912e496096ec0dc2ba1d1edbca80d792b5484d8c30cfd8c91b",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/start.md": "ab8a57bddbaf54a7a4da76744faa1fa15dca54229f61179bb8ba324906510115"
+          }
+        },
+        {
+          "name": "promptfoo",
+          "status": "not-applicable",
+          "skipReason": "No bounded shared task pack, candidate adapter, and deterministic outcome verifier existed for this quick run; no Promptfoo result was fabricated.",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "claude-code": {
+          "status": "completed",
+          "adapter": "Claude Code plugin plus filtered-environment MCP runner",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "Taskflow addresses real graph-shaped work with verification, persistence, resume, replay, and recomputation, but no paired outcome benchmark was run.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "A compiled, inspectable multi-agent DAG runtime is materially different from native one-turn subagents.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Source, CI, host adapters, and bounded process-supervisor checks were inspected; full dependencies, live hosts, and model tasks were not run.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+              ]
+            },
+            "X": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "First-party packages exist for Pi, Codex, Claude Code, OpenCode, and Grok; Hermes is unsupported.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The runtime has strong supervision and broad CI design, but local full tests were dependency-blocked and docs drift from implemented MCP tools.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Claude children receive a filtered environment and narrow tools, but there is no OS sandbox and unsafe bypass exists explicitly.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "The project is active and release automation is careful, but the runtime is large, concentrated in major files, and primarily maintained by one person.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Four requested hosts have explicit delivery packages with meaningful feature differences; Hermes has none.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Intermediate transcripts stay out of host context, but Plugin Eval estimated a 10,323-token Codex invocation and the runtime adds DAG authoring, persistence, MCP, and operational overhead.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+              ]
+            }
+          },
+          "score": 80,
+          "bloat": 3,
+          "confidence": "C"
+        },
+        "codex": {
+          "status": "completed",
+          "adapter": "Codex plugin plus ephemeral read-only/workspace-write MCP runner",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "Taskflow addresses real graph-shaped work with verification, persistence, resume, replay, and recomputation, but no paired outcome benchmark was run.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "A compiled, inspectable multi-agent DAG runtime is materially different from native one-turn subagents.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Source, CI, host adapters, and bounded process-supervisor checks were inspected; full dependencies, live hosts, and model tasks were not run.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+              ]
+            },
+            "X": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "First-party packages exist for Pi, Codex, Claude Code, OpenCode, and Grok; Hermes is unsupported.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The runtime has strong supervision and broad CI design, but local full tests were dependency-blocked and docs drift from implemented MCP tools.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The Codex runner is ephemeral, clears MCP and user rules, filters the environment, and never requests danger-full-access.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "The project is active and release automation is careful, but the runtime is large, concentrated in major files, and primarily maintained by one person.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Four requested hosts have explicit delivery packages with meaningful feature differences; Hermes has none.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Intermediate transcripts stay out of host context, but Plugin Eval estimated a 10,323-token Codex invocation and the runtime adds DAG authoring, persistence, MCP, and operational overhead.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+              ]
+            }
+          },
+          "score": 82,
+          "bloat": 3,
+          "confidence": "C"
+        },
+        "pi": {
+          "status": "completed",
+          "adapter": "Native Pi extension with richest UI and runtime",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "Taskflow addresses real graph-shaped work with verification, persistence, resume, replay, and recomputation, but no paired outcome benchmark was run.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "A compiled, inspectable multi-agent DAG runtime is materially different from native one-turn subagents.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Source, CI, host adapters, and bounded process-supervisor checks were inspected; full dependencies, live hosts, and model tasks were not run.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+              ]
+            },
+            "X": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "First-party packages exist for Pi, Codex, Claude Code, OpenCode, and Grok; Hermes is unsupported.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The runtime has strong supervision and broad CI design, but local full tests were dependency-blocked and docs drift from implemented MCP tools.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 1,
+              "evidenceState": "estimated",
+              "reason": "Pi is the richest adapter, but subagents inherit the full parent environment and Taskflow adds no OS sandbox.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "The project is active and release automation is careful, but the runtime is large, concentrated in major files, and primarily maintained by one person.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "Pi has Taskflow's richest UI, approvals, detached runs, resume, and applied recompute.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Native integration and isolated transcripts improve context use, though runtime and graph overhead remain.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+              ]
+            }
+          },
+          "score": 80,
+          "bloat": 2,
+          "confidence": "C"
+        },
+        "hermes": {
+          "status": "unsupported",
+          "reason": "No Hermes package, runner, guide, or support claim exists at this revision."
+        },
+        "opencode": {
+          "status": "completed",
+          "adapter": "OpenCode MCP runner and routing skill",
+          "evidenceState": "estimated",
+          "axes": {
+            "V": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "Taskflow addresses real graph-shaped work with verification, persistence, resume, replay, and recomputation, but no paired outcome benchmark was run.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "U": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "A compiled, inspectable multi-agent DAG runtime is materially different from native one-turn subagents.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Source, CI, host adapters, and bounded process-supervisor checks were inspected; full dependencies, live hosts, and model tasks were not run.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+              ]
+            },
+            "X": {
+              "value": 5,
+              "evidenceState": "estimated",
+              "reason": "First-party packages exist for Pi, Codex, Claude Code, OpenCode, and Grok; Hermes is unsupported.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The runtime has strong supervision and broad CI design, but local full tests were dependency-blocked and docs drift from implemented MCP tools.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "S": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Read-only runs default-deny permissions; mutating runs require an explicit unsandboxed opt-in and there is no OS sandbox.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "M": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "The project is active and release automation is careful, but the runtime is large, concentrated in major files, and primarily maintained by one person.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Four requested hosts have explicit delivery packages with meaningful feature differences; Hermes has none.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+              ]
+            },
+            "C": {
+              "value": 2,
+              "evidenceState": "estimated",
+              "reason": "Intermediate transcripts stay out of host context, but Plugin Eval estimated a 10,323-token Codex invocation and the runtime adds DAG authoring, persistence, MCP, and operational overhead.",
+              "evidence": [
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+                "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+              ]
+            }
+          },
+          "score": 80,
+          "bloat": 3,
+          "confidence": "C"
+        }
+      },
+      "combinations": [
+        {
+          "name": "Agent Repo Standard plus Taskflow",
+          "members": [
+            "Agent Repo Standard",
+            "Taskflow"
+          ],
+          "evidenceState": "estimated",
+          "terms": {
+            "scoreA": 68,
+            "scoreB": 78,
+            "synergy": 4,
+            "controlConflict": 2,
+            "contextPenalty": 3,
+            "operationsPenalty": 4
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/combinations/report.md"
+          ],
+          "rationale": "The repo standard owns durable structure while Taskflow is invoked only for explicit graph-shaped runtime work.",
+          "score": 73,
+          "confidence": "C"
+        }
+      ],
+      "findings": [
+        "Taskflow is a real orchestration runtime, not a lean routing skill.",
+        "The strongest fit is graph-shaped work; using it for ordinary single-agent tasks would add unnecessary control-plane cost.",
+        "Pi is functionally richest but has the weakest environment-isolation boundary in the reviewed source."
+      ],
+      "unresolvedFacts": [
+        "No live host, provider-usage, sandbox-escape, or paired outcome benchmark was run."
+      ],
+      "decision": "Adopt Taskflow only for repeatable DAG-shaped work. Prefer Codex for the safest reviewed adapter; use Pi only after fixing or containing environment inheritance.",
+      "removalPlan": "Use each host's documented plugin/package removal path and separately decide whether to retain project-local .pi/taskflows state; Pi removal guidance is missing upstream.",
+      "provenance": {
+        "harness": "Codex desktop orchestrator with independent method subagents",
+        "model": "Codex desktop default model; exact model version not independently reported",
+        "repositoryRevision": "300da53ea85ef820a49e72827f9f3261f377a9c9",
+        "sandbox": "orchestrator full workspace access; source-review workers read-only against targets",
+        "approvalPolicy": "never",
+        "network": "GitHub clone and metadata only; no live model or provider benchmark",
+        "enabledExtensions": [
+          "agent-eval@personal",
+          "plugin-eval@openai-curated"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/combinations/report.md": "639046aba636a59995c4673a4c55fc695dfc4354d79793ca657d74e04ee5fd23",
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/report.md": "1d2c6a261ba05a912e496096ec0dc2ba1d1edbca80d792b5484d8c30cfd8c91b",
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json": "5e3092c72b9b1fdc303c0f851f6a4b528660b2984b43df01fbe8d90ec4bae832",
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/start.md": "ab8a57bddbaf54a7a4da76744faa1fa15dca54229f61179bb8ba324906510115",
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md": "8bd6fa24796aef3c4f63b9bebdfb2fd2380b753e7106e5d870714cb6eb25ccd2"
+      },
+      "score": 78,
+      "bloat": 3,
+      "confidence": "C"
+    },
+    {
+      "schemaVersion": 1,
+      "id": "2026-07-17-agent-eval-self-v1",
+      "startedAt": "2026-07-17T00:05:00Z",
+      "finishedAt": "2026-07-17T00:08:49Z",
+      "mode": "quick",
+      "status": "completed",
+      "evidenceState": "mixed",
+      "target": {
+        "kind": "plugin",
+        "name": "Agent Eval",
+        "source": "/Users/tahabakhit/dev/projects/agents/tools/agent-eval",
+        "version": "1a36c03b85406a07fe74802884a2087c05fd3655"
+      },
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "mixed",
+          "reason": "The workflow completed a real Codex contract smoke and produced a validated offline evidence ledger, but it has not yet demonstrated paired outcome lift.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json",
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "It uniquely reconciles method evidence into per-axis, per-platform, and explicit combination records while keeping evaluator-local scores separate.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 4,
+          "evidenceState": "measured",
+          "reason": "Eighteen deterministic tests and a real Promptfoo contract run exercised evidence gates, artifact verification, and orchestration semantics.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json",
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "X": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "The score model represents five harnesses, but the installed workflow and this run are Codex-native; no Claude Code, Pi, Hermes, or OpenCode adapter ran.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "mixed",
+          "reason": "The implementation passed deterministic tests, fail-closed proof checks, two independent final reviews, and one real contract smoke.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json",
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 4,
+          "evidenceState": "mixed",
+          "reason": "Validated paths, symlink defenses, bounded files, digest pinning, secret-minimized subprocess environments, CSP, and read-only Promptfoo execution are implemented and tested.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json",
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The project has no runtime dependencies and one deterministic core, but the validator-renderer script and comprehensive specification remain sizable.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/plugin-eval/result.json",
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 5,
+          "evidenceState": "mixed",
+          "reason": "The personal Codex plugin installed and enabled successfully, its cache matched source, and the Codex app-server smoke passed.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json",
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Plugin Eval measured a 134-token trigger and 2,014-token invocation, both moderate; its heavy deferred estimate includes repository files that are not always loaded.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-eval-self-v1/plugin-eval/result.json"
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "source-review",
+          "status": "completed",
+          "version": "1a36c03b85406a07fe74802884a2087c05fd3655",
+          "exactCommand": "/usr/bin/time -p sh -c 'npm test && npm run check && npm audit --omit=dev'",
+          "exitCode": 0,
+          "durationMs": 1870,
+          "metrics": {
+            "testsPassed": 18,
+            "testsFailed": 0,
+            "auditVulnerabilities": 0,
+            "finalRequiredReviewFindings": 0,
+            "browserConsoleErrors": 0,
+            "automaticRemoteRequests": 0
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md": "f7dfe70e27e9fd9bb101afcba74ceb4bc6d70466dc45e59e194e490d5229a554"
+          }
+        },
+        {
+          "name": "plugin-eval",
+          "status": "completed",
+          "version": "0.1.0 (plugin 0.1.2)",
+          "exactCommand": "/usr/bin/time -p /opt/homebrew/bin/plugin-eval analyze /Users/tahabakhit/dev/projects/agents/tools/agent-eval --format json --output /tmp/agent-eval-self-run/plugin-eval/result.json",
+          "exitCode": 0,
+          "durationMs": 760,
+          "metrics": {
+            "localScore": 67,
+            "grade": "D",
+            "triggerTokens": 134,
+            "invokeTokens": 2014,
+            "deferredTokens": 28277,
+            "manifestFailures": 2
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-eval-self-v1/plugin-eval/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-eval-self-v1/plugin-eval/result.json": "b782e953c72ddbb725f03629ec7ca6855b16738e21d21399d5f10a6d775ab87a"
+          }
+        },
+        {
+          "name": "promptfoo",
+          "status": "completed",
+          "version": "0.121.19",
+          "exactCommand": "/opt/homebrew/bin/promptfoo validate -c /tmp/agent-eval-self-run/promptfoo/promptfooconfig.yaml && /usr/bin/time -p /opt/homebrew/bin/promptfoo eval -c /tmp/agent-eval-self-run/promptfoo/promptfooconfig.yaml --repeat 1 --no-cache --no-share --max-concurrency 1 --output /tmp/agent-eval-self-run/promptfoo/result.json",
+          "exitCode": 0,
+          "durationMs": 15000,
+          "metrics": {
+            "trials": 1,
+            "passes": 1,
+            "failures": 0,
+            "errors": 0,
+            "tokenTotal": 25354,
+            "cachedTokens": 22912,
+            "evaluationDurationMs": 12450,
+            "purpose": "read-only contract smoke, not paired outcome measurement",
+            "runtimeObserved": true,
+            "platforms": [
+              "codex"
+            ]
+          },
+          "artifactLinks": [
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/promptfooconfig.yaml",
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json"
+          ],
+          "artifactDigests": {
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/promptfooconfig.yaml": "395f457a69e73a12774237f9c99cdc81ea0f7c0292159881740f54a3f9f7623d",
+            "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json": "de0718f1b7b884225ed2ae3eab8508c269fd12fc2325526c7feb757020898321"
+          }
+        },
+        {
+          "name": "harbor",
+          "status": "unavailable",
+          "skipReason": "harbor is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        },
+        {
+          "name": "inspect",
+          "status": "unavailable",
+          "skipReason": "inspect is not on PATH",
+          "metrics": {},
+          "artifactLinks": [],
+          "artifactDigests": {}
+        }
+      ],
+      "platforms": {
+        "codex": {
+          "status": "completed",
+          "adapter": "Promptfoo openai:codex-app-server:gpt-5.4 plus installed Codex plugin",
+          "evidenceState": "mixed",
+          "axes": {
+            "V": {
+              "value": 4,
+              "evidenceState": "mixed",
+              "reason": "The Codex contract smoke passed, but outcome lift is not paired.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json"
+              ]
+            },
+            "U": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "The orchestration and ledger combination is differentiated on Codex.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+              ]
+            },
+            "E": {
+              "value": 4,
+              "evidenceState": "measured",
+              "reason": "The contract and evidence gates were directly exercised.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json"
+              ]
+            },
+            "X": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "The data model is portable, but this adapter is Codex-specific.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+              ]
+            },
+            "R": {
+              "value": 4,
+              "evidenceState": "mixed",
+              "reason": "Installation, tests, and the Codex smoke passed.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json"
+              ]
+            },
+            "S": {
+              "value": 4,
+              "evidenceState": "mixed",
+              "reason": "The Codex run was read-only and proof/path defenses passed tests.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json"
+              ]
+            },
+            "M": {
+              "value": 3,
+              "evidenceState": "estimated",
+              "reason": "Dependency-free, with one sizable core script.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md"
+              ]
+            },
+            "F": {
+              "value": 5,
+              "evidenceState": "mixed",
+              "reason": "The plugin is installed, enabled, hash-matched, and smoke-tested in Codex.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json"
+              ]
+            },
+            "C": {
+              "value": 4,
+              "evidenceState": "estimated",
+              "reason": "Trigger and invocation budgets were moderate.",
+              "evidence": [
+                "artifacts/2026-07-17-agent-eval-self-v1/plugin-eval/result.json"
+              ]
+            }
+          },
+          "score": 79,
+          "bloat": 1,
+          "confidence": "B"
+        },
+        "claude-code": {
+          "status": "unsupported",
+          "reason": "Version 0.1 is packaged as a Codex plugin and no Claude Code adapter ran."
+        },
+        "pi": {
+          "status": "unsupported",
+          "reason": "No Pi installation or behavioral adapter exists in version 0.1."
+        },
+        "hermes": {
+          "status": "unsupported",
+          "reason": "No Hermes installation or behavioral adapter exists in version 0.1."
+        },
+        "opencode": {
+          "status": "unsupported",
+          "reason": "No OpenCode installation or behavioral adapter exists in version 0.1."
+        }
+      },
+      "combinations": [],
+      "findings": [
+        "The final Promptfoo contract smoke passed 1 of 1 trials with deterministic structural and JavaScript assertions.",
+        "Plugin Eval scored 67/D, primarily because a private local plugin intentionally lacks public privacy and terms URLs; this method score is not the aggregate score.",
+        "All 18 deterministic tests, audit, core review, and browser review passed with no remaining required findings.",
+        "Cross-platform and paired outcome value remain unmeasured."
+      ],
+      "unresolvedFacts": [
+        "Outcome lift versus native Codex behavior has not been measured with paired repeated tasks.",
+        "Claude Code, Pi, Hermes, and OpenCode adapters have not been implemented or run.",
+        "Measured A+B combinations remain blocked until a four-way adapter exists."
+      ],
+      "decision": "Use Agent Eval now for Codex-local, evidence-labeled evaluations; do not treat this self-run as cross-harness outcome proof.",
+      "removalPlan": "Remove agent-eval@personal and the ~/plugins/agent-eval symlink; canonical JSON remains in this repository.",
+      "provenance": {
+        "harness": "Codex desktop orchestrator with method subagents",
+        "model": "gpt-5.4 for Promptfoo Codex app-server smoke",
+        "repositoryRevision": "1a36c03b85406a07fe74802884a2087c05fd3655",
+        "sandbox": "orchestrator full workspace access; Promptfoo agent read-only",
+        "approvalPolicy": "never",
+        "network": "provider API enabled; Promptfoo agent network access disabled",
+        "enabledExtensions": [
+          "agent-eval@personal",
+          "plugin-eval@openai-curated"
+        ]
+      },
+      "artifactDigests": {
+        "artifacts/2026-07-17-agent-eval-self-v1/plugin-eval/result.json": "b782e953c72ddbb725f03629ec7ca6855b16738e21d21399d5f10a6d775ab87a",
+        "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/promptfooconfig.yaml": "395f457a69e73a12774237f9c99cdc81ea0f7c0292159881740f54a3f9f7623d",
+        "artifacts/2026-07-17-agent-eval-self-v1/promptfoo/result.json": "de0718f1b7b884225ed2ae3eab8508c269fd12fc2325526c7feb757020898321",
+        "artifacts/2026-07-17-agent-eval-self-v1/source-review/report.md": "f7dfe70e27e9fd9bb101afcba74ceb4bc6d70466dc45e59e194e490d5229a554"
+      },
+      "score": 77,
+      "bloat": 1,
+      "confidence": "B"
+    }
+  ]
+}

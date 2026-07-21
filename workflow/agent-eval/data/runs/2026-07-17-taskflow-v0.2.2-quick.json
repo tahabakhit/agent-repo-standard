@@ -1,0 +1,569 @@
+{
+  "schemaVersion": 1,
+  "id": "2026-07-17-taskflow-v0.2.2-quick",
+  "startedAt": "2026-07-17T00:17:41.117Z",
+  "finishedAt": "2026-07-17T00:47:41.117Z",
+  "mode": "quick",
+  "status": "completed",
+  "evidenceState": "estimated",
+  "target": {
+    "kind": "tool",
+    "name": "Taskflow",
+    "source": "https://github.com/heggria/taskflow",
+    "version": "v0.2.2-300da53ea85ef820a49e72827f9f3261f377a9c9"
+  },
+  "axes": {
+    "V": {
+      "value": 5,
+      "evidenceState": "estimated",
+      "reason": "Taskflow addresses real graph-shaped work with verification, persistence, resume, replay, and recomputation, but no paired outcome benchmark was run.",
+      "evidence": [
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+      ]
+    },
+    "U": {
+      "value": 5,
+      "evidenceState": "estimated",
+      "reason": "A compiled, inspectable multi-agent DAG runtime is materially different from native one-turn subagents.",
+      "evidence": [
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+      ]
+    },
+    "E": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Source, CI, host adapters, and bounded process-supervisor checks were inspected; full dependencies, live hosts, and model tasks were not run.",
+      "evidence": [
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+      ]
+    },
+    "X": {
+      "value": 5,
+      "evidenceState": "estimated",
+      "reason": "First-party packages exist for Pi, Codex, Claude Code, OpenCode, and Grok; Hermes is unsupported.",
+      "evidence": [
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+      ]
+    },
+    "R": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "The runtime has strong supervision and broad CI design, but local full tests were dependency-blocked and docs drift from implemented MCP tools.",
+      "evidence": [
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+      ]
+    },
+    "S": {
+      "value": 2,
+      "evidenceState": "estimated",
+      "reason": "Filtered environments and fail-closed host runners are positives, but Pi subagents and every script phase inherit the full parent environment and run state is persisted in cleartext.",
+      "evidence": [
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+      ]
+    },
+    "M": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "The project is active and release automation is careful, but the runtime is large, concentrated in major files, and primarily maintained by one person.",
+      "evidence": [
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+      ]
+    },
+    "F": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "Four requested hosts have explicit delivery packages with meaningful feature differences; Hermes has none.",
+      "evidence": [
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+      ]
+    },
+    "C": {
+      "value": 2,
+      "evidenceState": "estimated",
+      "reason": "Intermediate transcripts stay out of host context, but Plugin Eval estimated a 10,323-token Codex invocation and the runtime adds DAG authoring, persistence, MCP, and operational overhead.",
+      "evidence": [
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+      ]
+    }
+  },
+  "methods": [
+    {
+      "name": "source-review",
+      "status": "completed",
+      "version": "300da53ea85ef820a49e72827f9f3261f377a9c9",
+      "exactCommand": "sh -c 'for f in $(git ls-files \"*.mjs\"); do node --check \"$f\" || exit 1; done'",
+      "exactCommands": [
+        {"command": "git rev-parse HEAD", "exitCode": 0},
+        {"command": "node --conditions=development --experimental-strip-types --test packages/taskflow-core/test/runner-process.test.ts", "exitCode": 1},
+        {"command": "sh -c 'for f in $(git ls-files \"*.mjs\"); do node --check \"$f\" || exit 1; done'", "exitCode": 0},
+        {"command": "sh -c 'git ls-files -z \"*.json\" | xargs -0 -n 1 jq empty'", "exitCode": 0},
+        {"command": "git diff --exit-code -- .", "exitCode": 0},
+        {"command": "pnpm --version", "exitCode": 0}
+      ],
+      "exitCode": 0,
+      "durationMs": 15490,
+      "metrics": {
+        "processTestsPassed": 34,
+        "processTestsFailed": 1,
+        "failureCause": "missing uninstalled typebox peer",
+        "fullSuiteRun": false,
+        "targetDirtyAfter": false
+      },
+      "artifactLinks": [
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+      ],
+      "artifactDigests": {
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md": "8bd6fa24796aef3c4f63b9bebdfb2fd2380b753e7106e5d870714cb6eb25ccd2"
+      }
+    },
+    {
+      "name": "plugin-eval",
+      "status": "completed",
+      "version": "0.1.0 (plugin 0.1.2)",
+      "exactCommand": "/usr/bin/time -p plugin-eval analyze /tmp/agent-eval-batch-2026-07-17.TkjC06/taskflow/packages/codex-taskflow/plugin --format json --output /tmp/agent-eval-batch-2026-07-17.TkjC06/results/taskflow-plugin-eval.json",
+      "exitCode": 0,
+      "durationMs": 670,
+      "metrics": {
+        "localScore": 49,
+        "grade": "F",
+        "triggerTokens": 218,
+        "invokeTokens": 10323,
+        "deferredTokens": 15682
+      },
+      "artifactLinks": [
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json",
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/report.md",
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/start.md"
+      ],
+      "artifactDigests": {
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json": "5e3092c72b9b1fdc303c0f851f6a4b528660b2984b43df01fbe8d90ec4bae832",
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/report.md": "1d2c6a261ba05a912e496096ec0dc2ba1d1edbca80d792b5484d8c30cfd8c91b",
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/start.md": "ab8a57bddbaf54a7a4da76744faa1fa15dca54229f61179bb8ba324906510115"
+      }
+    },
+    {
+      "name": "promptfoo",
+      "status": "not-applicable",
+      "skipReason": "No bounded shared task pack, candidate adapter, and deterministic outcome verifier existed for this quick run; no Promptfoo result was fabricated.",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "harbor",
+      "status": "unavailable",
+      "skipReason": "harbor is not on PATH",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "inspect",
+      "status": "unavailable",
+      "skipReason": "inspect is not on PATH",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    }
+  ],
+  "platforms": {
+    "claude-code": {
+      "status": "completed",
+      "adapter": "Claude Code plugin plus filtered-environment MCP runner",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "Taskflow addresses real graph-shaped work with verification, persistence, resume, replay, and recomputation, but no paired outcome benchmark was run.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "A compiled, inspectable multi-agent DAG runtime is materially different from native one-turn subagents.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Source, CI, host adapters, and bounded process-supervisor checks were inspected; full dependencies, live hosts, and model tasks were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "First-party packages exist for Pi, Codex, Claude Code, OpenCode, and Grok; Hermes is unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The runtime has strong supervision and broad CI design, but local full tests were dependency-blocked and docs drift from implemented MCP tools.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Claude children receive a filtered environment and narrow tools, but there is no OS sandbox and unsafe bypass exists explicitly.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The project is active and release automation is careful, but the runtime is large, concentrated in major files, and primarily maintained by one person.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Four requested hosts have explicit delivery packages with meaningful feature differences; Hermes has none.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Intermediate transcripts stay out of host context, but Plugin Eval estimated a 10,323-token Codex invocation and the runtime adds DAG authoring, persistence, MCP, and operational overhead.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+          ]
+        }
+      },
+      "score": 80,
+      "bloat": 3,
+      "confidence": "C"
+    },
+    "codex": {
+      "status": "completed",
+      "adapter": "Codex plugin plus ephemeral read-only/workspace-write MCP runner",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "Taskflow addresses real graph-shaped work with verification, persistence, resume, replay, and recomputation, but no paired outcome benchmark was run.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "A compiled, inspectable multi-agent DAG runtime is materially different from native one-turn subagents.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Source, CI, host adapters, and bounded process-supervisor checks were inspected; full dependencies, live hosts, and model tasks were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "First-party packages exist for Pi, Codex, Claude Code, OpenCode, and Grok; Hermes is unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The runtime has strong supervision and broad CI design, but local full tests were dependency-blocked and docs drift from implemented MCP tools.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The Codex runner is ephemeral, clears MCP and user rules, filters the environment, and never requests danger-full-access.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The project is active and release automation is careful, but the runtime is large, concentrated in major files, and primarily maintained by one person.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Four requested hosts have explicit delivery packages with meaningful feature differences; Hermes has none.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Intermediate transcripts stay out of host context, but Plugin Eval estimated a 10,323-token Codex invocation and the runtime adds DAG authoring, persistence, MCP, and operational overhead.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+          ]
+        }
+      },
+      "score": 82,
+      "bloat": 3,
+      "confidence": "C"
+    },
+    "pi": {
+      "status": "completed",
+      "adapter": "Native Pi extension with richest UI and runtime",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "Taskflow addresses real graph-shaped work with verification, persistence, resume, replay, and recomputation, but no paired outcome benchmark was run.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "A compiled, inspectable multi-agent DAG runtime is materially different from native one-turn subagents.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Source, CI, host adapters, and bounded process-supervisor checks were inspected; full dependencies, live hosts, and model tasks were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "First-party packages exist for Pi, Codex, Claude Code, OpenCode, and Grok; Hermes is unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The runtime has strong supervision and broad CI design, but local full tests were dependency-blocked and docs drift from implemented MCP tools.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 1,
+          "evidenceState": "estimated",
+          "reason": "Pi is the richest adapter, but subagents inherit the full parent environment and Taskflow adds no OS sandbox.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The project is active and release automation is careful, but the runtime is large, concentrated in major files, and primarily maintained by one person.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "Pi has Taskflow's richest UI, approvals, detached runs, resume, and applied recompute.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Native integration and isolated transcripts improve context use, though runtime and graph overhead remain.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+          ]
+        }
+      },
+      "score": 80,
+      "bloat": 2,
+      "confidence": "C"
+    },
+    "hermes": {
+      "status": "unsupported",
+      "reason": "No Hermes package, runner, guide, or support claim exists at this revision."
+    },
+    "opencode": {
+      "status": "completed",
+      "adapter": "OpenCode MCP runner and routing skill",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "Taskflow addresses real graph-shaped work with verification, persistence, resume, replay, and recomputation, but no paired outcome benchmark was run.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "A compiled, inspectable multi-agent DAG runtime is materially different from native one-turn subagents.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Source, CI, host adapters, and bounded process-supervisor checks were inspected; full dependencies, live hosts, and model tasks were not run.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+          ]
+        },
+        "X": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "First-party packages exist for Pi, Codex, Claude Code, OpenCode, and Grok; Hermes is unsupported.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The runtime has strong supervision and broad CI design, but local full tests were dependency-blocked and docs drift from implemented MCP tools.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "Read-only runs default-deny permissions; mutating runs require an explicit unsandboxed opt-in and there is no OS sandbox.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The project is active and release automation is careful, but the runtime is large, concentrated in major files, and primarily maintained by one person.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Four requested hosts have explicit delivery packages with meaningful feature differences; Hermes has none.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Intermediate transcripts stay out of host context, but Plugin Eval estimated a 10,323-token Codex invocation and the runtime adds DAG authoring, persistence, MCP, and operational overhead.",
+          "evidence": [
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md",
+            "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json"
+          ]
+        }
+      },
+      "score": 80,
+      "bloat": 3,
+      "confidence": "C"
+    }
+  },
+  "combinations": [
+    {
+      "name": "Agent Repo Standard plus Taskflow",
+      "members": [
+        "Agent Repo Standard",
+        "Taskflow"
+      ],
+      "evidenceState": "estimated",
+      "terms": {
+        "scoreA": 68,
+        "scoreB": 78,
+        "synergy": 4,
+        "controlConflict": 2,
+        "contextPenalty": 3,
+        "operationsPenalty": 4
+      },
+      "artifactLinks": [
+        "artifacts/2026-07-17-taskflow-v0.2.2-quick/combinations/report.md"
+      ],
+      "rationale": "The repo standard owns durable structure while Taskflow is invoked only for explicit graph-shaped runtime work.",
+      "score": 73,
+      "confidence": "C"
+    }
+  ],
+  "findings": [
+    "Taskflow is a real orchestration runtime, not a lean routing skill.",
+    "The strongest fit is graph-shaped work; using it for ordinary single-agent tasks would add unnecessary control-plane cost.",
+    "Pi is functionally richest but has the weakest environment-isolation boundary in the reviewed source."
+  ],
+  "unresolvedFacts": [
+    "No live host, provider-usage, sandbox-escape, or paired outcome benchmark was run."
+  ],
+  "decision": "Adopt Taskflow only for repeatable DAG-shaped work. Prefer Codex for the safest reviewed adapter; use Pi only after fixing or containing environment inheritance.",
+  "removalPlan": "Use each host's documented plugin/package removal path and separately decide whether to retain project-local .pi/taskflows state; Pi removal guidance is missing upstream.",
+  "provenance": {
+    "harness": "Codex desktop orchestrator with independent method subagents",
+    "model": "Codex desktop default model; exact model version not independently reported",
+    "repositoryRevision": "300da53ea85ef820a49e72827f9f3261f377a9c9",
+    "sandbox": "orchestrator full workspace access; source-review workers read-only against targets",
+    "approvalPolicy": "never",
+    "network": "GitHub clone and metadata only; no live model or provider benchmark",
+    "enabledExtensions": [
+      "agent-eval@personal",
+      "plugin-eval@openai-curated"
+    ]
+  },
+  "artifactDigests": {
+    "artifacts/2026-07-17-taskflow-v0.2.2-quick/combinations/report.md": "639046aba636a59995c4673a4c55fc695dfc4354d79793ca657d74e04ee5fd23",
+    "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/report.md": "1d2c6a261ba05a912e496096ec0dc2ba1d1edbca80d792b5484d8c30cfd8c91b",
+    "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/result.json": "5e3092c72b9b1fdc303c0f851f6a4b528660b2984b43df01fbe8d90ec4bae832",
+    "artifacts/2026-07-17-taskflow-v0.2.2-quick/plugin-eval/start.md": "ab8a57bddbaf54a7a4da76744faa1fa15dca54229f61179bb8ba324906510115",
+    "artifacts/2026-07-17-taskflow-v0.2.2-quick/source-review/report.md": "8bd6fa24796aef3c4f63b9bebdfb2fd2380b753e7106e5d870714cb6eb25ccd2"
+  },
+  "score": 78,
+  "bloat": 3,
+  "confidence": "C"
+}

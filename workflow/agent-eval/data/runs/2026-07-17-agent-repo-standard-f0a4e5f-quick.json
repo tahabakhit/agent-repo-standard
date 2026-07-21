@@ -1,0 +1,439 @@
+{
+  "schemaVersion": 1,
+  "id": "2026-07-17-agent-repo-standard-f0a4e5f-quick",
+  "startedAt": "2026-07-17T00:17:41.117Z",
+  "finishedAt": "2026-07-17T00:47:41.117Z",
+  "mode": "quick",
+  "status": "completed",
+  "evidenceState": "estimated",
+  "target": {
+    "kind": "repository-template",
+    "name": "Agent Repo Standard",
+    "source": "https://github.com/tahabakhit/agent-repo-standard",
+    "version": "f0a4e5f9b836ff87e43d47577c57281d7d0f4b21"
+  },
+  "axes": {
+    "V": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "The AGENTS.md, Diataxis, and MADR composition remains valuable, but the documented Copier path renders stale content and the advertised update path fails.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+      ]
+    },
+    "U": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "A host-neutral committed documentation and decision spine adds durable value beyond any one coding harness.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+      ]
+    },
+    "E": {
+      "value": 4,
+      "evidenceState": "estimated",
+      "reason": "The normal verifier passed and direct consumer, update, quoting, ShellCheck, and render probes exposed concrete failures in the shipped workflow.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+      ]
+    },
+    "X": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "The content is host-neutral and Codex, Hermes, and Claude loading paths are evidenced, but the generator is POSIX-specific and Pi/OpenCode fit is not established.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+      ]
+    },
+    "R": {
+      "value": 2,
+      "evidenceState": "estimated",
+      "reason": "The documented copy command selects an eight-commit-old tag, Copier update lacks an answers file, and the verifier misses consumer-path and ignore-assertion defects.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+      ]
+    },
+    "S": {
+      "value": 2,
+      "evidenceState": "estimated",
+      "reason": "Users are told to grant Copier trust while shell tasks interpolate unsanitized answers; a normal apostrophe already breaks rendering and hostile values could reach shell execution.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+      ]
+    },
+    "M": {
+      "value": 2,
+      "evidenceState": "estimated",
+      "reason": "The repo is intentionally small, but it has no license, no working update contract, no ownership manifest, and no current release tag containing HEAD fixes.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+      ]
+    },
+    "F": {
+      "value": 3,
+      "evidenceState": "estimated",
+      "reason": "Codex, Hermes, and Claude have clear instruction-loading paths; OpenCode and Pi are not verified and native Windows generation is unsupported.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+      ]
+    },
+    "C": {
+      "value": 5,
+      "evidenceState": "estimated",
+      "reason": "A current render adds only a 2.9 KB AGENTS.md and one-line Claude include, with no skills, hooks, MCP server, telemetry, or runtime daemon.",
+      "evidence": [
+        "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+      ]
+    }
+  },
+  "methods": [
+    {
+      "name": "source-review",
+      "status": "completed",
+      "version": "f0a4e5f9b836ff87e43d47577c57281d7d0f4b21",
+      "exactCommand": "/usr/bin/time -p bash tests/verify-template.sh",
+      "exactCommands": [
+        {"command": "/usr/bin/time -p bash tests/verify-template.sh", "exitCode": 0},
+        {"command": "/usr/bin/time -p bash -n bin/new-repo.sh tests/verify-template.sh", "exitCode": 0},
+        {"command": "/usr/bin/time -p git diff --check", "exitCode": 0},
+        {"command": "/usr/bin/time -p shellcheck bin/new-repo.sh tests/verify-template.sh", "exitCode": 1},
+        {"command": "uvx --from copier copier copy --trust --defaults --quiet gh:tahabakhit/agent-repo-standard /tmp/agent-repo-standard-render", "exitCode": 0},
+        {"command": "uvx --from copier copier copy --vcs-ref=HEAD --trust --defaults --quiet gh:tahabakhit/agent-repo-standard /tmp/agent-repo-standard-render-head", "exitCode": 0},
+        {"command": "uvx --from copier copier copy --trust --defaults --quiet --data description=\"Owner's library\" gh:tahabakhit/agent-repo-standard /tmp/agent-repo-standard-apostrophe", "exitCode": 1},
+        {"command": "uvx --from copier copier update --trust --defaults --quiet /tmp/agent-repo-standard-render", "exitCode": 1}
+      ],
+      "exitCode": 0,
+      "durationMs": 7130,
+      "metrics": {
+        "profileVerifierPassed": true,
+        "consumerTagBehindCommits": 8,
+        "copierUpdatePassed": false,
+        "normalApostropheRenderPassed": false,
+        "shellcheckActionableFindings": 3,
+        "targetDirtyAfter": false
+      },
+      "artifactLinks": [
+        "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+      ],
+      "artifactDigests": {
+        "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md": "25cbbad6ff70c6ebef414f1e2ad1eb44cfe921acc4e48195bc69f6b4f4960ec1"
+      }
+    },
+    {
+      "name": "plugin-eval",
+      "status": "not-applicable",
+      "skipReason": "This is a repository template, not a local Codex skill or .codex-plugin plugin.",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "promptfoo",
+      "status": "not-applicable",
+      "skipReason": "No bounded shared task pack, candidate adapter, and deterministic outcome verifier existed for this quick run; no Promptfoo result was fabricated.",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "harbor",
+      "status": "unavailable",
+      "skipReason": "harbor is not on PATH",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    },
+    {
+      "name": "inspect",
+      "status": "unavailable",
+      "skipReason": "inspect is not on PATH",
+      "metrics": {},
+      "artifactLinks": [],
+      "artifactDigests": {}
+    }
+  ],
+  "platforms": {
+    "claude-code": {
+      "status": "completed",
+      "adapter": "Generated one-line CLAUDE.md includes the shared AGENTS.md",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The AGENTS.md, Diataxis, and MADR composition remains valuable, but the documented Copier path renders stale content and the advertised update path fails.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "A host-neutral committed documentation and decision spine adds durable value beyond any one coding harness.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The normal verifier passed and direct consumer, update, quoting, ShellCheck, and render probes exposed concrete failures in the shipped workflow.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "X": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The content is host-neutral and Codex, Hermes, and Claude loading paths are evidenced, but the generator is POSIX-specific and Pi/OpenCode fit is not established.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "The documented copy command selects an eight-commit-old tag, Copier update lacks an answers file, and the verifier misses consumer-path and ignore-assertion defects.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Users are told to grant Copier trust while shell tasks interpolate unsanitized answers; a normal apostrophe already breaks rendering and hostile values could reach shell execution.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "The repo is intentionally small, but it has no license, no working update contract, no ownership manifest, and no current release tag containing HEAD fixes.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "Claude loads the shared standard through a one-line include without duplicating context.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "A current render adds only a 2.9 KB AGENTS.md and one-line Claude include, with no skills, hooks, MCP server, telemetry, or runtime daemon.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        }
+      },
+      "score": 70,
+      "bloat": 0,
+      "confidence": "C"
+    },
+    "codex": {
+      "status": "completed",
+      "adapter": "Codex natively auto-loads AGENTS.md",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The AGENTS.md, Diataxis, and MADR composition remains valuable, but the documented Copier path renders stale content and the advertised update path fails.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "A host-neutral committed documentation and decision spine adds durable value beyond any one coding harness.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The normal verifier passed and direct consumer, update, quoting, ShellCheck, and render probes exposed concrete failures in the shipped workflow.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "X": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The content is host-neutral and Codex, Hermes, and Claude loading paths are evidenced, but the generator is POSIX-specific and Pi/OpenCode fit is not established.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "The documented copy command selects an eight-commit-old tag, Copier update lacks an answers file, and the verifier misses consumer-path and ignore-assertion defects.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Users are told to grant Copier trust while shell tasks interpolate unsanitized answers; a normal apostrophe already breaks rendering and hostile values could reach shell execution.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "The repo is intentionally small, but it has no license, no working update contract, no ownership manifest, and no current release tag containing HEAD fixes.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "AGENTS.md is Codex's native repository instruction surface and the rendered context is lean.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "A current render adds only a 2.9 KB AGENTS.md and one-line Claude include, with no skills, hooks, MCP server, telemetry, or runtime daemon.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        }
+      },
+      "score": 72,
+      "bloat": 0,
+      "confidence": "C"
+    },
+    "pi": {
+      "status": "unsupported",
+      "reason": "The repository does not document Pi and no native AGENTS.md loading evidence was found in Pi's source search."
+    },
+    "hermes": {
+      "status": "completed",
+      "adapter": "Hermes natively auto-loads AGENTS.md",
+      "evidenceState": "estimated",
+      "axes": {
+        "V": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The AGENTS.md, Diataxis, and MADR composition remains valuable, but the documented Copier path renders stale content and the advertised update path fails.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "U": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "A host-neutral committed documentation and decision spine adds durable value beyond any one coding harness.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "E": {
+          "value": 4,
+          "evidenceState": "estimated",
+          "reason": "The normal verifier passed and direct consumer, update, quoting, ShellCheck, and render probes exposed concrete failures in the shipped workflow.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "X": {
+          "value": 3,
+          "evidenceState": "estimated",
+          "reason": "The content is host-neutral and Codex, Hermes, and Claude loading paths are evidenced, but the generator is POSIX-specific and Pi/OpenCode fit is not established.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "R": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "The documented copy command selects an eight-commit-old tag, Copier update lacks an answers file, and the verifier misses consumer-path and ignore-assertion defects.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "S": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "Users are told to grant Copier trust while shell tasks interpolate unsanitized answers; a normal apostrophe already breaks rendering and hostile values could reach shell execution.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "M": {
+          "value": 2,
+          "evidenceState": "estimated",
+          "reason": "The repo is intentionally small, but it has no license, no working update contract, no ownership manifest, and no current release tag containing HEAD fixes.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "F": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "Hermes officially loads AGENTS.md, so the standard needs no Hermes-specific adapter.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        },
+        "C": {
+          "value": 5,
+          "evidenceState": "estimated",
+          "reason": "A current render adds only a 2.9 KB AGENTS.md and one-line Claude include, with no skills, hooks, MCP server, telemetry, or runtime daemon.",
+          "evidence": [
+            "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md"
+          ]
+        }
+      },
+      "score": 72,
+      "bloat": 0,
+      "confidence": "C"
+    },
+    "opencode": {
+      "status": "not-run",
+      "reason": "The repository generates no OpenCode adapter and this lane did not verify current OpenCode AGENTS.md loading behavior."
+    }
+  },
+  "combinations": [],
+  "findings": [
+    "The conceptual standard is lean and useful, but the current Copier implementation is not a safe default workflow.",
+    "The documented copy command selects stale v1.0.10, while the advertised update command fails because no answers file is generated.",
+    "Trusted shell tasks interpolate unsanitized answers and can clobber brownfield files outside Copier's normal merge handling."
+  ],
+  "unresolvedFacts": [
+    "Native Windows generation, remote gh: rendering, brownfield adoption, OpenCode loading, and adversarial shell payloads were not executed."
+  ],
+  "decision": "Keep the Repo Standard concept, but stop recommending the current Copier command until tag selection, answers/update support, shell quoting, brownfield safety, verifier gaps, and licensing are fixed.",
+  "removalPlan": "For a generated repository, use version control to remove or restore the known scaffold files; there is no generated-file ownership manifest or automated uninstall path.",
+  "provenance": {
+    "harness": "Codex desktop orchestrator with independent method subagents",
+    "model": "Codex desktop default model; exact model version not independently reported",
+    "repositoryRevision": "f0a4e5f9b836ff87e43d47577c57281d7d0f4b21",
+    "sandbox": "orchestrator full workspace access; source-review workers read-only against targets",
+    "approvalPolicy": "never",
+    "network": "GitHub clone and metadata only; no live model or provider benchmark",
+    "enabledExtensions": [
+      "agent-eval@personal"
+    ]
+  },
+  "artifactDigests": {
+    "artifacts/2026-07-17-agent-repo-standard-f0a4e5f-quick/source-review/report.md": "25cbbad6ff70c6ebef414f1e2ad1eb44cfe921acc4e48195bc69f6b4f4960ec1"
+  },
+  "score": 68,
+  "bloat": 0,
+  "confidence": "C"
+}
