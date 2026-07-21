@@ -18,4 +18,3 @@ is weaker because only self-review was available.
 For code, use [test design](references/tests.md) and
 [mocking](references/mocking.md) only where they improve observable evidence;
 TDD is not mandatory.
-

@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tiered-hermes"
+version = "0.1.0"
+description = "Tiered memory provider for Hermes Agent — coordinates Mnemosyne L1, Hindsight L2, MCP L3, and LLM Wiki L4"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "mnemosyne-hermes>=0.3.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+hindsight = ["hindsight-memory>=0.1.0"]
+mcp = ["mcp>=1.0"]
+wiki = ["nvk-llm-wiki>=0.1.0"]
+all = ["tiered-hermes[hindsight,mcp,wiki]"]
+
+[project.entry-points."hermes_agent.memory_providers"]
+tiered = "tiered_hermes:register"
+
+[project.scripts]
+tiered-hermes = "tiered_hermes.install:main"
+
+[tool.setuptools.packages.find]
+include = ["tiered_hermes*"]

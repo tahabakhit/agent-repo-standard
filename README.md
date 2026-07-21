@@ -8,6 +8,8 @@ tag `legacy-fixed-v1.0.11` at commit `9feb596`.
 
 - [`harness/`](harness/) — adaptive repository harness and `asturlab-scaffold`
 - [`workflow/`](workflow/) — inquiry, design, orchestration, assurance, and evaluation
+- [`storage/synology-mcp/`](storage/synology-mcp/) — portable read-only DSM MCP adapter
+- [`agents/tiered-hermes/`](agents/tiered-hermes/) — optional portable Hermes memory provider
 
 The historical fixed Copier generator was removed from the current branch after
 the compatibility tag. Retrieve it from that tag only; it is not a current

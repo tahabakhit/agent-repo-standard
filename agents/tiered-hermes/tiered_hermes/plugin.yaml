@@ -1,0 +1,3 @@
+name: tiered
+description: "Tiered memory for Hermes — coordinates Mnemosyne L1, Hindsight L2, MCP L3, and LLM Wiki L4"
+version: "0.1.0"

@@ -4,4 +4,3 @@ interface:
   default_prompt: "Use $asturlab-inquire to clarify this idea into accepted requirements and evidence."
 policy:
   allow_implicit_invocation: false
-

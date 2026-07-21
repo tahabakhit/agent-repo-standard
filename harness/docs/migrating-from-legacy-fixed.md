@@ -13,4 +13,3 @@ valid custom structures and do not imply a Copier update path.
 Historical generated repositories remain independent. Do not retrieve the tagged
 generator and run it over a non-empty repository. The compatibility tag is a
 recovery and provenance boundary, not a current interface.
-

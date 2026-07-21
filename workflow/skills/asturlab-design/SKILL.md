@@ -16,4 +16,3 @@ research. Make assumptions explicit and identify blockers. For software module
 design, use [deep modules](references/deep-modules.md),
 [deepening](references/deepening.md), and
 [design it twice](references/design-it-twice.md) when relevant.
-

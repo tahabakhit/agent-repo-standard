@@ -4,4 +4,3 @@ interface:
   default_prompt: "Use $asturlab-workflow to route this objective from its current state to verified completion."
 policy:
   allow_implicit_invocation: false
-

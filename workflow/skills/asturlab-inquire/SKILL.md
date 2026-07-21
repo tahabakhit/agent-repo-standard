@@ -14,4 +14,3 @@ Produce a concise success contract covering purpose, actors, objective, scope,
 non-goals, authority boundaries, acceptance criteria, evidence, risks, and open
 blockers. Research only named uncertainties. Do not smuggle implementation choices
 into requirements or treat a preferred solution as the problem statement.
-

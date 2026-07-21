@@ -8,4 +8,15 @@ components:
     path: workflow
     authority: instructional and project-scoped lifecycle work
     validation: python3 workflow/tests/validate-workflow.py
-
+  - id: asturlab-workflow-agent-eval
+    path: workflow/agent-eval
+    authority: local evaluation records and deterministic evaluator tooling
+    validation: npm test --prefix workflow/agent-eval
+  - id: asturlab-storage-synology-mcp
+    path: storage/synology-mcp
+    authority: portable read-only Synology DSM MCP implementation
+    validation: uv run --directory storage/synology-mcp python -m unittest discover -s tests
+  - id: asturlab-agents-tiered-hermes
+    path: agents/tiered-hermes
+    authority: portable optional Hermes memory-provider extension
+    validation: uv run --directory agents/tiered-hermes --with pytest --with pyyaml --with mnemosyne-hermes python -m pytest tests -q

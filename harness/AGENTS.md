@@ -6,4 +6,3 @@ and add only justified files. It must never modify home-directory configuration,
 install products, publish, push, deploy, or invoke machine bootstrap operations.
 
 Run `python3 tests/validate-harness.py` after changes.
-

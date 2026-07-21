@@ -18,4 +18,3 @@ Do not begin implementation while a blocker or consequential authority question
 is unresolved. Route only to the capabilities that add value. Completion requires
 evidence against acceptance criteria. External effects always require current
 authority; saved state never grants it.
-
