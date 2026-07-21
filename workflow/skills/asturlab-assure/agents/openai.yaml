@@ -1,0 +1,7 @@
+interface:
+  display_name: "Asturlab Assure"
+  short_description: "Challenge readiness and completion evidence"
+  default_prompt: "Use $asturlab-assure to adversarially review this work and classify findings."
+policy:
+  allow_implicit_invocation: false
+

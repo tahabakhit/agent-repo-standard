@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "purpose": "Behavioural review cases for explicit $asturlab-scaffold agent runs; deterministic checks validate this schema but do not compute recommendations.",
+  "cases": [
+    {
+      "id": "atlas-shaped-preservation",
+      "mode": "audit",
+      "inputs_and_signals": {
+        "repository_state": "Existing operated monorepo with a root AGENTS.md map",
+        "profiles": ["infrastructure", "knowledge", "monorepo"],
+        "signals": ["ops/ is operational truth", "knowledge/ is the canonical knowledge plane", "scoped instructions already exist", "validation commands are documented"]
+      },
+      "expected_recommendation": "Preserve the two authority planes and report no generic tree migration; recommend only evidence-backed local gaps, if any.",
+      "structures_to_preserve": ["AGENTS.md", "ops/", "knowledge/", "scoped instruction boundaries"],
+      "prohibited_recommendations": ["convert to the legacy fixed layout", "merge ops/ and knowledge/", "add mandatory src/", "add a full Diataxis tree by default"],
+      "review_criteria": ["Recognizes both authority planes", "Does not normalize an intentional custom architecture", "Separates observed gaps from optional suggestions"]
+    },
+    {
+      "id": "minimal-existing-cli",
+      "mode": "adopt",
+      "inputs_and_signals": {
+        "repository_state": "Small working CLI with README.md, cli.py, and tests/test_cli.py",
+        "profiles": ["cli", "developer-tool"],
+        "signals": ["README documents invocation", "python3 -m unittest is the working test command", "no AGENTS.md exists", "no remote release workflow exists"]
+      },
+      "expected_recommendation": "Add a lean AGENTS.md that links to the existing command contract and records the real validation command; keep the flat working layout.",
+      "structures_to_preserve": ["cli.py", "tests/test_cli.py", "README.md command contract", "python3 -m unittest validation"],
+      "prohibited_recommendations": ["move cli.py into src/", "replace unittest", "add release CI without a real remote workflow", "add data/ or deliverables/"],
+      "review_criteria": ["Adds only the missing agent entrypoint", "Names the existing executable validation", "Preserves the CLI's working layout"]
+    },
+    {
+      "id": "intentional-custom-documentation",
+      "mode": "adopt",
+      "inputs_and_signals": {
+        "repository_state": "Existing research repository with README.md and a maintained handbook/ tree",
+        "profiles": ["knowledge", "research"],
+        "signals": ["handbook/index.md is the documentation map", "source provenance is recorded in handbook/sources.md", "link-check.sh is the validation entrypoint", "the custom taxonomy is intentional"]
+      },
+      "expected_recommendation": "Keep handbook/ authoritative, add only missing navigation or agent guidance that links to it, and retain link-check.sh as the validation gate.",
+      "structures_to_preserve": ["handbook/", "handbook/index.md", "handbook/sources.md", "link-check.sh"],
+      "prohibited_recommendations": ["replace handbook/ with docs/", "split documentation into Diataxis categories", "duplicate the source manifest", "introduce application packaging"],
+      "review_criteria": ["Treats intentional documentation as authoritative", "Avoids duplicated navigation", "Preserves provenance and the working validation command"]
+    },
+    {
+      "id": "empty-new-repository",
+      "mode": "new",
+      "inputs_and_signals": {
+        "repository_state": "Empty destination with a defined small data-validation tool outcome",
+        "profiles": ["cli", "data"],
+        "signals": ["Python is already chosen", "the primary artifact is a command-line validator", "input schemas and an executable test are required", "the repository is not yet operated"]
+      },
+      "expected_recommendation": "Create only README.md, a lean AGENTS.md, the chosen Python project metadata, the command and schema source, and an executable test entrypoint.",
+      "structures_to_preserve": [],
+      "prohibited_recommendations": ["create empty documentation taxonomies", "add runbooks for an unoperated tool", "add ADRs before a durable decision exists", "add local-only agent state"],
+      "review_criteria": ["Maps every proposed path to a current artifact", "Includes exact setup and validation", "Omits speculative structure"]
+    },
+    {
+      "id": "no-structural-change-justified",
+      "mode": "audit",
+      "inputs_and_signals": {
+        "repository_state": "Existing library with README.md, AGENTS.md, pyproject.toml, src/, tests/, and passing CI",
+        "profiles": ["library"],
+        "signals": ["authority links resolve", "setup and validation commands are exact", "tracked and secret boundaries are documented", "the working tree is clean"]
+      },
+      "expected_recommendation": "Report that no structural changes are justified and identify the verified existing harness as sufficient.",
+      "structures_to_preserve": ["README.md", "AGENTS.md", "pyproject.toml", "src/", "tests/", "existing CI"],
+      "prohibited_recommendations": ["manufacture a migration", "add duplicate documentation", "replace the task runner", "add profiles or fragments directories"],
+      "review_criteria": ["Allows a no-change result", "Cites the observed sufficient harness", "Does not confuse optional polish with a gap"]
+    }
+  ]
+}

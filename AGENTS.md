@@ -1,39 +1,21 @@
-# agent-repo-standard agent map
+# Asturlab agent entrypoint
 
-This repository owns the adaptive repository-harness toolkit and the preserved
-`legacy-fixed` Copier profile.
+Asturlab is Qawn's reusable instruments repository. Source here must be portable,
+sanitized, independently understandable, and testable without Atlas or Maydan.
+Mogador-specific topology, hostnames, credentials, private profiles, deployment
+state, and operational evidence belong in Maydan.
 
-## Source map
+Read `README.md`, `components.yaml`, then the nearest component `AGENTS.md`.
+The signed tag `legacy-fixed-v1.0.11` preserves the final fixed Copier generator;
+the current branch does not duplicate that obsolete interface.
 
-- `skills/scaffold/` is the primary adaptive interface and owns harness principles
-  and composable profile guidance.
-- `README.md` is the human entry point.
-- `docs/migrating-from-legacy-fixed.md` owns compatibility and migration guidance.
-- `copier.yml`, `template/`, `bin/new-repo.sh`, and `tests/verify-template.sh` are
-  the new-repository-only, fixed-layout legacy generator.
-- `tests/validate-toolkit.py` checks deterministic structure, references,
-  documentation assertions, shell syntax, and evaluation fixture schema. It does
-  not evaluate model recommendations.
-- `tests/fixtures/scaffold-evaluations.json` contains behavioural review cases for
-  `$scaffold` agent runs.
+Do not modify user-level agent configuration, installed skills, product-managed
+state, remotes, releases, or live systems from this repository. Do not add a
+placeholder component or shared framework without a qualifying implementation.
 
-## Boundaries
-
-- Preserve working repository conventions; do not impose a universal tree.
-- Add profiles, fragments, documentation taxonomies, ADRs, plans, runbooks, CI,
-  or project-local skills only when they own real content.
-- Do not create empty profile or fragment directories.
-- Treat Atlas only as a read-only preservation benchmark. Never modify it from
-  this repository's work.
-- Keep legacy behavior changes separate from adaptive-toolkit changes.
-
-## Validation
+Validation:
 
 ```sh
-python3 tests/validate-toolkit.py
-tests/verify-template.sh
+make validate
 git diff --check
 ```
-
-`tests/verify-template.sh` may use the pinned Copier release through isolated
-`uvx`; it must not install Copier globally or modify user tool configuration.

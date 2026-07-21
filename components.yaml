@@ -1,0 +1,11 @@
+schema_version: 1
+components:
+  - id: asturlab-harness
+    path: harness
+    authority: repository-scoped harnessing only
+    validation: python3 harness/tests/validate-harness.py
+  - id: asturlab-workflow
+    path: workflow
+    authority: instructional and project-scoped lifecycle work
+    validation: python3 workflow/tests/validate-workflow.py
+
