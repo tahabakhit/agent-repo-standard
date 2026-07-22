@@ -11,6 +11,9 @@ tag `legacy-fixed-v1.0.11` at commit `9feb596`.
 - [`storage/synology-mcp/`](storage/synology-mcp/) — portable read-only DSM MCP adapter
 - [`agents/tiered-hermes/`](agents/tiered-hermes/) — optional portable Hermes memory provider
 
+The six workflow and scaffold instrument skills support Claude, Pi, and Codex.
+`workflow/agent-eval` remains Codex-native.
+
 The historical fixed Copier generator was removed from the current branch after
 the compatibility tag. Retrieve it from that tag only; it is not a current
 Asturlab interface.
