@@ -1,10 +1,11 @@
 ---
 name: asturlab-orchestrate
-description: Own complex work through discovery, planning, implementation, review, and verification. Use only when the user explicitly invokes $asturlab-orchestrate with an idea, plan, objective, or other context.
+description: Own complex work through discovery, planning, implementation, review, and verification. Use only when explicitly invoked with $asturlab-orchestrate and an idea, plan, objective, or other context.
+disable-model-invocation: true
 ---
 
 Own the requested outcome from initial context through verified completion. Use the
-least machinery that safely achieves the result. Planning, delegation, and review
+least machinery that safely achieves the result. Goal and plan tracking, delegation, and review
 are tools for the journey, not goals by themselves.
 
 ## Invocation contract
@@ -15,11 +16,10 @@ Treat this as the complete entry point:
 $asturlab-orchestrate <idea, plan, objective, constraints, or other context>
 ```
 
-Do not ask the user to invoke `/goal` or `/plan`. Explicit invocation requests that
-the coordinator:
+Explicit invocation requests that the coordinator:
 
 1. create or reuse one compatible coordinator goal;
-2. create and maintain the native execution plan when the journey has multiple
+2. create and maintain the harness's native execution plan when the journey has multiple
    meaningful steps;
 3. inspect relevant context and resolve recoverable uncertainty;
 4. choose the smallest useful execution topology;
@@ -31,7 +31,7 @@ Explicit invocation authorizes:
 - coordinator goal and plan tracking;
 - read-only discovery and research;
 - ordinary reversible work inside the stated scope;
-- one durable worker when isolation, a long-running phase, or a deliberate context
+- one bounded worker when isolation, a long-running phase, or a deliberate context
   boundary materially improves execution.
 
 Invocation does not automatically authorize subagents, multiple workers, pushes,
@@ -117,16 +117,16 @@ deliberate fresh-context boundary.
 
 ## 4. Delegate economically
 
-Read [native orchestration](references/native-codex-orchestration.md) before
+Read the native orchestration reference for the active harness before
 dispatching. Use [the worker prompt contract](references/worker-prompt.md) for every
 durable phase or continuation.
 
 A subagent may be used only when the coordinator plan names its independent task.
 At most one child may be open at a time.
 
-For every `spawn_agent` call:
+For every worker invocation:
 
-- set `fork_turns="none"` unless a specific small number of recent turns is
+- pass only the minimum context needed for the worker's assigned phase;
   demonstrably required;
 - provide a small, self-contained evidence packet with the objective, exact paths,
   constraints, known facts, acceptance criteria, output format, and stop condition;
@@ -163,8 +163,8 @@ Approval for one action never authorizes another.
 
 ## 6. Execute and coordinate
 
-For project work, resolve the saved project before creating a task. Prefer a Codex
-worktree for isolated writes. Use the local checkout only when its dirty state is
+For project work, resolve the saved project before creating a task. Prefer an
+isolated worktree for isolated writes. Use the local checkout only when its dirty state is
 intentionally in scope and one writer is guaranteed. Use projectless tasks only when
 no repository belongs to the work.
 

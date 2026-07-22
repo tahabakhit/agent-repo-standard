@@ -1,6 +1,7 @@
 ---
 name: asturlab-scaffold
-description: Design, audit, or apply the smallest useful repository harness for a new or existing project. Use only when the user explicitly invokes $asturlab-scaffold. Adapt to the repository's purpose, language, operations, and existing conventions instead of imposing a fixed tree.
+description: Design, audit, or apply the smallest useful repository harness for a new or existing project. Use only when explicitly invoked with $asturlab-scaffold. Adapt to the repository's purpose, language, operations, and existing conventions instead of imposing a fixed tree.
+disable-model-invocation: true
 ---
 
 # Scaffold
@@ -53,7 +54,7 @@ creating anything.
 
 ## 2. Resolve only material unknowns
 
-Accept a Requirements Brief from `$grill` when available.
+Accept a Requirements Brief from `$asturlab-inquire` when available.
 
 When no brief exists, establish:
 
@@ -72,7 +73,7 @@ changes the repository shape, toolchain, authority, or verification strategy. Gi
 a recommendation with each question.
 
 If the project itself is broadly undefined rather than merely missing repository
-details, stop and recommend `$grill` before scaffolding.
+details, stop and recommend `$asturlab-inquire` before scaffolding.
 
 ## 3. Propose the minimum harness
 
@@ -155,5 +156,5 @@ Report:
 - unresolved product decisions;
 - recommended next action.
 
-Recommend `$orchestrate` only when a multi-phase implementation remains. For a
+Recommend `$asturlab-orchestrate` only when a multi-phase implementation remains. For a
 bounded next task, provide the direct task instead.

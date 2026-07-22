@@ -1,6 +1,7 @@
 ---
 name: asturlab-assure
 description: Adversarially review requirements, design, implementation, or completion evidence for blockers, material risks, and advisory improvements. Use only when explicitly invoked.
+disable-model-invocation: true
 ---
 
 # Asturlab Assure

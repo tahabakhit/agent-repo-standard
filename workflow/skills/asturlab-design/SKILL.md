@@ -1,6 +1,7 @@
 ---
 name: asturlab-design
 description: Design a project or system from evidence using adaptive cross-domain coverage, alternatives, failure analysis, migration, recovery, and verification. Use only when explicitly invoked.
+disable-model-invocation: true
 ---
 
 # Asturlab Design

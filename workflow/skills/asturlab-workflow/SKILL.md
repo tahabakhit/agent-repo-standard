@@ -1,6 +1,7 @@
 ---
 name: asturlab-workflow
 description: Route an unclear, resumable, or material objective through proportionate inquiry, design, assurance, execution, and evidence. Use only when explicitly invoked.
+disable-model-invocation: true
 ---
 
 # Asturlab Workflow

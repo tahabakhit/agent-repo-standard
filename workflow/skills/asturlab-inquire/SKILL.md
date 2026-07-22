@@ -1,6 +1,7 @@
 ---
 name: asturlab-inquire
 description: Clarify an idea into accepted objectives, scope, authority, constraints, non-goals, acceptance criteria, and evidence. Use only when explicitly invoked.
+disable-model-invocation: true
 ---
 
 # Asturlab Inquire

@@ -75,7 +75,7 @@ Delegation authorization
 If `Allowed child task` is `none`, do not spawn a subagent.
 
 If one child is authorized:
-- set `fork_turns="none"`;
+- pass only the self-contained evidence packet above;
 - send only a self-contained evidence packet;
 - do not let the child create goals or children;
 - do not let it write unless the non-overlapping write set is explicit;
