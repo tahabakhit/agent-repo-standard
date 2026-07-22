@@ -127,7 +127,6 @@ At most one child may be open at a time.
 For every worker invocation:
 
 - pass only the minimum context needed for the worker's assigned phase;
-  demonstrably required;
 - provide a small, self-contained evidence packet with the objective, exact paths,
   constraints, known facts, acceptance criteria, output format, and stop condition;
 - use Low reasoning for bounded read-only inspection;
