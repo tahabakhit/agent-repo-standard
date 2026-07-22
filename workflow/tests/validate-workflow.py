@@ -12,6 +12,21 @@ EXPECTED = {
     "asturlab-orchestrate",
     "asturlab-assure",
 }
+ALLOWED_TOKENS = {f"asturlab-{name.split('asturlab-', 1)[1]}" for name in EXPECTED} | {"asturlab-scaffold", "agent-eval:evaluate-all"}
+
+
+def validate_skill(root: Path) -> None:
+    skill = (root / "SKILL.md").read_text()
+    frontmatter = skill.split("---", 2)[1] if skill.startswith("---") else ""
+    if re.search(r"^name:\s*\S+", frontmatter, re.M) is None or re.search(r"^description:\s*.+Use only when explicitly invoked", frontmatter, re.M) is None or "disable-model-invocation: true" not in frontmatter:
+        raise SystemExit(f"invalid explicit skill frontmatter: {root.name}")
+    metadata = (root / "agents" / "openai.yaml").read_text()
+    if "allow_implicit_invocation: false" not in metadata:
+        raise SystemExit(f"skill is not explicit-only: {root.name}")
+    for path in root.rglob("*.md"):
+        for token in re.findall(r"\$[a-z][a-z0-9:-]+", path.read_text()):
+            if token[1:] not in ALLOWED_TOKENS:
+                raise SystemExit(f"unresolved invocation token {token}: {path}")
 
 
 def main() -> None:
@@ -23,9 +38,7 @@ def main() -> None:
         skill = (root / "SKILL.md").read_text()
         if re.search(rf"^name:\s*{re.escape(name)}$", skill, re.M) is None:
             raise SystemExit(f"invalid skill name: {name}")
-        metadata = (root / "agents" / "openai.yaml").read_text()
-        if "allow_implicit_invocation: false" not in metadata:
-            raise SystemExit(f"skill is not explicit-only: {name}")
+        validate_skill(root)
         for path in root.rglob("*.md"):
             text = path.read_text()
             for target in re.findall(r"\[[^]]+\]\(([^)]+)\)", text):

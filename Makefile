@@ -1,8 +1,14 @@
 .PHONY: validate
 
+# `npm run check` is intentionally excluded from the shared gate: it verifies
+# canonical run records against generated evaluator artifacts, which are
+# git-ignored and absent on a clean checkout. Run it locally after generating
+# artifacts. `npm test` covers the validation/digest logic via fixtures.
 validate:
 	python3 harness/tests/validate-harness.py
 	python3 workflow/tests/validate-workflow.py
-	python3 -m py_compile storage/synology-mcp/synology_mcp_server.py
-	python3 -m compileall -q agents/tiered-hermes/tiered_hermes
+	python3 tests/validate-components.py
+	npm test --prefix workflow/agent-eval
+	uv run --directory storage/synology-mcp python -m unittest discover -s tests
+	uv run --directory agents/tiered-hermes --with pytest --with pyyaml --with mnemosyne-hermes python -m pytest tests -q
 	git diff --check
