@@ -18,6 +18,7 @@ import logging
 import os
 import threading
 import time
+from urllib.parse import urlparse
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -89,8 +90,9 @@ class HindsightL2Adapter(TierAdapter):
                 self._daemon_started = True
                 return
             # Start it
+            port = urlparse(self._api_url).port or 8888
             ok = mgr._start_daemon(
-                config={"profile": "hermes", "host": "127.0.0.1", "port": 8888},
+                config={"profile": "hermes", "host": "127.0.0.1", "port": port},
                 profile="hermes",
             )
             if ok:

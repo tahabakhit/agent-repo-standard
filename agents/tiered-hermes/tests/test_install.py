@@ -4,9 +4,12 @@ import os
 import sys
 from pathlib import Path
 
+import pytest
+
 
 def test_wrapper_install_discovers_and_loads_tiered_provider(tmp_path, monkeypatch):
     """A temporary Hermes home discovers the wrapper without touching the real one."""
+    pytest.importorskip("plugins.memory")
     hermes_home = tmp_path / "hermes-home"
     hermes_home.mkdir()
     monkeypatch.setenv("HERMES_HOME", str(hermes_home))
