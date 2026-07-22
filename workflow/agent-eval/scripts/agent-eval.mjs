@@ -162,7 +162,6 @@ const DETERMINISTIC_ASSERTIONS = new Set([
   "cost",
   "equals",
   "is-json",
-  "javascript",
   "latency",
   "not-contains",
   "regex",
@@ -171,7 +170,19 @@ const DETERMINISTIC_ASSERTIONS = new Set([
   "trajectory:tool-sequence",
   "trajectory:tool-used",
 ]);
-const OUTCOME_ASSERTIONS = new Set(["contains", "contains-all", "contains-any", "contains-json", "equals", "is-json", "javascript", "not-contains", "regex", "starts-with"]);
+const OUTCOME_ASSERTIONS = new Set(["contains", "contains-all", "contains-any", "contains-json", "equals", "is-json", "not-contains", "regex", "starts-with"]);
+
+function canonicalJson(value) {
+  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(",")}]`;
+  if (value && typeof value === "object") return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonicalJson(value[key])}`).join(",")}}`;
+  return JSON.stringify(value);
+}
+
+export function computeRunContentDigest(run) {
+  const content = structuredClone(run);
+  delete content.runContentDigest;
+  return createHash("sha256").update(canonicalJson(content)).digest("hex");
+}
 
 function platformForProvider(providerId) {
   const id = String(providerId ?? "").toLowerCase();
@@ -586,7 +597,12 @@ export async function loadAndVerifyRun(source, options = {}) {
   }
   if (candidate.evidenceState === "measured" && !pairedVerified) throw new Error("A measured run requires artifacts/<run-id>/promptfoo/result.json");
 
-  return normalizeRun(candidate, { pairedVerified, runtimeObserved, pairedPlatforms, runtimePlatforms, runtimeArtifactLinks });
+  const normalized = normalizeRun(candidate, { pairedVerified, runtimeObserved, pairedPlatforms, runtimePlatforms, runtimeArtifactLinks });
+  if (options.requireDigests === true) {
+    if (!source.runContentDigest) throw new Error("Run content digest is missing");
+    if (source.runContentDigest !== computeRunContentDigest(normalized)) throw new Error("Run content digest mismatch");
+  }
+  return normalized;
 }
 
 async function readRuns() {
@@ -632,6 +648,7 @@ async function recordRun(inputPath) {
   if (!inputPath) throw new Error("Usage: agent-eval.mjs record <run.json>");
   const sourcePath = path.resolve(inputPath);
   const run = await loadAndVerifyRun(JSON.parse((await readBoundedFile(sourcePath, 2_000_000, "Run JSON")).toString("utf8")));
+  run.runContentDigest = computeRunContentDigest(run);
   const destination = safeRunPath(RUNS_DIR, run.id);
   await exclusiveAtomicWrite(destination, `${JSON.stringify(run, null, 2)}\n`);
   const runs = await readRuns();

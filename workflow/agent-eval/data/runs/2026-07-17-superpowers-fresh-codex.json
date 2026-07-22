@@ -347,5 +347,6 @@
   },
   "score": 77,
   "bloat": 4,
-  "confidence": "B"
+  "confidence": "B",
+  "runContentDigest": "d45985e7456e1fa1c05ac9775e2aedb8505447f59763baafa9d578bbd252a310"
 }

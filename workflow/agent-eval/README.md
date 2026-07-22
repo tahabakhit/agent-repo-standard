@@ -18,7 +18,7 @@ Evidence labels are strict:
 - `mixed`: runtime observations plus static or source judgments;
 - `estimated`: source, static, validation, or smoke evidence only.
 
-Each axis carries its own evidence label; non-estimated axes must cite a verified runtime artifact. Platform proof is scoped to the platform that produced it. Version 0.1 scores explicit combinations as estimates and rejects a measured-combination claim until native, A, B, and A+B artifacts can all be verified. Canonical records pin every artifact with a SHA-256 digest, so later edits fail validation.
+Each axis carries its own evidence label; non-estimated axes must cite a verified runtime artifact. Platform proof is scoped to the platform that produced it. Version 0.1 scores explicit combinations as estimates and rejects a measured-combination claim until native, A, B, and A+B artifacts can all be verified. Canonical records pin every artifact and normalized run scoring content with SHA-256 digests, so later edits fail validation.
 
 ## Local commands
 

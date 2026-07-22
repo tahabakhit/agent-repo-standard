@@ -8,6 +8,7 @@ import {
   assertCanonicalFilename,
   buildIndex,
   combinationScore,
+  computeRunContentDigest,
   detectEvaluators,
   loadAndVerifyRun,
   normalizeRun,
@@ -26,6 +27,17 @@ const fullAxes = Object.fromEntries(
 );
 
 const promptfooResult = "artifacts/2026-07-17-example/promptfoo/result.json";
+
+test("javascript-only Promptfoo grading cannot claim measured evidence", () => {
+  const rows = ["baseline", "candidate"].flatMap((label) => [0, 1, 2].map((repeat) => ({
+    provider: { label, id: "openai:codex" },
+    metadata: { platform: "codex", repeat },
+    vars: { task: "fixture" },
+    success: true,
+    gradingResult: { componentResults: [{ assertion: { type: "javascript" } }] },
+  })));
+  assert.throws(() => verifyPromptfooResult({ results: { results: rows } }), /deterministic assertions/);
+});
 
 function axesWith(state, evidence) {
   const axes = structuredClone(fullAxes);
@@ -434,6 +446,11 @@ test("loader verifies axis artifacts and preserves Promptfoo configuration", asy
     assert.match(canonical.artifactDigests[digestRun.methods[0].artifactLinks[0]], /^[a-f0-9]{64}$/);
     await writeFile(digestPath, "changed");
     await assert.rejects(loadAndVerifyRun(canonical, { requireDigests: true }), /artifact digest mismatch/);
+    await writeFile(digestPath, "first");
+    canonical.artifactDigests = { [digestRun.methods[0].artifactLinks[0]]: (await verifyArtifact(digestRun.id, digestRun.methods[0].artifactLinks[0])).sha256 };
+    canonical.runContentDigest = computeRunContentDigest(canonical);
+    canonical.axes.V.value = 4;
+    await assert.rejects(loadAndVerifyRun(canonical, { requireDigests: true }), /content digest mismatch/);
   } finally {
     await rm(path.join(projectRoot, "artifacts", axisRun.id), { recursive: true, force: true });
     await rm(path.join(projectRoot, "artifacts", promptfooRun.id), { recursive: true, force: true });
