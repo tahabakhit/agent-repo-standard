@@ -36,6 +36,7 @@ from synology_api.core_sys_info import SysInfo
 from synology_api.filestation import FileStation
 
 mcp = FastMCP("synology")
+_RESOLVED_OTP_VALUES: set[str] = set()
 
 
 def _bool(value: str | None, default: bool = False) -> bool:
@@ -55,22 +56,25 @@ def _current_otp() -> str | None:
         command.extend(["--vault", vault])
     command.append("--otp")
     try:
-        return subprocess.check_output(
+        value = subprocess.check_output(
             command,
             env=os.environ,
             text=True,
             stderr=subprocess.PIPE,
         ).strip()
+        if value:
+            _RESOLVED_OTP_VALUES.add(value)
+        return value
     except (OSError, subprocess.CalledProcessError) as exc:
         raise RuntimeError("Unable to resolve current Synology OTP from 1Password") from exc
 
 
 def _settings() -> dict[str, Any]:
-    host = os.environ.get("SYNOLOGY_HOST") or os.environ.get("SYNOLOGY_NASRID_HOST") or os.environ.get("DSM_HOST")
-    username = os.environ.get("SYNOLOGY_USERNAME") or os.environ.get("SYNOLOGY_NASRID_USERNAME") or os.environ.get("DSM_USERNAME")
-    password = os.environ.get("SYNOLOGY_PASSWORD") or os.environ.get("SYNOLOGY_NASRID_PASSWORD") or os.environ.get("DSM_PASSWORD")
-    port = os.environ.get("SYNOLOGY_PORT") or os.environ.get("SYNOLOGY_NASRID_PORT") or os.environ.get("DSM_PORT") or "5001"
-    secure = _bool(os.environ.get("SYNOLOGY_USE_HTTPS") or os.environ.get("SYNOLOGY_NASRID_USE_HTTPS") or os.environ.get("DSM_USE_HTTPS"), True)
+    host = os.environ.get("SYNOLOGY_HOST") or os.environ.get("DSM_HOST")
+    username = os.environ.get("SYNOLOGY_USERNAME") or os.environ.get("DSM_USERNAME")
+    password = os.environ.get("SYNOLOGY_PASSWORD") or os.environ.get("DSM_PASSWORD")
+    port = os.environ.get("SYNOLOGY_PORT") or os.environ.get("DSM_PORT") or "5001"
+    secure = _bool(os.environ.get("SYNOLOGY_USE_HTTPS") or os.environ.get("DSM_USE_HTTPS"), True)
     cert_verify = _bool(os.environ.get("SYNOLOGY_CERT_VERIFY") or os.environ.get("DSM_CERT_VERIFY"), False)
     dsm_version = int(os.environ.get("SYNOLOGY_DSM_VERSION") or os.environ.get("DSM_VERSION") or "7")
     otp_code = _current_otp()
@@ -114,15 +118,13 @@ def _json(data: Any) -> str:
 def _redact(text: str) -> str:
     for value in (
         os.environ.get("SYNOLOGY_HOST"),
-        os.environ.get("SYNOLOGY_NASRID_HOST"),
         os.environ.get("DSM_HOST"),
         os.environ.get("SYNOLOGY_USERNAME"),
-        os.environ.get("SYNOLOGY_NASRID_USERNAME"),
         os.environ.get("DSM_USERNAME"),
         os.environ.get("SYNOLOGY_PASSWORD"),
-        os.environ.get("SYNOLOGY_NASRID_PASSWORD"),
         os.environ.get("DSM_PASSWORD"),
         os.environ.get("SYNOLOGY_OTP_CODE"),
+        *_RESOLVED_OTP_VALUES,
     ):
         if value:
             text = text.replace(value, "[REDACTED]")
@@ -162,6 +164,13 @@ def _summarize_storage(raw: Any) -> dict[str, Any]:
     payload = raw.get("data", {}) if isinstance(raw, dict) else {}
     overview = payload.get("overview_data", {}) if isinstance(payload, dict) else {}
 
+    def first_list(value: dict[str, Any], *keys: str) -> list[Any]:
+        for key in keys:
+            candidate = value.get(key)
+            if isinstance(candidate, list):
+                return candidate
+        return []
+
     def size_value(item: dict[str, Any], key: str) -> int | None:
         size = item.get("size", {})
         return _storage_int(size.get(key) if isinstance(size, dict) else None)
@@ -170,18 +179,18 @@ def _summarize_storage(raw: Any) -> dict[str, Any]:
         {"name": disk.get("name"), "slot": _storage_int(disk.get("slot_id")), "model": disk.get("model"),
          "capacity_bytes": _storage_int(disk.get("size_total")), "temperature_c": _storage_int(disk.get("temp")),
          "status": _storage_status(disk.get("summary_status"))}
-        for disk in payload.get("disks", []) if isinstance(disk, dict)
+        for disk in first_list(payload, "disks") if isinstance(disk, dict)
     ]
     pools = [
         {"id": pool.get("id"), "raid_type": pool.get("device_type"), "capacity_bytes": size_value(pool, "total"),
          "used_bytes": size_value(pool, "used"), "status": _storage_status(pool.get("summary_status"))}
-        for pool in payload.get("storagePools", []) if isinstance(pool, dict)
+        for pool in first_list(payload, "storagePools", "detected_pools", "pools") if isinstance(pool, dict)
     ]
     volumes = [
         {"id": volume.get("id"), "path": volume.get("vol_path"), "filesystem": volume.get("fs_type"),
          "capacity_bytes": size_value(volume, "total"), "used_bytes": size_value(volume, "used"),
          "status": _storage_status(volume.get("summary_status"))}
-        for volume in payload.get("volumes", []) if isinstance(volume, dict)
+        for volume in first_list(payload, "volumes") if isinstance(volume, dict)
     ]
     return {"success": bool(raw.get("success", True)) if isinstance(raw, dict) else False,
             "status": _storage_status(overview.get("status_level") if isinstance(overview, dict) else None),

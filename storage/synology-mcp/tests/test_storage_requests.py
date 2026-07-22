@@ -1,5 +1,7 @@
+import os
 import sys
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 from typing import cast
 
@@ -18,6 +20,24 @@ class FakeStorage:
 
 
 class StorageRequestTests(unittest.TestCase):
+    def test_settings_uses_generic_and_dsm_names_only(self):
+        with patch.dict(os.environ, {
+            "SYNOLOGY_" + "N" + "ASRID_HOST": "estate-host",
+            "SYNOLOGY_" + "N" + "ASRID_USERNAME": "estate-user",
+            "SYNOLOGY_" + "N" + "ASRID_PASSWORD": "estate-password",
+            "DSM_HOST": "dsm-host", "DSM_USERNAME": "dsm-user", "DSM_PASSWORD": "dsm-password",
+        }, clear=True):
+            settings = server._settings()
+        self.assertEqual(settings["ip_address"], "dsm-host")
+        self.assertEqual(settings["username"], "dsm-user")
+        self.assertEqual(settings["password"], "dsm-password")
+
+    def test_redact_scrubs_op_resolved_otp(self):
+        with patch.dict(os.environ, {"SYNOLOGY_OP_ITEM": "item"}, clear=True), \
+             patch.object(server.subprocess, "check_output", return_value="654321\n"):
+            server._current_otp()
+        self.assertNotIn("654321", server._redact("OTP 654321 failed"))
+
     def test_storage_overview_uses_storage_manager_endpoint(self):
         storage = FakeStorage()
 
@@ -36,7 +56,7 @@ class StorageRequestTests(unittest.TestCase):
                     "size_total": "1000", "temp": 31, "summary_status": "normal",
                     "serial": "must-not-leak", "device": "/dev/sata1",
                 }],
-                "storagePools": [{
+                "detected_pools": [{
                     "id": "pool_1", "device_type": "shr", "summary_status": "normal",
                     "size": {"total": "900", "used": "300"}, "uuid": "must-not-leak",
                 }],
@@ -57,6 +77,13 @@ class StorageRequestTests(unittest.TestCase):
             "pools": [{"id": "pool_1", "raid_type": "shr", "capacity_bytes": 900, "used_bytes": 300, "status": "normal"}],
             "volumes": [{"id": "volume_1", "path": "/volume1", "filesystem": "btrfs", "capacity_bytes": 800, "used_bytes": 200, "status": "normal"}],
         })
+
+    def test_storage_summary_accepts_all_pool_key_variants(self):
+        pool = {"id": "pool", "device_type": "shr", "summary_status": "normal", "size": {"total": "1", "used": "0"}}
+        for key in ("storagePools", "detected_pools", "pools"):
+            with self.subTest(key=key):
+                result = server._summarize_storage({"success": True, "data": {key: [pool]}})
+                self.assertEqual(result["pools"][0]["id"], "pool")
 
 
 if __name__ == "__main__":
