@@ -13,7 +13,10 @@ failure and partial success; security, privacy, and safety; migration and
 compatibility; operation and recovery; and validation evidence.
 
 Avoid a universal template. Resolve named technical uncertainty with targeted
-research. Make assumptions explicit and identify blockers. For software module
+research. Make assumptions explicit and identify blockers. Express the executable
+plan as a [task spec](references/task-spec.md) — GOAL, DONE-WHEN, SCOPE, VERIFY,
+BLAST-RADIUS — that compiles to a controller contract for `$amanar-workflow`. For
+software module
 design, use [deep modules](references/deep-modules.md),
 [deepening](references/deepening.md), and
 [design it twice](references/design-it-twice.md) when relevant.

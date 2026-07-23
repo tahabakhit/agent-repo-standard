@@ -17,7 +17,8 @@ check passed is not evidence; only a receipt is.
 
 The controller is the vendored `.amanar/kernel/amanar-workflow`, run with Python from
 the repository root. Author the task as `.amanar/workflow.json` (see the kernel
-contract), then run, in order:
+contract), or compile one from a task-spec with
+`python3 .amanar/kernel/tools/compile_task_spec.py <spec.json>`. Then run, in order:
 
 1. `python3 .amanar/kernel/amanar-workflow validate`
 2. `python3 .amanar/kernel/amanar-workflow begin` — required once before any check.

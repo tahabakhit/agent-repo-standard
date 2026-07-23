@@ -6,6 +6,13 @@ Claude secondary. The deterministic kernel is on `main` (commit `aa9cb6f`,
 `workflow/kernel/`, CLI v1.0.0, 44 tests), so its gating dependency is cleared.
 Lead workstream is now WS0 — make Pi a first-class, pack-passing host.
 
+**Progress (2026-07-24):** WS0 (Pi first-class host) and WS1 (skill-slimming —
+thin `amanar-workflow` adapter + `render_handoff`, `amanar-orchestrate` stub,
+`amanar-assure` evidence-citation) complete and committed (`ada2226`, `009b54b`).
+Next: WS3 (task-spec + compiler), then WS2.1 (bounded-loop runner — the
+evidence-identified reliability mechanism), then WS2.2/2.3 (which need the deferred
+sync-skills decisions).
+
 ## Current baseline (verified against the tree)
 
 - Kernel: `workflow/kernel/` — contract at `.amanar/workflow.json`, state/receipts
@@ -151,9 +158,9 @@ statement never substitutes for a receipt). The resume-digest (grafts Track B) i
 **deterministic tool**, not prose: a small script consuming `status --json` +
 receipts to emit a handoff — state, current vs stale receipts, an id/artifact
 closet from the contract `artifacts`/`scope`, and a checklist-rebuild from remaining
-checks. Home it beside the kernel as tooling (e.g. `workflow/kernel/tools/
-render-handoff.py`), **not** as a new frozen CLI verb; the SKILL references it. No
-separate `amanar-handoff` skill (surface creep).
+checks. Home it beside the kernel as tooling
+(`workflow/kernel/tools/render_handoff.py`), **not** as a new frozen CLI verb; the
+SKILL references it. No separate `amanar-handoff` skill (surface creep).
 
 **1.2 `amanar-orchestrate` → one-release deprecation stub.** Replace the 219-line
 body with a short stub pointing to host-native scheduling + `$amanar-workflow`;
@@ -211,8 +218,9 @@ outside the temp dirs.
 ## Workstream 3 — RPI/QRSPI task-spec (deterministic)
 
 Add `references/task-spec.md` under `amanar-design` (the "Plan" artifact),
-cross-referenced from `amanar-workflow`, plus a **compiler** (`workflow/tools/
-compile-task-spec.py`) that turns the template into a validated `.amanar/workflow.json`
+cross-referenced from `amanar-workflow`, plus a **compiler**
+(`workflow/kernel/tools/compile_task_spec.py`) that turns the template into a
+validated `.amanar/workflow.json`
 — deterministic, not agent-authored. Field mapping:
 
 - GOAL → `objective`
