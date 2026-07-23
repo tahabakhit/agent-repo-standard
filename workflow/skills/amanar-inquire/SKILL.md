@@ -4,7 +4,7 @@ description: Clarify an idea into accepted objectives, scope, authority, constra
 disable-model-invocation: true
 ---
 
-# Asturlab Inquire
+# Amanar Inquire
 
 Inspect available context first. Separate verified facts, assumptions, preferences,
 constraints, and unresolved decisions. Ask only questions whose answers materially

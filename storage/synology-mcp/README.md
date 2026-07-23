@@ -1,4 +1,4 @@
-# Asturlab Synology MCP
+# Amanar Synology MCP
 
 A small read-only MCP wrapper around the pinned `synology-api` client. It exposes
 sanitized system, storage, share, package, and file-station inspection without
@@ -15,6 +15,6 @@ Run tests from an environment with the locked dependencies:
 uv run python -m unittest discover -s tests
 ```
 
-Source provenance: migrated from Atlas/Maydan operational component
-`mogador-storage-synology` at Atlas commit `7b2260c`. Mogador launch and smoke
-configuration remains in Maydan.
+Source provenance: migrated from Igoudar/Anáºar operational component
+`mogador-storage-synology` at Igoudar commit `7b2260c`. Mogador launch and smoke
+configuration remains in Anáºar.

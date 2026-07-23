@@ -3,7 +3,7 @@
 The signed annotated tag `legacy-fixed-v1.0.11` is the final supported historical
 Copier-compatible state. It resolves to commit
 `9feb5960714fcf0c67b87020630c3a1fed233c8e`. The fixed generator and its dedicated
-support surface do not exist on the current Asturlab branch.
+support surface do not exist on the current Amanar branch.
 
 Use `$amanar-scaffold audit` for an existing repository, then
 `$amanar-scaffold adopt` only when changes are justified. Use

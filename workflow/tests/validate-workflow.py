@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate canonical Asturlab workflow skill contracts."""
+"""Validate canonical Amanar workflow skill contracts."""
 from pathlib import Path
 import re
 

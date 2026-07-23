@@ -1,4 +1,4 @@
-# Asturlab harness
+# Amanar harness
 
 The canonical interface is
 [`$amanar-scaffold`](skills/amanar-scaffold/SKILL.md), supporting explicit

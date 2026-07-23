@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Dependency-free structure validation for the Asturlab harness."""
+"""Dependency-free structure validation for the Amanar harness."""
 from pathlib import Path
 import json
 import re
@@ -48,7 +48,7 @@ def main() -> None:
     require(len(ids) == len(cases), "fixture IDs must be unique")
     for obsolete in ("copier.yml", "template", "bin/new-repo.sh", "tests/verify-template.sh"):
         require(not (REPO / obsolete).exists(), f"obsolete live Copier path: {obsolete}")
-    print("PASS: Asturlab harness structure, links, fixtures, and compatibility boundary valid")
+    print("PASS: Amanar harness structure, links, fixtures, and compatibility boundary valid")
 
 
 if __name__ == "__main__":

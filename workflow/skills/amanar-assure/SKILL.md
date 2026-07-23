@@ -4,7 +4,7 @@ description: Adversarially review requirements, design, implementation, or compl
 disable-model-invocation: true
 ---
 
-# Asturlab Assure
+# Amanar Assure
 
 Review repository and system evidence independently of the author's claims. Seek
 contradictions, omitted actors and states, hidden dependencies, unsafe defaults,

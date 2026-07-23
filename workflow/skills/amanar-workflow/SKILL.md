@@ -4,7 +4,7 @@ description: Route an unclear, resumable, or material objective through proporti
 disable-model-invocation: true
 ---
 
-# Asturlab Workflow
+# Amanar Workflow
 
 Inspect existing project context before asking questions. Determine the current
 stage and classify the work as bounded, managed, or high assurance.

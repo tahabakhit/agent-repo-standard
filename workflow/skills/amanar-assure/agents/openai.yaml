@@ -1,5 +1,5 @@
 interface:
-  display_name: "Asturlab Assure"
+  display_name: "Amanar Assure"
   short_description: "Challenge readiness and completion evidence"
   default_prompt: "Use $amanar-assure to adversarially review this work and classify findings."
 policy:

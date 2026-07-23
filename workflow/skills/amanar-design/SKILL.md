@@ -4,7 +4,7 @@ description: Design a project or system from evidence using adaptive cross-domai
 disable-model-invocation: true
 ---
 
-# Asturlab Design
+# Amanar Design
 
 Start from the accepted objective and verified current state. Compare credible
 alternatives proportionately, then design only the concerns supported by evidence:

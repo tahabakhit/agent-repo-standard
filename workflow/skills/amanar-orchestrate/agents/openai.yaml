@@ -1,5 +1,5 @@
 interface:
-  display_name: "Asturlab Orchestrate"
+  display_name: "Amanar Orchestrate"
   short_description: "Own complex work through verified completion"
   default_prompt: "Use $amanar-orchestrate to take this idea or objective through discovery, planning, implementation, review, and verified completion."
 

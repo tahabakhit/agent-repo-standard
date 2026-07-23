@@ -1,5 +1,5 @@
 interface:
-  display_name: "Asturlab Workflow"
+  display_name: "Amanar Workflow"
   short_description: "Route material work through proportionate lifecycle gates"
   default_prompt: "Use $amanar-workflow to route this objective from its current state to verified completion."
 policy:
