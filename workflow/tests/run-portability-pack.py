@@ -14,6 +14,9 @@ from pathlib import Path
 from typing import Any
 
 WORKFLOW = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(WORKFLOW))
+from hosts import host_command  # noqa: E402  shared with the loop runner
+
 KERNEL = WORKFLOW / "kernel"
 FIXTURES = Path(__file__).parent / "fixtures" / "portable-kernel"
 RUNS = Path(__file__).parent / ".runs"
@@ -91,22 +94,6 @@ def host_version(host: str) -> str | None:
     return result.stdout.strip() if result.returncode == 0 else "present-version-unavailable"
 
 
-def host_command(host: str, fixture: Path, prompt: str, model: str) -> list[str] | None:
-    if host == "codex":
-        return [
-            "codex", "exec", "--model", model, "--config", 'model_reasoning_effort="low"',
-            "--ephemeral", "--disable", "plugins", "--sandbox", "workspace-write",
-            "--json", "-C", str(fixture), prompt,
-        ]
-    if host == "claude":
-        return [
-            "claude", "-p", "--no-session-persistence", "--setting-sources", "project",
-            "--permission-mode", "acceptEdits", "--output-format", "json",
-            "--model", "sonnet", "--effort", "low", prompt,
-        ]
-    return None
-
-
 def invoke(command: list[str], cwd: Path, timeout: int) -> tuple[int | None, str, str, bool]:
     process = subprocess.Popen(
         command, cwd=cwd, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -181,7 +168,7 @@ def evaluate(task: dict[str, Any], fixture: Path, host_output: str, mode: str) -
     return not problems, problems, receipts
 
 
-def run_trial(host: str, mode: str, task: dict[str, Any], model: str, timeout: int, version: str | None) -> dict[str, Any]:
+def run_trial(host: str, mode: str, task: dict[str, Any], model: str, effort: str, timeout: int, version: str | None) -> dict[str, Any]:
     fixture = materialize(task, host, mode)
     prompt = task["prompt"]
     if mode == "kernel":
@@ -190,10 +177,10 @@ def run_trial(host: str, mode: str, task: dict[str, Any], model: str, timeout: i
             "`.amanar/kernel/amanar-workflow`; invoke it with Python from the repository root.\n\n"
             + prompt
         )
-    command = host_command(host, fixture, prompt, model)
+    command = host_command(host, fixture, prompt, model, effort)
     record: dict[str, Any] = {
-        "host": host, "hostVersion": version, "model": model if host == "codex" else "sonnet",
-        "reasoningEffort": "low", "mode": mode, "task": task["id"],
+        "host": host, "hostVersion": version, "model": "sonnet" if host == "claude" else model,
+        "reasoningEffort": effort, "mode": mode, "task": task["id"],
         "acceptance": False, "receipts": [], "environmentFailure": None,
     }
     if version is None or command is None:
@@ -227,12 +214,13 @@ def main() -> int:
     parser.add_argument("--host", choices=("codex", "claude", "pi", "hermes"), required=True)
     parser.add_argument("--mode", choices=("native", "kernel", "both"), default="both")
     parser.add_argument("--model", default="gpt-5.6-sol")
+    parser.add_argument("--effort", default="low")
     parser.add_argument("--timeout", type=int, default=300)
     args = parser.parse_args()
     version = host_version(args.host)
     modes = ("native", "kernel") if args.mode == "both" else (args.mode,)
     records = [
-        run_trial(args.host, mode, task, args.model, args.timeout, version)
+        run_trial(args.host, mode, task, args.model, args.effort, args.timeout, version)
         for task in load_tasks() for mode in modes
     ]
     RESULTS.mkdir(parents=True, exist_ok=True)
