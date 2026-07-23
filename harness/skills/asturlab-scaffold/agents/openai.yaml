@@ -1,7 +1,0 @@
-interface:
-  display_name: "Asturlab Scaffold"
-  short_description: "Create an adaptive repository harness"
-  default_prompt: "Use $asturlab-scaffold to design and apply the smallest repository harness that fits this project. Preserve existing conventions and do not impose a fixed tree."
-
-policy:
-  allow_implicit_invocation: false

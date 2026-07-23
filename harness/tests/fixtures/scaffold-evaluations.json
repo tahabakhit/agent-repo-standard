@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "purpose": "Behavioural review cases for explicit $asturlab-scaffold agent runs; deterministic checks validate this schema but do not compute recommendations.",
+  "purpose": "Behavioural review cases for explicit $amanar-scaffold agent runs; deterministic checks validate this schema but do not compute recommendations.",
   "cases": [
     {
       "id": "atlas-shaped-preservation",

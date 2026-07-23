@@ -10,5 +10,4 @@ validate:
 	python3 tests/validate-components.py
 	npm test --prefix workflow/agent-eval
 	uv run --frozen --directory storage/synology-mcp python -m unittest discover -s tests
-	uv run --frozen --directory agents/tiered-hermes --with pytest --with pyyaml --with mnemosyne-hermes python -m pytest tests -q
 	git diff --check

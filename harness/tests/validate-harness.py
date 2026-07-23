@@ -6,7 +6,7 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 REPO = ROOT.parent
-SKILL = ROOT / "skills" / "asturlab-scaffold"
+SKILL = ROOT / "skills" / "amanar-scaffold"
 FIXTURE = ROOT / "tests" / "fixtures" / "scaffold-evaluations.json"
 
 
@@ -20,7 +20,7 @@ def validate_tokens_and_metadata() -> None:
     frontmatter = text.split("---", 2)[1] if text.startswith("---") else ""
     require(re.search(r"^description:\s*.+Use only when explicitly invoked", frontmatter, re.M) is not None and "disable-model-invocation: true" in frontmatter, "invalid scaffold explicit frontmatter")
     require("allow_implicit_invocation: false" in (SKILL / "agents" / "openai.yaml").read_text(), "scaffold must be explicit-only")
-    allowed = {"asturlab-scaffold", "asturlab-workflow", "asturlab-inquire", "asturlab-design", "asturlab-orchestrate", "asturlab-assure", "agent-eval:evaluate-all"}
+    allowed = {"amanar-scaffold", "amanar-workflow", "amanar-inquire", "amanar-design", "amanar-orchestrate", "amanar-assure", "agent-eval:evaluate-all"}
     for path in SKILL.rglob("*.md"):
         for token in re.findall(r"\$[a-z][a-z0-9:-]+", path.read_text()):
             require(token[1:] in allowed, f"unresolved invocation token {token}: {path}")
@@ -28,8 +28,8 @@ def validate_tokens_and_metadata() -> None:
 
 def main() -> None:
     skill = (SKILL / "SKILL.md").read_text()
-    require(re.search(r"^name:\s*asturlab-scaffold$", skill, re.M) is not None, "invalid scaffold name")
-    require("$asturlab-scaffold" in skill, "canonical invocation missing")
+    require(re.search(r"^name:\s*amanar-scaffold$", skill, re.M) is not None, "invalid scaffold name")
+    require("$amanar-scaffold" in skill, "canonical invocation missing")
     metadata = (SKILL / "agents" / "openai.yaml").read_text()
     require("allow_implicit_invocation: false" in metadata, "scaffold must be explicit-only")
     validate_tokens_and_metadata()

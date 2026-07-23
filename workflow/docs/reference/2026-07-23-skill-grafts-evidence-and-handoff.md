@@ -10,7 +10,7 @@ vs Asturlab:
 
 - **Confabulation catch** — `curate`/`curator` scored 5/5 evidence (caught 3/3
   claims, cited the exact falsifying line, ran headless under `claude -p`);
-  `asturlab-assure` caught the same contradictions but scored 3/5 — no contract
+  `amanar-assure` caught the same contradictions but scored 3/5 — no contract
   to quote the falsifying command/output, no per-claim verdict vocab.
 - **Handoff artifact** — iamneilroberts `handoff` 23/25 vs Asturlab close-out
   18/25; its edge is self-expiring "stale-if" receipts, a verbatim id/path/SHA
@@ -21,9 +21,9 @@ reimplemented from `iamneilroberts/claude-skills` (MIT — attribution retained)
 this is a pattern reimplementation, not a file copy. `task-observer` (CC BY 4.0)
 and `unslop-ui` (upstream-derived) are deliberately not used.
 
-## Graft 1 — evidence-citation cardinal rule → `asturlab-assure` (architecture-stable)
+## Graft 1 — evidence-citation cardinal rule → `amanar-assure` (architecture-stable)
 
-Add to `workflow/skills/asturlab-assure/SKILL.md`, after the independence-disclosure
+Add to `workflow/skills/amanar-assure/SKILL.md`, after the independence-disclosure
 sentence:
 
 > No evidence, no verdict. Every finding cites the exact command run and its
@@ -53,14 +53,14 @@ closet** — a deduped verbatim id/path/SHA ledger; (c) **checklist-rebuild** �
 block that lets a fresh session reconstruct state mechanically.
 
 Key reconciliation: **the deterministic form of (a) already exists on the kernel
-branch.** `workflow/kernel/asturlab_workflow/receipts.py` binds
+branch.** `workflow/kernel/amanar_workflow/receipts.py` binds
 {workflow hash, check-def hash, command, exit, test count, timestamp, stdout/stderr
 digests, source digest} and marks a receipt STALE when the contract, check,
 source, or output changes. Do not reinvent it — surface it.
 
 ### Track A — if `main` / merged-remediation is chosen
 
-Graft into `asturlab-orchestrate` §8 "Close the outcome" (it still exists here):
+Graft into `amanar-orchestrate` §8 "Close the outcome" (it still exists here):
 
 - Add "stale-if receipts" and a "coordinate closet" to the §8 `Report:` list.
 - Add a checklist-rebuild block to §1 "Bootstrap automatically" (resume path),
@@ -70,19 +70,19 @@ Graft into `asturlab-orchestrate` §8 "Close the outcome" (it still exists here)
 
 ### Track B — if `feat/thin-portable-kernel` is chosen
 
-`asturlab-orchestrate` becomes a deprecated stub — do **not** graft there.
+`amanar-orchestrate` becomes a deprecated stub — do **not** graft there.
 Instead:
 
 - Element (a) = the kernel's receipts; already deterministic. Surface it.
-- Extend `asturlab-workflow`'s recipe with a **resume-digest render**: from
+- Extend `amanar-workflow`'s recipe with a **resume-digest render**: from
   `status --json` + receipts, emit a human handoff listing state
   (planned/implementing/blocked/verified), current vs **stale** receipts (the
   machine-checked "stale-if"), an id/artifact closet drawn from the contract's
   `artifacts`/`scope`, and a checklist-rebuild from remaining checks.
 - The kernel deliberately owns no handoff UX, so this is a correct *additive*
   home. Prefer a small `status --json`→markdown render step + `references/handoff.md`
-  over inline prose (line budget). A separate `asturlab-handoff` instrument is
-  possible but expands the six-instrument surface — extend `asturlab-workflow`
+  over inline prose (line budget). A separate `amanar-handoff` instrument is
+  possible but expands the six-instrument surface — extend `amanar-workflow`
   first.
 
 ## Cross-cutting (both grafts)

@@ -1,5 +1,5 @@
 [project]
-name = "asturlab-synology-mcp"
+name = "amanar-synology-mcp"
 version = "0.1.0"
 description = "Portable read-only Synology DSM MCP integration"
 requires-python = ">=3.11,<3.14"

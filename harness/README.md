@@ -1,7 +1,7 @@
 # Asturlab harness
 
 The canonical interface is
-[`$asturlab-scaffold`](skills/asturlab-scaffold/SKILL.md), supporting explicit
+[`$amanar-scaffold`](skills/amanar-scaffold/SKILL.md), supporting explicit
 `new`, `adopt`, and `audit` modes. Behavioral fixtures verify preservation and
 proportionality without imposing deterministic prose.
 

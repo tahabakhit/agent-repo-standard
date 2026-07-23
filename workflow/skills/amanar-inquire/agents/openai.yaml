@@ -1,0 +1,6 @@
+interface:
+  display_name: "Asturlab Inquire"
+  short_description: "Turn unclear intent into a success contract"
+  default_prompt: "Use $amanar-inquire to clarify this idea into accepted requirements and evidence."
+policy:
+  allow_implicit_invocation: false

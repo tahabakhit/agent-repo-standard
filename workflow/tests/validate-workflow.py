@@ -6,13 +6,13 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 SKILLS = ROOT / "skills"
 EXPECTED = {
-    "asturlab-workflow",
-    "asturlab-inquire",
-    "asturlab-design",
-    "asturlab-orchestrate",
-    "asturlab-assure",
+    "amanar-workflow",
+    "amanar-inquire",
+    "amanar-design",
+    "amanar-orchestrate",
+    "amanar-assure",
 }
-ALLOWED_TOKENS = {f"asturlab-{name.split('asturlab-', 1)[1]}" for name in EXPECTED} | {"asturlab-scaffold", "agent-eval:evaluate-all"}
+ALLOWED_TOKENS = {f"amanar-{name.split('amanar-', 1)[1]}" for name in EXPECTED} | {"amanar-scaffold", "agent-eval:evaluate-all"}
 
 
 def validate_skill(root: Path) -> None:

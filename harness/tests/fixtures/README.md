@@ -1,6 +1,6 @@
 # Scaffold behavioural evaluation cases
 
-`scaffold-evaluations.json` is a small review corpus for explicit `$asturlab-scaffold`
+`scaffold-evaluations.json` is a small review corpus for explicit `$amanar-scaffold`
 agent runs. Each case records the repository signals, expected recommendation,
 structures that must survive, prohibited recommendations, and human review
 criteria.

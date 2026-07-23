@@ -5,9 +5,9 @@ Copier-compatible state. It resolves to commit
 `9feb5960714fcf0c67b87020630c3a1fed233c8e`. The fixed generator and its dedicated
 support surface do not exist on the current Asturlab branch.
 
-Use `$asturlab-scaffold audit` for an existing repository, then
-`$asturlab-scaffold adopt` only when changes are justified. Use
-`$asturlab-scaffold new` for a new repository. These adaptive workflows preserve
+Use `$amanar-scaffold audit` for an existing repository, then
+`$amanar-scaffold adopt` only when changes are justified. Use
+`$amanar-scaffold new` for a new repository. These adaptive workflows preserve
 valid custom structures and do not imply a Copier update path.
 
 Historical generated repositories remain independent. Do not retrieve the tagged

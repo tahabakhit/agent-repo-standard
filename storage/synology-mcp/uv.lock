@@ -25,7 +25,7 @@ wheels = [
 ]
 
 [[package]]
-name = "asturlab-synology-mcp"
+name = "amanar-synology-mcp"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
