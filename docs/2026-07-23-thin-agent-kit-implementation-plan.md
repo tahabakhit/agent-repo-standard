@@ -6,14 +6,14 @@ Claude secondary. The deterministic kernel is on `main` (commit `aa9cb6f`,
 `workflow/kernel/`, CLI v1.0.0, 44 tests), so its gating dependency is cleared.
 Lead workstream is now WS0 — make Pi a first-class, pack-passing host.
 
-**Progress (2026-07-24):** WS0 (Pi first-class host), WS1 (skill-slimming — thin
-`amanar-workflow` adapter + `render_handoff`, `amanar-orchestrate` stub,
-`amanar-assure` evidence-citation), WS3 (task-spec + compiler), and WS2.1
-(bounded-loop runner) complete and committed (`ada2226`, `009b54b`, `92e4aca`, +
-WS2.1). The loop runner owns the controller cycle (`begin`/`run-check`/`verify`), so
-it absorbs the measured single-shot flakiness — missed `verify` and spurious
-`block`. Remaining: WS2.2 (backpressure hook) and WS2.3 (sync-skills), which need
-the deferred sync-skills-ownership and personal-catalog-overlap decisions.
+**Progress (2026-07-24): plan fully implemented.** WS0–WS3 and all three WS2 ADDs
+complete and committed (`ada2226`, `009b54b`, `92e4aca`, `f363f35`, `0c36506`, +
+WS2.3). Pi is a first-class measured host; the skills are slimmed onto the kernel;
+the bounded-loop runner, backpressure hook, and cross-harness sync-skills each ship
+with an `AGENTS.md`, a validator, and a `components.yaml` entry, all wired into
+`make validate`. The loop runner owns the controller cycle
+(`begin`/`run-check`/`verify`), absorbing the measured single-shot flakiness (missed
+`verify`, spurious `block`).
 
 ## Current baseline (verified against the tree)
 
@@ -265,19 +265,24 @@ from `iamneilroberts/claude-skills` (MIT); retain an attribution line in
 Each component change lands with its validator wired into `make validate` in the
 same commit, so the gate never goes red between steps.
 
-## Decisions to confirm (defaults chosen; change before implementing)
+## Decisions (resolved)
 
-- **sync-skills ownership**: ship the amanar-versioned tool as the superset and
-  retire the `~/.agents/scripts/*.sh` prototypes to it (recommended), vs. just add a
-  Claude linker to the existing home scripts and keep amanar out of user-dir tooling.
-- **personal-catalog overlap**: the pre-amanar `~/.agents/skills` entries
-  (`orchestrate`, `scaffold`, `codebase-design`, `tdd`, …) are superseded by the
-  `amanar-*` skills and should be replaced on sync (recommended), vs. coexist under
-  distinct names.
-- **ADD placement**: loop in `workflow/loop/`; hook and `sync-skills` in `harness/`
-  (recommended), vs. all three under `workflow/`.
+- **sync-skills ownership**: ship the amanar-versioned tool as the Pi/Codex/Claude
+  superset; the `~/.agents/scripts/*.sh` prototypes can be retired to it.
+- **personal-catalog overlap**: supersede overlapping pre-amanar entries
+  (`orchestrate`→`amanar-orchestrate`, `scaffold`→`amanar-scaffold`,
+  `codebase-design`→`amanar-design`) on sync — backed up, never deleted outright.
+  Non-overlapping personal skills (`tdd`, `grill`, …) are left alone.
+- **ADD placement**: loop in `workflow/loop/`; hook and sync-skills in `harness/`.
 - **orchestrate**: deprecation stub kept in the validator's five-name set this
-  release (recommended), vs. remove now → four-skill validator set.
+  release; removal to a four-skill set is a later change.
+
+## Follow-ups (not blocking)
+
+- Pack `token_usage()` does not parse Pi's usage keys (`input`/`output`/`cacheRead`);
+  Pi cost records as null.
+- Re-measure the Pi pack through the loop runner to confirm reliable completion.
+- Retire the `~/.agents/scripts/*.sh` prototypes now that sync-skills supersedes them.
 
 ## Definition of done
 

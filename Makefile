@@ -7,6 +7,7 @@
 validate:
 	python3 harness/tests/validate-harness.py
 	python3 -m unittest discover -s harness/backpressure/tests
+	python3 -m unittest discover -s harness/sync-skills/tests
 	python3 workflow/tests/validate-workflow.py
 	python3 -m unittest discover -s workflow/kernel/tests
 	python3 -m unittest discover -s workflow/loop/tests
