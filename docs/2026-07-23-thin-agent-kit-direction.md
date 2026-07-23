@@ -1,7 +1,9 @@
 # Direction — Amanar as the thin, Pi-first agent-kit
 
-Status: research complete · plan not yet built · 2026-07-23 · reconciles with the
-pending `feat/thin-portable-kernel` fork / ADR-0001 and the workflow grafts spec
+Status: research complete · kernel adopted 2026-07-23 · plan not yet built. The
+`feat/thin-portable-kernel` fork is **resolved** — its deterministic kernel is
+merged to `main` and the branch is retired (see reconciliation item 1). ADR-0001
+accepted. Reconciles with the workflow grafts spec
 (`workflow/docs/reference/2026-07-23-skill-grafts-evidence-and-handoff.md`).
 
 ## Purpose
@@ -40,6 +42,7 @@ Full briefing in the Igoudar wiki, topic `agent-workflows` (commit `7c8456d`):
 - `workflow/skills/amanar-assure` — assurance/governance (blocker/material/advisory + independence).
 - `workflow/skills/amanar-workflow` — umbrella lifecycle.
 - `workflow/agent-eval` — Codex-native evaluation + deterministic runners.
+- `workflow/kernel/` — **deterministic workflow kernel** (contract + controller + check receipts + JSON schema + 44 passing tests; CLI `amanar-workflow` v1.0.0). Adopted 2026-07-23 from the resolved fork; ADR `workflow/docs/decisions/adrs/0001-thin-portable-kernel.md`; migration guide `workflow/docs/migrating-to-portable-kernel.md`. Skills are not yet routed through it (deferred — see below).
 
 ## Gap map (exists vs add)
 
@@ -78,8 +81,11 @@ onto the existing `inquire`/`design`/`orchestrate` skills.
 
 ## Reconciliation items for the plan
 
-1. **`feat/thin-portable-kernel` fork / ADR-0001** — resolve before adding new
-   surface; this direction should land as (or on top of) that kernel, not beside it.
+1. **`feat/thin-portable-kernel` fork / ADR-0001 — DONE (2026-07-23).** The
+   deterministic kernel was adopted onto `main` (renamed `asturlab→amanar`,
+   additive; skill rewrites, adapters, and the agent-eval quarantine deliberately
+   deferred), ADR-0001 accepted, and the fork branch + orphaned Codex worktree
+   retired. New surface now lands on `workflow/kernel/`.
 2. **RPI ↔ existing skills** — decide exact mapping of Research/Plan/Implement to
    `amanar-inquire`/`amanar-design`/`amanar-orchestrate`; add worktree isolation +
    per-phase compaction to orchestrate.
@@ -94,7 +100,18 @@ onto the existing `inquire`/`design`/`orchestrate` skills.
 
 ## Next session
 
-Build the implementation plan from this note: order the ADDs behind the
-`feat/thin-portable-kernel` resolution, define each new component's path +
-`components.yaml` entry + validator, and keep every addition inside the ROI-ceiling
-constraints above.
+Build the implementation plan from this note. The kernel is already on `main`, so
+the gating dependency is cleared. Ordered work:
+
+1. **Skill-slimming onto the kernel** (first task) — per
+   `workflow/docs/migrating-to-portable-kernel.md`: `amanar-workflow` → thin
+   adapter over the controller, `amanar-orchestrate` → retire from portable policy
+   (reconciled with main's already-neutralized orchestrate), `amanar-assure` →
+   split (deterministic gates to contracts, adversarial guidance stays). Keep
+   `amanar-inquire`/`amanar-design`.
+2. **The three ADDs** — bounded-loop runner, backpressure pre-commit hook,
+   cross-harness `sync-skills` — each built on the kernel, each with a
+   `components.yaml` entry + validator.
+3. **RPI task-spec** as a reference under `amanar-design`/`amanar-orchestrate`.
+
+Keep every addition inside the ROI-ceiling constraints above.

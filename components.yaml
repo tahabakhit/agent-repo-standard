@@ -8,6 +8,10 @@ components:
     path: workflow
     authority: instructional and project-scoped lifecycle work
     validation: python3 workflow/tests/validate-workflow.py
+  - id: amanar-workflow-kernel
+    path: workflow/kernel
+    authority: deterministic host-independent workflow contract, controller, and check receipts
+    validation: python3 -m unittest discover -s workflow/kernel/tests
   - id: amanar-workflow-agent-eval
     path: workflow/agent-eval
     authority: local evaluation records and deterministic evaluator tooling

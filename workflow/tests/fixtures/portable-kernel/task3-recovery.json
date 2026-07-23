@@ -1,0 +1,16 @@
+{
+  "id": "task3-recovery",
+  "prompt": "Run the test suite, diagnose the failure, and minimally fix slug.py. Do not edit tests. Rerun the exact suite and report its discovered-test count.",
+  "files": {
+    "AGENTS.md": "# Fixture instructions\n\nFix the implementation, not the tests. A task is incomplete until the previously failing suite passes with at least four discovered tests.\n",
+    "slug.py": "import re\n\n\ndef slugify(value):\n    return re.sub(r\"\\s+\", \"-\", value.strip().lower())\n",
+    "tests/test_slug.py": "import unittest\n\nfrom slug import slugify\n\n\nclass SlugTests(unittest.TestCase):\n    def test_spaces(self): self.assertEqual(slugify(\"Hello World\"), \"hello-world\")\n    def test_punctuation(self): self.assertEqual(slugify(\"Hello, World!\"), \"hello-world\")\n    def test_repeated_separators(self): self.assertEqual(slugify(\"a -- b\"), \"a-b\")\n    def test_unicode(self): self.assertEqual(slugify(\"Tromsø Guide\"), \"tromsø-guide\")\n"
+  },
+  "contract": {
+    "schemaVersion": "1.0.0", "id": "slug-recovery", "objective": "Repair slugify so the existing four-test suite passes",
+    "scope": ["slug.py"], "exclusions": ["tests/"], "artifacts": ["slug.py"],
+    "authority": {"repositoryWrites": true, "liveEffects": false},
+    "checks": [{"id": "tests", "command": "python3 -m unittest discover -s tests -v", "expectedExit": 0, "outputContains": ["OK"], "timeoutSeconds": 30, "minTests": 4, "testParser": "unittest", "liveEffect": false}]
+  },
+  "acceptance": {"command": ["python3", "-m", "unittest", "discover", "-s", "tests", "-v"], "outputContains": "OK", "readOnly": false}
+}

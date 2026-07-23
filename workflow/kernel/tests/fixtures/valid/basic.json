@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "fixture-workflow",
+  "objective": "Exercise the public contract",
+  "scope": ["src/", "result.txt"],
+  "exclusions": ["src/vendor/"],
+  "artifacts": ["result.txt"],
+  "authority": {"repositoryWrites": true, "liveEffects": false},
+  "checks": [{
+    "id": "tests",
+    "command": "python3 -m unittest discover -s tests -v",
+    "expectedExit": 0,
+    "outputContains": ["OK"],
+    "timeoutSeconds": 30,
+    "minTests": 1,
+    "testParser": "unittest",
+    "liveEffect": false
+  }]
+}

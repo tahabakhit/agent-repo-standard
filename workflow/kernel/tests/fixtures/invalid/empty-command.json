@@ -1,0 +1,1 @@
+{"schemaVersion":"1.0.0","id":"bad","objective":"x","scope":["x"],"exclusions":[],"artifacts":[],"authority":{"repositoryWrites":true,"liveEffects":false},"checks":[{"id":"c","command":" ","expectedExit":0,"outputContains":[],"timeoutSeconds":1,"minTests":0,"testParser":"none","liveEffect":false}]}

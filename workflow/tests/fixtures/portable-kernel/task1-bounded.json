@@ -1,0 +1,17 @@
+{
+  "id": "task1-bounded",
+  "prompt": "Add median(values) to metrics.py. It must support odd and even lengths, preserve the caller's list, and raise ValueError on empty input. Add at least three focused unit tests while preserving mean. Run the tests and report the exact verification command. Do not modify verify.py.",
+  "files": {
+    "AGENTS.md": "# Fixture instructions\n\nImplement only the requested metrics feature. Preserve existing behavior. Run the repository tests before claiming completion.\n",
+    "metrics.py": "def mean(values):\n    if not values:\n        raise ValueError(\"values must not be empty\")\n    return sum(values) / len(values)\n",
+    "tests/test_metrics.py": "import unittest\n\nfrom metrics import mean\n\n\nclass MeanTests(unittest.TestCase):\n    def test_mean(self):\n        self.assertEqual(mean([1, 2, 3]), 2)\n",
+    "verify.py": "import unittest\n\nfrom metrics import mean, median\n\n\nclass Acceptance(unittest.TestCase):\n    def test_mean_preserved(self): self.assertEqual(mean([2, 4]), 3)\n    def test_odd(self): self.assertEqual(median([9, 1, 4]), 4)\n    def test_even(self): self.assertEqual(median([1, 2, 8, 9]), 5)\n    def test_input_unchanged(self):\n        values = [3, 1, 2]\n        median(values)\n        self.assertEqual(values, [3, 1, 2])\n    def test_empty(self):\n        with self.assertRaises(ValueError): median([])\n\n\nif __name__ == \"__main__\": unittest.main()\n"
+  },
+  "contract": {
+    "schemaVersion": "1.0.0", "id": "bounded-median", "objective": "Implement and test median without regressing mean",
+    "scope": ["metrics.py", "tests/test_metrics.py"], "exclusions": ["verify.py"], "artifacts": ["metrics.py", "tests/test_metrics.py"],
+    "authority": {"repositoryWrites": true, "liveEffects": false},
+    "checks": [{"id": "tests", "command": "python3 -m unittest discover -s tests -v", "expectedExit": 0, "outputContains": ["OK"], "timeoutSeconds": 30, "minTests": 4, "testParser": "unittest", "liveEffect": false}]
+  },
+  "acceptance": {"command": ["python3", "verify.py"], "outputContains": "OK", "readOnly": false}
+}
