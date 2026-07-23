@@ -6,12 +6,14 @@ Claude secondary. The deterministic kernel is on `main` (commit `aa9cb6f`,
 `workflow/kernel/`, CLI v1.0.0, 44 tests), so its gating dependency is cleared.
 Lead workstream is now WS0 — make Pi a first-class, pack-passing host.
 
-**Progress (2026-07-24):** WS0 (Pi first-class host) and WS1 (skill-slimming —
-thin `amanar-workflow` adapter + `render_handoff`, `amanar-orchestrate` stub,
-`amanar-assure` evidence-citation) complete and committed (`ada2226`, `009b54b`).
-Next: WS3 (task-spec + compiler), then WS2.1 (bounded-loop runner — the
-evidence-identified reliability mechanism), then WS2.2/2.3 (which need the deferred
-sync-skills decisions).
+**Progress (2026-07-24):** WS0 (Pi first-class host), WS1 (skill-slimming — thin
+`amanar-workflow` adapter + `render_handoff`, `amanar-orchestrate` stub,
+`amanar-assure` evidence-citation), WS3 (task-spec + compiler), and WS2.1
+(bounded-loop runner) complete and committed (`ada2226`, `009b54b`, `92e4aca`, +
+WS2.1). The loop runner owns the controller cycle (`begin`/`run-check`/`verify`), so
+it absorbs the measured single-shot flakiness — missed `verify` and spurious
+`block`. Remaining: WS2.2 (backpressure hook) and WS2.3 (sync-skills), which need
+the deferred sync-skills-ownership and personal-catalog-overlap decisions.
 
 ## Current baseline (verified against the tree)
 
