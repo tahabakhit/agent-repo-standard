@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+"""Backpressure pre-commit hook: refuse the commit unless structural checks pass.
+
+Runs `git diff --cached --check` and, when a workflow contract is present, every
+declared check command from `.amanar/workflow.json`. Structural backpressure over
+model cleverness: the same checks that gate the controller's `verify` also gate the
+commit. Self-contained and portable; installed per-repo only, never globally.
+"""
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+
+def main() -> int:
+    top = subprocess.run(
+        ["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True,
+    )
+    root = Path(top.stdout.strip() or ".")
+    problems: list[str] = []
+
+    whitespace = subprocess.run(["git", "diff", "--cached", "--check"], cwd=root, capture_output=True, text=True)
+    if whitespace.returncode != 0:
+        problems.append("whitespace or conflict markers in staged changes:\n" + whitespace.stdout.strip())
+
+    contract_path = root / ".amanar" / "workflow.json"
+    if contract_path.is_file():
+        try:
+            checks = json.loads(contract_path.read_text(encoding="utf-8")).get("checks", [])
+        except (OSError, ValueError) as exc:
+            problems.append(f"cannot read workflow contract: {exc}")
+            checks = []
+        for check in checks:
+            try:
+                result = subprocess.run(
+                    check["command"], shell=True, cwd=root, capture_output=True,
+                    text=True, timeout=check.get("timeoutSeconds", 120),
+                )
+            except subprocess.TimeoutExpired:
+                problems.append(f"check {check.get('id', '?')} timed out")
+                continue
+            combined = result.stdout + result.stderr
+            if result.returncode != check.get("expectedExit", 0) or not all(
+                token in combined for token in check.get("outputContains", [])
+            ):
+                problems.append(f"check {check.get('id', '?')} failed")
+
+    if problems:
+        print("backpressure: commit blocked", file=sys.stderr)
+        for problem in problems:
+            print("  - " + problem, file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

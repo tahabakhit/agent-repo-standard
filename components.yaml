@@ -8,6 +8,10 @@ components:
     path: workflow
     authority: instructional and project-scoped lifecycle work
     validation: python3 workflow/tests/validate-workflow.py
+  - id: amanar-backpressure
+    path: harness/backpressure
+    authority: per-repo pre-commit gate; installs only into a repo's own .git/hooks
+    validation: python3 -m unittest discover -s harness/backpressure/tests
   - id: amanar-workflow-kernel
     path: workflow/kernel
     authority: deterministic host-independent workflow contract, controller, and check receipts
