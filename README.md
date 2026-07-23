@@ -1,6 +1,6 @@
 # Amanar
 
-Amanar is AmeÉ£rad's reusable, portable, independently testable instrument suite.
+Amanar is Ameɣrad's reusable, portable, independently testable instrument suite.
 It retains the full `agent-repo-standard` history and the signed final compatibility
 tag `legacy-fixed-v1.0.11` at commit `9feb596`.
 
@@ -19,7 +19,7 @@ the compatibility tag. Retrieve it from that tag only; it is not a current
 Amanar interface.
 
 Amanar does not contain Mogador deployment state. Igoudar records accepted tool
-relationships, while Anáºar owns private deployment and operational use.
+relationships, while Anẓar owns private deployment and operational use.
 
 ## Validation
 

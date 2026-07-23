@@ -1,4 +1,4 @@
-# Asturlab workflow
+# Amanar workflow
 
 The workflow component provides five explicit contracts:
 

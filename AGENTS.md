@@ -1,9 +1,9 @@
 # Amanar agent entrypoint
 
-Amanar is AmeÉ£rad's reusable instruments repository. Source here must be portable,
-sanitized, independently understandable, and testable without Igoudar or Anáºar.
+Amanar is Ameɣrad's reusable instruments repository. Source here must be portable,
+sanitized, independently understandable, and testable without Igoudar or Anẓar.
 Mogador-specific topology, hostnames, credentials, private profiles, deployment
-state, and operational evidence belong in Anáºar.
+state, and operational evidence belong in Anẓar.
 
 Read `README.md`, `components.yaml`, then the nearest component `AGENTS.md`.
 The signed tag `legacy-fixed-v1.0.11` preserves the final fixed Copier generator;

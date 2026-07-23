@@ -15,6 +15,6 @@ Run tests from an environment with the locked dependencies:
 uv run python -m unittest discover -s tests
 ```
 
-Source provenance: migrated from Igoudar/Anáºar operational component
+Source provenance: migrated from Igoudar/Anẓar operational component
 `mogador-storage-synology` at Igoudar commit `7b2260c`. Mogador launch and smoke
-configuration remains in Anáºar.
+configuration remains in Anẓar.
