@@ -1,20 +1,73 @@
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { runValidators } from "../validators/index.ts";
+import { runPreCommit } from "../hooks/preCommit.ts";
+import { runPreToolUse } from "../hooks/preToolUse.ts";
+import { installPreCommit } from "../hooks/installHook.ts";
+import { runSyncSkills } from "../sync/syncSkills.ts";
 
-/** Amanar CLI dispatcher. Grows one subcommand per collapse slice. */
-export function main(argv: string[]): void {
+/** Amanar CLI dispatcher. One binary all hooks and tools funnel through. */
+export async function main(argv: string[]): Promise<void> {
   const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
-  const [cmd] = argv;
+  const [cmd, ...rest] = argv;
 
   switch (cmd) {
     case "validate":
       runValidators(repoRoot);
       break;
+
+    case "hook":
+      await runHook(rest);
+      break;
+
+    case "hooks": {
+      // hooks install [--root R] [--remove]
+      if (rest[0] !== "install") {
+        console.error("amanar hooks: unknown subcommand. Available: install");
+        process.exit(2);
+      }
+      const rootFlag = rest.indexOf("--root");
+      installPreCommit({
+        root: rootFlag !== -1 ? rest[rootFlag + 1] : ".",
+        remove: rest.includes("--remove"),
+      });
+      break;
+    }
+
+    case "sync-skills":
+      runSyncSkills(rest);
+      break;
+
     default:
-      console.error(`amanar: unknown command '${cmd ?? ""}'. Available: validate`);
+      console.error(
+        `amanar: unknown command '${cmd ?? ""}'. Available: validate, hook, hooks, sync-skills`,
+      );
       process.exit(2);
   }
 }
 
-main(process.argv.slice(2));
+async function runHook(rest: string[]): Promise<void> {
+  const name = rest[0];
+  switch (name) {
+    case "pre-commit":
+      process.exit(runPreCommit(process.cwd()));
+      break;
+    case "pre-tool-use":
+      await runPreToolUse();
+      break;
+    case "user-prompt-submit":
+      // Placeholder — the essence re-injection lands in a later slice.
+      process.exit(0);
+      break;
+    default:
+      console.error(
+        `amanar hook: unknown hook '${name ?? ""}'. Available: pre-commit, pre-tool-use, user-prompt-submit`,
+      );
+      process.exit(2);
+  }
+}
+
+main(process.argv.slice(2)).catch((err: unknown) => {
+  console.error(err);
+  process.exit(1);
+});

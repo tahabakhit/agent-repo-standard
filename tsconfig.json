@@ -17,13 +17,13 @@
     "knowledge/src/**/*.ts",
     "harness/pi/src/**/*.ts",
     "harness/claude/hooks/**/*.ts",
-    "harness/claude/vendor/**/*.ts",
-    "harness/claude/tests/**/*.ts"
+    "harness/claude/vendor/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     "**/node_modules",
     "**/dist",
+    "**/*.test.ts",
     "workflow/tests/.runs",
     "workflow/tests/results"
   ]

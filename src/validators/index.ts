@@ -1,5 +1,4 @@
 import { fileURLToPath } from "node:url";
-import { join } from "node:path";
 import { validateHarness } from "./harness.ts";
 import { validateWorkflow } from "./workflow.ts";
 import { validateComponents } from "./components.ts";
@@ -10,13 +9,9 @@ import { validateSkillConsistency } from "./skillConsistency.ts";
  * the first failure, a `FAIL [name]: message` line, then exits non-zero.
  */
 export function runValidators(repoRoot: string): void {
-  // Files that legitimately name the estate identifier and must be skipped by
-  // the components scan: this validator's own source, plus the Python
-  // components validator during the parity window (removed in a later slice).
-  const identifierSources = [
-    fileURLToPath(new URL("./components.ts", import.meta.url)),
-    join(repoRoot, "tests", "validate-components.py"),
-  ];
+  // This validator's own source names the estate identifier (assembled from
+  // fragments) and is skipped by the components scan.
+  const identifierSources = [fileURLToPath(new URL("./components.ts", import.meta.url))];
 
   const steps: Array<[string, () => string]> = [
     ["harness", () => validateHarness(repoRoot)],
