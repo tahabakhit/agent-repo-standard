@@ -12,9 +12,6 @@
   },
   "include": [
     "src/**/*.ts",
-    "workflow/kernel/src/**/*.ts",
-    "workflow/loop/src/**/*.ts",
-    "knowledge/src/**/*.ts",
     "harness/pi/src/**/*.ts",
     "harness/claude/hooks/**/*.ts",
     "harness/claude/vendor/**/*.ts"

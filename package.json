@@ -9,7 +9,7 @@
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
-    "test": "node --test src/hooks/tests/*.test.ts src/sync/tests/*.test.ts workflow/kernel/tests/*.test.ts workflow/loop/tests/*.test.ts knowledge/tests/*.test.ts harness/pi/tests/*.test.ts harness/claude/tests/*.test.ts workflow/agent-eval/tests/*.test.mjs"
+    "test": "node --test src/hooks/tests/*.test.ts src/sync/tests/*.test.ts src/kernel/tests/*.test.ts src/loop/tests/*.test.ts src/knowledge/tests/*.test.ts harness/pi/tests/*.test.ts harness/claude/tests/*.test.ts workflow/agent-eval/tests/*.test.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

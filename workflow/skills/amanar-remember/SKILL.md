@@ -26,7 +26,7 @@ flags (`--store`, `--no-interactive`) come before the verb. Pipe content on stdi
 
 ```
 echo "The entry body in markdown." | \
-  node <repo>/knowledge/src/kb.ts --no-interactive save \
+  node <repo>/src/knowledge/src/kb.ts --no-interactive save \
     --title "Short, search-friendly title" \
     --type fact \
     --tags tag1,tag2 \
