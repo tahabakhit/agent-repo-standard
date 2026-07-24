@@ -12,7 +12,7 @@ Seven skills ship under a single `skills/` directory:
 **From git**
 
 ```
-pi install git:github.com/your-org/amanar
+pi install git:github.com/tahabakhit/amanar
 ```
 
 **From a local clone**
