@@ -51,8 +51,8 @@ to the first 256 KiB per stream; digests cover exactly those stored bytes.
 Receipts prove internal consistency with controller-produced local evidence.
 They are not signatures and cannot prevent forgery by an actor with write access
 to the same runtime directory. An organization may explicitly export reviewed
-receipts into Anẓar-owned evidence, but Amanar does not export or deploy them
-automatically.
+receipts into its own downstream evidence store, but Amanar does not export or
+deploy them automatically.
 
 Timeout handling stops the check process group, discovers and kills descendants
 that detached with a new session, then reaps the launched process. This covers

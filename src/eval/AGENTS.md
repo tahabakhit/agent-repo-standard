@@ -1,6 +1,8 @@
 # Agent Eval instructions
 
-Read `docs/reference/product-spec.md` before changing behavior.
+The product spec is archived in the coordination repo under
+`docs/reference/amanar/eval/reference/product-spec.md`; read it before changing
+behavior.
 
 - Keep the implementation dependency-free unless a measured need justifies otherwise.
 - Use Node.js standard library, semantic HTML, and deterministic JSON.

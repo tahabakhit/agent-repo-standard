@@ -38,6 +38,25 @@ src/              shared TypeScript library
 | `amanar-onboard` | explicit-only | Design, audit, or apply the smallest useful repository harness |
 
 Live-effect skills are explicit-only; the rest are model-invocable by default.
+Six more model-invocable skills — `amanar-essence`, `amanar-guide`,
+`amanar-worktrees`, `amanar-debug`, `amanar-discover`, `amanar-last30days` —
+round out the promoted set. See [docs/skills.md](docs/skills.md).
+
+## Documentation
+
+- [docs/skills.md](docs/skills.md) — every skill and when it fires.
+- [docs/architecture.md](docs/architecture.md) — enforcement layers, capability
+  gating, native-tool adaptation, injection.
+- [docs/eval.md](docs/eval.md) — the five-suite regression harness (`bin/amanar eval`).
+- [docs/config.md](docs/config.md) — templates, private overlay, and install.
+
+## Enforcement
+
+The kit's value is the forcing layer, not the advice: safety, verification, and
+completion never depend on the model choosing to comply. A runner owns the loop
+and gates "done" on external evidence; a single dispatcher (`bin/amanar hook`)
+applies hard deny/completion gates; injection keeps the active checklist in
+front of the model. See [docs/architecture.md](docs/architecture.md).
 
 ## Compatibility
 

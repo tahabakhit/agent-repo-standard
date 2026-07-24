@@ -1,9 +1,9 @@
 {
   "name": "amanar",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Amanar agent-kit: deterministic workflow, inquiry, design, assurance, and memory skills for Pi and Claude Code",
+  "description": "Amanar agent-kit: one plugin-spec package of skills, hooks, and tools for Pi, Claude Code, and Codex — with a runner that gates completion on evidence.",
   "engines": {
     "node": ">=22"
   },

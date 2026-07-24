@@ -66,4 +66,5 @@ Remove the `agent-eval` marketplace entry separately if the plugin will not be r
 - `scripts/agent-eval.mjs` is the sole score, confidence, path, and rendering authority.
 - Reviewed JSON is canonical; raw artifacts stay ignored; `dist/index.html` is generated offline.
 
-See the [approved product specification](docs/reference/product-spec.md), [ADR-0001](docs/decisions/adrs/0001-native-codex-orchestration.md) (superseded), and [ADR-0002](docs/decisions/adrs/0002-harness-agnostic-orchestration.md).
+The product specification and ADRs (0001 superseded, 0002) are archived in the
+coordination repo under `docs/reference/amanar/eval/`.
