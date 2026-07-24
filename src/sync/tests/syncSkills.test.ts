@@ -50,8 +50,8 @@ afterEach(() => {
 });
 
 test("discovers the amanar skills", () => {
-  assert.ok("amanar-workflow" in sources);
-  assert.ok("amanar-scaffold" in sources);
+  assert.ok("amanar-deliver" in sources);
+  assert.ok("amanar-onboard" in sources);
   assert.ok(Object.keys(sources).every((name) => name.startsWith("amanar-")));
 });
 
@@ -85,7 +85,7 @@ test("supersede backs up overlapping personal skill", () => {
   assert.ok(!existsSync(old));
   const backup = join(homes.pi, "skills", "backups", `sync-skills-${STAMP}`, "codebase-design");
   assert.ok(existsSync(backup));
-  assert.ok(lstatSync(join(homes.pi, "skills", "amanar-design")).isSymbolicLink());
+  assert.ok(lstatSync(join(homes.pi, "skills", "amanar-plan")).isSymbolicLink());
 });
 
 test("no supersede leaves personal skill", () => {

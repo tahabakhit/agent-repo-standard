@@ -2,7 +2,7 @@
 /**
  * Bounded-loop runner entry point.
  *
- * Usage: node workflow/loop/run-loop.ts --host pi --root PATH
+ * Usage: node src/loop/run-loop.ts --host pi --root PATH
  *
  * Invokes the TypeScript loop runner with the given flags. All flags are
  * forwarded to `loop()`; the result is printed as JSON. Exits 0 if the

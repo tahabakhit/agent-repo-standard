@@ -8,9 +8,9 @@ import {
 } from "./roster.ts";
 import { parseFrontmatter, escapeRegExp, walkFiles } from "./util.ts";
 
-/** Port of workflow/tests/validate-workflow.py — canonical workflow skills. */
+/** Canonical skill-roster validator over the single root `skills/` tree. */
 export function validateWorkflow(repoRoot: string): string {
-  const SKILLS = join(repoRoot, "workflow", "skills");
+  const SKILLS = join(repoRoot, "skills");
   const actual = readdirSync(SKILLS, { withFileTypes: true })
     .filter((e) => e.isDirectory())
     .map((e) => e.name);

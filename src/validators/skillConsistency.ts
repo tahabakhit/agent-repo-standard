@@ -2,13 +2,12 @@ import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
 /**
- * Port of scripts/check-skill-consistency.mjs — every skill under
- * workflow/skills and harness/skills has a SKILL.md whose name matches its
- * directory, a non-empty description, and an invocation policy that agrees
- * between SKILL.md and agents/openai.yaml.
+ * Every skill under the single root `skills/` tree has a SKILL.md whose name
+ * matches its directory, a non-empty description, and an invocation policy that
+ * agrees between SKILL.md and agents/openai.yaml.
  */
 export function validateSkillConsistency(repoRoot: string): string {
-  const roots = [join(repoRoot, "workflow", "skills"), join(repoRoot, "harness", "skills")];
+  const roots = [join(repoRoot, "skills")];
   let total = 0;
   for (const root of roots) {
     if (!existsSync(root)) throw new Error(`skill root not found: ${root}`);
@@ -18,7 +17,7 @@ export function validateSkillConsistency(repoRoot: string): string {
       total++;
     }
   }
-  return `PASS: ${total} skill(s) checked across workflow/skills and harness/skills — all consistent`;
+  return `PASS: ${total} skill(s) checked under skills/ — all consistent`;
 }
 
 function parseFrontmatter(text: string): string {

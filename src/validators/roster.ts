@@ -5,22 +5,18 @@
  */
 
 // Skills with live effects must stay explicit-only.
-export const EXPLICIT_ONLY = new Set<string>(["amanar-workflow"]);
+export const EXPLICIT_ONLY = new Set<string>(["amanar-deliver", "amanar-onboard"]);
 
 // Skills that are model-invocable by default.
 export const MODEL_INVOCABLE = new Set<string>([
-  "amanar-inquire",
-  "amanar-design",
-  "amanar-assure",
+  "amanar-interview",
+  "amanar-plan",
+  "amanar-adversarial-review",
   "amanar-remember",
-  "amanar-writing-skills",
+  "amanar-author-skill",
 ]);
 
 export const KNOWN_SKILLS = new Set<string>([...EXPLICIT_ONLY, ...MODEL_INVOCABLE]);
 
 // Invocation tokens that may appear in skill markdown.
-export const ALLOWED_TOKENS = new Set<string>([
-  ...KNOWN_SKILLS,
-  "amanar-scaffold",
-  "agent-eval:evaluate-all",
-]);
+export const ALLOWED_TOKENS = new Set<string>([...KNOWN_SKILLS]);

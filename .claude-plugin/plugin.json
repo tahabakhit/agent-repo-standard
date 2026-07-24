@@ -1,0 +1,8 @@
+{
+  "name": "amanar",
+  "description": "Amanar agent-kit: skills (interview, plan, adversarial-review, deliver, remember, author-skill, onboard) plus a PreToolUse backpressure gate, funneled through bin/amanar.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Amanar"
+  }
+}

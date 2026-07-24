@@ -1,5 +1,5 @@
 import { fileURLToPath } from "node:url";
-import { validateHarness } from "./harness.ts";
+import { validateOnboard } from "./onboard.ts";
 import { validateWorkflow } from "./workflow.ts";
 import { validateComponents } from "./components.ts";
 import { validateSkillConsistency } from "./skillConsistency.ts";
@@ -14,8 +14,8 @@ export function runValidators(repoRoot: string): void {
   const identifierSources = [fileURLToPath(new URL("./components.ts", import.meta.url))];
 
   const steps: Array<[string, () => string]> = [
-    ["harness", () => validateHarness(repoRoot)],
-    ["workflow", () => validateWorkflow(repoRoot)],
+    ["onboard", () => validateOnboard(repoRoot)],
+    ["skills", () => validateWorkflow(repoRoot)],
     ["components", () => validateComponents(repoRoot, identifierSources)],
     ["skill-consistency", () => validateSkillConsistency(repoRoot)],
   ];

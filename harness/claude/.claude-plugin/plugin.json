@@ -1,8 +1,0 @@
-{
-  "name": "amanar",
-  "description": "Amanar kit Claude Code adapter: skills mount-point + PreToolUse backpressure gate reusing the Pi classifier",
-  "version": "0.1.0",
-  "author": {
-    "name": "Amanar"
-  }
-}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amanar Plan"
+  short_description: "Design systems from evidence and failure analysis"
+  default_prompt: "Use $amanar-plan to produce an implementation-ready design for this objective."
+policy:
+  allow_implicit_invocation: true

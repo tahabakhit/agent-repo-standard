@@ -16,8 +16,8 @@ Boundaries:
   pass on `k` direct re-runs.
 - Authority is fail-closed: a denied `begin` or a live-effect check without authority
   stops the loop; it never escalates.
-- Host invocation shapes come from `loop/src/hosts.ts`. The runner adds no host
+- Host invocation shapes come from `src/loop/src/hosts.ts`. The runner adds no host
   authority.
 
-Run `npm test --prefix workflow/loop` after changes (tsc --noEmit + node:test). The
+Run `make validate` after changes (tsc --noEmit + node:test). The
 tests inject a fake agent and vendor the TS kernel, so they need no model or network.

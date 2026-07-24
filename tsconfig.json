@@ -12,16 +12,12 @@
   },
   "include": [
     "src/**/*.ts",
-    "harness/pi/src/**/*.ts",
-    "harness/claude/hooks/**/*.ts",
-    "harness/claude/vendor/**/*.ts"
+    "pi/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     "**/node_modules",
     "**/dist",
-    "**/*.test.ts",
-    "workflow/tests/.runs",
-    "workflow/tests/results"
+    "**/*.test.ts"
   ]
 }

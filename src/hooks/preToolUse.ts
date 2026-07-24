@@ -1,13 +1,10 @@
-import { classifyToolCall } from "../../harness/pi/src/classify.ts";
+import { classifyToolCall } from "../classify.ts";
 
 /**
  * Claude Code PreToolUse backpressure adapter. Reads the PreToolUse JSON
  * payload from stdin, routes it through the shared classifier, and emits the
  * Claude Code hookSpecificOutput decision. Deny rules live in the classifier
  * (single source of truth), never here.
- *
- * (classify.ts moves to src/classify.ts in a later slice; this import updates
- * with it.)
  */
 
 export interface ClaudePreToolUsePayload {

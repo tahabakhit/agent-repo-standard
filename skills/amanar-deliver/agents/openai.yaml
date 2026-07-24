@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amanar Deliver"
+  short_description: "Route material work through proportionate lifecycle gates"
+  default_prompt: "Use $amanar-deliver to route this objective from its current state to verified completion."
+policy:
+  allow_implicit_invocation: false

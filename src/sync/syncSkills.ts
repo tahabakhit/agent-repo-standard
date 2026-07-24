@@ -27,7 +27,7 @@ import { fileURLToPath } from "node:url";
  */
 
 const REPO = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..");
-const SKILL_ROOTS = [join(REPO, "harness", "skills"), join(REPO, "workflow", "skills")];
+const SKILL_ROOTS = [join(REPO, "skills")];
 const HOSTS: Record<string, [string, string]> = {
   pi: ["AGENTS_HOME", ".agents"],
   codex: ["CODEX_HOME", ".codex"],
@@ -35,8 +35,8 @@ const HOSTS: Record<string, [string, string]> = {
 };
 // Pre-amanar personal skills superseded by an amanar-* skill.
 const SUPERSEDE: Record<string, string> = {
-  scaffold: "amanar-scaffold",
-  "codebase-design": "amanar-design",
+  scaffold: "amanar-onboard",
+  "codebase-design": "amanar-plan",
 };
 const PROTECTED = new Set([".system"]);
 

@@ -1,17 +1,15 @@
 # Amanar kit — install guide
 
-Seven skills ship in two directories:
+Seven skills ship under a single `skills/` directory:
 
-| Dir | Skills |
-|---|---|
-| `workflow/skills/` | amanar-assure, amanar-design, amanar-inquire, amanar-remember, amanar-workflow, amanar-writing-skills |
-| `harness/skills/` | amanar-scaffold |
+`amanar-interview`, `amanar-plan`, `amanar-adversarial-review`, `amanar-remember`,
+`amanar-author-skill`, `amanar-deliver`, `amanar-onboard`.
 
 ---
 
 ## Pi
 
-**From git (recommended)**
+**From git**
 
 ```
 pi install git:github.com/your-org/amanar
@@ -25,68 +23,44 @@ pi install /path/to/amanar
 
 The root `package.json` `pi` key declares:
 
-- **extension** — `harness/pi/src/extension.ts` (type-stripped by Pi; provides bootstrap context injection and backpressure)
-- **skillPaths** — `workflow/skills` and `harness/skills`
+- **extension** — `pi/extension.ts` (type-stripped by Pi; provides bootstrap
+  context injection and in-session backpressure)
+- **skillPaths** — `skills`
 
-Pi loads the extension and registers all skill directories in one step.
-No separate skill install is needed.
+Pi loads the extension and registers the skills directory in one step. No separate
+skill install is needed.
 
 ---
 
 ## Claude Code
 
-**One-time plugin-root sync (run after cloning or pulling)**
+The plugin root is the repository root, so no symlink or vendor sync step is
+required: `skills/` and `hooks/hooks.json` are discovered directly.
+
+**Development / per-session**
 
 ```
-node harness/claude/scripts/link-skills.mjs
-node harness/claude/scripts/vendor-classify.mjs
+claude --plugin-dir /path/to/amanar
 ```
 
-`link-skills.mjs` creates relative symlinks from `harness/claude/skills/` to
-every `amanar-*` directory in `workflow/skills/` and `harness/skills/`. Claude
-Code requires skills under the plugin root; symlinks avoid file duplication.
+**Persistent** — point your marketplace/plugin source at the repository root
+(`.claude-plugin/marketplace.json` declares `source: "./"`).
 
-`vendor-classify.mjs` mirrors `harness/pi/src/classify.ts` (the single source of
-truth for backpressure deny rules) into `harness/claude/vendor/classify.ts`. The
-PreToolUse hook imports the vendored copy because Claude Code packages only the
-plugin root and a code import cannot reach the sibling `harness/pi/` tree.
-
-Both scripts are idempotent and can be re-run safely. `tests/vendor-classify.test.ts`
-fails the build if the vendored mirror drifts.
-
-**Load the plugin**
-
-Development / per-session:
-
-```
-claude --plugin-dir /path/to/amanar/harness/claude
-```
-
-Persistent (installs via marketplace or `claude plugin` command):
-point your plugin source at `harness/claude/`.
-
-Skills load as `/amanar:<skill-name>` (namespaced by the plugin `name` field).
-
-**PreToolUse backpressure gate**
-
-`harness/claude/hooks/hooks.json` wires a `PreToolUse` hook for the `Bash` tool.
-The hook runs `harness/claude/hooks/pre-tool-use.ts` via
-`node --experimental-strip-types` and reuses the classifier from
-`harness/pi/src/classify.ts` as the single source of truth.
-No compilation step is required.
+Skills load as `/amanar:<skill-name>`. The `PreToolUse` hook in `hooks/hooks.json`
+runs `bin/amanar hook pre-tool-use`, which reuses the shared classifier in
+`src/classify.ts` as the single source of truth for backpressure deny rules.
 
 ---
 
 ## Codex (best-effort)
 
 Codex reads agent skills from `.agents/skills/` and `agents/openai.yaml` sidecars.
-
 Each skill directory already contains `agents/openai.yaml`. Copy or symlink the
 skill directories you want into your repo's `.agents/skills/`:
 
 ```
 mkdir -p .agents/skills
-ln -s /path/to/amanar/workflow/skills/amanar-inquire .agents/skills/
+ln -s /path/to/amanar/skills/amanar-interview .agents/skills/
 # repeat for other skills
 ```
 

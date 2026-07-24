@@ -4,8 +4,8 @@
   "plugins": [
     {
       "name": "amanar",
-      "source": "./harness/claude",
-      "description": "Amanar agent-kit for Claude Code: skills (inquire, design, assure, workflow, remember, writing-skills, scaffold) plus a PreToolUse backpressure gate sharing the Pi classifier."
+      "source": "./",
+      "description": "Amanar agent-kit for Claude Code: skills (interview, plan, adversarial-review, deliver, remember, author-skill, onboard) plus a PreToolUse backpressure gate, funneled through bin/amanar."
     }
   ]
 }
