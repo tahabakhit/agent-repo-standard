@@ -21,5 +21,5 @@ Cases are JSON under `src/eval/cases/<suite>/`.
    harness.
 
 The framework and the mutation suite are unit-tested inside `make validate`; the
-full five-suite run is the CI job. The eval recorder (`src/eval/scripts/`) is the
-deterministic recorder for eval runs.
+full five-suite run is the CI job. The eval recorder (`src/eval/recorder.ts`) is
+the deterministic recorder for eval runs.

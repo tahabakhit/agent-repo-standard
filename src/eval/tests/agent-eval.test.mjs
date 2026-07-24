@@ -17,7 +17,7 @@ import {
   scoreAxes,
   verifyArtifact,
   verifyPromptfooResult,
-} from "../scripts/agent-eval.mjs";
+} from "../recorder.ts";
 
 const fullAxes = Object.fromEntries(
   ["V", "U", "E", "X", "R", "S", "M", "F", "C"].map((key) => [

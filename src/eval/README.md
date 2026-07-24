@@ -25,10 +25,10 @@ Each axis carries its own evidence label; non-estimated axes must cite a verifie
 | Command | Purpose |
 |---|---|
 | `npm test` | Run the built-in Node test suite |
-| `node scripts/agent-eval.mjs detect` | Check evaluator availability without inheriting secrets |
-| `node scripts/agent-eval.mjs record <run.json>` | Validate and record a draft run |
-| `npm run check` | Validate canonical runs and the dashboard template |
-| `npm run render` | Rebuild `data/index.json` and `dist/index.html` |
+| `node recorder.ts detect` | Check evaluator availability without inheriting secrets |
+| `node recorder.ts record <run.json>` | Validate and record a draft run |
+| `node recorder.ts check` | Validate canonical runs and the dashboard template |
+| `node recorder.ts render` | Rebuild `data/index.json` and `dist/index.html` |
 
 No package installation or build framework is required. Node.js 20 or newer is enough.
 
@@ -36,7 +36,7 @@ No package installation or build framework is required. Node.js 20 or newer is e
 
 - The current agent task (Pi primary; Claude Code/Codex also) owns orchestration and subagent lifecycle.
 - Evaluators own only their raw method evidence.
-- `scripts/agent-eval.mjs` is the sole score, confidence, path, and rendering authority.
+- `recorder.ts` is the sole score, confidence, path, and rendering authority.
 - Reviewed JSON is canonical; raw artifacts stay ignored; `dist/index.html` is generated offline.
 
 The product specification and ADRs (0001 superseded, 0002) are archived in the

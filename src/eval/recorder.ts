@@ -1,5 +1,19 @@
 #!/usr/bin/env node
 
+/**
+ * Deterministic evaluation recorder and dashboard renderer.
+ *
+ * Strict-TS port of the former scripts/agent-eval.mjs (logic identical). It is
+ * the sole score/confidence/path/render authority: it validates a draft run,
+ * verifies its artifacts by SHA-256, computes canonical scores, and writes the
+ * canonical run record plus the offline dashboard. Inputs (target paths, run
+ * JSON, evaluator output) are untrusted; nothing is passed through a shell.
+ *
+ * Dynamic JSON shapes are typed `any` at the validation boundary on purpose —
+ * these functions exist to prove structure at runtime, not to trust a static
+ * type. Scalars and internal collections are typed precisely.
+ */
+
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { constants, existsSync, readFileSync, realpathSync } from "node:fs";
@@ -8,9 +22,10 @@ import { homedir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const APP_ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+// recorder.ts lives at src/eval/; APP_ROOT is that directory (web/, dist/ siblings).
+const APP_ROOT = path.dirname(fileURLToPath(import.meta.url));
 
-function dataRoot() {
+function dataRoot(): string {
   if (process.env.AGENT_EVAL_HOME) return path.resolve(process.env.AGENT_EVAL_HOME);
   const localMarketplacePath = path.join(homedir(), "plugins", "agent-eval");
   if (existsSync(path.join(localMarketplacePath, "package.json"))) return realpathSync(localMarketplacePath);
@@ -27,7 +42,7 @@ const INDEX_PATH = path.join(DATA_ROOT, "data", "index.json");
 const TEMPLATE_PATH = path.join(APP_ROOT, "web", "template.html");
 const DASHBOARD_PATH = path.join(DATA_ROOT, "dist", "index.html");
 const AXES = ["V", "U", "E", "X", "R", "S", "M", "F", "C"];
-const WEIGHTS = { V: 25, U: 10, E: 10, X: 10, R: 10, S: 10, M: 5, F: 10, C: 10 };
+const WEIGHTS: Record<string, number> = { V: 25, U: 10, E: 10, X: 10, R: 10, S: 10, M: 5, F: 10, C: 10 };
 const METHOD_STATUSES = new Set(["completed", "unavailable", "not-applicable", "blocked", "failed", "skipped"]);
 const RUN_STATUSES = new Set(["completed", "partial", "blocked", "failed"]);
 const PLATFORM_STATUSES = new Set(["completed", "unsupported", "unavailable", "not-run", "failed", "blocked", "skipped", "not-applicable"]);
@@ -37,27 +52,27 @@ const MAX_ARTIFACTS = 32;
 const MAX_ARTIFACT_BYTES = 20_000_000;
 const MAX_TOTAL_ARTIFACT_BYTES = 50_000_000;
 
-function object(value, label) {
+function object(value: any, label: string): any {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error(`${label} must be an object`);
   return value;
 }
 
-function text(value, label) {
+function text(value: any, label: string): string {
   if (typeof value !== "string" || !value.trim()) throw new Error(`${label} must be a non-empty string`);
   return value;
 }
 
-function finite(value, label, min, max) {
+function finite(value: any, label: string, min: number, max: number): number {
   if (!Number.isFinite(value) || value < min || value > max) throw new Error(`${label} must be between ${min} and ${max}`);
   return value;
 }
 
-function stringList(value, label) {
+function stringList(value: any, label: string): string[] {
   if (!Array.isArray(value) || value.some((item) => typeof item !== "string")) throw new Error(`${label} must be an array of strings`);
   return value;
 }
 
-function validDate(value, label) {
+function validDate(value: any, label: string): string {
   text(value, label);
   const date = new Date(value);
   const canonical = Number.isNaN(date.valueOf()) ? null : date.toISOString();
@@ -65,7 +80,7 @@ function validDate(value, label) {
   return value;
 }
 
-function validateEvidenceRef(reference, label, runId) {
+function validateEvidenceRef(reference: any, label: string, runId?: string): string {
   text(reference, label);
   if (reference.length > 500 || /\p{Cc}/u.test(reference)) throw new Error(`${label} is not a valid evidence reference`);
   if (reference.startsWith("https://")) {
@@ -77,7 +92,7 @@ function validateEvidenceRef(reference, label, runId) {
   throw new Error(`${label} is not a valid evidence reference`);
 }
 
-export function scoreAxes(axes, runId) {
+export function scoreAxes(axes: any, runId?: string): { score: number; bloat: number } {
   object(axes, "axes");
   const keys = Object.keys(axes).sort();
   if (keys.length !== AXES.length || keys.some((key, index) => key !== [...AXES].sort()[index])) {
@@ -98,7 +113,7 @@ export function scoreAxes(axes, runId) {
   return { score: Math.round(total), bloat: 5 - axes.C.value };
 }
 
-export function combinationScore(terms) {
+export function combinationScore(terms: any): number {
   object(terms, "combination terms");
   const scoreA = finite(terms.scoreA, "scoreA", 0, 100);
   const scoreB = finite(terms.scoreB, "scoreB", 0, 100);
@@ -109,7 +124,7 @@ export function combinationScore(terms) {
   return Math.round(Math.max(0, Math.min(100, Math.max(scoreA, scoreB) + synergy - controlConflict - contextPenalty - operationsPenalty)));
 }
 
-function validateArtifactLink(link, label, runId) {
+function validateArtifactLink(link: any, label: string, runId: string): string {
   text(link, label);
   if (/\p{Cc}/u.test(link) || link.includes("\\") || link.includes("%") || path.isAbsolute(link) || /^[A-Za-z][A-Za-z0-9+.-]*:/.test(link)) {
     throw new Error(`${label} is not a valid artifact path`);
@@ -119,20 +134,20 @@ function validateArtifactLink(link, label, runId) {
     segments.length < 3
     || segments[0] !== "artifacts"
     || segments[1] !== runId
-    || segments.some((segment) => !/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(segment) || segment === "." || segment === "..")
+    || segments.some((segment: string) => !/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(segment) || segment === "." || segment === "..")
   ) {
     throw new Error(`${label} is not a valid artifact path under artifacts/${runId}`);
   }
   return link;
 }
 
-function normalizeMethod(method, index, runId) {
+function normalizeMethod(method: any, index: number, runId: string): any {
   object(method, `methods[${index}]`);
   text(method.name, `methods[${index}].name`);
   if (!METHOD_STATUSES.has(method.status)) throw new Error(`methods[${index}].status is invalid`);
   const result = structuredClone(method);
   result.metrics = object(method.metrics ?? {}, `methods[${index}].metrics`);
-  result.artifactLinks = (method.artifactLinks ?? []).map((link, linkIndex) => validateArtifactLink(link, `methods[${index}].artifactLinks[${linkIndex}]`, runId));
+  result.artifactLinks = (method.artifactLinks ?? []).map((link: any, linkIndex: number) => validateArtifactLink(link, `methods[${index}].artifactLinks[${linkIndex}]`, runId));
   if (["completed", "failed"].includes(method.status)) text(method.exactCommand, `methods[${index}].exactCommand`);
   if (method.exitCode !== undefined && method.exitCode !== null && !Number.isInteger(method.exitCode)) throw new Error(`methods[${index}].exitCode must be an integer or null`);
   if (method.durationMs !== undefined) finite(method.durationMs, `methods[${index}].durationMs`, 0, Number.MAX_SAFE_INTEGER);
@@ -172,19 +187,19 @@ const DETERMINISTIC_ASSERTIONS = new Set([
 ]);
 const OUTCOME_ASSERTIONS = new Set(["contains", "contains-all", "contains-any", "contains-json", "equals", "is-json", "not-contains", "regex", "starts-with"]);
 
-function canonicalJson(value) {
+function canonicalJson(value: any): string {
   if (Array.isArray(value)) return `[${value.map(canonicalJson).join(",")}]`;
   if (value && typeof value === "object") return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${canonicalJson(value[key])}`).join(",")}}`;
   return JSON.stringify(value);
 }
 
-export function computeRunContentDigest(run) {
+export function computeRunContentDigest(run: any): string {
   const content = structuredClone(run);
   delete content.runContentDigest;
   return createHash("sha256").update(canonicalJson(content)).digest("hex");
 }
 
-function platformForProvider(providerId) {
+function platformForProvider(providerId: any): string | null {
   const id = String(providerId ?? "").toLowerCase();
   if (id.startsWith("openai:codex")) return "codex";
   if (id.startsWith("anthropic:claude-agent-sdk") || id.startsWith("anthropic:claude-code")) return "claude-code";
@@ -192,24 +207,24 @@ function platformForProvider(providerId) {
   return null;
 }
 
-function platformForRow(row) {
+function platformForRow(row: any): string | null {
   const native = platformForProvider(row?.provider?.id);
   if (native) return native;
   const declared = String(row?.metadata?.platform ?? row?.response?.metadata?.platform ?? "").toLowerCase();
   return PLATFORMS.has(declared) ? declared : null;
 }
 
-function platformsForRows(rows) {
-  return [...new Set(rows.map((row) => platformForRow(row)).filter(Boolean))].sort();
+function platformsForRows(rows: any[]): string[] {
+  return [...new Set(rows.map((row) => platformForRow(row)).filter(Boolean))].sort() as string[];
 }
 
-export function verifyPromptfooResult(result) {
+export function verifyPromptfooResult(result: any): any {
   const rows = result?.results?.results;
   if (!Array.isArray(rows)) throw new Error("Promptfoo artifact has no result rows");
-  const byLabel = { baseline: [], candidate: [] };
+  const byLabel: { baseline: any[]; candidate: any[] } = { baseline: [], candidate: [] };
   for (const row of rows) {
     const label = String(row?.provider?.label ?? "").toLowerCase();
-    if (label in byLabel) byLabel[label].push(row);
+    if (label in byLabel) (byLabel as Record<string, any[]>)[label].push(row);
   }
   const baselinePlatforms = new Set(byLabel.baseline.map((row) => platformForRow(row)));
   const candidatePlatforms = new Set(byLabel.candidate.map((row) => platformForRow(row)));
@@ -219,31 +234,31 @@ export function verifyPromptfooResult(result) {
   const platform = [...baselinePlatforms][0];
   if (byLabel.baseline.length < 3 || byLabel.candidate.length < 3) throw new Error("Promptfoo measured evidence requires at least 3 baseline and 3 candidate trials");
 
-  const taskKey = (row) => {
+  const taskKey = (row: any): string => {
     const task = row?.vars?.task ?? row?.testCase?.vars?.task ?? row?.testCase?.description;
     return `${String(task ?? row?.testIdx ?? "unknown")}:${row?.promptId ?? ""}`;
   };
-  const taskCounts = (group) => group.reduce((counts, row) => {
+  const taskCounts = (group: any[]): Record<string, number> => group.reduce((counts: Record<string, number>, row) => {
     const key = taskKey(row);
     counts[key] = (counts[key] ?? 0) + 1;
     return counts;
   }, {});
   const baselineCounts = taskCounts(byLabel.baseline);
   const candidateCounts = taskCounts(byLabel.candidate);
-  const countSignature = (counts) => JSON.stringify(Object.entries(counts).sort(([left], [right]) => left.localeCompare(right)));
+  const countSignature = (counts: Record<string, number>): string => JSON.stringify(Object.entries(counts).sort(([left], [right]) => left.localeCompare(right)));
   if (countSignature(baselineCounts) !== countSignature(candidateCounts)) throw new Error("Promptfoo baseline and candidate require the same number of trials per task");
   if (Object.values(baselineCounts).some((count) => count < 3)) throw new Error("Promptfoo measured evidence requires three trials per task and condition");
 
-  const repeatSignature = (group) => {
-    const grouped = new Map();
+  const repeatSignature = (group: any[]): Record<string, { kind: string; identifiers: string[] }> => {
+    const grouped = new Map<string, any[]>();
     for (const row of group) {
       const task = taskKey(row);
       grouped.set(task, [...(grouped.get(task) ?? []), row]);
     }
     return Object.fromEntries([...grouped.entries()].sort(([left], [right]) => left.localeCompare(right)).map(([task, taskRows]) => {
-      const hasRepeatMetadata = taskRows.every((row) => row?.metadata?.repeat !== undefined);
-      const identifiers = taskRows.map((row) => String(hasRepeatMetadata ? row.metadata.repeat : row.id ?? ""));
-      if (identifiers.some((id) => !id) || new Set(identifiers).size !== identifiers.length) {
+      const hasRepeatMetadata = taskRows.every((row: any) => row?.metadata?.repeat !== undefined);
+      const identifiers = taskRows.map((row: any) => String(hasRepeatMetadata ? row.metadata.repeat : row.id ?? ""));
+      if (identifiers.some((id: string) => !id) || new Set(identifiers).size !== identifiers.length) {
         throw new Error("Promptfoo measured evidence requires distinct repeat identifiers");
       }
       return [task, { kind: hasRepeatMetadata ? "repeat" : "row", identifiers: identifiers.sort() }];
@@ -259,10 +274,10 @@ export function verifyPromptfooResult(result) {
 
   for (const row of [...byLabel.baseline, ...byLabel.candidate]) {
     const components = row?.gradingResult?.componentResults;
-    if (!Array.isArray(components) || !components.length || components.some((item) => !DETERMINISTIC_ASSERTIONS.has(item?.assertion?.type))) {
+    if (!Array.isArray(components) || !components.length || components.some((item: any) => !DETERMINISTIC_ASSERTIONS.has(item?.assertion?.type))) {
       throw new Error("Promptfoo measured evidence requires deterministic assertions");
     }
-    if (!components.some((item) => OUTCOME_ASSERTIONS.has(item?.assertion?.type))) {
+    if (!components.some((item: any) => OUTCOME_ASSERTIONS.has(item?.assertion?.type))) {
       throw new Error("Promptfoo measured evidence requires at least one deterministic outcome assertion per trial");
     }
   }
@@ -278,12 +293,12 @@ export function verifyPromptfooResult(result) {
   };
 }
 
-export function verifyPromptfooSmokeResult(result) {
+export function verifyPromptfooSmokeResult(result: any): any {
   const rows = result?.results?.results;
   if (!Array.isArray(rows) || !rows.length) throw new Error("Promptfoo artifact has no result rows");
   for (const row of rows) {
     const components = row?.gradingResult?.componentResults;
-    if (!Array.isArray(components) || !components.length || components.some((item) => !DETERMINISTIC_ASSERTIONS.has(item?.assertion?.type))) {
+    if (!Array.isArray(components) || !components.length || components.some((item: any) => !DETERMINISTIC_ASSERTIONS.has(item?.assertion?.type))) {
       throw new Error("Promptfoo runtime evidence requires deterministic assertions");
     }
   }
@@ -296,33 +311,33 @@ export function verifyPromptfooSmokeResult(result) {
   };
 }
 
-function confidenceFor(evidenceState) {
+function confidenceFor(evidenceState: string): "A" | "B" | "C" {
   return evidenceState === "measured" ? "A" : evidenceState === "mixed" ? "B" : "C";
 }
 
-function axesEvidenceState(axes) {
+function axesEvidenceState(axes: any): string {
   const states = AXES.map((key) => axes[key].evidenceState);
   if (states.every((state) => state === "measured")) return "measured";
   if (states.some((state) => state !== "estimated")) return "mixed";
   return "estimated";
 }
 
-function requireConsistentEvidence(declared, axes, label) {
+function requireConsistentEvidence(declared: any, axes: any, label: string): void {
   const derived = axesEvidenceState(axes);
   if (declared !== derived) throw new Error(`${label}.evidenceState must be ${derived} based on its per-axis evidence`);
 }
 
-function requireRuntimeAxisEvidence(axes, runtimeArtifactLinks, label) {
+function requireRuntimeAxisEvidence(axes: any, runtimeArtifactLinks: Set<string>, label: string): void {
   for (const key of AXES) {
     const axis = axes[key];
     if (axis.evidenceState === "estimated") continue;
-    if (!axis.evidence.some((reference) => runtimeArtifactLinks.has(reference))) {
+    if (!axis.evidence.some((reference: string) => runtimeArtifactLinks.has(reference))) {
       throw new Error(`${label}.${key} ${axis.evidenceState} axis must cite a verified runtime artifact`);
     }
   }
 }
 
-function normalizePlatform(platform, name, pairedPlatforms, runtimePlatforms, runtimeArtifactLinks, runId) {
+function normalizePlatform(platform: any, name: string, pairedPlatforms: Set<string>, runtimePlatforms: Set<string>, runtimeArtifactLinks: Set<string>, runId: string): any {
   object(platform, `platforms.${name}`);
   if (!PLATFORM_STATUSES.has(platform.status)) throw new Error(`platforms.${name}.status is invalid`);
   const result = structuredClone(platform);
@@ -342,13 +357,13 @@ function normalizePlatform(platform, name, pairedPlatforms, runtimePlatforms, ru
   return { ...result, ...scoreAxes(platform.axes, runId), confidence: confidenceFor(platform.evidenceState) };
 }
 
-function normalizeCombination(combo, index, runId) {
+function normalizeCombination(combo: any, index: number, runId: string): any {
   object(combo, `combinations[${index}]`);
   const members = stringList(combo.members, `combinations[${index}].members`);
   if (members.length < 2) throw new Error(`combinations[${index}].members requires at least two entries`);
   if (!EVIDENCE_STATES.has(combo.evidenceState)) throw new Error(`combinations[${index}].evidenceState is invalid`);
   const result = structuredClone(combo);
-  result.artifactLinks = (combo.artifactLinks ?? []).map((link, linkIndex) => validateArtifactLink(link, `combinations[${index}].artifactLinks[${linkIndex}]`, runId));
+  result.artifactLinks = (combo.artifactLinks ?? []).map((link: any, linkIndex: number) => validateArtifactLink(link, `combinations[${index}].artifactLinks[${linkIndex}]`, runId));
   if (combo.evidenceState === "estimated") {
     result.score = combinationScore(combo.terms);
     result.confidence = "C";
@@ -357,7 +372,7 @@ function normalizeCombination(combo, index, runId) {
   throw new Error("Measured combinations are not supported until native, A, B, and A+B artifacts are verified");
 }
 
-export function safeRunPath(root, id) {
+export function safeRunPath(root: string, id: any): string {
   if (typeof id !== "string" || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$/.test(id)) throw new Error("Invalid run id");
   const resolvedRoot = path.resolve(root);
   const destination = path.resolve(resolvedRoot, `${id}.json`);
@@ -365,7 +380,7 @@ export function safeRunPath(root, id) {
   return destination;
 }
 
-export function normalizeRun(input, verified = {}) {
+export function normalizeRun(input: any, verified: any = {}): any {
   const source = object(input, "run");
   if (source.schemaVersion !== 1) throw new Error("schemaVersion must be 1");
   safeRunPath(RUNS_DIR, source.id);
@@ -383,13 +398,13 @@ export function normalizeRun(input, verified = {}) {
   text(target.version, "target.version");
 
   if (!Array.isArray(source.methods) || !source.methods.length) throw new Error("methods must contain at least one method");
-  const methods = source.methods.map((method, index) => normalizeMethod(method, index, source.id));
-  const methodNames = methods.map((method) => method.name);
+  const methods = source.methods.map((method: any, index: number) => normalizeMethod(method, index, source.id));
+  const methodNames = methods.map((method: any) => method.name);
   if (new Set(methodNames).size !== methodNames.length) throw new Error("Duplicate method name in run");
   const pairedVerified = verified.pairedVerified === true;
-  const pairedPlatforms = new Set(verified.pairedPlatforms ?? []);
-  const runtimePlatforms = new Set(verified.runtimePlatforms ?? []);
-  const runtimeArtifactLinks = new Set(verified.runtimeArtifactLinks ?? []);
+  const pairedPlatforms = new Set<string>(verified.pairedPlatforms ?? []);
+  const runtimePlatforms = new Set<string>(verified.runtimePlatforms ?? []);
+  const runtimeArtifactLinks = new Set<string>(verified.runtimeArtifactLinks ?? []);
   if (source.evidenceState === "measured" && !pairedVerified) throw new Error("A measured run requires a paired verified outcome");
   if (source.evidenceState === "mixed" && verified.runtimeObserved !== true) throw new Error("A mixed run requires a verified runtime artifact");
 
@@ -401,18 +416,18 @@ export function normalizeRun(input, verified = {}) {
   const platforms = Object.fromEntries(
     platformEntries.map(([name, platform]) => [name, normalizePlatform(platform, name, pairedPlatforms, runtimePlatforms, runtimeArtifactLinks, source.id)]),
   );
-  const combinations = (source.combinations ?? []).map((combo, index) => normalizeCombination(combo, index, source.id));
+  const combinations = (source.combinations ?? []).map((combo: any, index: number) => normalizeCombination(combo, index, source.id));
   stringList(source.findings ?? [], "findings");
   text(source.decision, "decision");
   const provenance = object(source.provenance, "provenance");
   for (const key of ["harness", "model", "repositoryRevision", "sandbox", "approvalPolicy", "network"]) text(provenance[key], `provenance.${key}`);
   stringList(provenance.enabledExtensions, "provenance.enabledExtensions");
 
-  if (source.status === "completed" && methods.some((method) => ["failed", "blocked"].includes(method.status))) {
+  if (source.status === "completed" && methods.some((method: any) => ["failed", "blocked"].includes(method.status))) {
     throw new Error("A completed run cannot contain failed or blocked methods");
   }
-  if (source.status === "failed" && !methods.some((method) => method.status === "failed")) throw new Error("A failed run requires at least one failed method");
-  if (source.status === "blocked" && !methods.some((method) => method.status === "blocked")) throw new Error("A blocked run requires at least one blocked method");
+  if (source.status === "failed" && !methods.some((method: any) => method.status === "failed")) throw new Error("A failed run requires at least one failed method");
+  if (source.status === "blocked" && !methods.some((method: any) => method.status === "blocked")) throw new Error("A blocked run requires at least one blocked method");
 
   return {
     ...structuredClone(source),
@@ -424,7 +439,7 @@ export function normalizeRun(input, verified = {}) {
   };
 }
 
-export function buildIndex(runs) {
+export function buildIndex(runs: any): any {
   if (!Array.isArray(runs)) throw new Error("runs must be an array");
   const ids = runs.map((run) => run.id);
   if (new Set(ids).size !== ids.length) throw new Error("Duplicate run id in canonical data");
@@ -436,11 +451,11 @@ export function buildIndex(runs) {
   };
 }
 
-function safeJson(value) {
+function safeJson(value: any): string {
   return JSON.stringify(value).replaceAll("&", "\\u0026").replaceAll("<", "\\u003c").replaceAll(">", "\\u003e").replaceAll("\u2028", "\\u2028").replaceAll("\u2029", "\\u2029");
 }
 
-export function renderDashboard(template, index) {
+export function renderDashboard(template: any, index: any): string {
   const marker = "__AGENT_EVAL_DATA__";
   const hashMarker = "__AGENT_EVAL_SCRIPT_HASH__";
   if (typeof template !== "string" || template.split(marker).length !== 2) throw new Error(`Dashboard template must contain exactly one ${marker} marker`);
@@ -456,19 +471,19 @@ export function renderDashboard(template, index) {
   return `${withData.slice(0, adjustedHashIndex)}'sha256-${digest}'${withData.slice(adjustedHashIndex + hashMarker.length)}`;
 }
 
-async function atomicWrite(destination, content) {
+async function atomicWrite(destination: string, content: string): Promise<void> {
   await mkdir(path.dirname(destination), { recursive: true });
   const temporary = `${destination}.${process.pid}.tmp`;
   await writeFile(temporary, content, { encoding: "utf8", mode: 0o600 });
   await rename(temporary, destination);
 }
 
-async function exclusiveAtomicWrite(destination, content) {
+async function exclusiveAtomicWrite(destination: string, content: string): Promise<void> {
   await mkdir(path.dirname(destination), { recursive: true });
   try {
     const reservation = await open(destination, "wx", 0o600);
     await reservation.close();
-  } catch (error) {
+  } catch (error: any) {
     if (error.code === "EEXIST") throw new Error(`Run already exists: ${path.basename(destination, ".json")}`);
     throw error;
   }
@@ -480,7 +495,7 @@ async function exclusiveAtomicWrite(destination, content) {
   }
 }
 
-export async function verifyArtifact(runId, link) {
+export async function verifyArtifact(runId: string, link: string): Promise<{ content: Buffer; size: number; sha256: string }> {
   validateArtifactLink(link, "artifact", runId);
   const lexicalRoot = path.resolve(DATA_ROOT, "artifacts", runId);
   const lexicalPath = path.resolve(DATA_ROOT, link);
@@ -503,15 +518,15 @@ export async function verifyArtifact(runId, link) {
   }
 }
 
-function evidenceArtifactLinks(source) {
-  const links = [];
-  const collectAxes = (axes) => {
-    for (const axis of Object.values(axes ?? {})) {
+function evidenceArtifactLinks(source: any): string[] {
+  const links: string[] = [];
+  const collectAxes = (axes: any): void => {
+    for (const axis of Object.values(axes ?? {}) as any[]) {
       for (const reference of axis?.evidence ?? []) if (typeof reference === "string" && reference.startsWith("artifacts/")) links.push(reference);
     }
   };
   collectAxes(source.axes);
-  for (const platform of Object.values(source.platforms ?? {})) collectAxes(platform?.axes);
+  for (const platform of Object.values(source.platforms ?? {}) as any[]) collectAxes(platform?.axes);
   for (const combo of source.combinations ?? []) {
     collectAxes(combo?.axes);
     links.push(...(combo?.artifactLinks ?? []));
@@ -519,7 +534,7 @@ function evidenceArtifactLinks(source) {
   return links;
 }
 
-function requireMatchingDigests(supplied, computed, label) {
+function requireMatchingDigests(supplied: any, computed: any, label: string): void {
   object(supplied, `${label} artifactDigests`);
   const suppliedKeys = Object.keys(supplied).sort();
   const computedKeys = Object.keys(computed).sort();
@@ -527,15 +542,15 @@ function requireMatchingDigests(supplied, computed, label) {
   for (const key of computedKeys) if (supplied[key] !== computed[key]) throw new Error(`${label} artifact digest mismatch: ${key}`);
 }
 
-export async function loadAndVerifyRun(source, options = {}) {
+export async function loadAndVerifyRun(source: any, options: { requireDigests?: boolean } = {}): Promise<any> {
   object(source, "run");
   safeRunPath(RUNS_DIR, source.id);
   if (!Array.isArray(source.methods)) throw new Error("methods must be an array");
   const candidate = structuredClone(source);
-  const artifacts = new Map();
-  const links = [];
+  const artifacts = new Map<string, { content: Buffer; size: number; sha256: string }>();
+  const links: string[] = [];
   const suppliedRunDigests = candidate.artifactDigests;
-  const suppliedMethodDigests = candidate.methods.map((method) => method.artifactDigests);
+  const suppliedMethodDigests = candidate.methods.map((method: any) => method.artifactDigests);
 
   for (const [index, method] of candidate.methods.entries()) {
     method.metrics = object(method.metrics ?? {}, `methods[${index}].metrics`);
@@ -561,32 +576,32 @@ export async function loadAndVerifyRun(source, options = {}) {
     artifacts.set(link, artifact);
   }
   for (const method of candidate.methods) {
-    for (const link of method.artifactLinks ?? []) method.artifactDigests[link] = artifacts.get(link).sha256;
+    for (const link of method.artifactLinks ?? []) method.artifactDigests[link] = artifacts.get(link)!.sha256;
   }
-  candidate.artifactDigests = Object.fromEntries(uniqueLinks.sort().map((link) => [link, artifacts.get(link).sha256]));
+  candidate.artifactDigests = Object.fromEntries(uniqueLinks.sort().map((link) => [link, artifacts.get(link)!.sha256]));
   if (options.requireDigests === true) {
     requireMatchingDigests(suppliedRunDigests, candidate.artifactDigests, "Run");
-    candidate.methods.forEach((method, index) => requireMatchingDigests(suppliedMethodDigests[index], method.artifactDigests, `methods[${index}]`));
+    candidate.methods.forEach((method: any, index: number) => requireMatchingDigests(suppliedMethodDigests[index], method.artifactDigests, `methods[${index}]`));
   }
 
   let pairedVerified = false;
   let runtimeObserved = false;
-  let pairedPlatforms = [];
-  let runtimePlatforms = [];
-  const runtimeArtifactLinks = [];
-  const promptfoo = candidate.methods.find((item) => item.name === "promptfoo" && item.status === "completed");
-  const promptfooLink = promptfoo?.artifactLinks?.find((item) => item.endsWith("/promptfoo/result.json"));
-  const promptfooConfig = promptfoo?.artifactLinks?.find((item) => item.endsWith("/promptfoo/promptfooconfig.yaml"));
+  let pairedPlatforms: string[] = [];
+  let runtimePlatforms: string[] = [];
+  const runtimeArtifactLinks: string[] = [];
+  const promptfoo = candidate.methods.find((item: any) => item.name === "promptfoo" && item.status === "completed");
+  const promptfooLink = promptfoo?.artifactLinks?.find((item: string) => item.endsWith("/promptfoo/result.json"));
+  const promptfooConfig = promptfoo?.artifactLinks?.find((item: string) => item.endsWith("/promptfoo/promptfooconfig.yaml"));
   if (promptfoo && (!promptfooLink || !promptfooConfig)) {
     throw new Error("A completed Promptfoo method requires promptfoo/promptfooconfig.yaml and promptfoo/result.json artifacts");
   }
   if (promptfoo && artifacts.has(promptfooLink) && artifacts.has(promptfooConfig)) {
-    const raw = JSON.parse(artifacts.get(promptfooLink).content.toString("utf8"));
-    const rawLabels = new Set((raw?.results?.results ?? []).map((row) => String(row?.provider?.label ?? "").toLowerCase()));
+    const raw = JSON.parse(artifacts.get(promptfooLink)!.content.toString("utf8"));
+    const rawLabels = new Set((raw?.results?.results ?? []).map((row: any) => String(row?.provider?.label ?? "").toLowerCase()));
     const hasPairedLabels = rawLabels.has("baseline") && rawLabels.has("candidate");
     const needsPaired = candidate.evidenceState === "measured"
-      || Object.values(candidate.axes ?? {}).some((axis) => ["measured", "mixed"].includes(axis?.evidenceState))
-      || Object.values(candidate.platforms ?? {}).some((platform) => ["measured", "mixed"].includes(platform?.evidenceState));
+      || Object.values(candidate.axes ?? {}).some((axis: any) => ["measured", "mixed"].includes(axis?.evidenceState))
+      || Object.values(candidate.platforms ?? {}).some((platform: any) => ["measured", "mixed"].includes(platform?.evidenceState));
     const derived = needsPaired && hasPairedLabels ? verifyPromptfooResult(raw) : verifyPromptfooSmokeResult(raw);
     promptfoo.metrics = { ...promptfoo.metrics, ...derived };
     pairedVerified = derived.pairedBaseline === true && derived.deterministicVerifier === true;
@@ -605,10 +620,10 @@ export async function loadAndVerifyRun(source, options = {}) {
   return normalized;
 }
 
-async function readRuns() {
+async function readRuns(): Promise<any[]> {
   await mkdir(RUNS_DIR, { recursive: true });
   const names = (await readdir(RUNS_DIR)).filter((name) => name.endsWith(".json")).sort();
-  const runs = [];
+  const runs: any[] = [];
   for (const name of names) {
     const location = path.join(RUNS_DIR, name);
     const source = JSON.parse((await readBoundedFile(location, 2_000_000, `Canonical run ${name}`)).toString("utf8"));
@@ -618,7 +633,7 @@ async function readRuns() {
   return runs;
 }
 
-async function readBoundedFile(location, maxBytes, label) {
+async function readBoundedFile(location: string, maxBytes: number, label: string): Promise<Buffer> {
   const handle = await open(location, constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0));
   try {
     const details = await handle.stat();
@@ -632,11 +647,11 @@ async function readBoundedFile(location, maxBytes, label) {
   }
 }
 
-export function assertCanonicalFilename(name, runId) {
+export function assertCanonicalFilename(name: string, runId: any): void {
   if (name !== `${runId}.json`) throw new Error(`Canonical filename does not match run id: ${name}`);
 }
 
-async function writeOutputs(runs) {
+async function writeOutputs(runs: any[]): Promise<any> {
   const index = buildIndex(runs);
   const template = await readFile(TEMPLATE_PATH, "utf8");
   await atomicWrite(INDEX_PATH, `${JSON.stringify(index, null, 2)}\n`);
@@ -644,8 +659,8 @@ async function writeOutputs(runs) {
   return index;
 }
 
-async function recordRun(inputPath) {
-  if (!inputPath) throw new Error("Usage: agent-eval.mjs record <run.json>");
+async function recordRun(inputPath: string | undefined): Promise<any> {
+  if (!inputPath) throw new Error("Usage: recorder.ts record <run.json>");
   const sourcePath = path.resolve(inputPath);
   const run = await loadAndVerifyRun(JSON.parse((await readBoundedFile(sourcePath, 2_000_000, "Run JSON")).toString("utf8")));
   run.runContentDigest = computeRunContentDigest(run);
@@ -656,10 +671,10 @@ async function recordRun(inputPath) {
   return run;
 }
 
-function detectCommand(name, args = ["--version"]) {
+function detectCommand(name: string, args: string[] = ["--version"]): Record<string, unknown> {
   const result = spawnSync(name, args, { encoding: "utf8", timeout: 10_000, maxBuffer: 65_536, env: { PATH: process.env.PATH ?? "" } });
-  if (result.error?.code === "ENOENT") return { name, status: "unavailable", skipReason: `${name} is not on PATH` };
-  if (result.error?.code === "ETIMEDOUT") return { name, status: "timeout", skipReason: `${name} did not answer within 10 seconds` };
+  if (result.error && (result.error as NodeJS.ErrnoException).code === "ENOENT") return { name, status: "unavailable", skipReason: `${name} is not on PATH` };
+  if (result.error && (result.error as NodeJS.ErrnoException).code === "ETIMEDOUT") return { name, status: "timeout", skipReason: `${name} did not answer within 10 seconds` };
   const output = (`${result.stdout ?? ""}\n${result.stderr ?? ""}`.trim().split("\n")[0] ?? "").slice(0, 256);
   return {
     name,
@@ -671,7 +686,7 @@ function detectCommand(name, args = ["--version"]) {
   };
 }
 
-function executablePath(name) {
+function executablePath(name: string): string | null {
   for (const directory of (process.env.PATH ?? "").split(path.delimiter)) {
     const candidate = path.join(directory, name);
     if (existsSync(candidate)) return candidate;
@@ -679,11 +694,11 @@ function executablePath(name) {
   return null;
 }
 
-function detectPluginEval() {
+function detectPluginEval(): Record<string, unknown> {
   const result = detectCommand("plugin-eval", ["--help"]);
   if (result.status !== "available") return result;
   try {
-    const executable = realpathSync(executablePath("plugin-eval"));
+    const executable = realpathSync(executablePath("plugin-eval")!);
     const root = path.dirname(path.dirname(executable));
     const packageVersion = JSON.parse(readFileSync(path.join(root, "package.json"), "utf8")).version;
     const manifestPath = path.join(root, ".codex-plugin", "plugin.json");
@@ -694,7 +709,7 @@ function detectPluginEval() {
   }
 }
 
-export function detectEvaluators() {
+export function detectEvaluators(): Record<string, unknown>[] {
   return [
     detectPluginEval(),
     detectCommand("promptfoo"),
@@ -703,7 +718,7 @@ export function detectEvaluators() {
   ];
 }
 
-async function main(args) {
+async function main(args: string[]): Promise<void> {
   const [command, value] = args;
   if (command === "record") {
     const run = await recordRun(value);
@@ -726,11 +741,11 @@ async function main(args) {
     console.log(JSON.stringify(detectEvaluators(), null, 2));
     return;
   }
-  throw new Error("Usage: agent-eval.mjs <record RUN.json|render|check|detect>");
+  throw new Error("Usage: recorder.ts <record RUN.json|render|check|detect>");
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  main(process.argv.slice(2)).catch((error) => {
+  main(process.argv.slice(2)).catch((error: any) => {
     console.error(error.message);
     process.exitCode = 1;
   });
