@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amanar Remember"
+  short_description: "Capture reusable knowledge into the configured store"
+  default_prompt: "Use $amanar-remember to save this as a knowledge entry."
+policy:
+  allow_implicit_invocation: true

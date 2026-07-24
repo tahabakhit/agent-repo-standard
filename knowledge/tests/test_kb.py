@@ -4,12 +4,14 @@ All tests use tempfile.TemporaryDirectory.  No real store, repo, or user config
 is touched.  HOME and XDG env vars are overridden per test so config-resolution
 never reads the actual user environment.
 """
+import io
 import json
 import os
 import subprocess
 import sys
 import tempfile
 import unittest
+import unittest.mock
 from pathlib import Path
 
 # Allow imports from the knowledge package root.
@@ -565,6 +567,75 @@ class TestStaleParsing(unittest.TestCase):
     def test_invalid_ttl_raises(self):
         with self.assertRaises(ValueError):
             kb._parse_ttl("two-weeks")
+
+
+# ---------------------------------------------------------------------------
+# Gitleaks defense-in-depth tests
+# ---------------------------------------------------------------------------
+
+class TestGitleaksDefenseInDepth(unittest.TestCase):
+
+    def test_gitleaks_absent_is_noop(self):
+        """When gitleaks is not on PATH, _run_gitleaks_check returns [] (no-op)."""
+        with unittest.mock.patch("kb.shutil.which", return_value=None):
+            findings = kb._run_gitleaks_check(Path("/fake/store"))
+        self.assertEqual(findings, [])
+
+    def test_gitleaks_clean_scan_returns_empty(self):
+        """When gitleaks is present and exits 0, _run_gitleaks_check returns []."""
+        clean_result = subprocess.CompletedProcess(
+            args=["gitleaks", "detect"],
+            returncode=0,
+            stdout="",
+            stderr="",
+        )
+        with unittest.mock.patch("kb.shutil.which", return_value="/usr/bin/gitleaks"), \
+             unittest.mock.patch("kb.subprocess.run", return_value=clean_result):
+            findings = kb._run_gitleaks_check(Path("/fake/store"))
+        self.assertEqual(findings, [])
+
+    def test_gitleaks_found_secrets_returns_findings(self):
+        """When gitleaks exits non-zero, _run_gitleaks_check returns a non-empty list."""
+        dirty_result = subprocess.CompletedProcess(
+            args=["gitleaks", "detect"],
+            returncode=1,
+            stdout="WRN secret leaked: AWS access key at line 3\n",
+            stderr="",
+        )
+        with unittest.mock.patch("kb.shutil.which", return_value="/usr/bin/gitleaks"), \
+             unittest.mock.patch("kb.subprocess.run", return_value=dirty_result):
+            findings = kb._run_gitleaks_check(Path("/fake/store"))
+        self.assertGreater(len(findings), 0)
+        self.assertTrue(any("gitleaks" in f for f in findings))
+
+    def test_gitleaks_found_secrets_aborts_save(self):
+        """When _run_gitleaks_check returns findings, cmd_save aborts with non-zero exit."""
+        with tempfile.TemporaryDirectory() as td:
+            store = Path(td) / "store"
+            store.mkdir()
+            _git_init_store(store)
+
+            # Monkeypatch _run_gitleaks_check on the kb module to simulate findings.
+            with unittest.mock.patch.object(
+                kb,
+                "_run_gitleaks_check",
+                return_value=["gitleaks: leaked AWS key at fact/entry.md:1"],
+            ):
+                code = _save_entry(store, title="Gitleaks abort test", content="Safe content.\n")
+
+            self.assertNotEqual(code, 0)
+
+    def test_gitleaks_absent_save_succeeds(self):
+        """When gitleaks is absent, save completes normally (no hard dependency)."""
+        with tempfile.TemporaryDirectory() as td:
+            store = Path(td) / "store"
+            store.mkdir()
+            _git_init_store(store)
+
+            with unittest.mock.patch("kb.shutil.which", return_value=None):
+                code = _save_entry(store, title="No gitleaks test", content="Normal content.\n")
+
+            self.assertEqual(code, 0)
 
 
 if __name__ == "__main__":

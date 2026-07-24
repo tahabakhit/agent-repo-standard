@@ -27,6 +27,7 @@ import json
 import math
 import os
 import re
+import shutil
 import subprocess
 import sys
 import uuid
@@ -652,6 +653,35 @@ def _git_commit_store(store: Path, message: str, paths: list[Path]) -> bool:
 
 
 # ---------------------------------------------------------------------------
+# Optional gitleaks defense-in-depth
+# ---------------------------------------------------------------------------
+
+def _run_gitleaks_check(store: Path) -> list[str]:
+    """Run gitleaks against the store if the binary is available.
+
+    Uses 'gitleaks detect --no-git --source <store>' to scan the store
+    directory for secrets without requiring a staged git index.
+
+    Returns a list of finding descriptions.  An empty list means either
+    gitleaks is absent (no hard dependency) or the scan found nothing.
+    Non-zero gitleaks exit codes are treated as findings and the caller
+    must abort the commit.
+    """
+    if shutil.which("gitleaks") is None:
+        return []
+    result = subprocess.run(
+        ["gitleaks", "detect", "--no-git", "--source", str(store)],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode == 0:
+        return []
+    output = (result.stdout + result.stderr).strip()
+    lines = [line for line in output.splitlines() if line.strip()]
+    return [f"gitleaks: {line}" for line in lines] if lines else ["gitleaks: secrets detected (no detail)"]
+
+
+# ---------------------------------------------------------------------------
 # Verb: save
 # ---------------------------------------------------------------------------
 
@@ -746,6 +776,14 @@ def cmd_save(args: argparse.Namespace) -> int:
 
     # ---- Step 5d: regenerate manifest.json ----
     _rebuild_manifest(store)
+
+    # ---- Step 5e: optional gitleaks defense-in-depth ----
+    gl_findings = _run_gitleaks_check(store)
+    if gl_findings:
+        print("kb: ABORTED — gitleaks detected secrets; commit suppressed:", file=sys.stderr)
+        for f in gl_findings:
+            print(f"  • {f}", file=sys.stderr)
+        return 1
 
     # ---- Step 6: git commit ----
     if commit_policy == "auto":
