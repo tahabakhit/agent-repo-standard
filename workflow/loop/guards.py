@@ -10,10 +10,22 @@ Two families of check:
 2. detect_placeholders — flags placeholder markers (raise NotImplementedError,
    TODO, FIXME, bare pass, standalone ...) found in non-test scope files.
    Operates on the current working-tree state after each agent invocation.
+   Accepts an optional ``allowed_markers`` set of stable marker keys; markers
+   whose key is in that set are skipped.  Default (empty set) is strict: every
+   marker blocks 'verified'.
 
 Both functions accept ``root`` (absolute repo root) and ``contract``
 (dict decoded from workflow.json).  They are pure: no subprocess calls, no
 side effects, no network.
+
+Stable marker keys (used by ``allowed_markers`` and the ``--allow-marker`` CLI
+flag):
+
+  "notimplemented" — raise NotImplementedError
+  "todo"           — TODO comment
+  "fixme"          — FIXME comment
+  "pass"           — bare pass statement
+  "ellipsis"       — standalone ... expression
 """
 from __future__ import annotations
 
@@ -133,25 +145,38 @@ _BARE_PASS_RE = re.compile(r"^pass(\s+#.*)?$")
 # standalone ellipsis: the stripped line is exactly '...' or '... # ...'
 _ELLIPSIS_RE = re.compile(r"^\.\.\.\s*(#.*)?$")
 
+# Canonical set of stable marker keys accepted by detect_placeholders and the
+# --allow-marker CLI flag.
+MARKER_KEYS: frozenset[str] = frozenset(
+    {"notimplemented", "todo", "fixme", "pass", "ellipsis"}
+)
 
-def _first_placeholder(text: str) -> str | None:
-    """Return the label of the first placeholder marker found in *text*."""
+
+def _first_placeholder(text: str, allowed_markers: set[str] = set()) -> str | None:  # noqa: B006
+    """Return the label of the first placeholder marker found in *text*.
+
+    Markers whose stable key appears in *allowed_markers* are skipped.
+    """
     for line in text.splitlines():
         stripped = line.strip()
-        if _RAISE_NOT_IMPL_RE.search(stripped):
+        if "notimplemented" not in allowed_markers and _RAISE_NOT_IMPL_RE.search(stripped):
             return "raise NotImplementedError"
-        if _TODO_RE.search(stripped):
+        if "todo" not in allowed_markers and _TODO_RE.search(stripped):
             return "TODO"
-        if _FIXME_RE.search(stripped):
+        if "fixme" not in allowed_markers and _FIXME_RE.search(stripped):
             return "FIXME"
-        if _BARE_PASS_RE.match(stripped):
+        if "pass" not in allowed_markers and _BARE_PASS_RE.match(stripped):
             return "pass"
-        if _ELLIPSIS_RE.match(stripped):
+        if "ellipsis" not in allowed_markers and _ELLIPSIS_RE.match(stripped):
             return "..."
     return None
 
 
-def detect_placeholders(root: Path, contract: dict) -> list[tuple[str, str]]:
+def detect_placeholders(
+    root: Path,
+    contract: dict,
+    allowed_markers: set[str] | None = None,
+) -> list[tuple[str, str]]:
     """Return ``[(rel_path, marker)]`` for placeholder code in scope files.
 
     Scans all files inside the contract scope, excluding:
@@ -159,7 +184,12 @@ def detect_placeholders(root: Path, contract: dict) -> list[tuple[str, str]]:
     - files under ``.amanar/``
 
     Returns at most one entry per file (the first marker encountered).
+
+    ``allowed_markers`` is an optional set of stable marker keys (see
+    :data:`MARKER_KEYS`) whose corresponding markers are *not* flagged.
+    Default (``None`` or empty set) is strict: every marker blocks 'verified'.
     """
+    _allowed: set[str] = allowed_markers if allowed_markers is not None else set()
     offenders: list[tuple[str, str]] = []
     amanar = root / ".amanar"
     for path in _iter_scope_files(root, contract):
@@ -176,7 +206,7 @@ def detect_placeholders(root: Path, contract: dict) -> list[tuple[str, str]]:
             text = path.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
-        marker = _first_placeholder(text)
+        marker = _first_placeholder(text, _allowed)
         if marker is not None:
             offenders.append((str(rel), marker))
     return offenders

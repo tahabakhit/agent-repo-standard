@@ -27,7 +27,7 @@ _HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(_HERE))          # loop dir -> guards
 sys.path.insert(0, str(_HERE.parent))   # workflow dir -> hosts
 
-from guards import detect_placeholders, detect_test_tampering, snapshot_tests  # noqa: E402
+from guards import MARKER_KEYS, detect_placeholders, detect_test_tampering, snapshot_tests  # noqa: E402
 from hosts import host_command  # noqa: E402
 
 AUTHORITY_DENIED = 3
@@ -128,6 +128,7 @@ def verified(record: dict[str, Any]) -> bool:
 def loop(
     root: Path, host: str, model: str, effort: str, max_iterations: int, pass_k: int,
     timeout: int, agent: Callable[..., tuple[int | None, str]] = invoke_agent,
+    allowed_markers: set[str] | None = None,
 ) -> dict[str, Any]:
     contract = load_contract(root)
     preflight = controller(root, "validate")
@@ -148,7 +149,7 @@ def loop(
 
         # --- structural guards (run before controller grading) ---
         tampered = detect_test_tampering(root, contract, test_baseline)
-        placeholders = detect_placeholders(root, contract)
+        placeholders = detect_placeholders(root, contract, allowed_markers=allowed_markers)
         if tampered or placeholders:
             parts: list[str] = []
             if tampered:
@@ -188,10 +189,25 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--max-iterations", type=int, default=6)
     parser.add_argument("--pass-k", type=int, default=1)
     parser.add_argument("--timeout", type=int, default=300)
+    parser.add_argument(
+        "--allow-marker",
+        dest="allow_markers",
+        action="append",
+        choices=sorted(MARKER_KEYS),
+        metavar="KEY",
+        default=[],
+        help=(
+            "Allow a placeholder marker key without blocking 'verified'. "
+            "May be repeated. Choices: " + ", ".join(sorted(MARKER_KEYS)) + ". "
+            "Default: none (strict — all markers block 'verified')."
+        ),
+    )
     args = parser.parse_args(argv)
+    allowed_markers: set[str] = set(args.allow_markers) if args.allow_markers else set()
     result = loop(
         Path(args.root).resolve(), args.host, args.model, args.effort,
         args.max_iterations, args.pass_k, args.timeout,
+        allowed_markers=allowed_markers or None,
     )
     print(json.dumps(result, sort_keys=True))
     raise SystemExit(0 if result["outcome"] == "verified" else 1)

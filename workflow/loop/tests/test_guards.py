@@ -288,6 +288,104 @@ class DetectPlaceholdersCase(unittest.TestCase):
 
 
 # ---------------------------------------------------------------------------
+# detect_placeholders — allowed_markers parameter
+# ---------------------------------------------------------------------------
+
+
+class AllowMarkersCase(unittest.TestCase):
+    """Tests that allowed_markers lets specific markers through while the
+    default (strict) behaviour and other markers remain unchanged."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+        src = self.root / "src"
+        src.mkdir()
+        self._src = src
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def _contract(self):
+        return make_contract(["src"])
+
+    # (a) Default strict mode — no allowed_markers — still blocks a TODO.
+    def test_strict_default_blocks_todo(self):
+        (self._src / "impl.py").write_text("# TODO: implement me\n")
+        result = guards.detect_placeholders(self.root, self._contract())
+        markers = [m for _, m in result]
+        self.assertIn("TODO", markers)
+
+    # Default with explicit empty set is equally strict.
+    def test_explicit_empty_set_blocks_todo(self):
+        (self._src / "impl.py").write_text("# TODO: implement me\n")
+        result = guards.detect_placeholders(self.root, self._contract(), allowed_markers=set())
+        markers = [m for _, m in result]
+        self.assertIn("TODO", markers)
+
+    # (b) Allowing "todo" lets a TODO through but still blocks NotImplementedError.
+    def test_allow_todo_passes_todo_blocks_notimplemented(self):
+        (self._src / "todo_only.py").write_text("# TODO: later\n")
+        (self._src / "ni_only.py").write_text("raise NotImplementedError\n")
+        result = guards.detect_placeholders(
+            self.root, self._contract(), allowed_markers={"todo"}
+        )
+        paths = {p for p, _ in result}
+        markers = [m for _, m in result]
+        # TODO file must NOT appear in offenders
+        self.assertNotIn("src/todo_only.py", paths)
+        # NotImplementedError file MUST still appear
+        self.assertIn("raise NotImplementedError", markers)
+
+    # Single file with both: TODO allowed, NotImplementedError still caught.
+    def test_allow_todo_mixed_file_still_blocks_notimplemented(self):
+        (self._src / "impl.py").write_text(
+            "# TODO: polish later\nraise NotImplementedError\n"
+        )
+        result = guards.detect_placeholders(
+            self.root, self._contract(), allowed_markers={"todo"}
+        )
+        markers = [m for _, m in result]
+        self.assertIn("raise NotImplementedError", markers)
+
+    # (c) Allowing all markers lets a fully-annotated file verify (no offenders).
+    def test_allow_all_markers_clears_fully_annotated_file(self):
+        (self._src / "impl.py").write_text(
+            "# TODO: finish\n"
+            "# FIXME: broken\n"
+            "def run():\n"
+            "    raise NotImplementedError\n"
+            "def stub():\n"
+            "    pass\n"
+            "def proto():\n"
+            "    ...\n"
+        )
+        all_keys = {"notimplemented", "todo", "fixme", "pass", "ellipsis"}
+        result = guards.detect_placeholders(
+            self.root, self._contract(), allowed_markers=all_keys
+        )
+        self.assertEqual(result, [])
+
+    # Sanity: allowing one marker does not suppress a different one.
+    def test_allow_fixme_does_not_suppress_todo(self):
+        (self._src / "impl.py").write_text("# FIXME: ok\n# TODO: not ok\n")
+        result = guards.detect_placeholders(
+            self.root, self._contract(), allowed_markers={"fixme"}
+        )
+        markers = [m for _, m in result]
+        self.assertIn("TODO", markers)
+        self.assertNotIn("FIXME", markers)
+
+    # Test-file exclusion is unaffected by allowed_markers.
+    def test_test_files_excluded_regardless_of_allowed_markers(self):
+        (self._src / "test_impl.py").write_text("raise NotImplementedError\n")
+        result = guards.detect_placeholders(
+            self.root, self._contract(), allowed_markers=set()
+        )
+        self.assertEqual(result, [])
+
+
+# ---------------------------------------------------------------------------
 # _is_test_file (internal helper, tested through public API above but also
 # exercised directly for completeness)
 # ---------------------------------------------------------------------------
