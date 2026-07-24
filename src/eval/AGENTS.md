@@ -1,4 +1,4 @@
-# Agent Eval instructions
+# Amanar Eval instructions
 
 The product spec is archived in the coordination repo under
 `docs/reference/amanar/eval/reference/product-spec.md`; read it before changing

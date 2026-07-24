@@ -480,7 +480,7 @@
       const platforms = [...document.querySelectorAll("#new-platforms input:checked")].map((input) => input.value);
       const withTarget = byId("with-target").value.trim();
       const quote = (value) => JSON.stringify(value);
-      let command = `$agent-eval:evaluate-all ${quote(target)} --mode ${mode} --platforms ${platforms.join(",")}`;
+      let command = `evaluate-all ${quote(target)} --mode ${mode} --platforms ${platforms.join(",")}`;
       if (kind !== "auto") command += ` --kind ${kind}`;
       if (withTarget) command += ` --with ${quote(withTarget)}`;
       byId("command-output").value = command;
