@@ -31,8 +31,24 @@ import { classifyToolCall } from "./classify.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-/** Absolute path to the skills directory bundled with this extension. */
-const SKILLS_DIR = resolve(__dirname, "..", "skills");
+/**
+ * Absolute paths to the kit skill directories.
+ *
+ * Both resolve relative to this file's directory (works whether Pi runs
+ * extension.ts via type-stripping from src/ or from a compiled dist/):
+ *
+ *   src/  or dist/  → ../../../workflow/skills  (kit workflow skills)
+ *                    → ../../skills             (kit harness skills)
+ */
+export const WORKFLOW_SKILLS_DIR = resolve(
+  __dirname,
+  "..",
+  "..",
+  "..",
+  "workflow",
+  "skills",
+);
+export const HARNESS_SKILLS_DIR = resolve(__dirname, "..", "..", "skills");
 
 export default function amanarExtension(pi: ExtensionAPI): void {
   // ── 1. Skill registration ─────────────────────────────────────────────────
@@ -40,7 +56,7 @@ export default function amanarExtension(pi: ExtensionAPI): void {
   pi.on(
     "resources_discover",
     (_event: ResourcesDiscoverEvent): ResourcesDiscoverResult => ({
-      skillPaths: [SKILLS_DIR],
+      skillPaths: [WORKFLOW_SKILLS_DIR, HARNESS_SKILLS_DIR],
     }),
   );
 

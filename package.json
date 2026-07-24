@@ -1,0 +1,11 @@
+{
+  "name": "amanar",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Amanar agent-kit: deterministic workflow, inquiry, design, assurance, and memory skills for Pi and Claude Code",
+  "pi": {
+    "extensions": ["./harness/pi/src/extension.ts"],
+    "skillPaths": ["./workflow/skills", "./harness/skills"]
+  }
+}

@@ -10,6 +10,7 @@ validate:
 	python3 -m unittest discover -s harness/sync-skills/tests
 	python3 workflow/tests/validate-workflow.py
 	python3 tests/validate-components.py
+	node scripts/check-skill-consistency.mjs
 	npm test --prefix harness/pi
 	npm test --prefix harness/claude
 	npm test --prefix workflow/kernel
