@@ -32,6 +32,12 @@ import { buildPiInjection } from "../src/inject.ts";
 import { essenceToggleFromPrompt } from "../src/hooks/userPromptSubmit.ts";
 import { decidePiSettle } from "../src/hooks/piCompletion.ts";
 import { registerControllerTools } from "./controllerTools.ts";
+import {
+  nativeToolsHint,
+  piRuntimeModelHint,
+  detectVersion,
+  type RuntimeModel,
+} from "../src/nativeTools.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -41,6 +47,37 @@ const __dirname = dirname(__filename);
  * file's directory (pi/extension.ts → ../skills).
  */
 export const SKILLS_DIR = resolve(__dirname, "..", "skills");
+
+/**
+ * First-turn runtime hints from Pi's in-process signals: the native-mechanism
+ * list and the true model introspection (ctx.model + modelRegistry.getAvailable)
+ * that only Pi exposes to plugin code. Defensive: any missing field yields no
+ * hint rather than throwing.
+ */
+function runtimeHints(ctx: ExtensionContext): Array<string | null> {
+  const toRuntime = (
+    m: { id?: unknown; name?: unknown; provider?: unknown } | undefined,
+  ): RuntimeModel | null =>
+    m && typeof m.id === "string"
+      ? {
+          id: m.id,
+          name: typeof m.name === "string" ? m.name : undefined,
+          provider: typeof m.provider === "string" ? m.provider : undefined,
+        }
+      : null;
+
+  const current = toRuntime(ctx.model);
+  let available: RuntimeModel[] = [];
+  try {
+    available = (ctx.modelRegistry?.getAvailable() ?? [])
+      .map(toRuntime)
+      .filter((m): m is RuntimeModel => m !== null);
+  } catch {
+    available = [];
+  }
+
+  return [nativeToolsHint("pi", detectVersion()), piRuntimeModelHint(current, available)];
+}
 
 export default function amanarExtension(pi: ExtensionAPI): void {
   // Per-session injection state (reset by session_start).
@@ -92,9 +129,11 @@ export default function amanarExtension(pi: ExtensionAPI): void {
       if (toggle === "off") essenceOn = false;
       else if (toggle === "on") essenceOn = true;
 
+      const firstTurn = !firstTurnDone;
       const injection = buildPiInjection(ctx.cwd, {
-        firstTurn: !firstTurnDone,
+        firstTurn,
         essenceOn,
+        firstTurnExtras: firstTurn ? runtimeHints(ctx) : undefined,
       });
       firstTurnDone = true;
 

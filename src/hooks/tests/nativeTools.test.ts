@@ -7,6 +7,7 @@ import {
   detectHarness,
   detectVersion,
   nativeToolsHint,
+  piRuntimeModelHint,
 } from "../../nativeTools.ts";
 
 // ── version compare ────────────────────────────────────────────────────────
@@ -86,4 +87,25 @@ test("nativeToolsHint lists available mechanisms; null when harness unknown", ()
   const hint = nativeToolsHint("claude", "2.3.0");
   assert.ok(hint !== null && hint.includes("workflows"));
   assert.ok(hint.includes("prefer these"));
+});
+
+// ── Pi runtime model introspection ─────────────────────────────────────────
+
+test("piRuntimeModelHint: null when nothing is known", () => {
+  assert.equal(piRuntimeModelHint(null, []), null);
+  assert.equal(piRuntimeModelHint(undefined), null);
+});
+
+test("piRuntimeModelHint: reports the active model with provider qualification", () => {
+  const hint = piRuntimeModelHint({ id: "claude-sonnet-5", provider: "anthropic-vertex" }, []);
+  assert.ok(hint !== null);
+  assert.ok(hint.includes("anthropic-vertex/claude-sonnet-5"));
+});
+
+test("piRuntimeModelHint: lists available count and samples, truncating past six", () => {
+  const avail = Array.from({ length: 9 }, (_, i) => ({ id: `m${i}` }));
+  const hint = piRuntimeModelHint({ id: "m0" }, avail);
+  assert.ok(hint !== null);
+  assert.ok(hint.includes("Available (authenticated): 9"));
+  assert.ok(hint.includes("+3 more"));
 });

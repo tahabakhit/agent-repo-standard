@@ -132,6 +132,40 @@ export function detectVersion(env: NodeJS.ProcessEnv = process.env): string | un
 }
 
 /**
+ * A model as reported by Pi's in-process runtime (ctx.model /
+ * ctx.modelRegistry.getAvailable()). Pi is the only harness that exposes a true
+ * runtime model signal to plugin code; Claude/Codex fall back to the static
+ * manifest + env guess above.
+ */
+export interface RuntimeModel {
+  id: string;
+  name?: string;
+  provider?: string;
+}
+
+/**
+ * Format Pi's runtime model introspection as an advisory hint: the active model
+ * plus the count of authenticated/available models. Null when nothing is known.
+ * (Replaces the handoff's stale `getModels` API — 0.82.0 exposes
+ * ctx.model + ctx.modelRegistry.getAvailable().)
+ */
+export function piRuntimeModelHint(
+  current: RuntimeModel | null | undefined,
+  available: RuntimeModel[] = [],
+): string | null {
+  const label = (m: RuntimeModel): string =>
+    m.provider ? `${m.provider}/${m.id}` : m.id;
+  const lines: string[] = [];
+  if (current) lines.push(`[amanar:model] Active model: ${label(current)}.`);
+  if (available.length > 0) {
+    const sample = available.slice(0, 6).map(label).join(", ");
+    const more = available.length > 6 ? `, +${available.length - 6} more` : "";
+    lines.push(`Available (authenticated): ${available.length} — ${sample}${more}.`);
+  }
+  return lines.length ? lines.join("\n") : null;
+}
+
+/**
  * An advisory hint listing the native mechanisms available on this harness and
  * the "prefer native, then degrade" guidance. Null when the harness is unknown.
  */
