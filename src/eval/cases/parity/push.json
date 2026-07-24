@@ -1,0 +1,6 @@
+{
+  "id": "parity-git-push-denied",
+  "suite": "harness-parity",
+  "command": "git push origin main",
+  "expectAllow": false
+}

@@ -1,0 +1,6 @@
+{
+  "id": "misfire-no-route",
+  "suite": "invocation",
+  "prompt": "xyzzy plugh frobnicate the flux",
+  "expected": null
+}

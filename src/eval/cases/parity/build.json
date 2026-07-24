@@ -1,0 +1,6 @@
+{
+  "id": "parity-build-allowed",
+  "suite": "harness-parity",
+  "command": "npm run build",
+  "expectAllow": true
+}

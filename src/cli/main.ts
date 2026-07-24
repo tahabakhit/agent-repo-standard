@@ -9,6 +9,7 @@ import { runSessionStart } from "../hooks/sessionStart.ts";
 import { runUserPromptSubmit } from "../hooks/userPromptSubmit.ts";
 import { installPreCommit } from "../hooks/installHook.ts";
 import { runSyncSkills } from "../sync/syncSkills.ts";
+import { runEval } from "../eval/evalCli.ts";
 
 /** Amanar CLI dispatcher. One binary all hooks and tools funnel through. */
 export async function main(argv: string[]): Promise<void> {
@@ -42,9 +43,13 @@ export async function main(argv: string[]): Promise<void> {
       runSyncSkills(rest);
       break;
 
+    case "eval":
+      process.exit(await runEval(repoRoot));
+      break;
+
     default:
       console.error(
-        `amanar: unknown command '${cmd ?? ""}'. Available: validate, hook, hooks, sync-skills`,
+        `amanar: unknown command '${cmd ?? ""}'. Available: validate, hook, hooks, sync-skills, eval`,
       );
       process.exit(2);
   }

@@ -1,0 +1,7 @@
+{
+  "id": "tier-no-regression",
+  "suite": "model-tier",
+  "order": ["haiku", "sonnet", "opus"],
+  "epsilon": 0.02,
+  "tiers": { "haiku": 0.62, "sonnet": 0.81, "opus": 0.9 }
+}

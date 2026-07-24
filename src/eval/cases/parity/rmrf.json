@@ -1,0 +1,6 @@
+{
+  "id": "parity-rm-rf-denied",
+  "suite": "harness-parity",
+  "command": "rm -rf /tmp/scratch",
+  "expectAllow": false
+}

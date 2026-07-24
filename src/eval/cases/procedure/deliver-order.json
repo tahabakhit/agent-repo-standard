@@ -1,0 +1,7 @@
+{
+  "id": "deliver-controller-order",
+  "suite": "procedure",
+  "skill": "amanar-deliver",
+  "mustContain": ["begin", "verify", "receipts"],
+  "mustNotContain": []
+}

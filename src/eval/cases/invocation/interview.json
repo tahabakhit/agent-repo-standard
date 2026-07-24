@@ -1,0 +1,6 @@
+{
+  "id": "route-interview",
+  "suite": "invocation",
+  "prompt": "the requirements are unclear, help me clarify scope",
+  "expected": "amanar-interview"
+}

@@ -1,0 +1,6 @@
+{
+  "id": "route-debug",
+  "suite": "invocation",
+  "prompt": "this is failing and I need the root cause",
+  "expected": "amanar-debug"
+}

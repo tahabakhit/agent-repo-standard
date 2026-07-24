@@ -1,0 +1,7 @@
+{
+  "id": "onboard-explicit-clause",
+  "suite": "procedure",
+  "skill": "amanar-onboard",
+  "mustContain": ["Use only when explicitly invoked"],
+  "mustNotContain": []
+}

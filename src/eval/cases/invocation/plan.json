@@ -1,0 +1,6 @@
+{
+  "id": "route-plan",
+  "suite": "invocation",
+  "prompt": "design the architecture and overall approach for this service",
+  "expected": "amanar-plan"
+}

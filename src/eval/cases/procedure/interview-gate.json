@@ -1,0 +1,7 @@
+{
+  "id": "interview-confirm-gate",
+  "suite": "procedure",
+  "skill": "amanar-interview",
+  "mustContain": ["accepted", "success contract"],
+  "mustNotContain": []
+}
