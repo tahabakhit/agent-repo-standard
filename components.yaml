@@ -23,7 +23,7 @@ components:
   - id: amanar-workflow-loop
     path: workflow/loop
     authority: bounded-loop runner that drives the controller; adds no host authority
-    validation: python3 -m unittest discover -s workflow/loop/tests
+    validation: npm test --prefix workflow/loop
   - id: amanar-knowledge
     path: knowledge
     authority: portable stateless knowledge-save CLI; writes only to the user-configured store directory, never to the caller repo

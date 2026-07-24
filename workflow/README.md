@@ -12,17 +12,17 @@ live effects (`amanar-workflow` drives the controller).
 
 ## Kernel
 
-`kernel/` is the deterministic, host-independent controller. Consumers vendor it at
-`.amanar/kernel/` and invoke `amanar-workflow validate|begin|run-check|verify|
-status`. See `kernel/docs/contract.md`. `hosts.py` holds the shared, non-interactive
-invocation shapes for each supported host, reused by the portability pack
-(`tests/run-portability-pack.py`) and the bounded-loop runner.
+`kernel/` is the deterministic, host-independent controller (TypeScript). Consumers
+vendor it at `.amanar/kernel/` and invoke `node .amanar/kernel/amanar-workflow.ts
+validate|begin|run-check|verify|status`. See `kernel/docs/contract.md`. The loop's
+`loop/src/hosts.ts` holds the shared, non-interactive invocation shapes for each
+supported host.
 
 ## Hosts
 
 Pi is the primary harness; Claude and Codex are secondary. Each runs the kernel by
-calling the vendored `.amanar/kernel/amanar-workflow` — the controller is identical
-across hosts.
+calling the vendored `.amanar/kernel/amanar-workflow.ts` via node — the controller is
+identical across hosts.
 
 Pi (primary):
 

@@ -19,4 +19,5 @@ jobs:
       - run: npm ci --prefix harness/pi
       - run: npm ci --prefix knowledge
       - run: npm ci --prefix workflow/kernel
+      - run: npm ci --prefix workflow/loop
       - run: make validate
