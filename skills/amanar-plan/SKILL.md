@@ -19,3 +19,13 @@ software module
 design, use [deep modules](references/deep-modules.md),
 [deepening](references/deepening.md), and
 [design it twice](references/design-it-twice.md) when relevant.
+
+Design against an accepted objective only — designing before requirements are
+accepted is out of order; return to `$amanar-interview` first. When the solution
+space is wide, compare 2–3 approaches with trade-offs and design from the chosen
+one, grafting the best ideas from the others.
+
+Structure the plan as tracer-bullet vertical slices: each slice is an
+independently verifiable end-to-end increment (a real path through the system,
+not a horizontal layer), with its own checks, sequenced so the earliest slice
+proves the riskiest assumption. Each slice maps to a controller contract.

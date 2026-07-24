@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amanar Last 30 Days"
+  short_description: "Research recent real-world signal on a topic"
+  default_prompt: "Use $amanar-last30days to research what people have said about this topic recently, weighted by engagement, with citations."
+policy:
+  allow_implicit_invocation: true

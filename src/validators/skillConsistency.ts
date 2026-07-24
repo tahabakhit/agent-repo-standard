@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { SKILL_BUCKETS } from "./roster.ts";
 
 /**
  * Every skill under the single root `skills/` tree has a SKILL.md whose name
@@ -12,7 +13,7 @@ export function validateSkillConsistency(repoRoot: string): string {
   for (const root of roots) {
     if (!existsSync(root)) throw new Error(`skill root not found: ${root}`);
     for (const entry of readdirSync(root, { withFileTypes: true })) {
-      if (!entry.isDirectory()) continue;
+      if (!entry.isDirectory() || SKILL_BUCKETS.has(entry.name)) continue;
       checkSkill(join(root, entry.name), entry.name);
       total++;
     }

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amanar Discover"
+  short_description: "Find and vet community skills worth borrowing"
+  default_prompt: "Use $amanar-discover to search the skills.sh index for skills relevant to this task, vet each at the source, and shortlist."
+policy:
+  allow_implicit_invocation: true

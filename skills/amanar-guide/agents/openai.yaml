@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amanar Guide"
+  short_description: "Route a request to the right amanar skill"
+  default_prompt: "Use $amanar-guide to pick the right amanar skill for this request and sequence the work."
+policy:
+  allow_implicit_invocation: true

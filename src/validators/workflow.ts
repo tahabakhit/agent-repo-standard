@@ -5,6 +5,7 @@ import {
   MODEL_INVOCABLE,
   KNOWN_SKILLS,
   ALLOWED_TOKENS,
+  SKILL_BUCKETS,
 } from "./roster.ts";
 import { parseFrontmatter, escapeRegExp, walkFiles } from "./util.ts";
 
@@ -12,7 +13,7 @@ import { parseFrontmatter, escapeRegExp, walkFiles } from "./util.ts";
 export function validateWorkflow(repoRoot: string): string {
   const SKILLS = join(repoRoot, "skills");
   const actual = readdirSync(SKILLS, { withFileTypes: true })
-    .filter((e) => e.isDirectory())
+    .filter((e) => e.isDirectory() && !SKILL_BUCKETS.has(e.name))
     .map((e) => e.name);
 
   // Each present skill must have the correct name in its SKILL.md.

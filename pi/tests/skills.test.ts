@@ -24,11 +24,17 @@ const SKILLS_DIR = resolve(PI_DIR, "..", "skills");
 const EXPECTED_SKILLS = [
   "amanar-adversarial-review",
   "amanar-author-skill",
+  "amanar-debug",
   "amanar-deliver",
+  "amanar-discover",
+  "amanar-essence",
+  "amanar-guide",
   "amanar-interview",
+  "amanar-last30days",
   "amanar-onboard",
   "amanar-plan",
   "amanar-remember",
+  "amanar-worktrees",
 ];
 
 test("SKILLS_DIR: resolves to an existing directory", () => {

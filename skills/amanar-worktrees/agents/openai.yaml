@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amanar Worktrees"
+  short_description: "Set up an isolated workspace before implementation"
+  default_prompt: "Use $amanar-worktrees to set up an isolated workspace and verify a clean baseline before starting."
+policy:
+  allow_implicit_invocation: true

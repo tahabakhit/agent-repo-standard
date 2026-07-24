@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amanar Essence"
+  short_description: "Strip reader-facing writing down to only what you mean"
+  default_prompt: "Use $amanar-essence to rewrite this so it stands on its own — no conversation-derived cruft, no reflexive hedging, every fact kept, code/paths/URLs verbatim."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amanar Debug"
+  short_description: "Find a bug's root cause before fixing it"
+  default_prompt: "Use $amanar-debug to reproduce and root-cause this bug before attempting a fix."
+policy:
+  allow_implicit_invocation: true

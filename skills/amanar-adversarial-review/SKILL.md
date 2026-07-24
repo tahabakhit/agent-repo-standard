@@ -22,8 +22,13 @@ discipline is the narrative complement to the controller's pass/fail receipts, n
 second gate.
 
 For code, use [test design](references/tests.md) and
-[mocking](references/mocking.md) only where they improve observable evidence;
-TDD is not mandatory.
+[mocking](references/mocking.md) only where they improve observable evidence.
+
+When a fix or new behavior is in scope, drive it red-green-refactor: first write
+a test that fails for the right reason (proving the defect or the missing
+behavior), then make the minimal change to pass it, then refactor under the green
+test. A change with no failing test that preceded it has weaker evidence — say so
+in the finding. TDD is the strongest evidence path, not a mandatory ritual.
 
 The VERIFIED / CONTRADICTED / UNVERIFIED evidence-citation discipline is
 reimplemented from iamneilroberts/claude-skills (MIT).

@@ -60,6 +60,42 @@ export const ROUTES: SkillRoute[] = [
     summary: "Design, audit, or apply the smallest useful repository harness.",
     explicitOnly: true,
   },
+  {
+    skill: "amanar-essence",
+    triggers: ["essence", "tighten this writing", "reader-facing", "strip the fluff", "make this stand on its own"],
+    summary: "Strip reader-facing writing down to only what you mean.",
+    explicitOnly: false,
+  },
+  {
+    skill: "amanar-worktrees",
+    triggers: ["isolated workspace", "worktree", "branch isolation", "isolate this work"],
+    summary: "Set up an isolated workspace before implementation.",
+    explicitOnly: false,
+  },
+  {
+    skill: "amanar-debug",
+    triggers: ["debug", "root cause", "not working", "failing", "why is this broken", "reproduce the bug"],
+    summary: "Find a bug's root cause before attempting a fix.",
+    explicitOnly: false,
+  },
+  {
+    skill: "amanar-discover",
+    triggers: ["find a skill", "community skill", "borrow a skill", "skills.sh", "is there a skill for"],
+    summary: "Find and vet community skills worth borrowing.",
+    explicitOnly: false,
+  },
+  {
+    skill: "amanar-last30days",
+    triggers: ["last 30 days", "recently", "what are people saying", "current sentiment", "recent adoption"],
+    summary: "Research recent real-world signal on a topic.",
+    explicitOnly: false,
+  },
+  {
+    skill: "amanar-guide",
+    triggers: ["which skill", "how do i start", "route this", "where do i begin", "orient me"],
+    summary: "Route a request to the right amanar skill and sequence the work.",
+    explicitOnly: false,
+  },
 ];
 
 export interface RouteMatch {
