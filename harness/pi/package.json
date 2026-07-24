@@ -1,0 +1,23 @@
+{
+  "name": "amanar-pi",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Amanar Pi extension: skill registration, light bootstrap, and in-session backpressure",
+  "pi": {
+    "extensions": ["./src/extension.ts"],
+    "skillPaths": ["./skills"]
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "tsc --noEmit && node --test tests/*.test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -7,12 +7,13 @@ tag `legacy-fixed-v1.0.11` at commit `9feb596`.
 ## Components
 
 - [`harness/`](harness/) — adaptive repository harness and `amanar-scaffold`
-- [`workflow/`](workflow/) — inquiry, design, assurance, verification, and evaluation
+- [`harness/pi/`](harness/pi/) — TypeScript Pi extension (native skill loading, light bootstrap, in-session backpressure)
+- [`workflow/`](workflow/) — inquiry, design, assurance, verification, knowledge-capture, and evaluation
 - [`knowledge/`](knowledge/) — config-driven knowledge-save CLI (portable, user-owned store)
 - [`storage/synology-mcp/`](storage/synology-mcp/) — portable read-only DSM MCP adapter
 - Tiered Hermes was extracted to [`../ayyur/tiered-hermes/`](../ayyur/tiered-hermes/) (independent repository)
 
-The five instrument skills (four workflow + scaffold) support Pi and Claude Code
+The six instrument skills (five workflow + scaffold) support Pi and Claude Code
 first-class and Codex best-effort, with per-skill invocation (model-invocable by
 default; explicit-only for live-effect skills). `workflow/agent-eval` remains
 Codex-native pending a Pi-first rework.
