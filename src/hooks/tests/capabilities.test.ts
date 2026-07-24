@@ -7,10 +7,10 @@ test("claude has both the pre-gate and the completion gate", () => {
   assert.equal(capable("claude", "completionGate"), true);
 });
 
-test("pi has a pre-gate and injection but no completion gate", () => {
+test("pi has a pre-gate, injection, and a continuation-based completion gate", () => {
   assert.equal(capable("pi", "preToolUseDeny"), true);
   assert.equal(capable("pi", "reinjection"), true);
-  assert.equal(capable("pi", "completionGate"), false);
+  assert.equal(capable("pi", "completionGate"), true);
 });
 
 test("codex has only the shell pre-gate; no completion gate or injection", () => {

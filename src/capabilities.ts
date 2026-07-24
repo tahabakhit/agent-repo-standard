@@ -3,10 +3,12 @@
  *
  * The forcing layers (pre-gate deny, completion gate, injection) do not
  * generalize across harnesses: Claude Code has both an unbypassable PreToolUse
- * deny AND a force-to-completion Stop gate; Pi has a tool-call block and
- * per-turn system-prompt injection but NO completion gate; Codex has only a
- * shell-level deny (hooks off by default). The one mechanism uniform everywhere
- * is the runner that owns the loop and gates "done" on external evidence.
+ * deny AND a force-to-completion Stop gate; Pi has a tool-call block, per-turn
+ * system-prompt injection, AND a completion gate implemented by continuation
+ * (agent_settled cannot block, so the extension re-injects the evidence demand
+ * via sendUserMessage — bounded by a nudge cap); Codex has only a shell-level
+ * deny (hooks off by default). The one mechanism uniform everywhere is the
+ * runner that owns the loop and gates "done" on external evidence.
  *
  * Every forcing layer consults `capable()` before relying on a mechanism, so
  * the kit degrades to the runner-holds-done floor where a mechanism is absent —
@@ -35,13 +37,14 @@ export interface CapabilitySet {
 }
 
 /**
- * Conservative per-harness defaults, source-verified 2026-07. The runner floor
- * is always present. Claude alone has an unbypassable pre-gate AND a
- * force-to-completion gate; on Pi and Codex the runner holds "done".
+ * Conservative per-harness defaults, source-verified against pi-coding-agent
+ * 0.82.0 (2026-07). The runner floor is always present. Claude blocks to hold
+ * "done"; Pi holds it by bounded continuation on agent_settled (see
+ * hooks/piCompletion.ts); Codex has neither and leans on the runner floor.
  */
 const TABLE: Record<Harness, CapabilitySet> = {
   claude: { preToolUseDeny: true, completionGate: true, reinjection: true, runnerHoldsDone: true },
-  pi: { preToolUseDeny: true, completionGate: false, reinjection: true, runnerHoldsDone: true },
+  pi: { preToolUseDeny: true, completionGate: true, reinjection: true, runnerHoldsDone: true },
   codex: { preToolUseDeny: true, completionGate: false, reinjection: false, runnerHoldsDone: true },
 };
 

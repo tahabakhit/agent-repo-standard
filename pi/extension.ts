@@ -23,12 +23,14 @@ import type {
   SessionStartEvent,
   BeforeAgentStartEvent,
   BeforeAgentStartEventResult,
+  AgentSettledEvent,
   ToolCallEvent,
   ToolCallEventResult,
 } from "@earendil-works/pi-coding-agent";
 import { classifyToolCall } from "../src/classify.ts";
 import { buildPiInjection } from "../src/inject.ts";
 import { essenceToggleFromPrompt } from "../src/hooks/userPromptSubmit.ts";
+import { decidePiSettle } from "../src/hooks/piCompletion.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,6 +45,9 @@ export default function amanarExtension(pi: ExtensionAPI): void {
   // Per-session injection state (reset by session_start).
   let firstTurnDone = false;
   let essenceOn = true;
+  // Completion-gate continuation counter (bounded; reset by session_start and
+  // whenever the contract is verified or absent).
+  let piNudges = 0;
 
   // ── 1. Skill registration ─────────────────────────────────────────────────
 
@@ -62,6 +67,7 @@ export default function amanarExtension(pi: ExtensionAPI): void {
   pi.on("session_start", (_event: SessionStartEvent): void => {
     firstTurnDone = false;
     essenceOn = true;
+    piNudges = 0;
   });
 
   // ── 3. Injection: before_agent_start systemPrompt rewrite ──────────────────
@@ -93,7 +99,26 @@ export default function amanarExtension(pi: ExtensionAPI): void {
     },
   );
 
-  // ── 4. Backpressure: deny dangerous ops ────────────────────────────────────
+  // ── 4. Completion gate: agent_settled continuation ─────────────────────────
+  //
+  // Pi cannot block "done" (agent_settled returns nothing), so the gate holds
+  // completion by continuation: if a governed contract is present and unverified,
+  // re-inject the evidence demand via sendUserMessage, which triggers another
+  // turn. Bounded by a nudge cap (no stop_hook_active equivalent on Pi); past the
+  // cap it stands down to the runner-holds-done floor.
+
+  pi.on("agent_settled", (_event: AgentSettledEvent, ctx: ExtensionContext): void => {
+    const decision = decidePiSettle(ctx.cwd, { nudges: piNudges });
+    if (decision.action === "reset") {
+      piNudges = 0;
+    } else if (decision.action === "continue" && decision.reason) {
+      piNudges += 1;
+      pi.sendUserMessage(decision.reason);
+    }
+    // stand-down: leave the counter and do nothing (runner holds done).
+  });
+
+  // ── 5. Backpressure: deny dangerous ops ────────────────────────────────────
 
   pi.on("tool_call", (event: ToolCallEvent): ToolCallEventResult | void => {
     const input =
