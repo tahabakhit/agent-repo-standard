@@ -164,6 +164,26 @@ multi-agent orchestration for sequential work.
   and shippable incrementally.
 - Reset/compaction memory strategy is model-version-dependent — don't hard-code it.
 
+## Addendum 2026-07-24 — language direction + slice decisions
+
+- **Language: move to TypeScript.** New surfaces are TS/Node, starting with the Pi
+  extension. The existing Python components (kernel, loop, knowledge CLI, validators)
+  migrate to TS component-by-component in dedicated, test-verified slices — not a
+  stop-the-world rewrite. Rationale: Pi's extension/hook API is TS-native; a
+  single-language kit is cleaner; the in-session-hook differentiator requires it.
+- **Pi extension: build now** — `resources_discover` skill loading + one-time
+  `context` bootstrap injection + a `tool_call` deny-unless-evidence backpressure
+  hook. Lives in `harness/pi/`.
+- **Secret scanning:** built-in stdlib scan always-on + optional gitleaks pre-commit
+  when present (no hard dependency).
+- **agent-eval: adapt in place** (already Node) — make it harness-agnostic and
+  Pi-drivable as the outside eval gate; preserves the 19 tests + ADR-0001.
+- **Completion guard: configurable, strict by default** — any placeholder marker
+  blocks `verified`; a run may opt specific markers out (CLI flag, not a contract
+  field, to avoid loosening the kernel contract schema).
+- **Slice 1 shipped** (commits `626844e`→`276e1ea`, `make validate` green): loop
+  anti-gaming guards, per-skill invocation + orchestrate retired, knowledge CLI MVP.
+
 ## Attribution
 
 Evidence-citation + handoff grafts are MIT from `iamneilroberts/claude-skills`. The
