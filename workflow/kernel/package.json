@@ -1,0 +1,19 @@
+{
+  "name": "amanar-workflow-kernel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic workflow kernel — host-independent contract controller",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "tsc --noEmit && node --test tests/*.test.ts",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
