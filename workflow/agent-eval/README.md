@@ -1,16 +1,18 @@
 # Agent Eval
 
-Run evidence-backed evaluations of skills, plugins, tools, and explicit combinations from Codex, then browse the normalized scorecard offline.
+Outside eval gate for the Amanar agent-kit. Run evidence-backed evaluations of skills, plugins, tools, and explicit combinations from any agent harness (Pi primary; Claude Code and Codex also supported), then browse the normalized scorecard offline. Runs at CI or pre-PR, outside the harness inner loop.
 
 ## Use it
 
-After installing the local plugin, start in Codex with:
+The current agent task (in any harness — Pi primary, Claude Code, Codex, or another) delegates independent evaluator lanes, reconciles their evidence, and writes the canonical result. The web page only displays results and copies new commands; it cannot execute anything.
+
+When the plugin is installed under Codex or Claude Code, invoke with:
 
 ```text
 $agent-eval:evaluate-all <target> --mode quick|full --platforms codex,claude-code,pi,hermes,opencode
 ```
 
-The current Codex task delegates independent evaluator lanes, reconciles their evidence, and writes the canonical result. The web page only displays results and copies new commands; it cannot execute anything.
+From Pi or another harness, invoke the skill by task instruction using the same options.
 
 Evidence labels are strict:
 
@@ -59,9 +61,9 @@ Remove the `agent-eval` marketplace entry separately if the plugin will not be r
 
 ## Architecture
 
-- Codex owns orchestration and subagent lifecycle.
+- The current agent task (Pi primary; Claude Code/Codex also) owns orchestration and subagent lifecycle.
 - Evaluators own only their raw method evidence.
 - `scripts/agent-eval.mjs` is the sole score, confidence, path, and rendering authority.
 - Reviewed JSON is canonical; raw artifacts stay ignored; `dist/index.html` is generated offline.
 
-See the [approved product specification](docs/reference/product-spec.md) and [ADR-0001](docs/decisions/adrs/0001-native-codex-orchestration.md).
+See the [approved product specification](docs/reference/product-spec.md), [ADR-0001](docs/decisions/adrs/0001-native-codex-orchestration.md) (superseded), and [ADR-0002](docs/decisions/adrs/0002-harness-agnostic-orchestration.md).

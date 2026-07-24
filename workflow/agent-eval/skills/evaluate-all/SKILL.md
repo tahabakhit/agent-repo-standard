@@ -7,7 +7,7 @@ description: Evaluate a local skill, plugin, agent tool, repository workflow, or
 
 Explicit invocation: `$agent-eval:evaluate-all <target> [options]`.
 
-The current Codex task is the orchestrator and only canonical writer. Invocation authorizes evaluator subagents for this workflow. Never delegate final scoring, reconciliation, ledger writes, dashboard generation, or wiki updates.
+The current agent task (in any harness — Pi primary, Claude Code, Codex, or another) is the orchestrator and only canonical writer. Invocation authorizes evaluator subagents for this workflow. Never delegate final scoring, reconciliation, ledger writes, dashboard generation, or wiki updates.
 
 ## Inputs
 
@@ -34,7 +34,7 @@ Run `node <plugin-root>/scripts/agent-eval.mjs detect` first. Use the absolute e
 | Lane | Run when |
 |---|---|
 | Source and safety review | Always |
-| Plugin Eval | Target is a local Codex skill or plugin |
+| Plugin Eval | Target is a local Codex skill or plugin (Codex-local lane; skip on other harnesses) |
 | Promptfoo | Default behavioral lane when a valid task/config and verifier exist |
 | Harbor | Full mode, installed, and deterministic repository tasks exist |
 | Inspect AI | `--deep`, installed, and a suitable Inspect task exists |
