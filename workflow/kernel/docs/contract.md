@@ -64,10 +64,10 @@ boundary must run inside a separately managed container or sandbox.
 ## Controller discovery
 
 The single supported opt-in discovery location is
-`.amanar/kernel/amanar-workflow`, with the exact release recorded in
-`.amanar/kernel/VERSION`. Hosts invoke that file with Python from the repository
-root and confirm `--version` matches the pin. Global installation and unpinned
-`PATH` discovery are outside the portable contract.
+`.amanar/kernel/amanar-workflow.ts`, with the exact release recorded in
+`.amanar/kernel/VERSION`. Hosts invoke that file with Node (>=22) from the
+repository root and confirm `--version` matches the pin. Global installation and
+unpinned `PATH` discovery are outside the portable contract.
 
 ## CLI and stable exit codes
 

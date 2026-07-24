@@ -19,7 +19,7 @@ components:
   - id: amanar-workflow-kernel
     path: workflow/kernel
     authority: deterministic host-independent workflow contract, controller, and check receipts
-    validation: python3 -m unittest discover -s workflow/kernel/tests
+    validation: npm test --prefix workflow/kernel
   - id: amanar-workflow-loop
     path: workflow/loop
     authority: bounded-loop runner that drives the controller; adds no host authority

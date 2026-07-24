@@ -1,6 +1,6 @@
 # Resume and handoff digest
 
-`python3 .amanar/kernel/tools/render_handoff.py` renders a deterministic Markdown
+`node .amanar/kernel/src/tools/renderHandoff.ts` renders a deterministic Markdown
 handoff from controller state. It is read-only and reuses the controller's own
 freshness logic; it is not part of the frozen CLI or the workflow contract.
 

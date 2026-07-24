@@ -140,3 +140,8 @@ export function main(argv: string[] = process.argv.slice(2)): void {
   );
   console.log(`wrote ${out}`);
 }
+
+import { pathToFileURL as _p2u } from 'node:url';
+if (process.argv[1] && import.meta.url === _p2u(process.argv[1]).href) {
+  main();
+}

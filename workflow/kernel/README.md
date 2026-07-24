@@ -5,14 +5,14 @@ deterministic controller. It is deliberately not an agent runtime or scheduler.
 
 Consumers opt in by vendoring this directory at `.amanar/kernel/` and pinning
 the exact controller release in `.amanar/kernel/VERSION`. The file must match
-`python3 .amanar/kernel/amanar-workflow --version`. Run the pinned CLI from
+`node .amanar/kernel/amanar-workflow.ts --version`. Run the pinned CLI from
 the target repository root:
 
 ```sh
-python3 .amanar/kernel/amanar-workflow validate
-python3 .amanar/kernel/amanar-workflow begin
-python3 .amanar/kernel/amanar-workflow run-check tests
-python3 .amanar/kernel/amanar-workflow verify
+node .amanar/kernel/amanar-workflow.ts validate
+node .amanar/kernel/amanar-workflow.ts begin
+node .amanar/kernel/amanar-workflow.ts run-check tests
+node .amanar/kernel/amanar-workflow.ts verify
 ```
 
 The target contract is `.amanar/workflow.json`. Runtime state, bounded output,

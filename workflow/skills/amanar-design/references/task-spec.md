@@ -28,7 +28,7 @@ Author it as compact JSON, then compile:
 ```
 
 ```sh
-python3 .amanar/kernel/tools/compile_task_spec.py spec.json --out .amanar/workflow.json
+node .amanar/kernel/src/tools/compileTaskSpec.ts spec.json --out .amanar/workflow.json
 ```
 
 The compiler fills each check's machinery by default — `expectedExit: 0`,

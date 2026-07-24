@@ -38,9 +38,9 @@ class LoopError(Exception):
 
 
 def controller(root: Path, *args: str) -> subprocess.CompletedProcess[str]:
-    cli = root / ".amanar" / "kernel" / "amanar-workflow"
+    cli = root / ".amanar" / "kernel" / "amanar-workflow.ts"
     return subprocess.run(
-        [sys.executable, str(cli), *args], cwd=root, text=True, capture_output=True,
+        ["node", str(cli), *args], cwd=root, text=True, capture_output=True,
     )
 
 

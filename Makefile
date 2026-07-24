@@ -9,10 +9,10 @@ validate:
 	python3 -m unittest discover -s harness/backpressure/tests
 	python3 -m unittest discover -s harness/sync-skills/tests
 	python3 workflow/tests/validate-workflow.py
-	python3 -m unittest discover -s workflow/kernel/tests
 	python3 -m unittest discover -s workflow/loop/tests
 	python3 tests/validate-components.py
 	npm test --prefix harness/pi
+	npm test --prefix workflow/kernel
 	npm test --prefix knowledge
 	npm test --prefix workflow/agent-eval
 	uv run --frozen --directory storage/synology-mcp python -m unittest discover -s tests

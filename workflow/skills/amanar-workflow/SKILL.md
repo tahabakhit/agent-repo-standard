@@ -15,15 +15,15 @@ check passed is not evidence; only a receipt is.
 
 ## Run the controller
 
-The controller is the vendored `.amanar/kernel/amanar-workflow`, run with Python from
-the repository root. Author the task as `.amanar/workflow.json` (see the kernel
-contract), or compile one from a task-spec with
-`python3 .amanar/kernel/tools/compile_task_spec.py <spec.json>`. Then run, in order:
+The controller is the vendored `.amanar/kernel/amanar-workflow.ts`, run with Node
+(>=22) from the repository root. Author the task as `.amanar/workflow.json` (see the
+kernel contract), or compile one from a task-spec with
+`node .amanar/kernel/src/tools/compileTaskSpec.ts <spec.json>`. Then run, in order:
 
-1. `python3 .amanar/kernel/amanar-workflow validate`
-2. `python3 .amanar/kernel/amanar-workflow begin` — required once before any check.
-3. `python3 .amanar/kernel/amanar-workflow run-check <id>` — for every check.
-4. `python3 .amanar/kernel/amanar-workflow verify` — the only route to verified.
+1. `node .amanar/kernel/amanar-workflow.ts validate`
+2. `node .amanar/kernel/amanar-workflow.ts begin` — required once before any check.
+3. `node .amanar/kernel/amanar-workflow.ts run-check <id>` — for every check.
+4. `node .amanar/kernel/amanar-workflow.ts verify` — the only route to verified.
 
 `status --json` reports the derived state and any stale receipts; the `--json` flag
 is required. `block --reason "<text>"` records a blocker, after which `begin` resumes.
@@ -42,7 +42,7 @@ state never grants it.
 
 To hand off or resume, render a deterministic digest of controller state:
 
-`python3 .amanar/kernel/tools/render_handoff.py`
+`node .amanar/kernel/src/tools/renderHandoff.ts`
 
 It reports the derived state, each receipt's current/stale/missing verdict, the
 id/artifact closet, and the ordered rebuild to verified. See

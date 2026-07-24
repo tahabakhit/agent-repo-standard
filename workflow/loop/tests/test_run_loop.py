@@ -46,11 +46,9 @@ class RunLoopTestCase(unittest.TestCase):
         kernel = control / "kernel"
         kernel.mkdir()
         shutil.copy2(KERNEL / "VERSION", kernel / "VERSION")
-        shutil.copy2(KERNEL / "amanar-workflow", kernel / "amanar-workflow")
-        shutil.copytree(
-            KERNEL / "amanar_workflow", kernel / "amanar_workflow",
-            ignore=shutil.ignore_patterns("__pycache__", "*.pyc"),
-        )
+        shutil.copy2(KERNEL / "amanar-workflow.ts", kernel / "amanar-workflow.ts")
+        shutil.copytree(KERNEL / "src", kernel / "src")
+        shutil.copytree(KERNEL / "schema", kernel / "schema")
         (self.root / ".gitignore").write_text(".amanar/run/\n__pycache__/\n")
         for command in (
             ["git", "init", "-q"],
