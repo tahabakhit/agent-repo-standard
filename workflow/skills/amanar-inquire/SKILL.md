@@ -1,7 +1,6 @@
 ---
 name: amanar-inquire
-description: Clarify an idea into accepted objectives, scope, authority, constraints, non-goals, acceptance criteria, and evidence. Use only when explicitly invoked.
-disable-model-invocation: true
+description: Clarify an unclear idea, request, or objective into a verifiable success contract — use when scope, authority, acceptance criteria, or key constraints are unresolved.
 ---
 
 # Amanar Inquire

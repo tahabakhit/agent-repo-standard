@@ -28,7 +28,7 @@ REPO = Path(__file__).resolve().parents[2]
 SKILL_ROOTS = [REPO / "harness" / "skills", REPO / "workflow" / "skills"]
 HOSTS = {"pi": ("AGENTS_HOME", ".agents"), "codex": ("CODEX_HOME", ".codex"), "claude": ("CLAUDE_HOME", ".claude")}
 # Pre-amanar personal skills superseded by an amanar-* skill.
-SUPERSEDE = {"orchestrate": "amanar-orchestrate", "scaffold": "amanar-scaffold", "codebase-design": "amanar-design"}
+SUPERSEDE = {"scaffold": "amanar-scaffold", "codebase-design": "amanar-design"}
 PROTECTED = {".system"}
 
 

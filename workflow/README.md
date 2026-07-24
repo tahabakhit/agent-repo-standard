@@ -1,14 +1,14 @@
 # Amanar workflow
 
-The workflow component provides five explicit contracts:
+The workflow component provides four skill contracts plus the deterministic kernel:
 
-- `amanar-workflow`: stateful umbrella and rigor routing
-- `amanar-inquire`: problem framing and requirements
-- `amanar-design`: adaptive cross-domain design
-- `amanar-orchestrate`: phased execution and verification
-- `amanar-assure`: adversarial readiness and completion review
+- `amanar-workflow` (explicit-only): rigor routing over the controller
+- `amanar-inquire` (model-invocable): problem framing and requirements
+- `amanar-design` (model-invocable): adaptive cross-domain design
+- `amanar-assure` (model-invocable): adversarial readiness and completion review
 
-The contracts are portable and do not assume that one skill can invoke another.
+Invocation is per-skill: model-invocable by default, explicit-only for skills with
+live effects (`amanar-workflow` drives the controller).
 
 ## Kernel
 
@@ -34,10 +34,10 @@ Pi (primary):
   keep it lean.
 - **Skills:** loaded from `~/.agents/skills/` and project `.agents/skills/`;
   `--skill <path>` / `--no-skills` control loading.
-- **Explicit-only:** Pi honors no per-skill frontmatter gate. Governed and loop
-  invocations enforce explicit invocation structurally with
-  `pi --no-skills --skill <path>` (load exactly the intended skill); interactive use
-  relies on each skill's "Use only when explicitly invoked" description.
+- **Invocation:** Pi honors the standard `disable-model-invocation` frontmatter
+  (like Claude Code), so explicit-only skills are gated natively. Governed and loop
+  runs additionally enforce it structurally with `pi --no-skills --skill <path>`
+  (load exactly the intended skill).
 - **Models:** default provider/model come from Pi settings; override with
   `--provider`/`--model`. Routing intent: GPT by default, Claude-on-Vertex as the
   secondary lane.

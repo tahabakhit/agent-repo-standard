@@ -56,19 +56,19 @@ class SyncSkillsTestCase(unittest.TestCase):
                 self.assertEqual(os.readlink(link), str(source))
 
     def test_supersede_backs_up_overlapping_personal_skill(self):
-        old = self.homes["pi"] / "skills" / "orchestrate"
+        old = self.homes["pi"] / "skills" / "codebase-design"
         old.mkdir(parents=True)
         (old / "SKILL.md").write_text("legacy\n")
         actions = sync_skills.plan(self.sources, ["pi"], True, False)
         self.assertTrue(any(a["op"] == "supersede" and a["path"] == str(old) for a in actions))
         sync_skills.apply(actions, STAMP)
         self.assertFalse(old.exists())
-        backup = self.homes["pi"] / "skills" / "backups" / f"sync-skills-{STAMP}" / "orchestrate"
+        backup = self.homes["pi"] / "skills" / "backups" / f"sync-skills-{STAMP}" / "codebase-design"
         self.assertTrue(backup.is_dir())
-        self.assertTrue((self.homes["pi"] / "skills" / "amanar-orchestrate").is_symlink())
+        self.assertTrue((self.homes["pi"] / "skills" / "amanar-design").is_symlink())
 
     def test_no_supersede_leaves_personal_skill(self):
-        old = self.homes["pi"] / "skills" / "orchestrate"
+        old = self.homes["pi"] / "skills" / "codebase-design"
         old.mkdir(parents=True)
         actions = sync_skills.plan(self.sources, ["pi"], False, False)
         self.assertFalse(any(a["op"] == "supersede" for a in actions))

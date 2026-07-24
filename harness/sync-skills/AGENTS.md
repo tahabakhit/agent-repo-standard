@@ -10,9 +10,9 @@ Boundaries:
 - Opt-in developer tool: dry-run by default, `--apply` to act, `--remove` to unlink.
   Never run by `make validate` or a hook.
 - Writes only under each host's skill directory. It supersedes a pre-amanar personal
-  skill (`orchestrate`, `scaffold`, `codebase-design`) only by backing it up, never
-  deleting outright, and never touches a protected `.system` directory or a
-  symlinked skills directory.
+  skill (`scaffold`, `codebase-design`) only by backing it up, never deleting
+  outright, and never touches a protected `.system` directory or a symlinked skills
+  directory.
 - Local only. Remote propagation to an estate is operational and belongs in Anẓar,
   not here.
 - Host homes are overridable via `AGENTS_HOME` / `CODEX_HOME` / `CLAUDE_HOME`.

@@ -1,7 +1,6 @@
 ---
 name: amanar-assure
-description: Adversarially review requirements, design, implementation, or completion evidence for blockers, material risks, and advisory improvements. Use only when explicitly invoked.
-disable-model-invocation: true
+description: Adversarially review requirements, design, implementation, or completion evidence for blockers, material risks, and advisory improvements — use when independent verification of readiness or correctness is needed.
 ---
 
 # Amanar Assure

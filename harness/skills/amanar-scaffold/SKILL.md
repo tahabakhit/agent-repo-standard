@@ -156,5 +156,6 @@ Report:
 - unresolved product decisions;
 - recommended next action.
 
-Recommend `$amanar-orchestrate` only when a multi-phase implementation remains. For a
-bounded next task, provide the direct task instead.
+Recommend `$amanar-workflow` for a governed multi-phase implementation, or `$amanar-design`
+when the next phase needs a design before execution. For a bounded next task, provide
+the direct task instead.
