@@ -1,0 +1,15 @@
+# Knowledge-base config template — installed to ~/.config/amanar/kb.yml
+#
+# The kb store is a private, git-backed LLM-wiki any harness can read. It is the
+# home for durable, reusable knowledge — not a single harness's private memory.
+# Never publish its contents; the store path below points outside this public
+# repo and belongs in the private overlay.
+#
+# Set `store` to an absolute path to a private git repository or directory.
+store: CHANGE-ME-private-kb-path
+
+conventions:
+  # One fact per entry; frontmatter carries name/description/type; link related
+  # entries. Capture via `$amanar-remember`; read via the kb CLI.
+  entry_format: markdown-frontmatter
+  never_publish: true

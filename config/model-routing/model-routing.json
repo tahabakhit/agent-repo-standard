@@ -1,0 +1,13 @@
+{
+  "_comment": "Model-routing template. Maps task tiers to models; capability-gated forcing relaxes as tiers improve. Provider ids, project ids, and regions are environment-specific — put those in overlay/model-routing/model-routing.json.",
+  "tiers": {
+    "cheap": "claude-haiku-4-5",
+    "default": "claude-sonnet-5",
+    "strong": "claude-opus-4-8"
+  },
+  "routes": {
+    "generate": "default",
+    "evaluate": "cheap",
+    "hard-verify": "strong"
+  }
+}

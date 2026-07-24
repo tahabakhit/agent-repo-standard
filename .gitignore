@@ -10,3 +10,6 @@ target/
 .env
 .env.*
 !.env.example
+
+# Private config overlay — personal/secret values, never committed.
+/overlay/

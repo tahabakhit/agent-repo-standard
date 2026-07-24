@@ -1,0 +1,11 @@
+{
+  "_comment": "Shareable Claude Code settings template. No secrets. Personal values (model overrides, env, private permissions) belong in the gitignored overlay at overlay/claude/settings.json, which the installer prefers when present.",
+  "statusLine": {
+    "type": "command",
+    "command": "npx ccstatusline"
+  },
+  "permissions": {
+    "allow": [],
+    "deny": []
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "_comment": "MCP server template. Declare shareable servers here with NO tokens. Secret-bearing servers and tokens go only in overlay/mcp/.mcp.json (gitignored), which the installer prefers when present. Never commit a token.",
+  "mcpServers": {}
+}

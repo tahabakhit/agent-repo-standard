@@ -1,0 +1,5 @@
+{
+  "_comment": "ccstatusline default config template. Documented as the kit's default statusline. Override in overlay/statusline/ccstatusline.json.",
+  "segments": ["model", "cwd", "git-branch", "context-percent"],
+  "theme": "default"
+}

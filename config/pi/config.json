@@ -1,0 +1,5 @@
+{
+  "_comment": "Pi settings template. Shareable defaults only. Personal provider credentials and machine paths go in overlay/pi/config.json.",
+  "extensions": ["amanar"],
+  "thinking": "medium"
+}

@@ -10,6 +10,7 @@ import { runUserPromptSubmit } from "../hooks/userPromptSubmit.ts";
 import { installPreCommit } from "../hooks/installHook.ts";
 import { runSyncSkills } from "../sync/syncSkills.ts";
 import { runEval } from "../eval/evalCli.ts";
+import { runConfigInstall } from "../config/install.ts";
 
 /** Amanar CLI dispatcher. One binary all hooks and tools funnel through. */
 export async function main(argv: string[]): Promise<void> {
@@ -47,9 +48,17 @@ export async function main(argv: string[]): Promise<void> {
       process.exit(await runEval(repoRoot));
       break;
 
+    case "install":
+    case "sync":
+      // Config install/sync (explicit, dry-run by default). `sync` is an
+      // idempotent re-apply — same planner.
+      runConfigInstall(rest);
+      break;
+
     default:
       console.error(
-        `amanar: unknown command '${cmd ?? ""}'. Available: validate, hook, hooks, sync-skills, eval`,
+        `amanar: unknown command '${cmd ?? ""}'. Available: ` +
+          `validate, hook, hooks, sync-skills, eval, install, sync`,
       );
       process.exit(2);
   }
