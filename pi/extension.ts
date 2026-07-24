@@ -31,6 +31,7 @@ import { classifyToolCall } from "../src/classify.ts";
 import { buildPiInjection } from "../src/inject.ts";
 import { essenceToggleFromPrompt } from "../src/hooks/userPromptSubmit.ts";
 import { decidePiSettle } from "../src/hooks/piCompletion.ts";
+import { registerControllerTools } from "./controllerTools.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -57,6 +58,9 @@ export default function amanarExtension(pi: ExtensionAPI): void {
       skillPaths: [SKILLS_DIR],
     }),
   );
+
+  // Native controller tools: schema-forced kernel verbs (Pi-only strength).
+  registerControllerTools(pi);
 
   // ── 2. Session lifecycle ───────────────────────────────────────────────────
   //
