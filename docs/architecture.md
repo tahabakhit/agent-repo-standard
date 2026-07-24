@@ -23,8 +23,9 @@ for discovery only. The layers degrade gracefully.
   fail-closed; the invariants never depend on it.
 - **L3 — Always-on injection.** SessionStart catalog + missing-`.amanar/`
   onboarding nudge; UserPromptSubmit re-injection of the active checklist and the
-  essence directive; platform-adaptive (Claude additionalContext, Pi context
-  event, Codex AGENTS.md). Soft context — memory preservation, not a gate.
+  essence directive; platform-adaptive (Claude additionalContext, Pi
+  `before_agent_start` systemPrompt rewrite, Codex AGENTS.md). Soft context —
+  memory preservation, not a gate.
 - **L4 — Deterministic contracts (floor).** The advice skills and the backpressure
   classifier where no hook or runner exists.
 
@@ -35,11 +36,22 @@ model judgment.
 ## Capability gating
 
 Forcing mechanisms do not generalize: Claude has both an unbypassable PreToolUse
-deny and a force-to-completion Stop gate; Pi has a tool-call block and per-turn
-injection but no completion gate; Codex has only a shell-level deny. The runner
+deny and a force-to-completion Stop gate; Pi (pi-coding-agent 0.82.0) has a
+tool-call block, `before_agent_start` injection, and a completion gate by
+continuation — `agent_settled` cannot block, so the extension re-injects the
+evidence demand via `sendUserMessage`, bounded by a nudge cap
+(`src/hooks/piCompletion.ts`); Codex has only a shell-level deny. The runner
 floor is present everywhere. `src/capabilities.ts` is the one place these
 per-harness assumptions live, so every layer degrades per harness/version as the
 harnesses change.
+
+Pi-native beyond parity: the extension registers the controller verbs as native
+tools (`registerTool` + constrained sampling, `pi/controllerTools.ts`) and feeds
+Pi's in-process model introspection (`ctx.modelRegistry`) into injection —
+neither is reachable from Claude/Codex plugin code. A true in-process Session-SDK
+runner (driving turns programmatically instead of `pi -p` subprocesses) is a
+documented follow-up; the subprocess host shape in `src/loop/src/hosts.ts` is the
+current floor.
 
 ## Native-tool adaptation
 
