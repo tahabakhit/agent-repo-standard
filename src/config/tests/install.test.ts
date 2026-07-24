@@ -4,7 +4,8 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync
 import { join, resolve, dirname } from "node:path";
 import { tmpdir } from "node:os";
 import { fileURLToPath } from "node:url";
-import { planConfigInstall, applyConfigInstall } from "../install.ts";
+import { planConfigInstall, applyConfigInstall, backupConfigTarget, stamp } from "../install.ts";
+import { readdirSync } from "node:fs";
 
 const REPO = resolve(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 
@@ -54,6 +55,44 @@ test("overlay overrides the public template and its content wins", () => {
   assert.ok(claudeDoctrine?.fromOverlay === true);
   applyConfigInstall(actions);
   assert.equal(readFileSync(join(base, "claude", "CLAUDE.md"), "utf8"), "PRIVATE DOCTRINE\n");
+});
+
+test("apply backs up an existing target before overwriting it (no silent clobber)", () => {
+  const claudeMd = join(base, "claude", "CLAUDE.md");
+  mkdirSync(dirname(claudeMd), { recursive: true });
+  writeFileSync(claudeMd, "USER LIVE DOCTRINE\n");
+
+  const backups = applyConfigInstall(planConfigInstall({ repoRoot: REPO, overlayDir, env }), "20260724T000000Z");
+
+  // the live file was replaced with the template...
+  assert.notEqual(readFileSync(claudeMd, "utf8"), "USER LIVE DOCTRINE\n");
+  // ...but its original content is preserved in a stamped backup dir.
+  const backupDir = join(base, "claude", "backups", "config-install-20260724T000000Z");
+  const backedUp = join(backupDir, "CLAUDE.md");
+  assert.ok(existsSync(backedUp), "expected a backup of the overwritten CLAUDE.md");
+  assert.equal(readFileSync(backedUp, "utf8"), "USER LIVE DOCTRINE\n");
+  assert.ok(backups.includes(backedUp));
+});
+
+test("apply does not create backups when no target exists yet", () => {
+  const backups = applyConfigInstall(planConfigInstall({ repoRoot: REPO, overlayDir, env }), "20260724T000000Z");
+  assert.deepEqual(backups, []);
+  assert.ok(!existsSync(join(base, "claude", "backups")));
+});
+
+test("backupConfigTarget: absent target → null, present → copied under backups/", () => {
+  const f = join(base, "x", "file.txt");
+  assert.equal(backupConfigTarget(f, "S"), null);
+  mkdirSync(dirname(f), { recursive: true });
+  writeFileSync(f, "orig");
+  const dest = backupConfigTarget(f, "S");
+  assert.ok(dest !== null && existsSync(dest));
+  assert.equal(readFileSync(dest, "utf8"), "orig");
+  assert.ok(readdirSync(join(base, "x", "backups")).includes("config-install-S"));
+});
+
+test("stamp: compact ISO with separators and millis stripped", () => {
+  assert.equal(stamp(new Date("2026-07-24T01:02:03.456Z")), "20260724T010203Z");
 });
 
 test("public doctrine template carries no personal identifiers", () => {

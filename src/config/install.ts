@@ -1,5 +1,5 @@
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
-import { join, resolve, dirname } from "node:path";
+import { existsSync, readFileSync, writeFileSync, mkdirSync, copyFileSync } from "node:fs";
+import { join, resolve, dirname, basename } from "node:path";
 import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 
@@ -99,12 +99,41 @@ export function planConfigInstall(opts: PlanOpts = {}): ConfigAction[] {
   return actions;
 }
 
-export function applyConfigInstall(actions: ConfigAction[]): void {
+/**
+ * Back up an existing target before it is overwritten. Mirrors syncSkills:
+ * copies the current file into `<dir>/backups/config-install-<stamp>/<name>` so
+ * an install --apply can never silently clobber a user's live CLAUDE.md /
+ * settings.json / AGENTS.md. Returns the backup path, or null when there was
+ * nothing to back up. Copy (not rename) so the target is replaced in place.
+ */
+export function backupConfigTarget(target: string, stamp: string): string | null {
+  if (!existsSync(target)) return null;
+  const backupDir = join(dirname(target), "backups", `config-install-${stamp}`);
+  mkdirSync(backupDir, { recursive: true });
+  const dest = join(backupDir, basename(target));
+  copyFileSync(target, dest);
+  return dest;
+}
+
+export function stamp(now: Date = new Date()): string {
+  return now.toISOString().replace(/[-:]/g, "").replace(/\.\d+Z$/, "Z");
+}
+
+/**
+ * Apply the plan. Every existing target is backed up before it is overwritten
+ * (see backupConfigTarget), so no live config is lost. `at` fixes the backup
+ * stamp for deterministic testing.
+ */
+export function applyConfigInstall(actions: ConfigAction[], at: string = stamp()): string[] {
+  const backups: string[] = [];
   for (const a of actions) {
     if (a.op !== "write") continue;
+    const backed = backupConfigTarget(a.target, at);
+    if (backed !== null) backups.push(backed);
     mkdirSync(dirname(a.target), { recursive: true });
     writeFileSync(a.target, readFileSync(a.source, "utf8"));
   }
+  return backups;
 }
 
 export function describeConfigAction(a: ConfigAction): string {
@@ -126,7 +155,8 @@ export function runConfigInstall(argv: string[]): void {
 
   const missing = actions.some((a) => a.op === "missing-template");
   if (apply) {
-    applyConfigInstall(actions);
+    const backups = applyConfigInstall(actions);
+    for (const b of backups) console.log(`backed up existing → ${b}`);
     console.log("applied");
   } else {
     console.log("dry run; re-run with --apply to write");
