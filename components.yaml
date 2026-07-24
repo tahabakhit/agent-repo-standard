@@ -40,7 +40,3 @@ components:
     path: workflow/agent-eval
     authority: local evaluation records and deterministic evaluator tooling
     validation: npm test --prefix workflow/agent-eval && npm run check --prefix workflow/agent-eval
-  - id: amanar-storage-synology-mcp
-    path: storage/synology-mcp
-    authority: portable read-only Synology DSM MCP implementation
-    validation: uv run --directory storage/synology-mcp python -m unittest discover -s tests

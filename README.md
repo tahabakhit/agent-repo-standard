@@ -11,8 +11,7 @@ tag `legacy-fixed-v1.0.11` at commit `9feb596`.
 - [`harness/claude/`](harness/claude/) — Claude Code plugin (skills + PreToolUse backpressure gate, shared classifier)
 - [`workflow/`](workflow/) — inquiry, design, assurance, verification, knowledge-capture, skill-authoring, and evaluation
 - [`knowledge/`](knowledge/) — config-driven knowledge-save CLI (portable, user-owned store)
-- [`storage/synology-mcp/`](storage/synology-mcp/) — portable read-only DSM MCP adapter
-- Tiered Hermes was extracted to [`../ayyur/tiered-hermes/`](../ayyur/tiered-hermes/) (independent repository)
+- Tiered Hermes was extracted to [`../ayyur/tiered-hermes/`](../ayyur/tiered-hermes/) (independent repository); the read-only Synology DSM MCP moved to Anẓar's estate
 
 The seven instrument skills (six workflow + scaffold) support Pi and Claude Code
 first-class and Codex best-effort, with per-skill invocation (model-invocable by

@@ -17,5 +17,4 @@ validate:
 	npm test --prefix workflow/loop
 	npm test --prefix knowledge
 	npm test --prefix workflow/agent-eval
-	uv run --frozen --directory storage/synology-mcp python -m unittest discover -s tests
 	git diff --check
