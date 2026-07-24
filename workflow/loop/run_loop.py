@@ -23,8 +23,11 @@ import sys
 from pathlib import Path
 from typing import Any, Callable
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # workflow dir -> hosts
+_HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(_HERE))          # loop dir -> guards
+sys.path.insert(0, str(_HERE.parent))   # workflow dir -> hosts
 
+from guards import detect_placeholders, detect_test_tampering, snapshot_tests  # noqa: E402
 from hosts import host_command  # noqa: E402
 
 AUTHORITY_DENIED = 3
@@ -134,15 +137,45 @@ def loop(
     if verified(status(root)) and passes_k(root, contract, pass_k):
         return {"outcome": "verified", "iterations": 0}
 
+    # Capture test-file hashes before any agent mutation so we can detect
+    # any weakening or deletion of tests during the run.
+    test_baseline = snapshot_tests(root, contract)
+
     last_failing = ""
+    last_guard_failure: str | None = None
     for iteration in range(1, max_iterations + 1):
         agent(host, root, build_prompt(contract, last_failing), model, effort, timeout)
+
+        # --- structural guards (run before controller grading) ---
+        tampered = detect_test_tampering(root, contract, test_baseline)
+        placeholders = detect_placeholders(root, contract)
+        if tampered or placeholders:
+            parts: list[str] = []
+            if tampered:
+                last_guard_failure = "test-tampering"
+                parts.append(
+                    "Test files modified or deleted: " + ", ".join(tampered)
+                )
+            if placeholders:
+                if not tampered:
+                    last_guard_failure = "placeholder-detected"
+                parts.append(
+                    "Placeholder code found: "
+                    + "; ".join(f"{p} [{m}]" for p, m in placeholders)
+                )
+            last_failing = "\n".join(parts)
+            continue  # do not advance to controller grading this iteration
+
+        last_guard_failure = None
         record = advance(root, contract)
         if record.get("status") == "authority-required":
             return {"outcome": "authority-required", "iteration": iteration, "detail": record.get("detail")}
         if verified(record) and passes_k(root, contract, pass_k):
             return {"outcome": "verified", "iterations": iteration}
         last_failing = "\n".join(record.get("failing", []))
+
+    if last_guard_failure:
+        return {"outcome": last_guard_failure, "iterations": max_iterations, "failing": last_failing}
     return {"outcome": "exhausted", "iterations": max_iterations, "failing": last_failing}
 
 

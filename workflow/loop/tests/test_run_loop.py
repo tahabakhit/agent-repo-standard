@@ -34,7 +34,7 @@ class RunLoopTestCase(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
-        (self.root / "work.txt").write_text("TODO\n")
+        (self.root / "work.txt").write_text("PENDING\n")
 
     def tearDown(self):
         self.temporary.cleanup()
@@ -117,8 +117,154 @@ class RunLoopTestCase(unittest.TestCase):
             return 0, "fixed"
         result = self.run_loop(agent, pass_k=3)
         self.assertEqual(result["outcome"], "verified")
-        (self.root / "work.txt").write_text("TODO\n")
+        (self.root / "work.txt").write_text("PENDING\n")
         self.assertFalse(run_loop.passes_k(self.root, base_contract(), 1))
+
+
+# ---------------------------------------------------------------------------
+# Guard integration tests
+# ---------------------------------------------------------------------------
+
+
+def base_contract_with_tests(check=None):
+    """Contract whose scope includes a tests/ directory alongside work.txt."""
+    return {
+        **base_contract(check),
+        "scope": ["work.txt", "tests/"],
+    }
+
+
+class GuardIntegrationCase(RunLoopTestCase):
+    """Integration tests verifying structural guards inside the bounded loop."""
+
+    def vendor_with_test_file(self, test_content="assert True\n", contract=None):
+        """Set up fixture with a real test file in scope."""
+        tests_dir = self.root / "tests"
+        tests_dir.mkdir(exist_ok=True)
+        (tests_dir / "test_core.py").write_text(test_content)
+        self.vendor(contract or base_contract_with_tests())
+
+    def test_tampered_test_file_outcome_is_not_verified(self):
+        """Agent that weakens a test must not reach 'verified'."""
+        self.vendor_with_test_file()
+        def agent(*_):
+            (self.root / "work.txt").write_text("DONE\n")
+            (self.root / "tests" / "test_core.py").write_text("# emptied\n")
+            return 0, "done"
+        result = self.run_loop(agent, contract=base_contract_with_tests())
+        self.assertNotEqual(result["outcome"], "verified")
+        self.assertEqual(result["outcome"], "test-tampering")
+
+    def test_deleted_test_file_outcome_is_not_verified(self):
+        """Agent that deletes a test must not reach 'verified'."""
+        self.vendor_with_test_file()
+        def agent(*_):
+            (self.root / "work.txt").write_text("DONE\n")
+            target = self.root / "tests" / "test_core.py"
+            if target.exists():
+                target.unlink()
+            return 0, "done"
+        result = self.run_loop(agent, contract=base_contract_with_tests())
+        self.assertNotEqual(result["outcome"], "verified")
+        self.assertEqual(result["outcome"], "test-tampering")
+
+    def test_tampered_test_failing_info_feeds_next_prompt(self):
+        """Guard failure message appears in last_failing for the next iteration."""
+        self.vendor_with_test_file()
+        prompts: list[str] = []
+        calls = {"n": 0}
+        def agent(_host, _root, prompt, *_):
+            prompts.append(prompt)
+            calls["n"] += 1
+            if calls["n"] == 1:
+                # First iteration: tamper with the test
+                (self.root / "tests" / "test_core.py").write_text("# removed\n")
+            else:
+                # Second iteration: restore test and fix work.txt
+                (self.root / "tests" / "test_core.py").write_text("assert True\n")
+                (self.root / "work.txt").write_text("DONE\n")
+            return 0, "ok"
+        result = self.run_loop(agent, contract=base_contract_with_tests(), max_iterations=4)
+        # Second prompt must mention the tampering
+        self.assertGreater(len(prompts), 1)
+        self.assertIn("Test files modified or deleted", prompts[1])
+        self.assertEqual(result["outcome"], "verified")
+
+    def test_placeholder_code_prevents_verified(self):
+        """Agent that leaves raise NotImplementedError must not reach 'verified'."""
+        self.vendor()
+        def agent(*_):
+            # Would satisfy the DONE check but leaves a placeholder
+            (self.root / "work.txt").write_text("DONE\nraise NotImplementedError\n")
+            return 0, "done"
+        result = self.run_loop(agent)
+        self.assertNotEqual(result["outcome"], "verified")
+        self.assertEqual(result["outcome"], "placeholder-detected")
+
+    def test_todo_in_scope_file_prevents_verified(self):
+        """Agent that writes a TODO comment must not reach 'verified'."""
+        self.vendor()
+        def agent(*_):
+            (self.root / "work.txt").write_text("DONE\n# TODO: finish this\n")
+            return 0, "done"
+        result = self.run_loop(agent)
+        self.assertNotEqual(result["outcome"], "verified")
+        self.assertEqual(result["outcome"], "placeholder-detected")
+
+    def test_placeholder_fixed_eventually_verifies(self):
+        """After the guard fires once, a clean next iteration can verify."""
+        self.vendor()
+        calls = {"n": 0}
+        def agent(*_):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                # First attempt: placeholder left in scope file
+                (self.root / "work.txt").write_text("DONE\nraise NotImplementedError\n")
+            else:
+                # Second attempt: clean implementation
+                (self.root / "work.txt").write_text("DONE\n")
+            return 0, "step"
+        result = self.run_loop(agent, max_iterations=4)
+        self.assertEqual(result["outcome"], "verified")
+        self.assertEqual(result["iterations"], 2)
+
+    def test_tamper_then_fix_then_verify(self):
+        """Agent that first tampers with tests, then restores and fixes, verifies."""
+        self.vendor_with_test_file()
+        calls = {"n": 0}
+        def agent(*_):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                # First attempt: tamper
+                (self.root / "tests" / "test_core.py").write_text("# broken\n")
+                (self.root / "work.txt").write_text("DONE\n")
+            else:
+                # Second attempt: restore test and keep fix
+                (self.root / "tests" / "test_core.py").write_text("assert True\n")
+                (self.root / "work.txt").write_text("DONE\n")
+            return 0, "ok"
+        result = self.run_loop(agent, contract=base_contract_with_tests(), max_iterations=4)
+        self.assertEqual(result["outcome"], "verified")
+
+    def test_legitimate_implementation_passes_guards(self):
+        """A clean implementation without placeholders or test changes verifies."""
+        self.vendor()
+        def agent(*_):
+            (self.root / "work.txt").write_text("DONE\n")
+            return 0, "clean"
+        result = self.run_loop(agent)
+        self.assertEqual(result["outcome"], "verified")
+        self.assertEqual(result["iterations"], 1)
+
+    def test_guards_do_not_false_positive_on_clean_state(self):
+        """After multiple noop iterations, no guard-failure outcome is raised
+        when no placeholder markers exist in scope files."""
+        self.vendor()
+        # work.txt starts as "PENDING\n" — no placeholder markers
+        result = self.run_loop(lambda *_: (0, "noop"), max_iterations=3)
+        # Outcome is 'exhausted' (checks fail), NOT a guard outcome
+        self.assertEqual(result["outcome"], "exhausted")
+        self.assertEqual(result["iterations"], 3)
 
 
 if __name__ == "__main__":
