@@ -4,6 +4,17 @@
   "private": true,
   "type": "module",
   "description": "Amanar agent-kit: deterministic workflow, inquiry, design, assurance, and memory skills for Pi and Claude Code",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --test workflow/kernel/tests/*.test.ts workflow/loop/tests/*.test.ts knowledge/tests/*.test.ts harness/pi/tests/*.test.ts harness/claude/tests/*.test.ts workflow/agent-eval/tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  },
   "pi": {
     "extensions": ["./harness/pi/src/extension.ts"],
     "skillPaths": ["./workflow/skills", "./harness/skills"]

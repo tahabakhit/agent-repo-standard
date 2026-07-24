@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true
+  },
+  "include": [
+    "workflow/kernel/src/**/*.ts",
+    "workflow/loop/src/**/*.ts",
+    "knowledge/src/**/*.ts",
+    "harness/pi/src/**/*.ts",
+    "harness/claude/hooks/**/*.ts",
+    "harness/claude/vendor/**/*.ts",
+    "harness/claude/tests/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/node_modules",
+    "**/dist",
+    "workflow/tests/.runs",
+    "workflow/tests/results"
+  ]
+}

@@ -25,8 +25,8 @@ import {
   getBootstrapContent,
   messagesContainBootstrap,
   findBootstrapInsertionIndex,
-} from "./bootstrap.js";
-import { classifyToolCall } from "./classify.js";
+} from "./bootstrap.ts";
+import { classifyToolCall } from "./classify.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

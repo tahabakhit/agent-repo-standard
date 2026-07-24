@@ -7,15 +7,6 @@
   "bin": {
     "kb": "src/kb.ts"
   },
-  "scripts": {
-    "typecheck": "tsc --noEmit",
-    "test": "tsc --noEmit && node --test tests/*.test.ts",
-    "build": "tsc"
-  },
-  "devDependencies": {
-    "@types/node": "^22.0.0",
-    "typescript": "^5.4.0"
-  },
   "engines": {
     "node": ">=22"
   }
