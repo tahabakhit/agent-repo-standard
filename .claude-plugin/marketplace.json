@@ -1,0 +1,11 @@
+{
+  "name": "amanar",
+  "owner": { "name": "Taha Bakhit" },
+  "plugins": [
+    {
+      "name": "amanar",
+      "source": "./harness/claude",
+      "description": "Amanar agent-kit for Claude Code: skills (inquire, design, assure, workflow, remember, writing-skills, scaffold) plus a PreToolUse backpressure gate sharing the Pi classifier."
+    }
+  ]
+}
