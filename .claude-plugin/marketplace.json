@@ -1,5 +1,6 @@
 {
   "name": "amanar",
+  "description": "Amanar — a portable, Pi-first agent-kit: skills, enforcement hooks, and tools in one plugin, with a runner that gates completion on evidence.",
   "owner": { "name": "Taha Bakhit" },
   "plugins": [
     {
