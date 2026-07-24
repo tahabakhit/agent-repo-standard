@@ -11,6 +11,7 @@ validate:
 	python3 workflow/tests/validate-workflow.py
 	python3 -m unittest discover -s workflow/kernel/tests
 	python3 -m unittest discover -s workflow/loop/tests
+	python3 -m unittest discover -s knowledge/tests
 	python3 tests/validate-components.py
 	npm test --prefix workflow/agent-eval
 	uv run --frozen --directory storage/synology-mcp python -m unittest discover -s tests
