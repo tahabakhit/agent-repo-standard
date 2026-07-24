@@ -19,24 +19,20 @@ Choose the most specific type: `fact`, `decision`, `pattern`, `reference`, or
 The save pipeline runs a secret scan and schema gate before writing; it
 commits automatically to the knowledge store (not to the working code repo).
 
-## Concrete invocation (current implementation)
+## Concrete invocation
 
-The knowledge-save tool is the kb CLI. Pipe content on stdin:
+The knowledge-save tool is the `kb` CLI (TypeScript, run with Node ≥22). Global
+flags (`--store`, `--no-interactive`) come before the verb. Pipe content on stdin:
 
 ```
 echo "The entry body in markdown." | \
-  python3 <repo>/knowledge/kb.py save \
+  node <repo>/knowledge/src/kb.ts --no-interactive save \
     --title "Short, search-friendly title" \
     --type fact \
     --tags tag1,tag2 \
-    --provenance agent \
-    --no-interactive
+    --provenance agent
 ```
 
 The store is user-configured via `--store`, `AMANAR_KB_DIR`, or
 `~/.config/amanar/kb.yml`. Saving is full-auto-commit behind fail-closed
 gates and writes only to the knowledge store.
-
-> Note: the kb CLI is the current Python implementation. The abstract action
-> ("save the knowledge entry via the knowledge-save tool") survives a future
-> TypeScript migration unchanged.

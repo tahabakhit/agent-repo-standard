@@ -1,7 +1,8 @@
 # kb — knowledge-save CLI
 
 `kb` saves markdown knowledge entries into a user-configured, git-managed store.
-No embeddings, no vector search, no network access.  Pure stdlib Python.
+No embeddings, no vector search, no network access. TypeScript, run with Node ≥22
+(native type-stripping — no build step needed to run).
 
 ## Quick start
 
@@ -9,9 +10,9 @@ No embeddings, no vector search, no network access.  Pure stdlib Python.
 # Point kb at a store (one-time):
 export AMANAR_KB_DIR=~/knowledge
 
-# Save an entry:
-echo "Python's walrus operator (:=) was introduced in 3.8." \
-  | python3 kb.py save \
+# Save an entry (global flags come before the verb):
+echo "The walrus operator (:=) landed in Python 3.8." \
+  | node knowledge/src/kb.ts save \
       --title "Python walrus operator" \
       --type fact \
       --tags "python,syntax" \
@@ -19,13 +20,13 @@ echo "Python's walrus operator (:=) was introduced in 3.8." \
       --ttl 1y
 
 # List stale entries:
-python3 kb.py stale
+node knowledge/src/kb.ts stale
 
 # Re-validate all entries:
-python3 kb.py validate
+node knowledge/src/kb.ts validate
 
 # Check store health:
-python3 kb.py doctor
+node knowledge/src/kb.ts doctor
 ```
 
 ## Config precedence
@@ -54,12 +55,12 @@ python3 kb.py doctor
 
 ## Entry frontmatter schema
 
-See `schema/entry.schema.json`.  Required fields: `id`, `type`, `title`, `status`.
+See `schema/entry.schema.json`. Required fields: `id`, `type`, `title`, `status`.
 
 ## Save pipeline (fail-closed, in order)
 
 1. **Secret scan** — abort on AWS AKIA keys, PEM private key blocks, credential
-   assignments, or high-entropy tokens.
+   assignments, or high-entropy tokens; optional gitleaks when present.
 2. **Schema validation** — abort on missing required fields or invalid enum values.
 3. **Dedup** — lexical title/tag match against the manifest; archive the old entry
    with a forward pointer rather than silently overwriting.
