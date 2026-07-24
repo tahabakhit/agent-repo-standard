@@ -35,16 +35,24 @@ No separate skill install is needed.
 
 ## Claude Code
 
-**One-time skill link (run after cloning or pulling)**
+**One-time plugin-root sync (run after cloning or pulling)**
 
 ```
 node harness/claude/scripts/link-skills.mjs
+node harness/claude/scripts/vendor-classify.mjs
 ```
 
-This creates relative symlinks from `harness/claude/skills/` to every `amanar-*`
-directory in `workflow/skills/` and `harness/skills/`. Claude Code requires
-skills under the plugin root; symlinks avoid file duplication. The script is
-idempotent and can be re-run safely.
+`link-skills.mjs` creates relative symlinks from `harness/claude/skills/` to
+every `amanar-*` directory in `workflow/skills/` and `harness/skills/`. Claude
+Code requires skills under the plugin root; symlinks avoid file duplication.
+
+`vendor-classify.mjs` mirrors `harness/pi/src/classify.ts` (the single source of
+truth for backpressure deny rules) into `harness/claude/vendor/classify.ts`. The
+PreToolUse hook imports the vendored copy because Claude Code packages only the
+plugin root and a code import cannot reach the sibling `harness/pi/` tree.
+
+Both scripts are idempotent and can be re-run safely. `tests/vendor-classify.test.ts`
+fails the build if the vendored mirror drifts.
 
 **Load the plugin**
 

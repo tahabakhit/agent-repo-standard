@@ -5,8 +5,9 @@
  * tool_input to the shared Pi classifier, and emits the appropriate Claude
  * Code hookSpecificOutput decision.
  *
- * Deny rules are NOT duplicated here — they live in harness/pi/src/classify.ts
- * as the single source of truth.
+ * Deny rules are NOT authored here — they live in harness/pi/src/classify.ts
+ * as the single source of truth, mirrored into ./vendor/classify.ts so the
+ * classifier ships inside the packaged plugin root (see vendor/README.md).
  *
  * Claude Code tool names are PascalCase ("Bash") while the Pi classifier
  * expects lowercase ("bash"). This file normalises before calling.
@@ -17,7 +18,7 @@
  */
 
 import { fileURLToPath } from "node:url";
-import { classifyToolCall } from "../../pi/src/classify.ts";
+import { classifyToolCall } from "../vendor/classify.ts";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
