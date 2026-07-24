@@ -11,6 +11,7 @@ validate:
 	python3 workflow/tests/validate-workflow.py
 	python3 tests/validate-components.py
 	node scripts/check-skill-consistency.mjs
+	node bin/amanar validate
 	npm run typecheck
 	npm test
 	git diff --check

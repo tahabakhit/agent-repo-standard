@@ -11,6 +11,7 @@
     "rewriteRelativeImportExtensions": true
   },
   "include": [
+    "src/**/*.ts",
     "workflow/kernel/src/**/*.ts",
     "workflow/loop/src/**/*.ts",
     "knowledge/src/**/*.ts",

@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+// Amanar CLI launcher. Kept as plain JS (no types) so it runs directly under a
+// bare `node` shebang; it defers to the TypeScript entrypoint, which Node
+// type-strips at load. All subcommands live in src/cli/main.ts.
+import("../src/cli/main.ts").catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

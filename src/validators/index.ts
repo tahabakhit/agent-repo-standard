@@ -1,0 +1,37 @@
+import { fileURLToPath } from "node:url";
+import { join } from "node:path";
+import { validateHarness } from "./harness.ts";
+import { validateWorkflow } from "./workflow.ts";
+import { validateComponents } from "./components.ts";
+import { validateSkillConsistency } from "./skillConsistency.ts";
+
+/**
+ * Run every Amanar validator against `repoRoot`. Prints each PASS line and, on
+ * the first failure, a `FAIL [name]: message` line, then exits non-zero.
+ */
+export function runValidators(repoRoot: string): void {
+  // Files that legitimately name the estate identifier and must be skipped by
+  // the components scan: this validator's own source, plus the Python
+  // components validator during the parity window (removed in a later slice).
+  const identifierSources = [
+    fileURLToPath(new URL("./components.ts", import.meta.url)),
+    join(repoRoot, "tests", "validate-components.py"),
+  ];
+
+  const steps: Array<[string, () => string]> = [
+    ["harness", () => validateHarness(repoRoot)],
+    ["workflow", () => validateWorkflow(repoRoot)],
+    ["components", () => validateComponents(repoRoot, identifierSources)],
+    ["skill-consistency", () => validateSkillConsistency(repoRoot)],
+  ];
+
+  for (const [name, fn] of steps) {
+    try {
+      console.log(fn());
+    } catch (err) {
+      console.error(`FAIL [${name}]: ${(err as Error).message}`);
+      process.exit(1);
+    }
+  }
+  console.log("PASS: all amanar validators");
+}
