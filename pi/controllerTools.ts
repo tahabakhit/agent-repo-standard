@@ -18,10 +18,21 @@ import type {
   AgentToolResult,
   ConstrainedSamplingConfig,
 } from "@earendil-works/pi-coding-agent";
+import type { TSchema } from "typebox";
 import { runKernelVerb, formatVerbResult } from "../src/kernelVerbs.ts";
 
 /** Prefer strict JSON-Schema sampling; Pi drops it for models that can't honor it. */
 const PREFER_STRICT: ConstrainedSamplingConfig = { type: "json_schema", strictness: "prefer" };
+
+/**
+ * Object schema with additionalProperties:false. OpenAI/Codex strict function
+ * calling rejects a tool schema without it ("'additionalProperties' is required
+ * to be supplied and to be false"), so every controller-tool parameter object
+ * must set it — TypeBox omits it by default.
+ */
+function strictObject(properties: Record<string, TSchema> = {}): TSchema {
+  return Type.Object(properties, { additionalProperties: false });
+}
 
 function verbResult(root: string, args: string[]): AgentToolResult {
   return formatVerbResult(runKernelVerb(root, args)) as AgentToolResult;
@@ -36,7 +47,7 @@ export function registerControllerTools(pi: ExtensionAPI): void {
       "(status, current, unmet problems). Read-only. Use to check whether the " +
       "active contract is verified before ending or performing an outward action.",
     promptSnippet: "amanar_status — controller status (verified? unmet checks?)",
-    parameters: Type.Object({}),
+    parameters: strictObject(),
     constrainedSampling: PREFER_STRICT,
     execute: async (_id, _params, _signal, _onUpdate, ctx: ExtensionContext) =>
       verbResult(ctx.cwd, ["status", "--json"]),
@@ -49,7 +60,7 @@ export function registerControllerTools(pi: ExtensionAPI): void {
       "Begin implementing the governed workflow contract (planned → implementing). " +
       "Requires the contract to authorize repository writes.",
     promptSnippet: "amanar_begin — start implementing the active contract",
-    parameters: Type.Object({}),
+    parameters: strictObject(),
     constrainedSampling: PREFER_STRICT,
     execute: async (_id, _params, _signal, _onUpdate, ctx: ExtensionContext) =>
       verbResult(ctx.cwd, ["begin"]),
@@ -62,7 +73,7 @@ export function registerControllerTools(pi: ExtensionAPI): void {
       "Run one declared acceptance check by id and record its receipt. The check " +
       "command comes from the contract, not from you.",
     promptSnippet: "amanar_run_check(id) — run one declared check, record a receipt",
-    parameters: Type.Object({
+    parameters: strictObject({
       id: Type.String({ description: "The check id declared in the contract's checks." }),
     }),
     constrainedSampling: PREFER_STRICT,
@@ -80,7 +91,7 @@ export function registerControllerTools(pi: ExtensionAPI): void {
       "(implementing → verified). Fails unless every declared check has a passing " +
       "receipt and scope/artifact constraints hold. This is the completion proof.",
     promptSnippet: "amanar_verify — prove completion from receipts (not narration)",
-    parameters: Type.Object({}),
+    parameters: strictObject(),
     constrainedSampling: PREFER_STRICT,
     execute: async (_id, _params, _signal, _onUpdate, ctx: ExtensionContext) =>
       verbResult(ctx.cwd, ["verify"]),
