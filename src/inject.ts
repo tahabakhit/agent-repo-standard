@@ -1,6 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { catalogLines } from "./routing.ts";
 
 /**
  * Injection content builders.
@@ -64,4 +65,50 @@ export function activeWorkflowContext(root: string, runner: StatusRunner = defau
   if (problems.length) lines.push(`Unmet: ${problems.slice(0, 6).join("; ")}`);
   lines.push("Completion is proven by controller receipts (run the checks, then verify), not by narration.");
   return lines.join("\n");
+}
+
+/** Marker so an injection can be deduplicated within a session (Pi context). */
+export const CATALOG_MARKER = "amanar:catalog:v1";
+
+/** The skill catalog, injected at session start so the agent knows what is loaded. */
+export function sessionCatalog(): string {
+  return [`[${CATALOG_MARKER}] Amanar skills loaded:`, ...catalogLines()].join("\n");
+}
+
+/**
+ * When a repository has no `.amanar/` control directory, nudge toward onboarding.
+ * Discovery only — onboarding stays an explicit action.
+ */
+export function onboardingNudge(root: string): string | null {
+  if (existsSync(join(root, ".amanar"))) return null;
+  return "[amanar] No .amanar/ control directory here. For governed work, run $amanar-onboard to set up the repository harness.";
+}
+
+/**
+ * The always-on essence directive, re-injected each turn to resist drift.
+ * The full discipline lives in the amanar-essence skill; this is the standalone
+ * one-line contract so it holds even without the skill in context.
+ */
+export function essenceDirective(): string {
+  return (
+    "[amanar:essence] Write only what you mean, not a word more. Every reader-facing " +
+    "artifact must stand on its own: no references to this conversation, no reflexive " +
+    "hedging or preamble, normal grammar (not telegraphic). Keep every fact, decision, " +
+    "caveat, and all code/paths/commands verbatim."
+  );
+}
+
+/**
+ * Build the per-turn injection: the essence directive (unless toggled off) plus
+ * the active workflow context. Returns null when there is nothing to inject.
+ */
+export function buildTurnInjection(
+  root: string,
+  opts: { essenceOn?: boolean; statusRunner?: StatusRunner } = {},
+): string | null {
+  const parts: string[] = [];
+  if (opts.essenceOn !== false) parts.push(essenceDirective());
+  const wf = activeWorkflowContext(root, opts.statusRunner ?? defaultStatusRunner);
+  if (wf !== null) parts.push(wf);
+  return parts.length ? parts.join("\n\n") : null;
 }

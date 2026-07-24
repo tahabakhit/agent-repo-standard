@@ -5,6 +5,8 @@ import { runPreCommit } from "../hooks/preCommit.ts";
 import { runPreToolUse } from "../hooks/preToolUse.ts";
 import { runStop } from "../hooks/stop.ts";
 import { runPreCompact } from "../hooks/preCompact.ts";
+import { runSessionStart } from "../hooks/sessionStart.ts";
+import { runUserPromptSubmit } from "../hooks/userPromptSubmit.ts";
 import { installPreCommit } from "../hooks/installHook.ts";
 import { runSyncSkills } from "../sync/syncSkills.ts";
 
@@ -63,14 +65,16 @@ async function runHook(rest: string[]): Promise<void> {
     case "pre-compact":
       await runPreCompact();
       break;
+    case "session-start":
+      await runSessionStart();
+      break;
     case "user-prompt-submit":
-      // Placeholder — the essence re-injection lands in the injection slice.
-      process.exit(0);
+      await runUserPromptSubmit();
       break;
     default:
       console.error(
         `amanar hook: unknown hook '${name ?? ""}'. Available: ` +
-          `pre-commit, pre-tool-use, stop, pre-compact, user-prompt-submit`,
+          `pre-commit, pre-tool-use, stop, pre-compact, session-start, user-prompt-submit`,
       );
       process.exit(2);
   }
