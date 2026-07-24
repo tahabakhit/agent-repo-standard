@@ -1,12 +1,15 @@
 /**
- * Amanar Pi extension.
+ * Amanar Pi extension (pi-coding-agent 0.82.0).
  *
- * Three responsibilities:
- *   1. resources_discover — register the amanar skills directory so Pi
- *      loads amanar-* skills natively.
- *   2. context — inject a one-time, short bootstrap pointer into the
- *      conversation (deduplicated; does not repeat across turns).
- *   3. tool_call — deny-unless-evidence backpressure: block dangerous bash
+ * Responsibilities:
+ *   1. resources_discover — register the amanar skills directory so Pi loads
+ *      amanar-* skills natively.
+ *   2. session_start — reset per-session injection state (first-turn orientation,
+ *      essence toggle) for a fresh or reloaded session.
+ *   3. before_agent_start — the strong injection path: append the amanar block to
+ *      the assembled system prompt each turn (first-turn orientation + per-turn
+ *      essence/workflow context). Replaces the weaker context-message stuffing.
+ *   4. tool_call — deny-unless-evidence backpressure: block dangerous bash
  *      operations before they execute.
  */
 
@@ -15,20 +18,17 @@ import { dirname, resolve } from "node:path";
 import type {
   ExtensionAPI,
   ExtensionContext,
-  ContextEvent,
-  ContextEventResult,
   ResourcesDiscoverEvent,
   ResourcesDiscoverResult,
+  SessionStartEvent,
+  BeforeAgentStartEvent,
+  BeforeAgentStartEventResult,
   ToolCallEvent,
   ToolCallEventResult,
 } from "@earendil-works/pi-coding-agent";
-import {
-  getBootstrapContent,
-  messagesContainBootstrap,
-  findBootstrapInsertionIndex,
-} from "./bootstrap.ts";
 import { classifyToolCall } from "../src/classify.ts";
-import { activeWorkflowContext } from "../src/inject.ts";
+import { buildPiInjection } from "../src/inject.ts";
+import { essenceToggleFromPrompt } from "../src/hooks/userPromptSubmit.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -39,10 +39,11 @@ const __dirname = dirname(__filename);
  */
 export const SKILLS_DIR = resolve(__dirname, "..", "skills");
 
-/** Marks the per-turn workflow-context system message so stale copies are stripped. */
-const TURN_MARKER = "[amanar:turn:v1]";
-
 export default function amanarExtension(pi: ExtensionAPI): void {
+  // Per-session injection state (reset by session_start).
+  let firstTurnDone = false;
+  let essenceOn = true;
+
   // ── 1. Skill registration ─────────────────────────────────────────────────
 
   pi.on(
@@ -52,63 +53,58 @@ export default function amanarExtension(pi: ExtensionAPI): void {
     }),
   );
 
-  // ── 2. Injection: one-time bootstrap + per-turn workflow context ───────────
+  // ── 2. Session lifecycle ───────────────────────────────────────────────────
   //
-  // Pi's platform-adaptive injection path. The bootstrap pointer is injected
-  // once; the active workflow context is refreshed each turn (stale copies are
-  // stripped first so it does not accumulate). This mirrors the Claude
-  // UserPromptSubmit re-injection.
+  // Pi has no way to return context from session_start, so its job here is state:
+  // a new/reloaded session gets fresh orientation on its next turn and the
+  // default-on essence directive.
+
+  pi.on("session_start", (_event: SessionStartEvent): void => {
+    firstTurnDone = false;
+    essenceOn = true;
+  });
+
+  // ── 3. Injection: before_agent_start systemPrompt rewrite ──────────────────
+  //
+  // Pi's strongest injection point: the fully assembled system prompt is handed
+  // over per turn and we return a replacement. First turn carries the one-time
+  // orientation (bootstrap + catalog + onboarding nudge); every turn carries the
+  // essence directive and active workflow context. Mirrors the Claude
+  // SessionStart + UserPromptSubmit re-injection at equal or greater strength.
 
   pi.on(
-    "context",
-    (event: ContextEvent, ctx: ExtensionContext): ContextEventResult | void => {
-      let messages = event.messages;
-      let changed = false;
+    "before_agent_start",
+    (
+      event: BeforeAgentStartEvent,
+      ctx: ExtensionContext,
+    ): BeforeAgentStartEventResult | void => {
+      const toggle = essenceToggleFromPrompt(event.prompt ?? "");
+      if (toggle === "off") essenceOn = false;
+      else if (toggle === "on") essenceOn = true;
 
-      if (!messagesContainBootstrap(messages)) {
-        const insertAt = findBootstrapInsertionIndex(messages);
-        messages = [
-          ...messages.slice(0, insertAt),
-          { role: "system" as const, content: getBootstrapContent() },
-          ...messages.slice(insertAt),
-        ];
-        changed = true;
-      }
+      const injection = buildPiInjection(ctx.cwd, {
+        firstTurn: !firstTurnDone,
+        essenceOn,
+      });
+      firstTurnDone = true;
 
-      // Refresh the per-turn workflow context: drop any prior amanar turn
-      // injection, then append the current one (if any).
-      const withoutStale = messages.filter(
-        (m) => !(typeof m.content === "string" && m.content.startsWith(TURN_MARKER)),
-      );
-      if (withoutStale.length !== messages.length) {
-        messages = withoutStale;
-        changed = true;
-      }
-      const wf = activeWorkflowContext(ctx.cwd);
-      if (wf !== null) {
-        messages = [...messages, { role: "system" as const, content: `${TURN_MARKER} ${wf}` }];
-        changed = true;
-      }
-
-      return changed ? { messages } : undefined;
+      if (injection === null) return;
+      return { systemPrompt: `${event.systemPrompt}\n\n${injection}` };
     },
   );
 
-  // ── 3. Backpressure: deny dangerous ops ───────────────────────────────────
+  // ── 4. Backpressure: deny dangerous ops ────────────────────────────────────
 
-  pi.on(
-    "tool_call",
-    (event: ToolCallEvent): ToolCallEventResult | void => {
-      const input =
-        "input" in event && typeof event.input === "object" && event.input !== null
-          ? (event.input as Record<string, unknown>)
-          : {};
+  pi.on("tool_call", (event: ToolCallEvent): ToolCallEventResult | void => {
+    const input =
+      "input" in event && typeof event.input === "object" && event.input !== null
+        ? (event.input as Record<string, unknown>)
+        : {};
 
-      const result = classifyToolCall(event.toolName, input);
-      if (!result.allow) {
-        return { block: true, reason: result.reason };
-      }
-      // Allow: return nothing (Pi continues normally)
-    },
-  );
+    const result = classifyToolCall(event.toolName, input);
+    if (!result.allow) {
+      return { block: true, reason: result.reason };
+    }
+    // Allow: return nothing (Pi continues normally)
+  });
 }

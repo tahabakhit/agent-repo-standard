@@ -67,6 +67,18 @@ export function activeWorkflowContext(root: string, runner: StatusRunner = defau
   return lines.join("\n");
 }
 
+/**
+ * The one-time orientation pointer: tells the agent the amanar-* skills are
+ * loaded. Not a coercive prompt — brief discovery so the agent knows the tools
+ * exist. Injected on the first turn only (see buildPiInjection).
+ */
+export function bootstrapPointer(): string {
+  return (
+    "[amanar:bootstrap] Amanar skills are loaded (prefix $amanar-). " +
+    "Use them when they apply; ignore this note otherwise."
+  );
+}
+
 /** Marker so an injection can be deduplicated within a session (Pi context). */
 export const CATALOG_MARKER = "amanar:catalog:v1";
 
@@ -110,5 +122,41 @@ export function buildTurnInjection(
   if (opts.essenceOn !== false) parts.push(essenceDirective());
   const wf = activeWorkflowContext(root, opts.statusRunner ?? defaultStatusRunner);
   if (wf !== null) parts.push(wf);
+  return parts.length ? parts.join("\n\n") : null;
+}
+
+/**
+ * Compose the Pi `before_agent_start` injection block appended to the assembled
+ * system prompt. On the first turn it prepends the one-time orientation: the
+ * bootstrap pointer, the skill catalog, and (when the repo is ungoverned) the
+ * onboarding nudge. Every turn it appends the per-turn injection (essence
+ * directive + active workflow context). Returns null when there is nothing to
+ * add. Pure — the extension wires it; tests exercise it without a live Pi.
+ */
+export function buildPiInjection(
+  root: string,
+  opts: {
+    firstTurn: boolean;
+    essenceOn?: boolean;
+    statusRunner?: StatusRunner;
+    /** Optional extra first-turn lines (e.g. native-tool / model hints). */
+    firstTurnExtras?: Array<string | null>;
+  },
+): string | null {
+  const parts: string[] = [];
+  if (opts.firstTurn) {
+    parts.push(bootstrapPointer());
+    parts.push(sessionCatalog());
+    const nudge = onboardingNudge(root);
+    if (nudge !== null) parts.push(nudge);
+    for (const extra of opts.firstTurnExtras ?? []) {
+      if (extra !== null && extra !== undefined && extra !== "") parts.push(extra);
+    }
+  }
+  const turn = buildTurnInjection(root, {
+    essenceOn: opts.essenceOn,
+    statusRunner: opts.statusRunner,
+  });
+  if (turn !== null) parts.push(turn);
   return parts.length ? parts.join("\n\n") : null;
 }

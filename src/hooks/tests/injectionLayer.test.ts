@@ -3,7 +3,13 @@ import assert from "node:assert/strict";
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { essenceDirective, buildTurnInjection, sessionCatalog } from "../../inject.ts";
+import {
+  essenceDirective,
+  buildTurnInjection,
+  sessionCatalog,
+  bootstrapPointer,
+  buildPiInjection,
+} from "../../inject.ts";
 import { buildSessionContext, buildSessionStartOutput } from "../sessionStart.ts";
 import {
   essenceToggleFromPrompt,
@@ -117,4 +123,62 @@ test("buildSessionStartOutput wraps as SessionStart additionalContext", () => {
   assert.ok(out !== null);
   const parsed = JSON.parse(out) as { hookSpecificOutput: { hookEventName: string } };
   assert.equal(parsed.hookSpecificOutput.hookEventName, "SessionStart");
+});
+
+// ── Pi before_agent_start injection (buildPiInjection) ─────────────────────
+
+test("bootstrapPointer names the amanar skill prefix", () => {
+  assert.ok(bootstrapPointer().includes("$amanar-"));
+});
+
+test("buildPiInjection: first turn carries bootstrap + catalog + onboarding nudge", () => {
+  const out = buildPiInjection(root, { firstTurn: true, essenceOn: true, statusRunner: () => "" });
+  assert.ok(out !== null);
+  assert.ok(out.includes("[amanar:bootstrap]"));
+  assert.ok(out.includes("amanar-interview")); // from the catalog
+  assert.ok(out.includes("No .amanar/")); // onboarding nudge (no contract here)
+  assert.ok(out.includes("essence")); // per-turn directive
+});
+
+test("buildPiInjection: later turns drop first-turn orientation, keep per-turn", () => {
+  const out = buildPiInjection(root, { firstTurn: false, essenceOn: true, statusRunner: () => "" });
+  assert.ok(out !== null);
+  assert.ok(!out.includes("[amanar:bootstrap]"));
+  assert.ok(!out.includes("amanar-interview"));
+  assert.ok(out.includes("essence"));
+});
+
+test("buildPiInjection: later turn, essence off, no contract → null", () => {
+  const out = buildPiInjection(root, { firstTurn: false, essenceOn: false, statusRunner: () => "" });
+  assert.equal(out, null);
+});
+
+test("buildPiInjection: first turn always injects even with essence off", () => {
+  const out = buildPiInjection(root, { firstTurn: true, essenceOn: false, statusRunner: () => "" });
+  assert.ok(out !== null);
+  assert.ok(out.includes("[amanar:bootstrap]"));
+});
+
+test("buildPiInjection: with a contract, .amanar present → no onboarding nudge, workflow context shown", () => {
+  mkdirSync(join(root, ".amanar"), { recursive: true });
+  writeFileSync(join(root, ".amanar", "workflow.json"), JSON.stringify({ objective: "ship Y" }));
+  const out = buildPiInjection(root, {
+    firstTurn: true,
+    essenceOn: true,
+    statusRunner: () => JSON.stringify({ status: "implementing", current: false, problems: [] }),
+  });
+  assert.ok(out !== null);
+  assert.ok(!out.includes("No .amanar/"));
+  assert.ok(out.includes("ship Y"));
+});
+
+test("buildPiInjection: firstTurnExtras are appended on the first turn", () => {
+  const out = buildPiInjection(root, {
+    firstTurn: true,
+    essenceOn: true,
+    statusRunner: () => "",
+    firstTurnExtras: ["[amanar:native] hint line", null, ""],
+  });
+  assert.ok(out !== null);
+  assert.ok(out.includes("[amanar:native] hint line"));
 });
