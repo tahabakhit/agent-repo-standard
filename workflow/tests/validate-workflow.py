@@ -10,7 +10,7 @@ SKILLS = ROOT / "skills"
 EXPLICIT_ONLY = {"amanar-workflow"}
 
 # Skills that are model-invocable by default.
-MODEL_INVOCABLE = {"amanar-inquire", "amanar-design", "amanar-assure", "amanar-remember"}
+MODEL_INVOCABLE = {"amanar-inquire", "amanar-design", "amanar-assure", "amanar-remember", "amanar-writing-skills"}
 
 KNOWN_SKILLS = EXPLICIT_ONLY | MODEL_INVOCABLE
 

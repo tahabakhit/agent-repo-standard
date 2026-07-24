@@ -11,6 +11,7 @@ validate:
 	python3 workflow/tests/validate-workflow.py
 	python3 tests/validate-components.py
 	npm test --prefix harness/pi
+	npm test --prefix harness/claude
 	npm test --prefix workflow/kernel
 	npm test --prefix workflow/loop
 	npm test --prefix knowledge

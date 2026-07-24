@@ -1,0 +1,6 @@
+interface:
+  display_name: "Amanar Writing Skills"
+  short_description: "Apply the kit skill-authoring discipline to a SKILL.md"
+  default_prompt: "Use $amanar-writing-skills to author or revise this skill."
+policy:
+  allow_implicit_invocation: true

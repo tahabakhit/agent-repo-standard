@@ -32,6 +32,10 @@ components:
     path: harness/pi
     authority: portable Pi extension; registers amanar skills, injects a one-time light bootstrap, and applies in-session backpressure; no estate specifics
     validation: npm test --prefix harness/pi
+  - id: amanar-claude
+    path: harness/claude
+    authority: portable Claude Code plugin; skills mount-point + PreToolUse backpressure gate reusing the Pi classifier; no estate specifics
+    validation: npm test --prefix harness/claude
   - id: amanar-workflow-agent-eval
     path: workflow/agent-eval
     authority: local evaluation records and deterministic evaluator tooling

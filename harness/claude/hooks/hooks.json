@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node --experimental-strip-types ${CLAUDE_PROJECT_DIR}/harness/claude/hooks/pre-tool-use.ts",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
