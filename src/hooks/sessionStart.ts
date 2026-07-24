@@ -1,4 +1,5 @@
 import { sessionCatalog, onboardingNudge } from "../inject.ts";
+import { detectHarness, detectVersion, nativeToolsHint } from "../nativeTools.ts";
 
 /**
  * Claude Code SessionStart injection.
@@ -15,10 +16,12 @@ export interface SessionStartPayload {
 }
 
 /** Build the session-start context, or null when there is nothing to say. */
-export function buildSessionContext(root: string): string | null {
+export function buildSessionContext(root: string, env: NodeJS.ProcessEnv = process.env): string | null {
   const parts = [sessionCatalog()];
   const nudge = onboardingNudge(root);
   if (nudge !== null) parts.push(nudge);
+  const hint = nativeToolsHint(detectHarness(env), detectVersion(env));
+  if (hint !== null) parts.push(hint);
   return parts.join("\n\n");
 }
 

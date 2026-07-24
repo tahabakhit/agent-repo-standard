@@ -94,16 +94,22 @@ test("sessionCatalog lists the skills", () => {
 });
 
 test("buildSessionContext: no .amanar → catalog plus onboarding nudge", () => {
-  const c = buildSessionContext(root);
+  const c = buildSessionContext(root, {});
   assert.ok(c !== null && c.includes("amanar-onboard"));
   assert.ok(c.includes("No .amanar/"));
 });
 
 test("buildSessionContext: with .amanar → catalog, no onboarding nudge", () => {
   mkdirSync(join(root, ".amanar"), { recursive: true });
-  const c = buildSessionContext(root);
+  const c = buildSessionContext(root, {});
   assert.ok(c !== null);
   assert.ok(!c.includes("No .amanar/"));
+});
+
+test("buildSessionContext: appends native-tools hint when a harness is detected", () => {
+  const c = buildSessionContext(root, { AMANAR_HARNESS: "claude", AMANAR_HARNESS_VERSION: "2.3.0" });
+  assert.ok(c !== null && c.includes("[amanar:native]"));
+  assert.ok(c.includes("workflows"));
 });
 
 test("buildSessionStartOutput wraps as SessionStart additionalContext", () => {
